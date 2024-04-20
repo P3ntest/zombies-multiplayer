@@ -5,6 +5,7 @@ import { Level } from "./Level";
 import { useRef } from "react";
 import { StageProvider } from "./stageContext";
 import "@pixi/events";
+import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
@@ -19,21 +20,23 @@ export const MainStage = () => {
         windowSize.height && windowSize.height > 0 ? windowSize.height : 600
       }
     >
-      <Container
-        ref={mainContentRef}
-        mousemove={(e) => {
-          console.log(e);
-        }}
-      >
-        <StageProvider
-          value={{
-            levelContainer: mainContentRef.current,
+      <PhysicsProvider>
+        <Container
+          ref={mainContentRef}
+          mousemove={(e) => {
+            console.log(e);
           }}
         >
-          <Level />
-          <Players />
-        </StageProvider>
-      </Container>
+          <StageProvider
+            value={{
+              levelContainer: mainContentRef.current,
+            }}
+          >
+            <Level />
+            <Players />
+          </StageProvider>
+        </Container>
+      </PhysicsProvider>
     </Stage>
   );
 };

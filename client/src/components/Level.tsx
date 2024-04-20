@@ -1,4 +1,5 @@
 import { TilingSprite } from "@pixi/react";
+import { Wall } from "./Wall";
 
 export function Level() {
   return (
@@ -10,6 +11,8 @@ export function Level() {
         width={1000}
         height={1000}
       />
+      <Wall x={100} y={100} width={100} height={200} />
+      <Wall x={500} y={100} width={100} height={200} />
     </>
   );
 }

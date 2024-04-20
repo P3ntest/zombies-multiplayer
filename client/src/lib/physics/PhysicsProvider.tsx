@@ -1,14 +1,16 @@
-import * as Matter from "matter-js";
-import { createContext, useEffect, useRef } from "react";
-
-interface PhysicsContextState {
-  engine: Matter.Engine;
-}
-
-const PhysicsContext = createContext<PhysicsContextState | null>(null);
+import Matter, { Render } from "matter-js";
+import { useRef, useEffect } from "react";
+import { PhysicsContextProvider, physicsContext } from "./context";
 
 export function PhysicsProvider({ children }: { children: React.ReactNode }) {
-  const engine = useRef(Matter.Engine.create());
+  const engine = useRef(
+    Matter.Engine.create({
+      gravity: {
+        x: 0,
+        y: 0,
+      },
+    })
+  );
   const runner = useRef(Matter.Runner.create());
 
   useEffect(() => {
@@ -20,12 +22,12 @@ export function PhysicsProvider({ children }: { children: React.ReactNode }) {
   }, []);
 
   return (
-    <PhysicsContext.Provider
+    <PhysicsContextProvider
       value={{
         engine: engine.current,
       }}
     >
       {children}
-    </PhysicsContext.Provider>
+    </PhysicsContextProvider>
   );
 }
