@@ -19,6 +19,18 @@ export const useControlsStore = create<ControlsStore>((set) => ({
     }),
 }));
 
+export function useMouseDown(callback: (event: MouseEvent) => void) {
+  useEffect(() => {
+    const listener = (event: MouseEvent) => {
+      callback(event);
+    };
+    window.addEventListener("mousedown", listener);
+    return () => {
+      window.removeEventListener("mousedown", listener);
+    };
+  }, [callback]);
+}
+
 export function useControlEventListeners() {
   const { onKeydown, onKeyup } = useControlsStore();
   useEffect(() => {

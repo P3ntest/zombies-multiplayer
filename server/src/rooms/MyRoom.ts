@@ -1,5 +1,5 @@
 import { Room, Client } from "@colyseus/core";
-import { MyRoomState, PlayerState } from "./schema/MyRoomState";
+import { BulletState, MyRoomState, PlayerState } from "./schema/MyRoomState";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -13,6 +13,25 @@ export class MyRoom extends Room<MyRoomState> {
       player.x = x;
       player.y = y;
       player.rotation = rotation;
+    });
+
+    this.onMessage("shoot", (client, message) => {
+      const { originX, originY, rotation, speed } = message;
+
+      const bullet = new BulletState();
+      bullet.id = Math.random().toString(36).substring(7);
+      bullet.playerId = client.sessionId;
+      bullet.originX = originX;
+      bullet.originY = originY;
+      bullet.rotation = rotation;
+      bullet.speed = speed;
+
+      this.state.bullets.push(bullet);
+    });
+
+    this.onMessage("destroyBullet", (client, message) => {
+      const index = this.state.bullets.findIndex((b) => b.id === message.id);
+      this.state.bullets.splice(index, 1);
     });
   }
 

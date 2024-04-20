@@ -17,7 +17,7 @@ export function PlayerSprite({
         y={y}
         scale={{ x: 0.5, y: 0.5 }}
         anchor={{ x: 0.3, y: 0.58 }} // centered on his head
-        rotation={rotation - 0.2}
+        rotation={rotation}
       />
     </>
   );

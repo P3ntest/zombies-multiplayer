@@ -3,7 +3,7 @@ import { PlayerState } from "../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom, useColyseusState } from "../colyseus";
 import { Sprite, useApp, useTick } from "@pixi/react";
 import { stageContext } from "./stageContext";
-import { useAxis } from "../lib/useControls";
+import { useAxis, useMouseDown } from "../lib/useControls";
 import { useLerped, useLerpedRadian } from "../lib/useLerped";
 import { PlayerSprite } from "./PlayerSprite";
 import { useBodyRef } from "../lib/physics/hooks";
@@ -51,7 +51,19 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     });
   });
 
-  console.log("player", x, y);
+  useMouseDown(() => {
+    // move the origin a bit so the bullet doesn't collide with the player
+    const factor = 100;
+    const originX = x + Math.cos(rotation) * factor;
+    const originY = y + Math.sin(rotation) * factor;
+
+    room?.send("shoot", {
+      originX,
+      originY,
+      rotation,
+      speed: 15,
+    });
+  });
 
   return (
     <>

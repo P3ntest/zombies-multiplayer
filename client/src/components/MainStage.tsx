@@ -6,6 +6,7 @@ import { useRef } from "react";
 import { StageProvider } from "./stageContext";
 import "@pixi/events";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
+import { Bullets } from "./Bullets";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
@@ -33,6 +34,7 @@ export const MainStage = () => {
             }}
           >
             <Level />
+            <Bullets />
             <Players />
           </StageProvider>
         </Container>
