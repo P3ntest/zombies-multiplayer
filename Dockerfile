@@ -1,4 +1,4 @@
-FROM oven/bun:1 as base
+FROM imbios/bun-node as base
 
 # install server
 WORKDIR /app/server
@@ -24,10 +24,9 @@ FROM base as server
 WORKDIR /app/server
 
 COPY ./server ./
+RUN bun run build
 
 COPY --from=client /app/client/dist ./client/dist
-
-RUN bun run build
 
 ENV PORT=3000
 
@@ -35,4 +34,4 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD ["bun", "run", "start:prod"]
+CMD ["node", "build/index.js"]

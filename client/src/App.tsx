@@ -17,8 +17,6 @@ export function App() {
     );
   }
 
-  room?.send("test");
-
   return (
     <div>
       <div
