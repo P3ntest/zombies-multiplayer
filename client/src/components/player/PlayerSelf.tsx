@@ -9,6 +9,7 @@ import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 import { GunManager } from "./GunManager";
 import { useCheckCollectCoins } from "../coins/coinLogic";
+import { useWindowSize } from "usehooks-ts";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -77,14 +78,20 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 function PlayerCamera({ x, y }: { x: number; y: number }) {
   const stageRef = useContext(stageContext);
   const app = useApp();
+  const screen = useWindowSize();
 
   useEffect(() => {
     stageRef?.levelContainer?.pivot.set(x, y);
-    stageRef?.levelContainer?.position.set(
-      app.renderer.width / 4,
-      app.renderer.height / 4
-    );
-  }, [x, y, stageRef, app.renderer.width, app.renderer.height]);
+    stageRef?.levelContainer?.position.set(screen.width / 2, screen.height / 2);
+  }, [
+    x,
+    y,
+    stageRef,
+    app.renderer.width,
+    app.renderer.height,
+    screen.height,
+    screen.width,
+  ]);
 
   return null;
 }
