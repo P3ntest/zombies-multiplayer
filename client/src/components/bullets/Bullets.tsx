@@ -1,15 +1,16 @@
 import { Container, Graphics, ParticleContainer, useTick } from "@pixi/react";
-import { useColyseusRoom, useColyseusState } from "../colyseus";
-import { BulletState } from "../../../server/src/rooms/schema/MyRoomState";
+import { useColyseusRoom, useColyseusState } from "../../colyseus";
+import { BulletState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useCallback, useState } from "react";
 import {
   getBodyMeta,
   useBodyRef,
   useFilteredOnCollisionStart,
   useOnCollisionStart,
-} from "../lib/physics/hooks";
+} from "../../lib/physics/hooks";
 import { Bodies, Body } from "matter-js";
-import { useRerender } from "../lib/useRerender";
+import { useRerender } from "../../lib/useRerender";
+import { bulletHitListeners } from "./bullet";
 
 export function Bullets() {
   const state = useColyseusState((state) => state.bullets);
@@ -41,7 +42,7 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
 
   const body = useBodyRef(
     () => Bodies.circle(bullet.originX, bullet.originY, 5, { isSensor: true }),
-    { tags: ["bullet"] }
+    { tags: ["bullet", "localBullet"] }
   );
 
   const destroyBullet = useCallback(() => {
@@ -54,6 +55,11 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
     const otherMeta = getBodyMeta(pair.bodyOther);
     if (otherMeta?.tags?.includes("destroyBullet")) {
       destroyBullet();
+    }
+    if (bulletHitListeners.has(pair.bodyOther)) {
+      for (const listener of bulletHitListeners.get(pair.bodyOther)!) {
+        listener(bullet);
+      }
     }
   });
 

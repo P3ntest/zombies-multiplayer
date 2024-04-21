@@ -12,6 +12,12 @@ export class MyRoom extends Room<MyRoomState> {
 
   onCreate(options: any) {
     this.setState(new MyRoomState());
+    this.clock.start();
+
+    this.clock.setInterval(() => {
+      this.state.gameTick++;
+      this.broadcast("gameTick", this.state.gameTick);
+    }, 1000 / 20);
 
     this.onMessage("move", (client, message) => {
       const player = this.state.players.get(client.id);
@@ -50,6 +56,45 @@ export class MyRoom extends Room<MyRoomState> {
       rotation && (zombie.rotation = rotation);
       targetPlayerId != undefined && (zombie.targetPlayerId = targetPlayerId);
     });
+
+    this.onMessage("zombieHit", (client, message) => {
+      const { zombieId, bulletId } = message;
+      const zombie = this.state.zombies.find((z) => z.id === zombieId);
+      if (!zombie) return;
+
+      const bullet = this.state.bullets.find((b) => b.id === bulletId);
+      if (!bullet) return;
+
+      zombie.health -= 10;
+      if (zombie.health <= 0) {
+        const index = this.state.zombies.findIndex((z) => z.id === zombieId);
+        this.state.zombies.splice(index, 1);
+      }
+
+      this.broadcast("zombieHit", { zombieId, bulletId });
+
+      const bulletIndex = this.state.bullets.findIndex(
+        (b) => b.id === bulletId
+      );
+      this.state.bullets.splice(bulletIndex, 1);
+    });
+
+    this.onMessage("zombieAttackPlayer", (client, message) => {
+      const { playerId, zombieId } = message;
+      const player = this.state.players.get(playerId);
+      if (!player) return;
+
+      const zombie = this.state.zombies.find((z) => z.id === zombieId);
+      if (!zombie) return;
+
+      zombie.lastAttackTick = this.state.gameTick;
+
+      player.health -= 10;
+      if (player.health <= 0) {
+        this.broadcast("playerDied", { playerId });
+        this.state.players.delete(playerId);
+      }
+    });
   }
 
   onJoin(client: Client, options: any) {
@@ -59,6 +104,7 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.sessionId = client.sessionId;
     playerState.x = Math.floor(Math.random() * 800);
     playerState.y = Math.floor(Math.random() * 600);
+    playerState.health = 100;
     this.state.players.set(client.id, playerState);
 
     const zombieState = new ZombieState();

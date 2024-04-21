@@ -1,11 +1,15 @@
-import Matter, { use } from "matter-js";
+import Matter, { Body } from "matter-js";
 import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { ZombieSprite } from "./Zombies";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { useTick } from "@pixi/react";
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
-import { useNetworkTick } from "../../lib/networking/hooks";
+import {
+  useNetworkTick,
+  useRoomMessageHandler,
+} from "../../lib/networking/hooks";
+import { useZombieBulletHitListener } from "./zombies";
 
 export function MyZombie({ zombie }: { zombie: ZombieState }) {
   const [x, setX] = useState(zombie.x);
@@ -23,6 +27,19 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
     { tags: ["zombie"] }
   );
 
+  useZombieBulletHitListener(collider.current, zombie.id);
+
+  // for knockback, TODO:
+  // useRoomMessageHandler("zombieHit", (message) => {
+  //   if (message.zombieId === zombie.id) {
+  //     Body.applyForce(collider.current, collider.current.position, {
+  //       x: 10,
+  //       y: 10,
+  //     });
+  //     console.log("zombie hit");
+  //   }
+  // });
+
   useNetworkTick(() => {
     room?.send("updateZombie", {
       id: zombie.id,
@@ -38,7 +55,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
             player.x - collider.current.position.x,
             player.y - collider.current.position.y
           );
-          return distance < 200;
+          return distance < 700;
         }) ?? [];
 
       if (playersInRange.length > 0) {
@@ -62,10 +79,22 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
         targetPlayer.x - collider.current.position.x,
         targetPlayer.y - collider.current.position.y
       );
-      if (distance > 200) {
+      // if the player is too far away, reset the target
+      if (distance > 2000) {
         room?.send("updateZombie", {
           id: zombie.id,
           targetPlayerId: "",
+        });
+      }
+
+      // if the player is close enough, attack
+      console.log("distance", distance);
+      if (distance < 50) {
+        // attack the player
+        console.log("attacking player");
+        room?.send("zombieAttackPlayer", {
+          playerId: targetPlayer.sessionId,
+          damage: 10,
         });
       }
     }
@@ -107,5 +136,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
     setY(collider.current.position.y);
   });
 
-  return <ZombieSprite x={x} y={y} rotation={rotation} />;
+  return (
+    <ZombieSprite x={x} y={y} rotation={rotation} health={zombie.health} />
+  );
 }

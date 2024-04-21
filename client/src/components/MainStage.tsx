@@ -7,12 +7,14 @@ import { StageProvider } from "./stageContext";
 import "@pixi/events";
 import "@pixi/gif";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
-import { Bullets } from "./Bullets";
+import { Bullets } from "./bullets/Bullets";
 import { Zombies } from "./zombies/Zombies";
+import { useBroadcastRoomMessages } from "../lib/networking/hooks";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
   const mainContentRef = useRef(null);
+  useBroadcastRoomMessages();
   return (
     <Stage
       options={{
@@ -25,6 +27,7 @@ export const MainStage = () => {
     >
       <PhysicsProvider>
         <Container
+          scale={0.8}
           ref={mainContentRef}
           mousemove={(e) => {
             console.log(e);

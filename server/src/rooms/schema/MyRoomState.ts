@@ -6,6 +6,7 @@ export class PlayerState extends Schema {
   @type("number") x: number = 0;
   @type("number") y: number = 0;
   @type("number") rotation: number = 0;
+  @type("number") health: number = 100;
 }
 
 export class ZombieState extends Schema {
@@ -16,6 +17,9 @@ export class ZombieState extends Schema {
   @type("string") playerId: string = "";
   @type("number") health: number = 100;
   @type("string") targetPlayerId: string = "";
+
+  @type("uint32") lastAttackTick: number = 0;
+  @type("uint32") attackCoolDownTicks: number = 20;
 }
 
 export class BulletState extends Schema {
@@ -42,4 +46,7 @@ export class MyRoomState extends Schema {
     array: ZombieState,
   })
   zombies = new ArraySchema<ZombieState>();
+
+  @type("uint32")
+  gameTick = 0;
 }

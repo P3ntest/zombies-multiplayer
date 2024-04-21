@@ -52,5 +52,7 @@ function OtherPlayer({ player }: { player: PlayerState }) {
     });
   });
 
-  return <PlayerSprite x={x} y={y} rotation={rotation} />;
+  return (
+    <PlayerSprite x={x} y={y} rotation={rotation} health={player.health} />
+  );
 }

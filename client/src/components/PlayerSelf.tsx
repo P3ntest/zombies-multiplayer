@@ -66,7 +66,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 
   return (
     <>
-      <PlayerSprite x={x} y={y} rotation={rotation} />
+      <PlayerSprite x={x} y={y} rotation={rotation} health={player.health} />
 
       {/* <PlayerControls x={player.x} y={player.y} /> */}
       <PlayerCamera x={x} y={y} />
