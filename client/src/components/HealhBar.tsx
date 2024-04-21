@@ -24,7 +24,9 @@ export function HealthBar({
     [health, maxHealth]
   );
 
-  // if (health === 100) return null;
+  if (health >= maxHealth) {
+    return null;
+  }
 
   return (
     <Container>

@@ -7,7 +7,7 @@ import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 import { ComponentProps } from "react";
-import { useZombieBulletHitListener } from "./zombies";
+import { useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealhBar";
 import { EntityShadow } from "../Shadow";
 

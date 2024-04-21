@@ -65,7 +65,7 @@ export function PlayerSprite({
       </Container>
       {health ? (
         <Container y={50}>
-          <HealthBar health={health} />
+          <HealthBar health={health} maxHealth={100} />
         </Container>
       ) : null}
     </Container>
