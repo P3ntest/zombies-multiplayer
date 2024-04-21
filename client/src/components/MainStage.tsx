@@ -10,6 +10,7 @@ import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
 import { Zombies } from "./zombies/Zombies";
 import { useBroadcastRoomMessages } from "../lib/networking/hooks";
+import { ZombieSpawnPoint, ZombieSpawner } from "./zombies/ZombieSpawner";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
@@ -41,6 +42,9 @@ export const MainStage = () => {
             <Level />
             <Bullets />
             <Zombies />
+            <ZombieSpawner>
+              <ZombieSpawnPoint x={100} y={100} />
+            </ZombieSpawner>
             <Players />
           </StageProvider>
         </Container>

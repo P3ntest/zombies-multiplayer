@@ -22,11 +22,11 @@ export function PlayerSprite({
         anchor={{ x: 0.3, y: 0.58 }} // centered on his head
         rotation={rotation}
       />
-      {health && (
+      {health ? (
         <Container y={50}>
           <HealthBar health={health} />
         </Container>
-      )}
+      ) : null}
     </Container>
   );
 }

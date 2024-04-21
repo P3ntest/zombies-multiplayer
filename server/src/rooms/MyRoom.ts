@@ -15,6 +15,10 @@ export class MyRoom extends Room<MyRoomState> {
     this.clock.start();
 
     this.clock.setInterval(() => {
+      this.requestSpawnZombie();
+    }, 1000);
+
+    this.clock.setInterval(() => {
       this.state.gameTick++;
       this.broadcast("gameTick", this.state.gameTick);
     }, 1000 / 20);
@@ -80,7 +84,6 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("zombieAttackPlayer", (client, message) => {
-      console.log("zombie attack player");
       const { playerId, zombieId } = message;
       const player = this.state.players.get(playerId);
       if (!player) return;
@@ -100,10 +103,21 @@ export class MyRoom extends Room<MyRoomState> {
       this.broadcast("zombieAttackPlayer", { playerId, zombieId });
 
       player.health -= 10;
-      console.log("player health", player.health);
       if (player.health <= 0) {
         this.broadcast("playerDied", { playerId });
       }
+    });
+
+    this.onMessage("spawnZombie", (client, message) => {
+      const { x, y } = message;
+      const zombie = new ZombieState();
+      zombie.id = genId();
+      zombie.x = x;
+      zombie.y = y;
+      zombie.rotation = Math.random() * Math.PI * 2;
+      zombie.playerId = client.sessionId;
+      this.state.zombies.push(zombie);
+      this.broadcast("spawnZombie", { id: zombie.id });
     });
   }
 
@@ -143,6 +157,30 @@ export class MyRoom extends Room<MyRoomState> {
     this.state.bullets = this.state.bullets.filter((bullet) =>
       players.has(bullet.playerId)
     );
+  }
+
+  requestSpawnZombie() {
+    // find a player which has the least number of zombies
+    const players = this.state.players;
+    const playerIds = Array.from(players.keys());
+    const playerZombieCounts = new Map<string, number>();
+    for (const zombie of this.state.zombies) {
+      const count = playerZombieCounts.get(zombie.playerId) || 0;
+      playerZombieCounts.set(zombie.playerId, count + 1);
+    }
+
+    let minCount = Infinity;
+    let targetPlayerId = "";
+    for (const playerId of playerIds) {
+      const count = playerZombieCounts.get(playerId) || 0;
+      if (count < minCount) {
+        minCount = count;
+        targetPlayerId = playerId;
+      }
+    }
+
+    const client = this.clients.find((c) => c.sessionId === targetPlayerId);
+    client.send("requestSpawnZombie");
   }
 
   ensureZombieControl() {
