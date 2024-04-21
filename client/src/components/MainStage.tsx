@@ -1,6 +1,6 @@
 import { Container, Stage } from "@pixi/react";
 import { useWindowSize } from "usehooks-ts";
-import { Players } from "./Players";
+import { Players } from "./player/Players";
 import { Level } from "./Level";
 import { useRef } from "react";
 import { StageProvider } from "./stageContext";

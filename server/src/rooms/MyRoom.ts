@@ -2,6 +2,7 @@ import { Room, Client } from "@colyseus/core";
 import {
   BulletState,
   MyRoomState,
+  PlayerHealthState,
   PlayerState,
   ZombieState,
 } from "./schema/MyRoomState";
@@ -108,7 +109,7 @@ export class MyRoom extends Room<MyRoomState> {
 
       player.health -= 10;
       if (player.health <= 0) {
-        this.broadcast("playerDied", { playerId });
+        this.killPlayer(playerId);
       }
     });
 
@@ -123,6 +124,15 @@ export class MyRoom extends Room<MyRoomState> {
       this.state.zombies.push(zombie);
       this.broadcast("spawnZombie", { id: zombie.id });
     });
+  }
+
+  killPlayer(playerId: string) {
+    const player = this.state.players.get(playerId);
+    if (!player) return;
+
+    player.health = 0;
+    player.healthState = PlayerHealthState.DEAD;
+    this.broadcast("playerDied", { playerId });
   }
 
   onJoin(client: Client, options: any) {

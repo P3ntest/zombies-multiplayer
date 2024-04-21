@@ -1,5 +1,6 @@
 import Matter, { Body } from "matter-js";
 import {
+  PlayerHealthState,
   PlayerState,
   ZombieState,
 } from "../../../../server/src/rooms/schema/MyRoomState";
