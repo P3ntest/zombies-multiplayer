@@ -10,6 +10,7 @@ import {
 import { genId } from "../util";
 import { WaveManager } from "../game/WaveManager";
 import { ZombieType, zombieInfo } from "../game/zombies";
+import { calculateZombieSpawnType } from "../game/waves";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -116,7 +117,11 @@ export class MyRoom extends Room<MyRoomState> {
 
       this.broadcast("zombieAttackPlayer", { playerId, zombieId });
 
-      player.health -= 10;
+      const damage =
+        zombieInfo[zombie.zombieType].baseAttackDamage *
+        this.waveManager.currentWave.zombieAttackMultiplier;
+
+      player.health -= damage;
       if (player.health <= 0) {
         this.killPlayer(playerId);
       }
@@ -127,6 +132,9 @@ export class MyRoom extends Room<MyRoomState> {
       const zombie = new ZombieState();
       const typeInfo = zombieInfo[type as ZombieType];
       zombie.id = genId();
+      const health =
+        typeInfo.baseHealth *
+        this.waveManager.currentWave.zombieHealthMultiplier;
       zombie.health = typeInfo.baseHealth;
       zombie.x = x;
       zombie.y = y;
@@ -231,7 +239,7 @@ export class MyRoom extends Room<MyRoomState> {
 
     const client = this.clients.find((c) => c.sessionId === targetPlayerId);
     client.send("requestSpawnZombie", {
-      type: Math.random() < 0.5 ? "normal" : "baby",
+      type: calculateZombieSpawnType(this.waveManager.currentWaveNumber),
     });
   }
 

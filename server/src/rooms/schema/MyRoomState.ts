@@ -33,6 +33,7 @@ export class ZombieState extends Schema {
   @type("number") rotation: number = 0;
   @type("string") playerId: string = "";
   @type("number") health: number = 100;
+  @type("number") maxHealth: number = 100;
   @type("string") targetPlayerId: string = "";
 
   @type("uint32") lastAttackTick: number = 0;

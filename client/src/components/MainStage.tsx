@@ -10,7 +10,7 @@ import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
 import { Zombies } from "./zombies/Zombies";
 import { useBroadcastRoomMessages } from "../lib/networking/hooks";
-import { ZombieSpawnPoint, ZombieSpawner } from "./zombies/ZombieSpawner";
+import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 
@@ -18,6 +18,10 @@ export const MainStage = () => {
   const windowSize = useWindowSize();
   const mainContentRef = useRef(null);
   useBroadcastRoomMessages();
+
+  const maxAxis = Math.max(windowSize.width, windowSize.height);
+  const scale = (maxAxis / 1920) * 1.2;
+
   return (
     <>
       <GameUI />
@@ -34,7 +38,7 @@ export const MainStage = () => {
       >
         <PhysicsProvider>
           <Container
-            scale={0.8}
+            scale={scale}
             ref={mainContentRef}
             mousemove={(e) => {
               console.log(e);

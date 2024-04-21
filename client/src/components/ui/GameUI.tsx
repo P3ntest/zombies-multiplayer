@@ -15,13 +15,11 @@ export function GameUI() {
 
   useRoomMessageHandler("waveStart", (message) => {
     const { wave } = message;
-    console.log(`Wave ${wave} has started!`);
     showTitle(`Wave ${wave}`);
   });
 
   useRoomMessageHandler("waveEnd", (message) => {
     const { wave } = message;
-    console.log(`Wave ${wave} has ended!`);
     showTitle(`Wave ${wave} complete!`);
   });
 

@@ -9,7 +9,6 @@ export function useCheckCollectCoins(playerX: number, playerY: number) {
     if (!coins) return;
     for (const coin of coins) {
       const distance = Math.hypot(coin.x - playerX, coin.y - playerY);
-      console.log(distance);
       if (distance < 90) {
         room?.send("collectCoin", { id: coin.id });
       }

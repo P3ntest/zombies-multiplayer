@@ -44,8 +44,6 @@ export function PlayerSprite({
     anchor: { x: 0.3, y: 0.58 }, // centered on his head
   };
 
-  console.log(gun, animation);
-
   return (
     <Container x={x} y={y}>
       <EntityShadow radius={40} />
