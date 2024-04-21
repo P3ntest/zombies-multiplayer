@@ -80,6 +80,7 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("zombieAttackPlayer", (client, message) => {
+      console.log("zombie attack player");
       const { playerId, zombieId } = message;
       const player = this.state.players.get(playerId);
       if (!player) return;
@@ -87,12 +88,21 @@ export class MyRoom extends Room<MyRoomState> {
       const zombie = this.state.zombies.find((z) => z.id === zombieId);
       if (!zombie) return;
 
+      if (
+        zombie.attackCoolDownTicks + zombie.lastAttackTick >=
+        this.state.gameTick
+      ) {
+        return;
+      }
+
       zombie.lastAttackTick = this.state.gameTick;
 
+      this.broadcast("zombieAttackPlayer", { playerId, zombieId });
+
       player.health -= 10;
+      console.log("player health", player.health);
       if (player.health <= 0) {
         this.broadcast("playerDied", { playerId });
-        this.state.players.delete(playerId);
       }
     });
   }

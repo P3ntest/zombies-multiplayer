@@ -1,20 +1,23 @@
 import { useEffect, useRef } from "react";
 import { useColyseusRoom } from "../../colyseus";
 
-const networkTickRate = 20;
+// const networkTickRate = 20;
 
-export function useNetworkTick(callback: () => void) {
-  const callbackRef = useRef(callback);
-  callbackRef.current = callback;
+export function useNetworkTick(callback: (tick: number) => void) {
+  useRoomMessageHandler("gameTick", (message: number) => {
+    callback(message);
+  });
+  // const callbackRef = useRef(callback);
+  // callbackRef.current = callback;
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      callbackRef.current();
-    }, 1000 / networkTickRate);
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     callbackRef.current();
+  //   }, 1000 / networkTickRate);
+  //   return () => {
+  //     clearInterval(interval);
+  //   };
+  // }, []);
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

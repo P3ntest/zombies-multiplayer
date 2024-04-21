@@ -40,7 +40,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
   //   }
   // });
 
-  useNetworkTick(() => {
+  useNetworkTick((currentTick) => {
     room?.send("updateZombie", {
       id: zombie.id,
       x: collider.current.position.x,
@@ -88,12 +88,14 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
       }
 
       // if the player is close enough, attack
-      console.log("distance", distance);
-      if (distance < 50) {
+      if (
+        distance < 100 &&
+        zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick
+      ) {
         // attack the player
-        console.log("attacking player");
         room?.send("zombieAttackPlayer", {
           playerId: targetPlayer.sessionId,
+          zombieId: zombie.id,
           damage: 10,
         });
       }
