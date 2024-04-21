@@ -1,4 +1,10 @@
-import { Container, ParticleContainer, Sprite, useTick } from "@pixi/react";
+import {
+  AnimatedSprite,
+  Container,
+  ParticleContainer,
+  Sprite,
+  useTick,
+} from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { ZombieType, zombieInfo } from "../../../../server/src/game/zombies";
@@ -10,6 +16,7 @@ import { ComponentProps } from "react";
 import { useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealhBar";
 import { EntityShadow } from "../Shadow";
+import { zombieAnimationSprites } from "../../assets/spritesheets/zombie";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -76,7 +83,7 @@ export function ZombieSprite({
   health: number;
   rotation: number;
   type: ZombieType;
-} & ComponentProps<typeof Sprite>) {
+} & Partial<ComponentProps<typeof AnimatedSprite>>) {
   const typeInfo = zombieInfo[type];
 
   const scale = 0.4 * typeInfo.size;
@@ -84,9 +91,11 @@ export function ZombieSprite({
   return (
     <Container x={x} y={y}>
       <EntityShadow radius={40} />
-      <Sprite
+      <AnimatedSprite
         rotation={rotation}
-        image={"assets/zombie.gif"}
+        animationSpeed={0.36 * typeInfo.baseSpeed}
+        isPlaying
+        images={zombieAnimationSprites}
         tint={typeInfo.tint}
         scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}

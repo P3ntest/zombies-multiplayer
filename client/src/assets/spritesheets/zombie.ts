@@ -53,3 +53,10 @@ export const atlas: SpritesheetData = {
 // );
 
 // await zombieSpriteSheet.parse();
+
+export const zombieAnimationSprites = new Array(17)
+  .fill(0)
+  .map(
+    (_, i) =>
+      `assets/zombie/frames/frame_${i < 10 ? "0" : ""}${i}_delay-0.04s.png`
+  );

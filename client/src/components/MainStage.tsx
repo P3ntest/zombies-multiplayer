@@ -1,8 +1,8 @@
-import { Container, Stage } from "@pixi/react";
+import { Container, Stage, useApp } from "@pixi/react";
 import { useWindowSize } from "usehooks-ts";
 import { Players } from "./player/Players";
 import { Level } from "./Level";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { StageProvider } from "./stageContext";
 import "@pixi/events";
 import "@pixi/gif";
@@ -41,6 +41,7 @@ export const MainStage = () => {
           windowSize.height && windowSize.height > 0 ? windowSize.height : 600
         }
       >
+        <Resizer />
         <PhysicsProvider>
           <Container
             scale={scale}
@@ -68,3 +69,17 @@ export const MainStage = () => {
     </>
   );
 };
+
+function Resizer() {
+  const app = useApp();
+  useEffect(() => {
+    const resize = () => {
+      app.renderer.resize(window.innerWidth, window.innerHeight);
+    };
+    window.addEventListener("resize", resize);
+    return () => {
+      window.removeEventListener("resize", resize);
+    };
+  }, [app]);
+  return null;
+}
