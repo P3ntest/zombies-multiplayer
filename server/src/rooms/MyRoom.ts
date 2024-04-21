@@ -6,17 +6,18 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { genId } from "../util";
+import { WaveManager } from "../game/WaveManager";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
+
+  waveManager = new WaveManager(this);
 
   onCreate(options: any) {
     this.setState(new MyRoomState());
     this.clock.start();
 
-    this.clock.setInterval(() => {
-      this.requestSpawnZombie();
-    }, 1000);
+    this.waveManager.init();
 
     this.clock.setInterval(() => {
       this.state.gameTick++;
@@ -73,6 +74,7 @@ export class MyRoom extends Room<MyRoomState> {
       if (zombie.health <= 0) {
         const index = this.state.zombies.findIndex((z) => z.id === zombieId);
         this.state.zombies.splice(index, 1);
+        this.waveManager.checkWaveEnd();
       }
 
       this.broadcast("zombieHit", { zombieId, bulletId });
@@ -130,14 +132,6 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.y = Math.floor(Math.random() * 600);
     playerState.health = 100;
     this.state.players.set(client.id, playerState);
-
-    const zombieState = new ZombieState();
-    zombieState.id = genId();
-    zombieState.x = Math.floor(Math.random() * 800);
-    zombieState.y = Math.floor(Math.random() * 600);
-    zombieState.rotation = Math.random() * Math.PI * 2;
-    zombieState.playerId = client.sessionId;
-    this.state.zombies.push(zombieState);
   }
 
   onLeave(client: Client, consented: boolean) {

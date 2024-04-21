@@ -31,6 +31,12 @@ export class BulletState extends Schema {
   @type("number") speed: number = 0;
 }
 
+export class WaveInfoState extends Schema {
+  @type("number") currentWaveNumber: number = 0;
+  @type("boolean") active: boolean = false;
+  @type("number") nextWaveStartsIn: number = 0;
+}
+
 export class MyRoomState extends Schema {
   @type({
     map: PlayerState,

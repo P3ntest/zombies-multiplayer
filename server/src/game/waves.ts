@@ -1,4 +1,6 @@
 export function generateWave(wave: number) {
+  wave--; // 0-indexed
+
   return {
     wave,
     zombies: 10 + wave * 3,

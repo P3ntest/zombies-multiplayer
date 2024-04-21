@@ -11,44 +11,50 @@ import { Bullets } from "./bullets/Bullets";
 import { Zombies } from "./zombies/Zombies";
 import { useBroadcastRoomMessages } from "../lib/networking/hooks";
 import { ZombieSpawnPoint, ZombieSpawner } from "./zombies/ZombieSpawner";
+import { GameUI } from "./ui/GameUI";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
   const mainContentRef = useRef(null);
   useBroadcastRoomMessages();
   return (
-    <Stage
-      options={{
-        background: "transparent",
-      }}
-      width={windowSize.width && windowSize.width > 0 ? windowSize.width : 800}
-      height={
-        windowSize.height && windowSize.height > 0 ? windowSize.height : 600
-      }
-    >
-      <PhysicsProvider>
-        <Container
-          scale={0.8}
-          ref={mainContentRef}
-          mousemove={(e) => {
-            console.log(e);
-          }}
-        >
-          <StageProvider
-            value={{
-              levelContainer: mainContentRef.current,
+    <>
+      <GameUI />
+      <Stage
+        options={{
+          background: "transparent",
+        }}
+        width={
+          windowSize.width && windowSize.width > 0 ? windowSize.width : 800
+        }
+        height={
+          windowSize.height && windowSize.height > 0 ? windowSize.height : 600
+        }
+      >
+        <PhysicsProvider>
+          <Container
+            scale={0.8}
+            ref={mainContentRef}
+            mousemove={(e) => {
+              console.log(e);
             }}
           >
-            <Level />
-            <Bullets />
-            <Zombies />
-            <ZombieSpawner>
-              <ZombieSpawnPoint x={100} y={100} />
-            </ZombieSpawner>
-            <Players />
-          </StageProvider>
-        </Container>
-      </PhysicsProvider>
-    </Stage>
+            <StageProvider
+              value={{
+                levelContainer: mainContentRef.current,
+              }}
+            >
+              <Level />
+              <Bullets />
+              <Zombies />
+              <ZombieSpawner>
+                <ZombieSpawnPoint x={100} y={100} />
+              </ZombieSpawner>
+              <Players />
+            </StageProvider>
+          </Container>
+        </PhysicsProvider>
+      </Stage>
+    </>
   );
 };

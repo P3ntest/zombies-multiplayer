@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { connectToColyseus, useColyseusRoom } from "./colyseus";
 import { MainStage } from "./components/MainStage";
-import { PhysicsProvider } from "./lib/physics/PhysicsProvider";
 import { useControlEventListeners } from "./lib/useControls";
 
 export function App() {

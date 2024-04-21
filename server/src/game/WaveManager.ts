@@ -1,3 +1,4 @@
+import { Delayed } from "colyseus";
 import { MyRoom } from "../rooms/MyRoom";
 import { generateWave } from "./waves";
 
@@ -13,24 +14,49 @@ export class WaveManager {
 
   waveRunning = false;
 
+  currentWaveSpawned = 0;
+
+  currentSpawnInterval: Delayed;
+
+  finishedSpawning = false;
+
   beginNextWave() {
     this.currentWaveNumber++;
     this.currentWave = generateWave(this.currentWaveNumber);
     this.waveRunning = true;
+    this.currentWaveSpawned = 0;
+    this.finishedSpawning = false;
 
-    this.room.broadcast("wave", {
+    this.room.broadcast("waveStart", {
       wave: this.currentWaveNumber,
-      zombies: this.currentWave.zombies,
     });
 
-    this.room.clock.setTimeout(() => {
-      this.waveRunning = false;
-      this.beginNextWave();
-    }, this.currentWave.zombies * this.currentWave.zombieSpawnInterval);
+    this.currentSpawnInterval = this.room.clock.setInterval(() => {
+      if (this.currentWaveSpawned >= this.currentWave.zombies) {
+        this.currentSpawnInterval.clear();
+        this.finishedSpawning = true;
+        return;
+      }
+      this.currentWaveSpawned++;
+      this.room.requestSpawnZombie();
+    }, this.currentWave.zombieSpawnInterval);
+  }
 
-    this.room.clock.setTimeout(() => {
-      this.beginNextWave();
-    }, this.currentWave.postDelay);
+  checkWaveEnd() {
+    if (this.room.state.zombies.length === 0 && this.finishedSpawning) {
+      this.waveEnds();
+    }
+  }
+
+  waveEnds() {
+    this.waveRunning = false;
+    this.room.broadcast("waveEnd", {
+      wave: this.currentWaveNumber,
+    });
+
+    this.currentSpawnInterval.clear();
+
+    this.beginNextWaveTimeout();
   }
 
   beginNextWaveTimeout() {
