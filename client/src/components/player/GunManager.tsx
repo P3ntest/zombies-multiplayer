@@ -1,7 +1,12 @@
 import { useCallback, useState } from "react";
 import { useColyseusRoom } from "../../colyseus";
 import { useIsKeyDown } from "../../lib/useControls";
-import { useNetworkTick, useSelf } from "../../lib/networking/hooks";
+import {
+  useNetworkTick,
+  useRoomMessageHandler,
+  useSelf,
+} from "../../lib/networking/hooks";
+import { playGunSound } from "../../lib/sound/sound";
 
 export function GunManager({
   x,
@@ -38,6 +43,14 @@ export function GunManager({
     [room]
   );
 
+  useRoomMessageHandler("shotSound", (message) => {
+    console.log("shotSound", message);
+    const { playerClass, playerId } = message;
+    if (playerId === self.sessionId) {
+      playGunSound(playerClass);
+    }
+  });
+
   const shoot = useCallback(() => {
     const barrelMoveForwardFactor = self.playerClass === "pistol" ? 70 : 100;
     const originX = x + Math.cos(rotation) * barrelMoveForwardFactor;
@@ -50,6 +63,12 @@ export function GunManager({
       melee: 0, // no bullets
     }[self.playerClass];
 
+    room?.send("shotSound", {
+      playerClass: self.playerClass,
+      playerId: self.sessionId,
+    });
+    playGunSound(self.playerClass);
+
     if (self.playerClass === "shotgun") {
       for (let i = 0; i < 5; i++) {
         const randomRotation = rotation + (Math.random() - 0.5) * 0.5;
@@ -59,7 +78,7 @@ export function GunManager({
       const pierces = self.playerClass === "pistol" ? 2 : 1;
       shootBullet(originX, originY, rotation, 20, damage, pierces);
     }
-  }, [x, y, rotation, shootBullet, self.playerClass]);
+  }, [x, y, rotation, shootBullet, self.playerClass, room, self.sessionId]);
 
   useNetworkTick((currentTick) => {
     if (isShooting && currentTick > coolDownUntil) {

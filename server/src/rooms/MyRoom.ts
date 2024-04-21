@@ -54,6 +54,10 @@ export class MyRoom extends Room<MyRoomState> {
       this.state.bullets.push(bullet);
     });
 
+    this.onMessage("shotSound", (client, message) => {
+      this.broadcast("shotSound", message);
+    });
+
     this.onMessage("destroyBullet", (client, message) => {
       const index = this.state.bullets.findIndex((b) => b.id === message.id);
       this.state.bullets.splice(index, 1);
