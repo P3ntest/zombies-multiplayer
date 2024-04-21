@@ -28,6 +28,7 @@ export const MainStage = () => {
       <Stage
         options={{
           background: "transparent",
+          resolution: window.devicePixelRatio,
         }}
         style={{
           width: "100vw",
