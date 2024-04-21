@@ -1,4 +1,4 @@
-import { Container, Graphics, ParticleContainer, useTick } from "@pixi/react";
+import { Container, Graphics, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { BulletState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useCallback, useState } from "react";
@@ -6,7 +6,6 @@ import {
   getBodyMeta,
   useBodyRef,
   useFilteredOnCollisionStart,
-  useOnCollisionStart,
 } from "../../lib/physics/hooks";
 import { Bodies, Body } from "matter-js";
 import { useRerender } from "../../lib/useRerender";

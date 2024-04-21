@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useColyseusRoom } from "../../colyseus";
-import { useIsKeyDown, useMouseDown } from "../../lib/useControls";
+import { useIsKeyDown } from "../../lib/useControls";
 import { useNetworkTick } from "../../lib/networking/hooks";
 
 export function GunManager({

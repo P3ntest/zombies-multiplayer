@@ -1,13 +1,13 @@
-import { useCallback, useContext, useEffect, useState } from "react";
-import { PlayerState } from "../../../server/src/rooms/schema/MyRoomState";
-import { useColyseusRoom, useColyseusState } from "../colyseus";
-import { Sprite, useApp, useTick } from "@pixi/react";
-import { stageContext } from "./stageContext";
-import { useAxis, useMouseDown } from "../lib/useControls";
+import { useContext, useEffect, useState } from "react";
+import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { useColyseusRoom } from "../../colyseus";
+import { useApp, useTick } from "@pixi/react";
+import { stageContext } from "../stageContext";
+import { useAxis } from "../../lib/useControls";
 import { PlayerSprite } from "./PlayerSprite";
-import { useBodyRef } from "../lib/physics/hooks";
+import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
-import { GunManager } from "./player/GunManager";
+import { GunManager } from "./GunManager";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -47,13 +47,22 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     room?.send("move", {
       x: collider.current.position.x,
       y: collider.current.position.y,
+      velocityX: currentDirection.x,
+      velocityY: currentDirection.y,
       rotation,
     });
   });
 
   return (
     <>
-      <PlayerSprite x={x} y={y} rotation={rotation} health={player.health} />
+      <PlayerSprite
+        x={x}
+        y={y}
+        rotation={rotation}
+        health={player.health}
+        velocityX={currentDirection.x}
+        velocityY={currentDirection.y}
+      />
       <GunManager x={x} y={y} rotation={rotation} />
       {/* <PlayerControls x={player.x} y={player.y} /> */}
       <PlayerCamera x={x} y={y} />

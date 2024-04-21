@@ -8,9 +8,14 @@ export const PlayerHealthState = {
 export class PlayerState extends Schema {
   @type("string") name: string = "Unknown";
   @type("string") sessionId: string = "";
+
   @type("number") x: number = 0;
   @type("number") y: number = 0;
   @type("number") rotation: number = 0;
+
+  @type("number") velocityX: number = 0;
+  @type("number") velocityY: number = 0;
+
   @type("number") health: number = 100;
   @type("uint8") healthState: number = PlayerHealthState.ALIVE;
 }

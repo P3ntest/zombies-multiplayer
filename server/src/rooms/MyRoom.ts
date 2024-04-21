@@ -26,9 +26,11 @@ export class MyRoom extends Room<MyRoomState> {
 
     this.onMessage("move", (client, message) => {
       const player = this.state.players.get(client.id);
-      const { x, y, rotation } = message;
+      const { x, y, rotation, velocityX, velocityY } = message;
       player.x = x;
       player.y = y;
+      player.velocityX = velocityX;
+      player.velocityY = velocityY;
       player.rotation = rotation;
     });
 

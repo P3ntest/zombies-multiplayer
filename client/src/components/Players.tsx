@@ -5,8 +5,8 @@ import { Sprite, useApp, useTick } from "@pixi/react";
 import { stageContext } from "./stageContext";
 import { useAxis } from "../lib/useControls";
 import { useLerped, useLerpedRadian } from "../lib/useLerped";
-import { PlayerSprite } from "./PlayerSprite";
-import { PlayerSelf } from "./PlayerSelf";
+import { PlayerSprite } from "./player/PlayerSprite";
+import { PlayerSelf } from "./player/PlayerSelf";
 import Matter, { Body } from "matter-js";
 import { useBodyRef } from "../lib/physics/hooks";
 
@@ -53,6 +53,13 @@ function OtherPlayer({ player }: { player: PlayerState }) {
   });
 
   return (
-    <PlayerSprite x={x} y={y} rotation={rotation} health={player.health} />
+    <PlayerSprite
+      x={x}
+      y={y}
+      rotation={rotation}
+      health={player.health}
+      velocityX={player.velocityX}
+      velocityY={player.velocityY}
+    />
   );
 }

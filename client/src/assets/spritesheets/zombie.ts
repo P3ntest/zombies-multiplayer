@@ -1,4 +1,4 @@
-import { Spritesheet, SpritesheetData, Texture } from "pixi.js";
+import { SpritesheetData } from "pixi.js";
 
 const numFrames = 17;
 const width = 4896;
