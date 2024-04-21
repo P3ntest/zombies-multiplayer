@@ -44,12 +44,11 @@ export const MainStage = () => {
                 levelContainer: mainContentRef.current,
               }}
             >
-              <Level />
+              <ZombieSpawner>
+                <Level />
+              </ZombieSpawner>
               <Bullets />
               <Zombies />
-              <ZombieSpawner>
-                <ZombieSpawnPoint x={100} y={100} />
-              </ZombieSpawner>
               <Players />
             </StageProvider>
           </Container>

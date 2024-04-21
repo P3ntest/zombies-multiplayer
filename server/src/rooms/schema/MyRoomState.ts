@@ -1,5 +1,10 @@
 import { Schema, ArraySchema, type, MapSchema } from "@colyseus/schema";
 
+export const PlayerHealthState = {
+  ALIVE: 0,
+  DEAD: 1,
+};
+
 export class PlayerState extends Schema {
   @type("string") name: string = "Unknown";
   @type("string") sessionId: string = "";
@@ -7,6 +12,7 @@ export class PlayerState extends Schema {
   @type("number") y: number = 0;
   @type("number") rotation: number = 0;
   @type("number") health: number = 100;
+  @type("uint8") healthState: number = PlayerHealthState.ALIVE;
 }
 
 export class ZombieState extends Schema {

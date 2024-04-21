@@ -1,5 +1,6 @@
 import { TilingSprite } from "@pixi/react";
 import { Wall } from "./Wall";
+import { ZombieSpawnPoint } from "./zombies/ZombieSpawner";
 
 export function Level() {
   return (
@@ -19,6 +20,18 @@ export function Level() {
       <Wall x={1500} y={500} width={500} height={500} />
       <Wall x={500} y={1500} width={500} height={500} />
       <Wall x={1500} y={1500} width={500} height={500} />
+
+      <ZombieSpawnPoint x={100} y={100} />
+      <ZombieSpawnPoint x={1900} y={100} />
+      <ZombieSpawnPoint x={100} y={1900} />
+      <ZombieSpawnPoint x={1900} y={1900} />
+
+      <ZombieSpawnPoint x={1000} y={100} />
+      <ZombieSpawnPoint x={1000} y={1900} />
+      <ZombieSpawnPoint x={100} y={1000} />
+      <ZombieSpawnPoint x={1900} y={1000} />
+
+      <ZombieSpawnPoint x={1000} y={1000} />
     </>
   );
 }

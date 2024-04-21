@@ -1,5 +1,8 @@
 import Matter, { Body } from "matter-js";
-import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
+import {
+  PlayerState,
+  ZombieState,
+} from "../../../../server/src/rooms/schema/MyRoomState";
 import { ZombieSprite } from "./Zombies";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { useTick } from "@pixi/react";
@@ -10,6 +13,7 @@ import {
   useRoomMessageHandler,
 } from "../../lib/networking/hooks";
 import { useZombieBulletHitListener } from "./zombies";
+import { useAlivePlayers } from "../../lib/hooks/usePlayers";
 
 export function MyZombie({ zombie }: { zombie: ZombieState }) {
   const [x, setX] = useState(zombie.x);
@@ -18,7 +22,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
 
   const room = useColyseusRoom();
 
-  const players = useColyseusState((state) => state.players);
+  const alivePlayers = useAlivePlayers();
 
   const collider = useBodyRef(
     () => {
@@ -29,17 +33,6 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
 
   useZombieBulletHitListener(collider.current, zombie.id);
 
-  // for knockback, TODO:
-  // useRoomMessageHandler("zombieHit", (message) => {
-  //   if (message.zombieId === zombie.id) {
-  //     Body.applyForce(collider.current, collider.current.position, {
-  //       x: 10,
-  //       y: 10,
-  //     });
-  //     console.log("zombie hit");
-  //   }
-  // });
-
   useNetworkTick((currentTick) => {
     room?.send("updateZombie", {
       id: zombie.id,
@@ -48,48 +41,59 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
       rotation,
     });
 
-    if (zombie.targetPlayerId == "") {
-      const playersInRange =
-        Array.from(players!.entries()).filter(([, player]) => {
-          const distance = Math.hypot(
-            player.x - collider.current.position.x,
-            player.y - collider.current.position.y
-          );
-          return distance < 700;
-        }) ?? [];
+    const closestPlayer = alivePlayers.reduce(
+      (closest, player) => {
+        const distance = Math.hypot(
+          player.x - collider.current.position.x,
+          player.y - collider.current.position.y
+        );
+        if (distance < closest.distance) {
+          return { player, distance };
+        }
+        return closest;
+      },
+      { player: undefined as undefined | PlayerState, distance: Infinity }
+    );
 
-      if (playersInRange.length > 0) {
-        const targetPlayer = playersInRange[0];
-        room?.send("updateZombie", {
-          id: zombie.id,
-          targetPlayerId: targetPlayer[0],
-        });
+    if (zombie.targetPlayerId == "") {
+      // target the closest player
+      // all players are dead
+      if (!closestPlayer.player) {
+        return;
       }
+
+      room?.send("updateZombie", {
+        id: zombie.id,
+        targetPlayerId: closestPlayer.player.sessionId,
+      });
     } else {
-      const targetPlayer = players?.get(zombie.targetPlayerId);
+      const targetPlayer = alivePlayers.find(
+        (player) => player.sessionId === zombie.targetPlayerId
+      );
+      // died or disconnected
       if (!targetPlayer) {
-        console.warn("target player not found, resetting target");
         room?.send("updateZombie", {
           id: zombie.id,
           targetPlayerId: "",
         });
         return;
       }
-      const distance = Math.hypot(
+      const distanceToTarget = Math.hypot(
         targetPlayer.x - collider.current.position.x,
         targetPlayer.y - collider.current.position.y
       );
-      // if the player is too far away, reset the target
-      if (distance > 2000) {
+
+      if (targetPlayer.sessionId !== closestPlayer.player?.sessionId) {
+        // target the closest player
         room?.send("updateZombie", {
           id: zombie.id,
-          targetPlayerId: "",
+          targetPlayerId: closestPlayer.player?.sessionId,
         });
       }
 
       // if the player is close enough, attack
       if (
-        distance < 100 &&
+        distanceToTarget < 100 &&
         zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick
       ) {
         // attack the player
@@ -106,9 +110,11 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
     // zombie logic
     if (zombie.targetPlayerId) {
       // look and move towards the player
-      const targetPlayer = players?.get(zombie.targetPlayerId);
+      const targetPlayer = alivePlayers.find(
+        (player) => player.sessionId === zombie.targetPlayerId
+      );
       if (!targetPlayer) {
-        console.warn("target player not found");
+        // target player died or disconnected, wait for the next update
         return;
       }
 

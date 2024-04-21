@@ -107,13 +107,13 @@ export function ZombieSpawnPoint({ x, y }: { x: number; y: number }) {
 
   return (
     <Container ref={containerRef} x={x} y={y}>
-      <Graphics
+      {/* <Graphics
         draw={(g) => {
           g.beginFill(0xff0000);
           g.drawRect(0, 0, 10, 10);
           g.endFill();
         }}
-      />
+      /> */}
     </Container>
   );
 }

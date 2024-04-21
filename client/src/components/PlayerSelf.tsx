@@ -7,6 +7,7 @@ import { useAxis, useMouseDown } from "../lib/useControls";
 import { PlayerSprite } from "./PlayerSprite";
 import { useBodyRef } from "../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
+import { GunManager } from "./player/GunManager";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -50,24 +51,10 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     });
   });
 
-  useMouseDown(() => {
-    // move the origin a bit so the bullet doesn't collide with the player
-    const factor = 100;
-    const originX = x + Math.cos(rotation) * factor;
-    const originY = y + Math.sin(rotation) * factor;
-
-    room?.send("shoot", {
-      originX,
-      originY,
-      rotation,
-      speed: 15,
-    });
-  });
-
   return (
     <>
       <PlayerSprite x={x} y={y} rotation={rotation} health={player.health} />
-
+      <GunManager x={x} y={y} rotation={rotation} />
       {/* <PlayerControls x={player.x} y={player.y} /> */}
       <PlayerCamera x={x} y={y} />
     </>

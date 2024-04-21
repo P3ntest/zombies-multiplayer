@@ -31,6 +31,11 @@ export function useMouseDown(callback: (event: MouseEvent) => void) {
   }, [callback]);
 }
 
+export function useIsKeyDown(key: string) {
+  const isMouseDown = useControlsStore((state) => state.keysDown.has(key));
+  return isMouseDown;
+}
+
 export function useControlEventListeners() {
   const { onKeydown, onKeyup } = useControlsStore();
   useEffect(() => {
@@ -44,9 +49,23 @@ export function useControlEventListeners() {
     };
     window.addEventListener("keydown", keydownListener);
     window.addEventListener("keyup", keyupListener);
+
+    const mouseDownListener = (event: MouseEvent) => {
+      const key = event.button === 0 ? "mouse0" : "mouse1";
+      onKeydown(key);
+    };
+    const mouseUpListener = (event: MouseEvent) => {
+      const key = event.button === 0 ? "mouse0" : "mouse1";
+      onKeyup(key);
+    };
+    window.addEventListener("mousedown", mouseDownListener);
+    window.addEventListener("mouseup", mouseUpListener);
+
     return () => {
       window.removeEventListener("keydown", keydownListener);
       window.removeEventListener("keyup", keyupListener);
+      window.removeEventListener("mousedown", mouseDownListener);
+      window.removeEventListener("mouseup", mouseUpListener);
     };
   }, [onKeydown, onKeyup]);
 }

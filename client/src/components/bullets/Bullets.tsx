@@ -76,7 +76,7 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
       (x - bullet.originX) ** 2 + (y - bullet.originY) ** 2
     );
 
-    if (distance > 800) {
+    if (distance > 10000) {
       room?.send("destroyBullet", { id: bullet.id });
     }
 
