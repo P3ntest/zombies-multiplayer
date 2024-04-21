@@ -29,6 +29,10 @@ export const MainStage = () => {
         options={{
           background: "transparent",
         }}
+        style={{
+          width: "100vw",
+          height: "100vh",
+        }}
         width={
           windowSize.width && windowSize.width > 0 ? windowSize.width : 800
         }
