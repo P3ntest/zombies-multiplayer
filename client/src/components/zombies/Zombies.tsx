@@ -1,13 +1,6 @@
-import {
-  AnimatedSprite,
-  ParticleContainer,
-  Sprite,
-  useTick,
-} from "@pixi/react";
+import { ParticleContainer, Sprite, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
-import { useAsset } from "../../lib/graphics/useAsset";
-import { zombieSpriteSheet } from "../../assets/spritesheets/zombie";
 import { MyZombie } from "./MyZombie";
 import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
