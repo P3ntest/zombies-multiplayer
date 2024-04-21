@@ -2,7 +2,13 @@ import { Graphics } from "@pixi/react";
 import type { Graphics as G } from "@pixi/graphics";
 import { useCallback } from "react";
 
-export function HealthBar({ health }: { health: number }) {
+export function HealthBar({
+  health,
+  maxHealth = 100,
+}: {
+  health: number;
+  maxHealth: number;
+}) {
   const draw = useCallback(
     (g: G) => {
       g.beginFill(0xff0000);
@@ -10,10 +16,11 @@ export function HealthBar({ health }: { health: number }) {
       g.endFill();
 
       g.beginFill(0x00ff00);
-      g.drawRect(0, 0, health, 10);
+      const healthRel = (health / maxHealth) * 100;
+      g.drawRect(0, 0, healthRel, 10);
       g.endFill();
     },
-    [health]
+    [health, maxHealth]
   );
 
   if (health === 100) return null;

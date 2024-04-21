@@ -1,6 +1,7 @@
 import { Room, Client } from "@colyseus/core";
 import {
   BulletState,
+  CoinState,
   MyRoomState,
   PlayerHealthState,
   PlayerState,
@@ -8,6 +9,7 @@ import {
 } from "./schema/MyRoomState";
 import { genId } from "../util";
 import { WaveManager } from "../game/WaveManager";
+import { ZombieType, zombieInfo } from "../game/zombies";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -78,6 +80,7 @@ export class MyRoom extends Room<MyRoomState> {
         const index = this.state.zombies.findIndex((z) => z.id === zombieId);
         this.state.zombies.splice(index, 1);
         this.waveManager.checkWaveEnd();
+        this.spawnCoins(zombie.x, zombie.y, Math.floor(Math.random() * 3) + 1);
       }
 
       this.broadcast("zombieHit", { zombieId, bulletId });
@@ -114,15 +117,29 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("spawnZombie", (client, message) => {
-      const { x, y } = message;
+      const { x, y, type } = message;
       const zombie = new ZombieState();
+      const typeInfo = zombieInfo[type as ZombieType];
       zombie.id = genId();
+      zombie.health = typeInfo.baseHealth;
       zombie.x = x;
       zombie.y = y;
       zombie.rotation = Math.random() * Math.PI * 2;
+      zombie.zombieType = type;
       zombie.playerId = client.sessionId;
       this.state.zombies.push(zombie);
       this.broadcast("spawnZombie", { id: zombie.id });
+    });
+
+    this.onMessage("collectCoin", (client, message) => {
+      const { id } = message;
+      const coinIndex = this.state.coins.findIndex((c) => c.id === id);
+      if (coinIndex === -1) return;
+
+      const player = this.state.players.get(client.id);
+      player.coins++;
+
+      this.state.coins.splice(coinIndex, 1);
     });
   }
 
@@ -133,6 +150,15 @@ export class MyRoom extends Room<MyRoomState> {
     player.health = 0;
     player.healthState = PlayerHealthState.DEAD;
     this.broadcast("playerDied", { playerId });
+  }
+
+  revivePlayer(playerId: string) {
+    const player = this.state.players.get(playerId);
+    if (!player) return;
+
+    player.health = 100;
+    player.healthState = PlayerHealthState.ALIVE;
+    this.broadcast("playerRevived", { playerId });
   }
 
   onJoin(client: Client, options: any) {
@@ -152,6 +178,17 @@ export class MyRoom extends Room<MyRoomState> {
 
     this.ensureZombieControl();
     this.removeOrphanBullets();
+  }
+
+  spawnCoins(x: number, y: number, amount: number) {
+    const spreadRadius = 10 + Math.sqrt(amount) * 10;
+    for (let i = 0; i < amount; i++) {
+      const coin = new CoinState();
+      coin.id = genId();
+      coin.x = x + Math.random() * spreadRadius * 2 - spreadRadius;
+      coin.y = y + Math.random() * spreadRadius * 2 - spreadRadius;
+      this.state.coins.push(coin);
+    }
   }
 
   onDispose() {
@@ -186,7 +223,9 @@ export class MyRoom extends Room<MyRoomState> {
     }
 
     const client = this.clients.find((c) => c.sessionId === targetPlayerId);
-    client.send("requestSpawnZombie");
+    client.send("requestSpawnZombie", {
+      type: Math.random() < 0.5 ? "normal" : "baby",
+    });
   }
 
   ensureZombieControl() {

@@ -15,6 +15,7 @@ import {
 } from "../../lib/networking/hooks";
 import { useZombieBulletHitListener } from "./zombies";
 import { useAlivePlayers } from "../../lib/hooks/usePlayers";
+import { zombieInfo } from "../../../../server/src/game/zombies";
 
 export function MyZombie({ zombie }: { zombie: ZombieState }) {
   const [x, setX] = useState(zombie.x);
@@ -24,6 +25,8 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
   const room = useColyseusRoom();
 
   const alivePlayers = useAlivePlayers();
+
+  const zombieType = zombieInfo[zombie.zombieType];
 
   const collider = useBodyRef(
     () => {
@@ -101,7 +104,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
         room?.send("zombieAttackPlayer", {
           playerId: targetPlayer.sessionId,
           zombieId: zombie.id,
-          damage: 10,
+          damage: zombieType.baseAttackDamage,
         });
       }
     }
@@ -128,16 +131,15 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
 
       // move towards the player
 
+      const speed = 1.4 * zombieType.baseSpeed;
+
       Matter.Body.setVelocity(collider.current, {
-        x: Math.cos(rotation) * 1.4,
-        y: Math.sin(rotation) * 1.4,
+        x: Math.cos(rotation) * speed,
+        y: Math.sin(rotation) * speed,
       });
     } else {
-      // move randomly
-      Matter.Body.setVelocity(collider.current, {
-        x: Math.random() * 2 - 1,
-        y: Math.random() * 2 - 1,
-      });
+      // rotate in a circle
+      setRotation((r) => r + 0.1);
     }
 
     // updating
@@ -146,6 +148,12 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
   });
 
   return (
-    <ZombieSprite x={x} y={y} rotation={rotation} health={zombie.health} />
+    <ZombieSprite
+      type={zombie.zombieType}
+      x={x}
+      y={y}
+      rotation={rotation}
+      health={zombie.health}
+    />
   );
 }

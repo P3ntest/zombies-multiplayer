@@ -8,6 +8,7 @@ import { PlayerSprite } from "./PlayerSprite";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 import { GunManager } from "./GunManager";
+import { useCheckCollectCoins } from "../coins/coinLogic";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -24,6 +25,8 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   const stageRef = useContext(stageContext);
 
   const currentDirection = useCurrentPlayerDirection();
+
+  useCheckCollectCoins(x, y);
 
   useTick(() => {
     const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;

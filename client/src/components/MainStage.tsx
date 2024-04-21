@@ -12,6 +12,7 @@ import { Zombies } from "./zombies/Zombies";
 import { useBroadcastRoomMessages } from "../lib/networking/hooks";
 import { ZombieSpawnPoint, ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
+import { Coins } from "./coins/Coins";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
@@ -47,8 +48,9 @@ export const MainStage = () => {
               <ZombieSpawner>
                 <Level />
               </ZombieSpawner>
-              <Bullets />
+              <Coins />
               <Zombies />
+              <Bullets />
               <Players />
             </StageProvider>
           </Container>

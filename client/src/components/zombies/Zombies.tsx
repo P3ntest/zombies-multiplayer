@@ -1,6 +1,7 @@
 import { Container, ParticleContainer, Sprite, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { ZombieType, zombieInfo } from "../../../../server/src/game/zombies";
 import { MyZombie } from "./MyZombie";
 import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
@@ -37,6 +38,7 @@ function OtherZombie({ zombie }: { zombie: ZombieState }) {
   const collider = useBodyRef(() => {
     return Matter.Bodies.circle(zombie.x, zombie.y, 40);
   });
+
   useZombieBulletHitListener(collider.current, zombie.id);
 
   const x = useLerped(zombie.x, 0.1);
@@ -51,7 +53,13 @@ function OtherZombie({ zombie }: { zombie: ZombieState }) {
   });
 
   return (
-    <ZombieSprite x={x} y={y} rotation={rotation} health={zombie.health} />
+    <ZombieSprite
+      type={zombie.zombieType}
+      x={x}
+      y={y}
+      rotation={rotation}
+      health={zombie.health}
+    />
   );
 }
 
@@ -60,25 +68,32 @@ export function ZombieSprite({
   y,
   rotation,
   health,
+  type,
   ...other
 }: {
   x: number;
   y: number;
   health: number;
   rotation: number;
+  type: ZombieType;
 } & ComponentProps<typeof Sprite>) {
+  const typeInfo = zombieInfo[type];
+
+  const scale = 0.4 * typeInfo.size;
+
   return (
     <Container x={x} y={y}>
       <EntityShadow radius={40} />
       <Sprite
         rotation={rotation}
         image={"assets/zombie.gif"}
-        scale={{ x: 0.5, y: 0.5 }}
+        tint={typeInfo.tint}
+        scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}
         {...other}
       />
       <Container y={70}>
-        <HealthBar health={health} />
+        <HealthBar health={health} maxHealth={typeInfo.baseHealth} />
       </Container>
     </Container>
   );

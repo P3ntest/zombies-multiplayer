@@ -1,8 +1,7 @@
 import { Delayed } from "colyseus";
 import { MyRoom } from "../rooms/MyRoom";
 import { generateWave } from "./waves";
-
-const WAVE_PAUSE_MS = 5 * 1000;
+import { PlayerHealthState } from "../rooms/schema/MyRoomState";
 
 export class WaveManager {
   constructor(private room: MyRoom) {}
@@ -53,6 +52,14 @@ export class WaveManager {
     this.room.broadcast("waveEnd", {
       wave: this.currentWaveNumber,
     });
+
+    for (const player of this.room.state.players.values()) {
+      if (player.healthState === PlayerHealthState.DEAD) {
+        this.room.revivePlayer(player.sessionId);
+      } else {
+        player.health = 100;
+      }
+    }
 
     this.currentSpawnInterval.clear();
 

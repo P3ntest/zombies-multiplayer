@@ -8,8 +8,7 @@ import {
   useState,
 } from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
-import { Container, Graphics } from "@pixi/react";
-import { Container as PIXIContainer } from "pixi.js";
+import { Container } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 
 // this context will hold all zombie spawn points
@@ -54,7 +53,7 @@ export function ZombieSpawner({ children }: { children: React.ReactNode }) {
     [setSpawnPoints]
   );
 
-  useRoomMessageHandler("requestSpawnZombie", () => {
+  useRoomMessageHandler("requestSpawnZombie", ({ type }) => {
     // find the spawn point furthest from its nearest player
     const playersList = Array.from(players!.values());
     const spawnPoint = Object.entries(spawnPoints).reduce(
@@ -76,6 +75,7 @@ export function ZombieSpawner({ children }: { children: React.ReactNode }) {
     room?.send("spawnZombie", {
       x: spawnPoints[spawnPoint.id].x,
       y: spawnPoints[spawnPoint.id].y,
+      type,
     });
   });
 

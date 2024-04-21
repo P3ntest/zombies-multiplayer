@@ -42,7 +42,7 @@ export const feetAnimations = {
     frames: new Array(20)
       .fill(null)
       .map((_, i) => `${texturePrefix}/feet/run/survivor-run_${i}.png`),
-    animationSpeed: 0.5,
+    animationSpeed: 0.3,
   },
   strafe_left: {
     frames: new Array(20)
