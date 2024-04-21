@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-import { useColyseusRoom } from "../../colyseus";
+import { useColyseusRoom, useColyseusState } from "../../colyseus";
+import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 
 // const networkTickRate = 20;
 
@@ -64,4 +65,10 @@ export function useRoomMessageHandler(
       roomMessageHandlers.set(type, existingHandlers);
     };
   }, [type]);
+}
+
+export function useSelf(): PlayerState {
+  const sessionId = useColyseusRoom()?.sessionId;
+  const players = useColyseusState((s) => s.players);
+  return players!.get(sessionId!) as PlayerState;
 }

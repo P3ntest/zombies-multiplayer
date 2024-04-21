@@ -85,6 +85,7 @@ function OtherAlivePlayer({ player }: { player: PlayerState }) {
 
   return (
     <PlayerSprite
+      playerClass={player.playerClass}
       x={x}
       y={y}
       rotation={rotation}

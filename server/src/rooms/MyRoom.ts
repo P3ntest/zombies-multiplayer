@@ -38,14 +38,16 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("shoot", (client, message) => {
-      const { originX, originY, rotation, speed } = message;
+      const { originX, originY, rotation, speed, damage, pierces } = message;
 
       const bullet = new BulletState();
       bullet.id = genId();
       bullet.playerId = client.sessionId;
       bullet.originX = originX;
+      bullet.piercesLeft = pierces;
       bullet.originY = originY;
       bullet.rotation = rotation;
+      bullet.damage = damage;
       bullet.speed = speed;
 
       this.state.bullets.push(bullet);
@@ -85,10 +87,14 @@ export class MyRoom extends Room<MyRoomState> {
 
       this.broadcast("zombieHit", { zombieId, bulletId });
 
-      const bulletIndex = this.state.bullets.findIndex(
-        (b) => b.id === bulletId
-      );
-      this.state.bullets.splice(bulletIndex, 1);
+      bullet.piercesLeft--;
+
+      if (bullet.piercesLeft <= 0) {
+        const bulletIndex = this.state.bullets.findIndex(
+          (b) => b.id === bulletId
+        );
+        this.state.bullets.splice(bulletIndex, 1);
+      }
     });
 
     this.onMessage("zombieAttackPlayer", (client, message) => {
@@ -169,6 +175,7 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.x = Math.floor(Math.random() * 800);
     playerState.y = Math.floor(Math.random() * 600);
     playerState.health = 100;
+    playerState.playerClass = "pistol";
     this.state.players.set(client.id, playerState);
   }
 

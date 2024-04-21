@@ -7,6 +7,14 @@ import {
   feetAnimations,
   playerAnimationSprites,
 } from "../../assets/spritesheets/playerAnimationAtlas";
+import { PlayerClass } from "../../../../server/src/game/player";
+
+const gunFromClass: Record<PlayerClass, PlayerGun> = {
+  pistol: "pistol",
+  shotgun: "shotgun",
+  rifle: "rifle",
+  melee: "knife",
+};
 
 export function PlayerSprite({
   x,
@@ -15,6 +23,7 @@ export function PlayerSprite({
   health,
   velocityX,
   velocityY,
+  playerClass,
 }: {
   x: number;
   y: number;
@@ -22,17 +31,20 @@ export function PlayerSprite({
   health?: number;
   velocityX: number;
   velocityY: number;
+  playerClass: PlayerClass;
 }) {
   const isWalking = velocityX !== 0 || velocityY !== 0;
 
   const animation: PlayerAnimation = isWalking ? "walk" : "idle";
-  const gun: PlayerGun = "pistol";
+  const gun: PlayerGun = gunFromClass[playerClass];
 
   const commonProps = {
     isPlaying: true,
     scale: { x: 0.5, y: 0.5 },
     anchor: { x: 0.3, y: 0.58 }, // centered on his head
   };
+
+  console.log(gun, animation);
 
   return (
     <Container x={x} y={y}>
