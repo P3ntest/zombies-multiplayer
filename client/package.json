@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@pixi/events": "^7.4.2",
+    "@pixi/gif": "^3.0.1",
     "@pixi/react": "^7.1.2",
     "express": "^4.19.2",
     "matter-js": "^0.19.0",

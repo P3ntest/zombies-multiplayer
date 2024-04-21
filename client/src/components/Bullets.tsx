@@ -1,19 +1,25 @@
-import { Graphics, useTick } from "@pixi/react";
+import { Container, Graphics, ParticleContainer, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../colyseus";
 import { BulletState } from "../../../server/src/rooms/schema/MyRoomState";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import {
+  getBodyMeta,
+  useBodyRef,
+  useFilteredOnCollisionStart,
+  useOnCollisionStart,
+} from "../lib/physics/hooks";
+import { Bodies, Body } from "matter-js";
+import { useRerender } from "../lib/useRerender";
 
 export function Bullets() {
   const state = useColyseusState((state) => state.bullets);
 
-  console.log("bullets", state?.length);
-
   return (
-    <>
+    <Container>
       {state?.map((bullet) => (
         <Bullet key={bullet.id} bullet={bullet} />
       ))}
-    </>
+    </Container>
   );
 }
 
@@ -29,16 +35,36 @@ function Bullet({ bullet }: { bullet: BulletState }) {
 }
 
 function MyBullet({ bullet }: { bullet: BulletState }) {
-  const [x, setX] = useState(bullet.originX);
-  const [y, setY] = useState(bullet.originY);
   const room = useColyseusRoom();
+  const rerender = useRerender();
+  const [localDestroyed, setLocalDestroyed] = useState(false); // so the bullet doesn't go through the wall on the client
+
+  const body = useBodyRef(
+    () => Bodies.circle(bullet.originX, bullet.originY, 5, { isSensor: true }),
+    { tags: ["bullet"] }
+  );
+
+  const destroyBullet = useCallback(() => {
+    if (localDestroyed) return;
+    room?.send("destroyBullet", { id: bullet.id });
+    setLocalDestroyed(true);
+  }, [room, bullet, localDestroyed]);
+
+  useFilteredOnCollisionStart(body.current, (pair) => {
+    const otherMeta = getBodyMeta(pair.bodyOther);
+    if (otherMeta?.tags?.includes("destroyBullet")) {
+      destroyBullet();
+    }
+  });
 
   useTick((delta) => {
     const dx = Math.cos(bullet.rotation) * bullet.speed * delta;
     const dy = Math.sin(bullet.rotation) * bullet.speed * delta;
 
-    setX((x) => x + dx);
-    setY((y) => y + dy);
+    Body.translate(body.current, { x: dx, y: dy });
+
+    const x = body.current.position.x;
+    const y = body.current.position.y;
 
     const distance = Math.sqrt(
       (x - bullet.originX) ** 2 + (y - bullet.originY) ** 2
@@ -47,18 +73,14 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
     if (distance > 800) {
       room?.send("destroyBullet", { id: bullet.id });
     }
+
+    rerender();
   });
 
+  if (localDestroyed) return null;
+
   return (
-    <Graphics
-      x={x}
-      y={y}
-      draw={(g) => {
-        g.beginFill(0x433);
-        g.drawCircle(0, 0, 5);
-        g.endFill();
-      }}
-    />
+    <BulletGraphics x={body.current.position.x} y={body.current.position.y} />
   );
 }
 
@@ -74,17 +96,7 @@ function OtherBullet({ bullet }: { bullet: BulletState }) {
     setY((y) => y + dy);
   });
 
-  return (
-    <Graphics
-      x={x}
-      y={y}
-      draw={(g) => {
-        g.beginFill(0x433);
-        g.drawCircle(0, 0, 5);
-        g.endFill();
-      }}
-    />
-  );
+  return <BulletGraphics x={x} y={y} />;
 }
 
 function BulletGraphics({ x, y }: { x: number; y: number }) {

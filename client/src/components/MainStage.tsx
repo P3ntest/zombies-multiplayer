@@ -5,8 +5,10 @@ import { Level } from "./Level";
 import { useRef } from "react";
 import { StageProvider } from "./stageContext";
 import "@pixi/events";
+import "@pixi/gif";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./Bullets";
+import { Zombies } from "./zombies/Zombies";
 
 export const MainStage = () => {
   const windowSize = useWindowSize();
@@ -35,6 +37,7 @@ export const MainStage = () => {
           >
             <Level />
             <Bullets />
+            <Zombies />
             <Players />
           </StageProvider>
         </Container>

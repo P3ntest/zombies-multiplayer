@@ -1,6 +1,7 @@
-import Matter, { Render } from "matter-js";
+import Matter, { Engine, Render } from "matter-js";
 import { useRef, useEffect } from "react";
 import { PhysicsContextProvider, physicsContext } from "./context";
+import { PhysicsTicker } from "./ticker";
 
 export function PhysicsProvider({ children }: { children: React.ReactNode }) {
   const engine = useRef(
@@ -11,13 +12,18 @@ export function PhysicsProvider({ children }: { children: React.ReactNode }) {
       },
     })
   );
-  const runner = useRef(Matter.Runner.create());
+
+  const ticker = useRef(
+    new PhysicsTicker((delta: number) => {
+      Matter.Engine.update(engine.current, delta);
+    })
+  );
 
   useEffect(() => {
-    const currentRunner = runner.current;
-    Matter.Runner.run(currentRunner, engine.current);
+    const currentTicker = ticker.current;
+    currentTicker.start();
     return () => {
-      Matter.Runner.stop(currentRunner);
+      currentTicker.stop();
     };
   }, []);
 
@@ -25,6 +31,7 @@ export function PhysicsProvider({ children }: { children: React.ReactNode }) {
     <PhysicsContextProvider
       value={{
         engine: engine.current,
+        ticker: ticker.current,
       }}
     >
       {children}

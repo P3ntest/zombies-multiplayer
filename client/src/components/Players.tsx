@@ -7,6 +7,8 @@ import { useAxis } from "../lib/useControls";
 import { useLerped, useLerpedRadian } from "../lib/useLerped";
 import { PlayerSprite } from "./PlayerSprite";
 import { PlayerSelf } from "./PlayerSelf";
+import Matter, { Body } from "matter-js";
+import { useBodyRef } from "../lib/physics/hooks";
 
 export function Players() {
   const state = useColyseusState();
@@ -40,6 +42,15 @@ function OtherPlayer({ player }: { player: PlayerState }) {
   const x = useLerped(player.x, 0.5);
   const y = useLerped(player.y, 0.5);
   const rotation = useLerpedRadian(player.rotation, 0.5);
+  const collider = useBodyRef(() => {
+    return Matter.Bodies.circle(player.x, player.y, 40);
+  });
+  useTick(() => {
+    Body.setPosition(collider.current, {
+      x,
+      y,
+    });
+  });
 
   return <PlayerSprite x={x} y={y} rotation={rotation} />;
 }

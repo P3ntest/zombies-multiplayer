@@ -13,7 +13,9 @@ export function Wall({
   width: number;
   height: number;
 }) {
-  useBodyRef(() => Bodies.rectangle(x, y, width, height, { isStatic: true }));
+  useBodyRef(() => Bodies.rectangle(x, y, width, height, { isStatic: true }), {
+    tags: ["destroyBullet"],
+  });
 
   return (
     <TilingSprite

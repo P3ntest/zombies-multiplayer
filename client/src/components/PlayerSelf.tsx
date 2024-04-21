@@ -1,19 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { PlayerState } from "../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom, useColyseusState } from "../colyseus";
 import { Sprite, useApp, useTick } from "@pixi/react";
 import { stageContext } from "./stageContext";
 import { useAxis, useMouseDown } from "../lib/useControls";
-import { useLerped, useLerpedRadian } from "../lib/useLerped";
 import { PlayerSprite } from "./PlayerSprite";
 import { useBodyRef } from "../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
-    console.log("Creating collider");
     return Matter.Bodies.circle(player.x, player.y, 40);
   });
+
   const room = useColyseusRoom();
 
   const [x, setX] = useState(0);
@@ -92,7 +91,7 @@ function PlayerCamera({ x, y }: { x: number; y: number }) {
 
 function useCurrentPlayerDirection() {
   const axis = useAxis();
-  const speed = 2;
+  const speed = 4;
 
   const speedX = axis.x;
   const speedY = axis.y;

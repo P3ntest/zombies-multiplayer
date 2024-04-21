@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { connectToColyseus, useColyseusRoom } from "./colyseus";
 import { MainStage } from "./components/MainStage";
 import { PhysicsProvider } from "./lib/physics/PhysicsProvider";
@@ -8,15 +9,25 @@ export function App() {
 
   useControlEventListeners();
 
+  useEffect(() => {
+    if (!room) {
+      connectToColyseus("my_room", {});
+    }
+  }, [room]);
+
   if (!room) {
-    return (
-      <div>
-        <button onClick={() => connectToColyseus("my_room", {})}>
-          Connect
-        </button>
-      </div>
-    );
+    return null;
   }
+
+  // if (!room) {
+  //   return (
+  //     <div>
+  //       <button onClick={() => connectToColyseus("my_room", {})}>
+  //         Connect
+  //       </button>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>

@@ -8,6 +8,16 @@ export class PlayerState extends Schema {
   @type("number") rotation: number = 0;
 }
 
+export class ZombieState extends Schema {
+  @type("string") id: string = "";
+  @type("number") x: number = 0;
+  @type("number") y: number = 0;
+  @type("number") rotation: number = 0;
+  @type("string") playerId: string = "";
+  @type("number") health: number = 100;
+  @type("string") targetPlayerId: string = "";
+}
+
 export class BulletState extends Schema {
   @type("string") id: string = "";
   @type("string") playerId: string = "";
@@ -22,8 +32,14 @@ export class MyRoomState extends Schema {
     map: PlayerState,
   })
   players = new MapSchema<PlayerState>();
+
   @type({
     array: BulletState,
   })
   bullets = new ArraySchema<BulletState>();
+
+  @type({
+    array: ZombieState,
+  })
+  zombies = new ArraySchema<ZombieState>();
 }
