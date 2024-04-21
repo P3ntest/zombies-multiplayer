@@ -46,7 +46,7 @@ export function GunManager({
   useRoomMessageHandler("shotSound", (message) => {
     console.log("shotSound", message);
     const { playerClass, playerId } = message;
-    if (playerId === self.sessionId) {
+    if (playerId !== self.sessionId) {
       playGunSound(playerClass);
     }
   });

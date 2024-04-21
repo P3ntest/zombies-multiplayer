@@ -1,5 +1,6 @@
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useNetworkTick } from "../../lib/networking/hooks";
+import { playCoinPickup } from "../../lib/sound/sound";
 
 export function useCheckCollectCoins(playerX: number, playerY: number) {
   const coins = useColyseusState()?.coins;
@@ -11,6 +12,7 @@ export function useCheckCollectCoins(playerX: number, playerY: number) {
       const distance = Math.hypot(coin.x - playerX, coin.y - playerY);
       if (distance < 90) {
         room?.send("collectCoin", { id: coin.id });
+        playCoinPickup();
       }
     }
   });

@@ -88,6 +88,7 @@ export class MyRoom extends Room<MyRoomState> {
         this.state.zombies.splice(index, 1);
         this.waveManager.checkWaveEnd();
         this.spawnCoins(zombie.x, zombie.y, Math.floor(Math.random() * 3) + 1);
+        this.broadcast("zombieDead", { zombieId });
       }
 
       this.broadcast("zombieHit", { zombieId, bulletId });

@@ -13,14 +13,30 @@ import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 import { ComponentProps } from "react";
-import { useZombieBulletHitListener } from "./zombieHooks";
+import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealhBar";
 import { EntityShadow } from "../Shadow";
 import { zombieAnimationSprites } from "../../assets/spritesheets/zombie";
+import { useRoomMessageHandler } from "../../lib/networking/hooks";
+import {
+  playZombieDead,
+  playZombieGrowl,
+  playZombieHitSound,
+} from "../../lib/sound/sound";
 
 export function Zombies() {
   const state = useColyseusState();
   const zombies = state?.zombies;
+
+  useRoomMessageHandler("zombieHit", () => {
+    playZombieHitSound();
+    playZombieGrowl(0.5);
+  });
+
+  useRoomMessageHandler("zombieDead", () => {
+    playZombieDead();
+  });
+
   return (
     <Container>
       {zombies?.map((zombie) => (
@@ -33,6 +49,7 @@ export function Zombies() {
 function Zombie({ zombie }: { zombie: ZombieState }) {
   const sessionId = useColyseusRoom()?.sessionId;
   const isMe = zombie.playerId === sessionId;
+  useGrowling();
 
   if (isMe) {
     return <MyZombie zombie={zombie} />;

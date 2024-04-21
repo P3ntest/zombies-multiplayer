@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
+import { playWaveStart } from "../../lib/sound/sound";
 
 const TITLE_DURATION = 4000;
 
@@ -16,6 +17,7 @@ export function GameUI() {
   useRoomMessageHandler("waveStart", (message) => {
     const { wave } = message;
     showTitle(`Wave ${wave}`);
+    playWaveStart();
   });
 
   useRoomMessageHandler("waveEnd", (message) => {
