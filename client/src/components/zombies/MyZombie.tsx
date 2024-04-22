@@ -146,6 +146,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
   return (
     <ZombieSprite
       type={zombie.zombieType}
+      maxHealth={zombie.maxHealth}
       x={x}
       y={y}
       rotation={rotation}

@@ -79,6 +79,7 @@ function OtherZombie({ zombie }: { zombie: ZombieState }) {
   return (
     <ZombieSprite
       type={zombie.zombieType}
+      maxHealth={zombie.maxHealth}
       x={x}
       y={y}
       rotation={rotation}
@@ -92,12 +93,14 @@ export function ZombieSprite({
   y,
   rotation,
   health,
+  maxHealth,
   type,
   ...other
 }: {
   x: number;
   y: number;
   health: number;
+  maxHealth: number;
   rotation: number;
   type: ZombieType;
 } & Partial<ComponentProps<typeof AnimatedSprite>>) {
@@ -119,7 +122,7 @@ export function ZombieSprite({
         {...other}
       />
       <Container y={70}>
-        <HealthBar health={health} maxHealth={typeInfo.baseHealth} />
+        <HealthBar health={health} maxHealth={maxHealth} />
       </Container>
     </Container>
   );

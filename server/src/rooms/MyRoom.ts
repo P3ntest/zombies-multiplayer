@@ -87,7 +87,11 @@ export class MyRoom extends Room<MyRoomState> {
         const index = this.state.zombies.findIndex((z) => z.id === zombieId);
         this.state.zombies.splice(index, 1);
         this.waveManager.checkWaveEnd();
-        this.spawnCoins(zombie.x, zombie.y, Math.floor(Math.random() * 3) + 1);
+        this.spawnCoins(
+          zombie.x,
+          zombie.y,
+          Math.floor((Math.random() * zombie.maxHealth) / 30) + 1
+        );
         this.broadcast("blood", {
           x: zombie.x,
           y: zombie.y,
@@ -162,8 +166,10 @@ export class MyRoom extends Room<MyRoomState> {
       const coinIndex = this.state.coins.findIndex((c) => c.id === id);
       if (coinIndex === -1) return;
 
-      const player = this.state.players.get(client.id);
-      player.coins++;
+      // give it to all players
+      this.state.players.forEach((player) => {
+        player.coins += 1;
+      });
 
       this.state.coins.splice(coinIndex, 1);
     });

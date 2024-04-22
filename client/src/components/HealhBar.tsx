@@ -50,7 +50,7 @@ export function HealthBar({
           x: 0,
           y: 1,
         }}
-        text={`${health} / ${maxHealth}`}
+        text={`${Math.round(health)} / ${Math.round(maxHealth)}`}
         //
         style={
           new TextStyle({

@@ -44,7 +44,11 @@ export function App() {
   // }
 
   return (
-    <div>
+    <div
+      style={{
+        cursor: "crosshair",
+      }}
+    >
       {/* <div
         style={{
           position: "fixed",
