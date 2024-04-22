@@ -143,7 +143,7 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("spawnZombie", (client, message) => {
-      const { x, y, type } = message;
+      const { x, y } = message;
       const zombie = new ZombieState();
       const typeInfo = zombieInfo[type as ZombieType];
       const health = Math.round(

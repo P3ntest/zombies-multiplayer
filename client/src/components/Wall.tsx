@@ -14,7 +14,7 @@ export function Wall({
   height: number;
 }) {
   useBodyRef(() => Bodies.rectangle(x, y, width, height, { isStatic: true }), {
-    tags: ["destroyBullet"],
+    tags: ["destroyBullet", "obstacle"],
   });
 
   return (

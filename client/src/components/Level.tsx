@@ -32,8 +32,7 @@ export function Level() {
 
       {map.split("\n").map((row, y) =>
         row.split("").map((cell, x) => {
-          if (cell === "Z") {
-            // its X, Z means no walls
+          if (cell === "X") {
             return (
               <Wall
                 key={`${x}-${y}`}

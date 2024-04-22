@@ -49,7 +49,7 @@ export const MainStage = () => {
         <Resizer />
         <PhysicsProvider>
           <Container
-            scale={scale}
+            scale={scale * 0.7}
             ref={mainContentRef}
             mousemove={(e) => {
               console.log(e);

@@ -10,6 +10,7 @@ import {
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
 import { Container, Graphics } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
+import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 
 // this context will hold all zombie spawn points
 interface ZombieSpawnPointContext {
@@ -54,27 +55,34 @@ export function ZombieSpawner({ children }: { children: React.ReactNode }) {
   );
 
   useRoomMessageHandler("requestSpawnZombie", ({ type }) => {
-    // find the spawn point furthest from its nearest player
     const playersList = Array.from(players!.values());
-    const spawnPoint = Object.entries(spawnPoints).reduce(
-      (acc, [id, { x, y }]) => {
-        const distance = playersList.reduce((acc, player) => {
-          const playerDistance = Math.hypot(player.x - x, player.y - y);
-          return Math.min(acc, playerDistance);
-        }, Infinity);
 
-        if (distance > acc.distance) {
-          return { id, distance };
-        }
+    // calculate the distance to the closest player for all spawn points
+    const spawnPointDistances = Object.entries(spawnPoints)
+      .map(([, { x, y }]) => {
+        const closestPlayer = playersList.reduce(
+          (closest, player) => {
+            const distance = Math.hypot(player.x - x, player.y - y);
+            if (distance < closest.distance) {
+              return { player, distance };
+            }
+            return closest;
+          },
+          { player: undefined as undefined | PlayerState, distance: Infinity }
+        );
 
-        return acc;
-      },
-      { id: "", distance: -Infinity }
-    );
+        return { x, y, distance: closestPlayer.distance };
+      })
+      .sort((a, b) => a.distance - b.distance);
+
+    const MIN_DISTANCE = 1000;
+    const spawnPoint =
+      spawnPointDistances.find((point) => point.distance > MIN_DISTANCE) ??
+      spawnPointDistances[0];
 
     room?.send("spawnZombie", {
-      x: spawnPoints[spawnPoint.id].x,
-      y: spawnPoints[spawnPoint.id].y,
+      x: spawnPoint.x,
+      y: spawnPoint.y,
       type,
     });
   });
