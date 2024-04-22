@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
-import { Container } from "@pixi/react";
+import { Container, Graphics } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 
 // this context will hold all zombie spawn points

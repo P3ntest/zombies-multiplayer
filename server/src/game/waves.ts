@@ -5,7 +5,7 @@ export function generateWave(wave: number) {
 
   return {
     wave,
-    zombies: 10 * 1.25 ** wave,
+    zombies: 25 * 1.45 ** wave,
     zombieSpawnInterval: Math.max(200, 1000 - wave * 50),
     zombieHealthMultiplier: 1.15 ** wave,
     zombieAttackMultiplier: 1.15 ** wave,

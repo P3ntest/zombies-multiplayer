@@ -8,13 +8,13 @@ const upgradeTypes = [
     id: "damage",
     name: "Damage",
     maxLevel: 10,
-    cost: (level: number) => Math.round(Math.pow(2.5, level) * 30),
+    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
   },
   {
     id: "fireRate",
     name: "Fire Rate",
     maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(2.5, level) * 30),
+    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
   },
 ];
 

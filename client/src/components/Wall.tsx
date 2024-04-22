@@ -1,6 +1,6 @@
 import { Bodies } from "matter-js";
 import { useBodyRef } from "../lib/physics/hooks";
-import { Sprite, TilingSprite } from "@pixi/react";
+import { TilingSprite } from "@pixi/react";
 
 export function Wall({
   x,
