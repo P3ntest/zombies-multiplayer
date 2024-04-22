@@ -10,6 +10,7 @@ import Matter, { Body } from "matter-js";
 import { GunManager } from "./GunManager";
 import { useCheckCollectCoins } from "../coins/coinLogic";
 import { useWindowSize } from "usehooks-ts";
+import { useNetworkTick } from "../../lib/networking/hooks";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -47,12 +48,14 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     setX(collider.current.position.x);
     setY(collider.current.position.y);
     setRotation(rotation);
+  });
 
+  useNetworkTick(() => {
     room?.send("move", {
       x: collider.current.position.x,
       y: collider.current.position.y,
-      velocityX: currentDirection.x,
-      velocityY: currentDirection.y,
+      velocityX: collider.current.velocity.x,
+      velocityY: collider.current.velocity.y,
       rotation,
     });
   });
