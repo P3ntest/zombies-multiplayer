@@ -96,7 +96,6 @@ export function GunManager({
 
   useTick((delta) => {
     coolDown.current -= delta * (1000 / 60);
-    sd;
     if (isShooting && coolDown.current <= 0) {
       const coolDownTicks =
         {
