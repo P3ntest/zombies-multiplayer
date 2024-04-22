@@ -165,10 +165,11 @@ export class MyRoom extends Room<MyRoomState> {
       const { id } = message;
       const coinIndex = this.state.coins.findIndex((c) => c.id === id);
       if (coinIndex === -1) return;
+      const coin = this.state.coins[coinIndex];
 
       // give it to all players
       this.state.players.forEach((player) => {
-        player.coins += 1;
+        player.coins += coin.value;
       });
 
       this.state.coins.splice(coinIndex, 1);
@@ -220,7 +221,8 @@ export class MyRoom extends Room<MyRoomState> {
   onJoin(client: Client, options: any) {
     console.log(client.sessionId, "joined!");
     const playerState = new PlayerState();
-    playerState.name = "Player " + client.sessionId;
+    playerState.name =
+      options.name ?? "Player " + client.sessionId.substr(0, 4);
     playerState.sessionId = client.sessionId;
     playerState.x = Math.floor(Math.random() * 800);
     playerState.y = Math.floor(Math.random() * 600);
@@ -238,12 +240,16 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   spawnCoins(x: number, y: number, amount: number) {
-    const spreadRadius = 10 + Math.sqrt(amount) * 10;
-    for (let i = 0; i < amount; i++) {
+    const numCoins = Math.min(amount, 10);
+    const coinValue = amount / numCoins;
+
+    const spreadRadius = 10 + Math.sqrt(numCoins) * 10;
+    for (let i = 0; i < numCoins; i++) {
       const coin = new CoinState();
       coin.id = genId();
       coin.x = x + Math.random() * spreadRadius * 2 - spreadRadius;
       coin.y = y + Math.random() * spreadRadius * 2 - spreadRadius;
+      coin.value = i % 2 === 0 ? Math.floor(coinValue) : Math.ceil(coinValue);
       this.state.coins.push(coin);
     }
   }

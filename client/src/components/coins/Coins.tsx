@@ -19,13 +19,14 @@ export function Coins() {
 }
 
 function Coin({ coin }: { coin: CoinState }) {
+  const scale = 0.3 * coin.value ** 0.5;
   return (
     <Sprite
       x={coin.x}
       y={coin.y}
       image="assets/coin.png"
       anchor={[0.5, 0.5]}
-      scale={[0.3, 0.3]}
+      scale={[scale, scale]}
     />
   );
 }

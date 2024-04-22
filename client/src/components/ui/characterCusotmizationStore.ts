@@ -4,6 +4,8 @@ import { PlayerClass } from "../../../../server/src/game/player";
 interface CharacterCustomizationStore {
   selectedClass: PlayerClass;
   setSelectedClass: (playerClass: PlayerClass) => void;
+  name: string;
+  setName: (name: string) => void;
 }
 
 export const useCharacterCustomizationStore =
@@ -11,4 +13,6 @@ export const useCharacterCustomizationStore =
     selectedClass: "pistol",
     setSelectedClass: (playerClass: PlayerClass) =>
       set({ selectedClass: playerClass }),
+    name: "",
+    setName: (name: string) => set({ name }),
   }));

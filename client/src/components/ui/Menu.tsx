@@ -45,7 +45,8 @@ const AVAILABLE_CLASSES: PlayerClass[] = ["pistol", "shotgun", "rifle"];
 const PREVIEW_SIZE = 300;
 
 function ClassSelector() {
-  const { selectedClass, setSelectedClass } = useCharacterCustomizationStore();
+  const { selectedClass, setSelectedClass, name, setName } =
+    useCharacterCustomizationStore();
 
   return (
     <div className="flex flex-col items-center gap-4">
@@ -91,6 +92,13 @@ function ClassSelector() {
           );
         })}
       </div>
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        placeholder="Name"
+        className="input button"
+      />
     </div>
   );
 }

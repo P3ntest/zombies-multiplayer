@@ -1,4 +1,4 @@
-import { AnimatedSprite, Container, Sprite } from "@pixi/react";
+import { AnimatedSprite, Container, Graphics, Text } from "@pixi/react";
 import { EntityShadow } from "../Shadow";
 import { HealthBar } from "../HealhBar";
 import {
@@ -8,6 +8,7 @@ import {
   playerAnimationSprites,
 } from "../../assets/spritesheets/playerAnimationAtlas";
 import { PlayerClass } from "../../../../server/src/game/player";
+import { TextStyle } from "pixi.js";
 
 const gunFromClass: Record<PlayerClass, PlayerGun> = {
   pistol: "pistol",
@@ -24,6 +25,7 @@ export function PlayerSprite({
   velocityX,
   velocityY,
   playerClass,
+  name,
 }: {
   x: number;
   y: number;
@@ -32,6 +34,7 @@ export function PlayerSprite({
   velocityX: number;
   velocityY: number;
   playerClass: PlayerClass;
+  name: string;
 }) {
   const isWalking = velocityX !== 0 || velocityY !== 0;
 
@@ -68,9 +71,34 @@ export function PlayerSprite({
           <HealthBar health={health} maxHealth={100} />
         </Container>
       ) : null}
+      {/* <NameTag name={name} /> */}
     </Container>
   );
 }
+
+// function NameTag({ name }: { name: string }) {
+//   return (
+//     <Container y={-50}>
+//       <Graphics
+//         draw={(g) => {
+//           g.beginFill(0x000000, 0.2);
+//           g.drawRect(-50, -10, 100, 20);
+//           g.endFill();
+//         }}
+//       />
+//       <Text
+//         anchor={{ x: 0.5, y: 0.5 }}
+//         text={name}
+//         style={
+//           new TextStyle({
+//             fill: "white",
+//             // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//           }) as any
+//         }
+//       />
+//     </Container>
+//   );
+// }
 
 function Feet({
   rotation,

@@ -13,7 +13,7 @@ export class PlayerUpgradeState extends Schema {
 }
 
 export class PlayerState extends Schema {
-  @type("string") name: string = "Unknown";
+  @type("string") name: string = "Unnamed";
   @type("string") sessionId: string = "";
 
   @type("number") x: number = 0;
@@ -70,6 +70,7 @@ export class CoinState extends Schema {
   @type("string") id: string = "";
   @type("number") x: number = 0;
   @type("number") y: number = 0;
+  @type("number") value: number = 1;
 }
 
 export class MyRoomState extends Schema {
