@@ -3,6 +3,7 @@ import { monitor } from "@colyseus/monitor";
 import { playground } from "@colyseus/playground";
 import express from "express";
 import { join } from "path";
+import compression from "compression";
 /**
  * Import your Room files
  */
@@ -26,7 +27,7 @@ export default config({
     } else {
       const clientBuildPath = join(__dirname, "..", "client", "dist");
       console.log("clientBuildPath", clientBuildPath);
-      app.use("/", express.static(clientBuildPath));
+      app.use("/", compression(), express.static(clientBuildPath));
     }
 
     /**
