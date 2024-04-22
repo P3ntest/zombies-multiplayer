@@ -1,21 +1,36 @@
 import { useEffect } from "react";
-import { connectToColyseus, useColyseusRoom } from "./colyseus";
+import { colyseusClient, setCurrentRoom, useColyseusRoom } from "./colyseus";
 import { MainStage } from "./components/MainStage";
 import { useControlEventListeners } from "./lib/useControls";
+import { MyRoomState } from "../../server/src/rooms/schema/MyRoomState";
+import { Menu } from "./components/ui/Menu";
+
+let connecting = false;
 
 export function App() {
   const room = useColyseusRoom();
 
   useControlEventListeners();
 
-  useEffect(() => {
-    if (!room) {
-      connectToColyseus("my_room", {});
-    }
-  }, [room]);
+  // useEffect(() => {
+  //   if (!room) {
+  //     if (connecting) {
+  //       return;
+  //     }
+  //     connecting = true;
+  //     colyseusClient
+  //       .joinOrCreate<MyRoomState>("my_room", {})
+  //       .then((room) => {
+  //         setCurrentRoom(room);
+  //       })
+  //       .finally(() => {
+  //         connecting = false;
+  //       });
+  //   }
+  // }, [room]);
 
   if (!room) {
-    return null;
+    return <Menu />;
   }
 
   // if (!room) {

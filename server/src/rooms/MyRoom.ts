@@ -188,7 +188,7 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.x = Math.floor(Math.random() * 800);
     playerState.y = Math.floor(Math.random() * 600);
     playerState.health = 100;
-    playerState.playerClass = "pistol";
+    playerState.playerClass = options.playerClass ?? "pistol";
     this.state.players.set(client.id, playerState);
   }
 

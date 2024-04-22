@@ -1,5 +1,5 @@
 import { MyRoomState } from "../../server/src/rooms/schema/MyRoomState";
-import { colyseus } from "use-colyseus";
+import { colyseus } from "@p3ntest/use-colyseus";
 
 const productionWebsocketUrl = window.location.origin.replace(/^http/, "ws");
 const websocketUrl =
@@ -11,12 +11,14 @@ const {
   client,
   connectToColyseus,
   disconnectFromColyseus,
+  setCurrentRoom,
   useColyseusRoom,
   useColyseusState,
 } = colyseus<MyRoomState>(websocketUrl);
 
 export {
   client as colyseusClient,
+  setCurrentRoom,
   connectToColyseus,
   disconnectFromColyseus,
   useColyseusRoom,

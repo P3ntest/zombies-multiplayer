@@ -14,6 +14,10 @@ import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 
+/**
+ * This renders the actual ingame content. It requires to be connected to a game room.
+ * It will render the game world and all entities in it, as well as handle UI and Controls
+ */
 export const MainStage = () => {
   const windowSize = useWindowSize();
   const mainContentRef = useRef(null);

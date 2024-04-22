@@ -3,3 +3,7 @@ body {
   padding: 0;
   overflow: hidden;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
