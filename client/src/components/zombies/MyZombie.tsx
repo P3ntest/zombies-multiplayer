@@ -127,7 +127,7 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
 
       // move towards the player
 
-      const speed = 1.4 * zombieType.baseSpeed;
+      const speed = 1.6 * zombieType.baseSpeed;
 
       Matter.Body.setVelocity(collider.current, {
         x: Math.cos(rotation) * speed,

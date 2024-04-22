@@ -7,3 +7,18 @@ body {
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.button {
+  @apply bg-slate-800 text-slate-300 p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-105 transition-all;
+}
+
+.button_selected {
+  @apply bg-slate-700;
+}
+
+.ui-text {
+  text-shadow: 3px 5px 2px #474747;
+  user-select: none;
+  color: white;
+  font-weight: bold;
+}

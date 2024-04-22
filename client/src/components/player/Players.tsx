@@ -11,10 +11,19 @@ import Matter, { Body } from "matter-js";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { SpectateControls } from "./SpectateControls";
 import { useState } from "react";
+import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
+import { playSelfDied } from "../../lib/sound/sound";
 
 export function Players() {
   const state = useColyseusState();
   const players = state?.players;
+  const self = useSelf();
+
+  useRoomMessageHandler("playerDied", (message) => {
+    if (message.playerId === self.sessionId) {
+      playSelfDied();
+    }
+  });
 
   if (!players) {
     return null;

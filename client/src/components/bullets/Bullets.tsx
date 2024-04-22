@@ -110,7 +110,7 @@ function BulletGraphics({ x, y }: { x: number; y: number }) {
       x={x}
       y={y}
       draw={(g) => {
-        g.beginFill(0x433);
+        g.beginFill(0x222);
         g.drawCircle(0, 0, 5);
         g.endFill();
       }}

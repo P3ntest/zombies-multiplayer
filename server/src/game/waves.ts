@@ -5,13 +5,16 @@ export function generateWave(wave: number) {
 
   return {
     wave,
-    zombies: 10 + wave * 3,
+    zombies: 10 * 1.25 ** wave,
     zombieSpawnInterval: Math.max(200, 1000 - wave * 50),
-    zombieHealthMultiplier: 1 + wave * 0.1,
-    zombieAttackMultiplier: 1 + wave * 0.1,
+    zombieHealthMultiplier: 1.15 ** wave,
+    zombieAttackMultiplier: 1.15 ** wave,
     spawnChances: {
       normal: 100,
-      baby: Math.min(100, wave * 10),
+      baby: Math.min(40, wave * 5),
+      greenMutant: Math.min(40, wave * 2),
+      tank: Math.min(40, wave * 2),
+      blueMutant: Math.min(40, wave * 1),
     },
     postDelay: 5000,
   };

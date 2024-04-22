@@ -21,6 +21,8 @@ export class WaveManager {
 
   beginNextWave() {
     this.currentWaveNumber++;
+    this.room.state.waveInfo.currentWaveNumber = this.currentWaveNumber;
+    this.room.state.waveInfo.active = true;
     this.currentWave = generateWave(this.currentWaveNumber);
     this.waveRunning = true;
     this.currentWaveSpawned = 0;
@@ -53,6 +55,8 @@ export class WaveManager {
       wave: this.currentWaveNumber,
     });
 
+    this.room.state.waveInfo.active = false;
+
     for (const player of this.room.state.players.values()) {
       if (player.healthState === PlayerHealthState.DEAD) {
         this.room.revivePlayer(player.sessionId);
@@ -70,6 +74,16 @@ export class WaveManager {
     this.room.clock.setTimeout(() => {
       this.beginNextWave();
     }, this.currentWave.postDelay);
+    // interval to update nextWaveInSec
+    let totalSeconds = this.currentWave.postDelay / 1000;
+    this.room.state.waveInfo.nextWaveStartsInSec = totalSeconds;
+    const interval = this.room.clock.setInterval(() => {
+      totalSeconds--;
+      this.room.state.waveInfo.nextWaveStartsInSec = totalSeconds;
+      if (totalSeconds <= 0) {
+        interval.clear();
+      }
+    }, 1000);
   }
 
   init() {

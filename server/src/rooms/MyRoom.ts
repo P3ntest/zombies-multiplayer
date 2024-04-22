@@ -82,12 +82,17 @@ export class MyRoom extends Room<MyRoomState> {
       const bullet = this.state.bullets.find((b) => b.id === bulletId);
       if (!bullet) return;
 
-      zombie.health -= 10;
+      zombie.health -= bullet.damage;
       if (zombie.health <= 0) {
         const index = this.state.zombies.findIndex((z) => z.id === zombieId);
         this.state.zombies.splice(index, 1);
         this.waveManager.checkWaveEnd();
         this.spawnCoins(zombie.x, zombie.y, Math.floor(Math.random() * 3) + 1);
+        this.broadcast("blood", {
+          x: zombie.x,
+          y: zombie.y,
+          size: 8,
+        });
         this.broadcast("zombieDead", { zombieId });
       }
 
@@ -136,11 +141,13 @@ export class MyRoom extends Room<MyRoomState> {
       const { x, y, type } = message;
       const zombie = new ZombieState();
       const typeInfo = zombieInfo[type as ZombieType];
-      zombie.id = genId();
-      const health =
+      const health = Math.round(
         typeInfo.baseHealth *
-        this.waveManager.currentWave.zombieHealthMultiplier;
-      zombie.health = typeInfo.baseHealth;
+          this.waveManager.currentWave.zombieHealthMultiplier
+      );
+      zombie.id = genId();
+      zombie.health = health;
+      zombie.maxHealth = health;
       zombie.x = x;
       zombie.y = y;
       zombie.rotation = Math.random() * Math.PI * 2;
@@ -160,6 +167,24 @@ export class MyRoom extends Room<MyRoomState> {
 
       this.state.coins.splice(coinIndex, 1);
     });
+
+    this.onMessage("buyUpgrade", (client, message) => {
+      const { upgradeType, coins } = message;
+      const player = this.state.players.get(client.id);
+      if (!player) return;
+      if (player.coins < coins) return;
+      player.coins -= coins;
+      const upgrade = player.upgrades;
+
+      switch (upgradeType) {
+        case "fireRate":
+          upgrade.fireRate++;
+          break;
+        case "damage":
+          upgrade.damage++;
+          break;
+      }
+    });
   }
 
   killPlayer(playerId: string) {
@@ -169,6 +194,12 @@ export class MyRoom extends Room<MyRoomState> {
     player.health = 0;
     player.healthState = PlayerHealthState.DEAD;
     this.broadcast("playerDied", { playerId });
+    this.broadcast("blood", {
+      x: player.x,
+      y: player.y,
+      size: 13,
+      amount: 2,
+    });
   }
 
   revivePlayer(playerId: string) {

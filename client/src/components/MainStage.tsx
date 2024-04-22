@@ -13,6 +13,7 @@ import { useBroadcastRoomMessages } from "../lib/networking/hooks";
 import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
+import { BloodManager } from "./effects/Blood";
 
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
@@ -63,6 +64,7 @@ export const MainStage = () => {
                 <Level />
               </ZombieSpawner>
               <Coins />
+              <BloodManager />
               <Zombies />
               <Bullets />
               <Players />

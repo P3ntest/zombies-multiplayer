@@ -113,7 +113,7 @@ export function ZombieSprite({
         animationSpeed={0.36 * typeInfo.baseSpeed}
         isPlaying
         images={zombieAnimationSprites}
-        // tint={typeInfo.tint}
+        tint={typeInfo.tint ?? 0xffffff}
         scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}
         {...other}

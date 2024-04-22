@@ -12,13 +12,13 @@ export function playSound(
   audio.play();
 }
 
-export function playGunSound(gun: PlayerClass) {
+export function playGunSound(gun: PlayerClass, msCoolDown: number = 1000) {
   switch (gun) {
     case "shotgun":
       playSound("/assets/sounds/guns/shotgun.mp3");
       setTimeout(() => {
         playSound("/assets/sounds/guns/shotgun_rack.mp3");
-      }, 500);
+      }, Math.min(msCoolDown - 800, 500)); // 800ms is the sound length
       break;
     case "rifle":
       playSound("/assets/sounds/guns/rifle.mp3");
@@ -61,4 +61,12 @@ const coins = new Array(55)
   );
 export function playCoinPickup() {
   playSound(coins[Math.floor(Math.random() * coins.length)]);
+}
+
+export function playSplat() {
+  playSound("/assets/sounds/splat.flac");
+}
+
+export function playSelfDied() {
+  playSound("/assets/sounds/playerdies.mp3");
 }
