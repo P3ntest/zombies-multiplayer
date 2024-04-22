@@ -18,12 +18,22 @@ export function Coins() {
   );
 }
 
+const tint = {
+  1: 0xcd7f32,
+  10: 0xc0c0c0,
+  100: 0xffd700,
+  1000: 0x00ff00,
+  10000: 0xff0000,
+  100000: 0x0000ff,
+};
 function Coin({ coin }: { coin: CoinState }) {
-  const scale = 0.3 * coin.value ** 0.5;
+  const scale = 0.3;
   return (
     <Sprite
       x={coin.x}
       y={coin.y}
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      tint={(tint as any)[coin.value] ?? 0xffffff}
       image="assets/coin.png"
       anchor={[0.5, 0.5]}
       scale={[scale, scale]}

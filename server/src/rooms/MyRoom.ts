@@ -1,3 +1,4 @@
+import { listen } from "@colyseus/tools";
 import { Room, Client } from "@colyseus/core";
 import {
   BulletState,
@@ -240,16 +241,27 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   spawnCoins(x: number, y: number, amount: number) {
-    const numCoins = Math.min(amount, 10);
-    const coinValue = amount / numCoins;
+    // dynamically create combusted coins with 10x the value.
+    // ex: 11111 -> 10000 + 1000 + 100 + 10 + 1
+    amount = Math.floor(amount);
+    let coinValue = amount;
+    let coins = [];
+    const highestDigit = Math.floor(Math.log10(amount));
+    for (let i = highestDigit; i >= 0; i--) {
+      const digitValue = Math.pow(10, i);
+      while (coinValue >= digitValue) {
+        coinValue -= digitValue;
+        coins.push(digitValue);
+      }
+    }
 
-    const spreadRadius = 10 + Math.sqrt(numCoins) * 10;
-    for (let i = 0; i < numCoins; i++) {
+    const spreadRadius = 10 + Math.sqrt(coins.length) * 10;
+    for (const value of coins) {
       const coin = new CoinState();
       coin.id = genId();
       coin.x = x + Math.random() * spreadRadius * 2 - spreadRadius;
       coin.y = y + Math.random() * spreadRadius * 2 - spreadRadius;
-      coin.value = i % 2 === 0 ? Math.floor(coinValue) : Math.ceil(coinValue);
+      coin.value = value;
       this.state.coins.push(coin);
     }
   }
