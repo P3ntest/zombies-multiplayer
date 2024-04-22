@@ -47,7 +47,7 @@ function Player({ player }: { player: PlayerState }) {
       <PlayerSelf player={player} />
     ) : (
       <>
-        <SpectateControls />
+        <SpectateControls x={player.x} y={player.y} />
         <PlayerGrave x={player.x} y={player.y} />
       </>
     );

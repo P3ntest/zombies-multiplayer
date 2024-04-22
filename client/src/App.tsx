@@ -12,36 +12,9 @@ export function App() {
 
   useControlEventListeners();
 
-  // useEffect(() => {
-  //   if (!room) {
-  //     if (connecting) {
-  //       return;
-  //     }
-  //     connecting = true;
-  //     colyseusClient
-  //       .joinOrCreate<MyRoomState>("my_room", {})
-  //       .then((room) => {
-  //         setCurrentRoom(room);
-  //       })
-  //       .finally(() => {
-  //         connecting = false;
-  //       });
-  //   }
-  // }, [room]);
-
   if (!room) {
     return <Menu />;
   }
-
-  // if (!room) {
-  //   return (
-  //     <div>
-  //       <button onClick={() => connectToColyseus("my_room", {})}>
-  //         Connect
-  //       </button>
-  //     </div>
-  //   );
-  // }
 
   return (
     <div
@@ -49,19 +22,6 @@ export function App() {
         cursor: "crosshair",
       }}
     >
-      {/* <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          zIndex: 100,
-          width: "100vw",
-          height: "100vh",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-        }}
-        id="debug"
-      ></div> */}
-
       <MainStage />
     </div>
   );

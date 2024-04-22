@@ -99,7 +99,7 @@ function PlayerCamera({ x, y }: { x: number; y: number }) {
   return null;
 }
 
-function useCurrentPlayerDirection() {
+export function useCurrentPlayerDirection() {
   const axis = useAxis();
   const speed = 4;
 
