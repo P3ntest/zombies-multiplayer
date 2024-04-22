@@ -10,7 +10,7 @@ import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 let connecting = false;
 
 export function Menu() {
-  const { selectedClass } = useCharacterCustomizationStore();
+  const { selectedClass, name } = useCharacterCustomizationStore();
   return (
     <div className="bg-slate-900 min-h-screen">
       <h1>Menu</h1>
@@ -24,6 +24,7 @@ export function Menu() {
           colyseusClient
             .joinOrCreate<MyRoomState>("my_room", {
               playerClass: selectedClass,
+              name,
             })
             .then((room) => {
               setCurrentRoom(room);
@@ -66,6 +67,7 @@ function ClassSelector() {
           rotation={0}
         >
           <PlayerSprite
+            name={name}
             playerClass={selectedClass}
             x={-20}
             y={0}
@@ -95,7 +97,7 @@ function ClassSelector() {
       <input
         type="text"
         value={name}
-        onChange={(e) => setName(e.target.value)}
+        onChange={(e) => setName(e.target.value.substring(0, 16))}
         placeholder="Name"
         className="input button"
       />

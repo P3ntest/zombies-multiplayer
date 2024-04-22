@@ -63,6 +63,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   return (
     <>
       <PlayerSprite
+        name={player.name}
         playerClass={player.playerClass}
         x={x}
         y={y}

@@ -71,34 +71,38 @@ export function PlayerSprite({
           <HealthBar health={health} maxHealth={100} />
         </Container>
       ) : null}
-      {/* <NameTag name={name} /> */}
+      <NameTag name={name} />
     </Container>
   );
 }
 
-// function NameTag({ name }: { name: string }) {
-//   return (
-//     <Container y={-50}>
-//       <Graphics
-//         draw={(g) => {
-//           g.beginFill(0x000000, 0.2);
-//           g.drawRect(-50, -10, 100, 20);
-//           g.endFill();
-//         }}
-//       />
-//       <Text
-//         anchor={{ x: 0.5, y: 0.5 }}
-//         text={name}
-//         style={
-//           new TextStyle({
-//             fill: "white",
-//             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-//           }) as any
-//         }
-//       />
-//     </Container>
-//   );
-// }
+function NameTag({ name }: { name: string }) {
+  const width = name.length * 13;
+  return (
+    <Container y={-50}>
+      <Graphics
+        draw={(g) => {
+          g.clear();
+          g.beginFill(0x000000, 0.2);
+          g.drawRect(-width / 2, -10, width, 20);
+          g.endFill();
+        }}
+      />
+      <Text
+        alpha={0.7}
+        anchor={{ x: 0.5, y: 0.5 }}
+        text={name.toUpperCase()}
+        style={
+          new TextStyle({
+            fill: "white",
+            fontSize: 20,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          }) as any
+        }
+      />
+    </Container>
+  );
+}
 
 function Feet({
   rotation,
