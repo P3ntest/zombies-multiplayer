@@ -35,4 +35,8 @@ EXPOSE 3000
 
 ENV NODE_ENV=production
 
-CMD ["bunx", "prisma", "migrate", "deploy", "&&", "node", "build/index.js"]
+# copy and permit start.sh
+COPY ./start.sh ./
+RUN chmod +x ./start.sh
+
+CMD ["sh", "-c", "./start.sh"]
