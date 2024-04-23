@@ -94,6 +94,7 @@ function OtherAlivePlayer({ player }: { player: PlayerState }) {
 
   return (
     <PlayerSprite
+      currentAnimation={player.currentAnimation}
       name={player.name}
       playerClass={player.playerClass}
       x={x}

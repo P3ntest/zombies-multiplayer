@@ -42,6 +42,8 @@ export class PlayerState extends Schema {
   @type("number") damageDealt: number = 0;
   @type("number") wavesSurvived: number = 0;
   @type("number") accuracy: number = 0;
+
+  @type("uint8") currentAnimation = 0;
 }
 
 export class ZombieState extends Schema {
@@ -69,6 +71,7 @@ export class BulletState extends Schema {
   @type("number") speed: number = 0;
   @type("number") damage: number = 0;
   @type("uint8") piercesLeft: number = 0;
+  @type("float32") knockBack: number = 1;
 }
 
 export class WaveInfoState extends Schema {

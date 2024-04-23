@@ -60,12 +60,14 @@ export class MyRoom extends Room<MyRoomState> {
 
     this.onMessage("move", (client, message) => {
       const player = this.state.players.get(client.id);
-      const { x, y, rotation, velocityX, velocityY } = message;
+      const { x, y, rotation, velocityX, velocityY, currentAnimation } =
+        message;
       player.x = x;
       player.y = y;
       player.velocityX = velocityX;
       player.velocityY = velocityY;
       player.rotation = rotation;
+      player.currentAnimation = currentAnimation;
     });
 
     this.onMessage("chatMessage", (client, message) => {
@@ -75,7 +77,8 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("shoot", (client, message) => {
-      const { originX, originY, rotation, speed, damage, pierces } = message;
+      const { originX, originY, rotation, speed, damage, pierces, knockBack } =
+        message;
 
       const bullet = new BulletState();
       bullet.id = genId();
@@ -86,6 +89,7 @@ export class MyRoom extends Room<MyRoomState> {
       bullet.rotation = rotation;
       bullet.damage = damage;
       bullet.speed = speed;
+      bullet.knockBack = knockBack ?? 1;
 
       this.state.bullets.push(bullet);
     });
@@ -110,6 +114,27 @@ export class MyRoom extends Room<MyRoomState> {
       targetPlayerId != undefined && (zombie.targetPlayerId = targetPlayerId);
     });
 
+    this.onMessage("meleeHitZombie", (client, message) => {
+      console.log("meleeHitZombie", message);
+      const { zombieId, damage, knockBack } = message;
+      const zombie = this.state.zombies.find((z) => z.id === zombieId);
+      if (!zombie) return;
+
+      this.state.players.get(client.id)!.damageDealt += damage;
+      zombie.health -= damage;
+      if (zombie.health <= 0) {
+        this.killZombie(zombieId, client.id);
+        return;
+      }
+
+      const angle = Math.atan2(
+        zombie.y - this.state.players.get(client.id)!.y,
+        zombie.x - this.state.players.get(client.id)!.x
+      );
+
+      this.broadcast("zombieHit", { zombieId, damage, knockBack, angle });
+    });
+
     this.onMessage("zombieHit", (client, message) => {
       const { zombieId, bulletId } = message;
       const zombie = this.state.zombies.find((z) => z.id === zombieId);
@@ -117,28 +142,6 @@ export class MyRoom extends Room<MyRoomState> {
 
       const bullet = this.state.bullets.find((b) => b.id === bulletId);
       if (!bullet) return;
-
-      zombie.health -= bullet.damage;
-      this.state.players.get(bullet.playerId)!.damageDealt += bullet.damage;
-      if (zombie.health <= 0) {
-        const index = this.state.zombies.findIndex((z) => z.id === zombieId);
-        this.state.zombies.splice(index, 1);
-        this.waveManager.checkWaveEnd();
-        this.spawnCoins(
-          zombie.x,
-          zombie.y,
-          Math.floor((Math.random() * zombie.maxHealth) / 30) + 1
-        );
-        this.broadcast("blood", {
-          x: zombie.x,
-          y: zombie.y,
-          size: 8,
-        });
-        this.state.players.get(bullet.playerId)!.kills++;
-        this.broadcast("zombieDead", { zombieId });
-      }
-
-      this.broadcast("zombieHit", { zombieId, bulletId });
 
       bullet.piercesLeft--;
 
@@ -148,6 +151,25 @@ export class MyRoom extends Room<MyRoomState> {
         );
         this.state.bullets.splice(bulletIndex, 1);
       }
+
+      this.state.players.get(client.id)!.damageDealt += bullet.damage;
+      zombie.health -= bullet.damage;
+      if (zombie.health <= 0) {
+        this.killZombie(zombieId, client.id);
+        return;
+      }
+
+      const angle = Math.atan2(
+        zombie.y - bullet.originY,
+        zombie.x - bullet.originX
+      );
+
+      this.broadcast("zombieHit", {
+        zombieId,
+        bulletId,
+        angle,
+        knockBack: bullet.knockBack,
+      });
     });
 
     this.onMessage("zombieAttackPlayer", (client, message) => {
@@ -168,6 +190,7 @@ export class MyRoom extends Room<MyRoomState> {
       zombie.lastAttackTick = this.state.gameTick;
 
       this.broadcast("zombieAttackPlayer", { playerId, zombieId });
+      this.broadcast("playerHurt", { playerId });
 
       const damage =
         zombieInfo[zombie.zombieType].baseAttackDamage *
@@ -259,6 +282,30 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.checkGameOver();
+  }
+
+  killZombie(zombieId: string, playerI?: string) {
+    if (playerI) {
+      const player = this.state.players.get(playerI);
+      if (player) {
+        player.kills++;
+      }
+    }
+
+    const zombie = this.state.zombies.find((z) => z.id === zombieId);
+    this.state.zombies = this.state.zombies.filter((z) => z.id !== zombieId);
+    this.waveManager.checkWaveEnd();
+    this.spawnCoins(
+      zombie.x,
+      zombie.y,
+      Math.floor((Math.random() * zombie.maxHealth) / 30) + 1
+    );
+    this.broadcast("blood", {
+      x: zombie.x,
+      y: zombie.y,
+      size: 8,
+    });
+    this.broadcast("zombieDead", { zombieId });
   }
 
   revivePlayer(playerId: string) {

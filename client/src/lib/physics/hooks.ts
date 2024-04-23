@@ -20,9 +20,25 @@ export function usePhysicsEngine() {
 
 type BodyMeta = {
   tags?: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
 };
 
 export const bodyMeta = new Map<Matter.Body, BodyMeta>();
+
+export function getBodiesWithTag(tag: string) {
+  const result: Matter.Body[] = [];
+  for (const [body, meta] of bodyMeta) {
+    if (meta.tags?.includes(tag)) {
+      result.push(body);
+    }
+  }
+  return result;
+}
+
+export function getMetaForBody(body: Matter.Body) {
+  return bodyMeta.get(body);
+}
 
 export function getBodyMeta(body: Matter.Body) {
   return bodyMeta.get(body);

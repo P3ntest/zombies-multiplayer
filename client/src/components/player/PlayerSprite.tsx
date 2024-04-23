@@ -27,6 +27,7 @@ export function PlayerSprite({
   velocityY,
   playerClass,
   name,
+  currentAnimation,
 }: {
   x: number;
   y: number;
@@ -37,36 +38,27 @@ export function PlayerSprite({
   velocityY: number;
   playerClass: PlayerClass;
   name: string;
+  currentAnimation: number;
 }) {
   const isWalking = velocityX !== 0 || velocityY !== 0;
 
-  const animation: PlayerAnimation = isWalking ? "walk" : "idle";
+  const animation: PlayerAnimation =
+    currentAnimation == 0 ? (isWalking ? "walk" : "idle") : "melee";
   const gun: PlayerGun = gunFromClass[playerClass];
-
-  const commonProps = {
-    isPlaying: true,
-    scale: { x: 0.5, y: 0.5 },
-    anchor: { x: gun === "pistol" ? 0.45 : 0.35, y: 0.55 }, // centered on his head
-  };
 
   return (
     <Container x={x} y={y}>
       <EntityShadow radius={40} />
       <Container rotation={rotation}>
         <Feet rotation={rotation} velocityX={velocityX} velocityY={velocityY} />
-        {PlayerGun.flatMap((_gun) =>
-          PlayerAnimation.flatMap((_animation) => (
-            <AnimatedSprite
-              key={_gun + _animation}
-              alpha={_gun === gun && _animation === animation ? 1 : 0}
-              textures={playerAnimationSprites[_gun][_animation].frames}
-              animationSpeed={
-                playerAnimationSprites[_gun][_animation].animationSpeed
-              }
-              {...commonProps}
-            />
-          ))
-        )}
+        <AnimatedSprite
+          key={gun + animation}
+          textures={playerAnimationSprites[gun][animation].frames}
+          animationSpeed={playerAnimationSprites[gun][animation].animationSpeed}
+          isPlaying
+          scale={{ x: 0.5, y: 0.5 }}
+          anchor={{ x: gun === "pistol" ? 0.45 : 0.35, y: 0.55 }}
+        />
       </Container>
       {health ? (
         <Container y={50}>
@@ -137,17 +129,16 @@ function Feet({
 
   return (
     <>
-      {Object.entries(feetAnimations).map(([key, animation]) => (
-        <AnimatedSprite
-          key={key}
-          alpha={key === direction ? 1 : 0}
-          isPlaying
-          anchor={{ x: 0.5, y: 0.5 }} // centered on his head
-          scale={{ x: 0.5, y: 0.5 }}
-          textures={animation.frames}
-          animationSpeed={animation.animationSpeed * (backwards ? -1 : 1)}
-        />
-      ))}
+      <AnimatedSprite
+        key={direction}
+        isPlaying
+        anchor={{ x: 0.5, y: 0.5 }} // centered on his head
+        scale={{ x: 0.5, y: 0.5 }}
+        textures={feetAnimations[direction].frames}
+        animationSpeed={
+          feetAnimations[direction].animationSpeed * (backwards ? -1 : 1)
+        }
+      />
     </>
   );
 }

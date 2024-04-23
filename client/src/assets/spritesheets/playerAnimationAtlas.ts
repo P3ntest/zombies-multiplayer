@@ -1,8 +1,8 @@
 import { Texture } from "pixi.js";
 
-export const PlayerGun = ["pistol", "rifle", "shotgun", "knife"];
+export const PlayerGun = ["pistol", "rifle", "shotgun"];
 export type PlayerGun = (typeof PlayerGun)[number];
-export const PlayerAnimation = ["idle", "walk"];
+export const PlayerAnimation = ["idle", "walk", "melee"];
 export type PlayerAnimation = (typeof PlayerAnimation)[number];
 
 const texturePrefix = "Top_Down_Survivor";
@@ -26,94 +26,77 @@ export let feetAnimations: Record<
   }
 >;
 
+function textureArrayFromPrefix(prefix: string, count: number) {
+  return new Array(count)
+    .fill(null)
+    .map((_, i) => Texture.from(`${texturePrefix}/${prefix}_${i}.png`));
+}
+
+export const MELEE_ANIMATION_SPEED = 0.7;
+
 export async function loadPlayerAnimationSprites() {
   playerAnimationSprites = {
     pistol: {
       idle: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/handgun/idle/survivor-idle_handgun_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix(
+          "handgun/idle/survivor-idle_handgun",
+          20
+        ),
         animationSpeed: 0.2,
       },
       walk: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/handgun/move/survivor-move_handgun_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix(
+          "handgun/move/survivor-move_handgun",
+          20
+        ),
         animationSpeed: 0.5,
+      },
+      melee: {
+        frames: textureArrayFromPrefix(
+          "handgun/meleeattack/survivor-meleeattack_handgun",
+          15
+        ),
+        animationSpeed: MELEE_ANIMATION_SPEED,
       },
     },
     rifle: {
       idle: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/rifle/idle/survivor-idle_rifle_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix("rifle/idle/survivor-idle_rifle", 20),
         animationSpeed: 0.2,
       },
       walk: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/rifle/move/survivor-move_rifle_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix("rifle/move/survivor-move_rifle", 20),
         animationSpeed: 0.5,
+      },
+      melee: {
+        frames: textureArrayFromPrefix(
+          "rifle/meleeattack/survivor-meleeattack_rifle",
+          15
+        ),
+        animationSpeed: MELEE_ANIMATION_SPEED,
       },
     },
     shotgun: {
       idle: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/shotgun/idle/survivor-idle_shotgun_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix(
+          "shotgun/idle/survivor-idle_shotgun",
+          20
+        ),
         animationSpeed: 0.2,
       },
       walk: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/shotgun/move/survivor-move_shotgun_${i}.png`
-            )
-          ),
+        frames: textureArrayFromPrefix(
+          "shotgun/move/survivor-move_shotgun",
+          20
+        ),
         animationSpeed: 0.5,
       },
-    },
-    knife: {
-      idle: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/knife/idle/survivor-idle_knife_${i}.png`
-            )
-          ),
-        animationSpeed: 0.2,
-      },
-      walk: {
-        frames: new Array(20)
-          .fill(null)
-          .map((_, i) =>
-            Texture.from(
-              `${texturePrefix}/knife/move/survivor-move_knife_${i}.png`
-            )
-          ),
-        animationSpeed: 0.5,
+      melee: {
+        frames: textureArrayFromPrefix(
+          "shotgun/meleeattack/survivor-meleeattack_shotgun",
+          15
+        ),
+        animationSpeed: MELEE_ANIMATION_SPEED,
       },
     },
   };

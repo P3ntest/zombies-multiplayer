@@ -4,9 +4,12 @@ import {
   ZombieState,
 } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
-import Matter from "matter-js";
+import Matter, { Body } from "matter-js";
 import { useAlivePlayers } from "../../lib/hooks/usePlayers";
-import { useNetworkTick } from "../../lib/networking/hooks";
+import {
+  useNetworkTick,
+  useRoomMessageHandler,
+} from "../../lib/networking/hooks";
 import { zombieInfo } from "../../../../server/src/game/zombies";
 import { useTick } from "@pixi/react";
 import { bodyMeta } from "../../lib/physics/hooks";
@@ -33,6 +36,19 @@ export function useZombieLogic(
 
   const room = useColyseusRoom();
   const alivePlayers = useAlivePlayers();
+
+  useRoomMessageHandler("zombieHit", (message) => {
+    const { zombieId, angle, knockBack } = message;
+    if (zombieId !== zombie.id) return;
+
+    const force = 0.3 * knockBack;
+    const vector = {
+      x: Math.cos(angle) * force,
+      y: Math.sin(angle) * force,
+    };
+
+    Body.applyForce(collider.current, collider.current.position, vector);
+  });
 
   const updateTarget = useCallback(
     (pathFind: boolean) => {
@@ -157,9 +173,23 @@ export function useZombieLogic(
 
     const speed = 2.3 * zombieType.baseSpeed;
 
-    Matter.Body.setVelocity(collider.current, {
+    const targetVelocity = {
       x: Math.cos(rotation) * speed,
       y: Math.sin(rotation) * speed,
+    };
+
+    const delta = {
+      x: targetVelocity.x - collider.current.velocity.x,
+      y: targetVelocity.y - collider.current.velocity.y,
+    };
+
+    if (Number.isNaN(delta.x) || Number.isNaN(delta.y)) {
+      return;
+    }
+
+    Body.applyForce(collider.current, collider.current.position, {
+      x: delta.x * 0.003,
+      y: delta.y * 0.003,
     });
 
     // updating

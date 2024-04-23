@@ -72,3 +72,15 @@ export function playSelfDied() {
     volume: 2,
   });
 }
+
+export function playHurtSound() {
+  playSound("/assets/sounds/hurt.flac");
+}
+
+export function playMeleeSound(hit: boolean) {
+  if (hit) {
+    playSound("/assets/sounds/punch.mp3");
+  } else {
+    playSound("/assets/sounds/punchMiss.mp3");
+  }
+}

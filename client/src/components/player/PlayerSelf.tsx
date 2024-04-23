@@ -4,7 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
-import { useNetworkTick } from "../../lib/networking/hooks";
+import {
+  useNetworkTick,
+  useRoomMessageHandler,
+} from "../../lib/networking/hooks";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { useCurrentPlayerDirection } from "../../lib/useControls";
 import { useCheckCollectCoins } from "../coins/coinLogic";
@@ -12,6 +15,7 @@ import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
 import { useCameraStore } from "../graphics/cameraStore";
+import { playHurtSound } from "../../lib/sound/sound";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -19,6 +23,8 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   });
 
   const room = useColyseusRoom();
+
+  const [currentAnimation, setCurrentAnimation] = useState(0);
 
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -28,6 +34,12 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   const stageRef = useContext(cameraContext);
 
   const currentDirection = useCurrentPlayerDirection();
+
+  useRoomMessageHandler("playerHurt", (message) => {
+    if (message.playerId === player.sessionId) {
+      playHurtSound();
+    }
+  });
 
   useCheckCollectCoins(x, y);
 
@@ -58,12 +70,14 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
       velocityX: collider.current.velocity.x,
       velocityY: collider.current.velocity.y,
       rotation,
+      currentAnimation,
     });
   });
 
   return (
     <>
       <PlayerSprite
+        currentAnimation={currentAnimation}
         name={player.name}
         playerClass={player.playerClass}
         x={x}
@@ -74,8 +88,12 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         velocityX={currentDirection.x}
         velocityY={currentDirection.y}
       />
-      <GunManager x={x} y={y} rotation={rotation} />
-      {/* <PlayerControls x={player.x} y={player.y} /> */}
+      <GunManager
+        x={x}
+        y={y}
+        rotation={rotation}
+        setCurrentAnimation={setCurrentAnimation}
+      />
       <PlayerCamera x={x} y={y} />
     </>
   );
@@ -87,7 +105,7 @@ function PlayerCamera({ x, y }: { x: number; y: number }) {
   useEffect(() => {
     setPosition(x, y);
     setZoom(1.5);
-  }, [x, y, setPosition]);
+  }, [x, y, setPosition, setZoom]);
 
   return null;
 }
