@@ -69,6 +69,6 @@ export function playSplat() {
 
 export function playSelfDied() {
   playSound("/assets/sounds/playerdies.mp3", {
-    volume: 1.5,
+    volume: 2,
   });
 }

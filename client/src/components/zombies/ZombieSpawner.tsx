@@ -75,7 +75,7 @@ export function ZombieSpawner({ children }: { children: React.ReactNode }) {
       })
       .sort((a, b) => a.distance - b.distance);
 
-    const MIN_DISTANCE = 1000;
+    const MIN_DISTANCE = 1500;
     const spawnPoint =
       spawnPointDistances.find((point) => point.distance > MIN_DISTANCE) ??
       spawnPointDistances[0];

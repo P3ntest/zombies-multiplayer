@@ -1,5 +1,9 @@
+import { Room } from "@colyseus/core";
 import { MutableRefObject, useCallback, useState } from "react";
-import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
+import {
+  PlayerState,
+  ZombieState,
+} from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
 import Matter from "matter-js";
 import { useAlivePlayers } from "../../lib/hooks/usePlayers";
@@ -114,17 +118,20 @@ export function useZombieLogic(
       updateTarget(offsetTick % 20 === 0);
     }
 
-    //   if (
-    //     distanceToTarget < 100 &&
-    //     zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick
-    //   ) {
-    //     // attack the player
-    //     room?.send("zombieAttackPlayer", {
-    //       playerId: targetPlayer.sessionId,
-    //       zombieId: zombie.id,
-    //       damage: zombieType.baseAttackDamage,
-    //     });
-    //   }
+    const targetPlayer = alivePlayers.find(
+      (player) => player.sessionId === zombie.targetPlayerId
+    );
+    if (targetPlayer) {
+      attackLogic(
+        targetPlayer,
+        zombie,
+        x,
+        y,
+        room,
+        currentTick,
+        zombieType.baseAttackDamage
+      );
+    }
   });
 
   useTick(() => {
@@ -170,4 +177,27 @@ export function getObstacles() {
   return Array.from(bodyMeta.entries())
     .filter(([, meta]) => meta.tags?.includes("obstacle"))
     .map(([body]) => body);
+}
+
+function attackLogic(
+  targetPlayer: PlayerState,
+  zombie: ZombieState,
+  x: number,
+  y: number,
+  room: Room,
+  currentTick: number,
+  damage: number
+) {
+  const distanceToTarget = Math.hypot(targetPlayer.x - x, targetPlayer.y - y);
+  if (
+    distanceToTarget < 100 &&
+    zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick
+  ) {
+    // attack the player
+    room?.send("zombieAttackPlayer", {
+      playerId: targetPlayer.sessionId,
+      zombieId: zombie.id,
+      damage,
+    });
+  }
 }
