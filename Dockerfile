@@ -24,6 +24,7 @@ FROM base as server
 WORKDIR /app/server
 
 COPY ./server ./
+RUN bunx prisma generate
 RUN bun run build
 
 COPY --from=client /app/client/dist ./client/dist
