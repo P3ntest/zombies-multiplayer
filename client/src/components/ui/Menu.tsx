@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { Container, Stage } from "@pixi/react";
 import { PlayerSprite } from "../player/PlayerSprite";
@@ -10,33 +9,41 @@ import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 let connecting = false;
 
 export function Menu() {
-  const { selectedClass, name } = useCharacterCustomizationStore();
+  const { selectedClass, name, setName } = useCharacterCustomizationStore();
   return (
-    <div className="bg-slate-900 min-h-screen">
-      <h1>Menu</h1>
-      <button
-        className="bg-slate-700 text-white p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-105 transition-all"
-        onClick={() => {
-          if (connecting) {
-            return;
-          }
-          connecting = true;
-          colyseusClient
-            .joinOrCreate<MyRoomState>("my_room", {
-              playerClass: selectedClass,
-              name,
-            })
-            .then((room) => {
-              setCurrentRoom(room);
-            })
-            .finally(() => {
-              connecting = false;
-            });
-        }}
-      >
-        Join
-      </button>
+    <div className="bg-slate-900 min-h-screen flex flex-col items-center gap-4 pt-10">
       <ClassSelector />
+      <div className="flex flex-row gap-4">
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value.substring(0, 16))}
+          placeholder="Name"
+          className="input button"
+        />
+        <button
+          className="bg-slate-700 text-white p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-105 transition-all"
+          onClick={() => {
+            if (connecting) {
+              return;
+            }
+            connecting = true;
+            colyseusClient
+              .joinOrCreate<MyRoomState>("my_room", {
+                playerClass: selectedClass,
+                name,
+              })
+              .then((room) => {
+                setCurrentRoom(room);
+              })
+              .finally(() => {
+                connecting = false;
+              });
+          }}
+        >
+          Join
+        </button>
+      </div>
     </div>
   );
 }
@@ -46,7 +53,7 @@ const AVAILABLE_CLASSES: PlayerClass[] = ["pistol", "shotgun", "rifle"];
 const PREVIEW_SIZE = 300;
 
 function ClassSelector() {
-  const { selectedClass, setSelectedClass, name, setName } =
+  const { selectedClass, setSelectedClass, name } =
     useCharacterCustomizationStore();
 
   return (
@@ -94,13 +101,6 @@ function ClassSelector() {
           );
         })}
       </div>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value.substring(0, 16))}
-        placeholder="Name"
-        className="input button"
-      />
     </div>
   );
 }
