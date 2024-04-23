@@ -1,6 +1,6 @@
 import { AnimatedSprite, Container, Graphics, Text } from "@pixi/react";
 import { EntityShadow } from "../Shadow";
-import { HealthBar } from "../HealhBar";
+import { HealthBar } from "../HealthBar";
 import {
   PlayerAnimation,
   PlayerGun,
