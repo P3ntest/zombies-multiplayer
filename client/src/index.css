@@ -4,16 +4,12 @@ body {
   overflow: hidden;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 .button {
-  @apply bg-slate-800 text-slate-300 p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-105 transition-all;
+  @apply bg-slate-800 text-slate-300 p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-110 transition-all;
 }
 
 .button_selected {
-  @apply bg-slate-700;
+  @apply bg-slate-300 text-slate-900 scale-105;
 }
 
 .ui-text {
@@ -22,3 +18,7 @@ body {
   color: white;
   font-weight: bold;
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

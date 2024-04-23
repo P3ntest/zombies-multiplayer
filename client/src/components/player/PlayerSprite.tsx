@@ -46,7 +46,7 @@ export function PlayerSprite({
   const commonProps = {
     isPlaying: true,
     scale: { x: 0.5, y: 0.5 },
-    anchor: { x: 0.3, y: 0.58 }, // centered on his head
+    anchor: { x: gun === "pistol" ? 0.45 : 0.35, y: 0.55 }, // centered on his head
   };
 
   return (
@@ -142,7 +142,7 @@ function Feet({
           key={key}
           alpha={key === direction ? 1 : 0}
           isPlaying
-          anchor={{ x: 0.3, y: 0.58 }} // centered on his head
+          anchor={{ x: 0.5, y: 0.5 }} // centered on his head
           scale={{ x: 0.5, y: 0.5 }}
           images={animation.frames as string[]}
           animationSpeed={animation.animationSpeed * (backwards ? -1 : 1)}

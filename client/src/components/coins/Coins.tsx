@@ -1,6 +1,7 @@
 import { ParticleContainer, Sprite } from "@pixi/react";
 import { useColyseusState } from "../../colyseus";
 import { CoinState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { memo } from "react";
 
 export function Coins() {
   const coins = useColyseusState((state) => state.coins);
@@ -26,7 +27,7 @@ const tint = {
   10000: 0xff0000,
   100000: 0x0000ff,
 };
-function Coin({ coin }: { coin: CoinState }) {
+function _Coin({ coin }: { coin: CoinState }) {
   const scale = 0.3;
   return (
     <Sprite
@@ -40,3 +41,5 @@ function Coin({ coin }: { coin: CoinState }) {
     />
   );
 }
+
+const Coin = memo(_Coin);

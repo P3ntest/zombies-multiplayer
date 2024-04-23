@@ -61,6 +61,8 @@ export function useZombieLogic(
           visiblePlayers[Math.floor(Math.random() * visiblePlayers.length)] ??
           alivePlayers[Math.floor(Math.random() * alivePlayers.length)];
 
+        if (!newTarget) return;
+
         room?.send("updateZombie", {
           id: zombie.id,
           targetPlayerId: newTarget.sessionId,
