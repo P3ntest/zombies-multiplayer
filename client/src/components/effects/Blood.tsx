@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
-import { Sprite, useTick } from "@pixi/react";
+import { ParticleContainer, Sprite, useTick } from "@pixi/react";
 import { playSplat } from "../../lib/sound/sound";
+import { Texture } from "pixi.js";
 
 let currId = 0;
 
@@ -31,7 +32,7 @@ export function BloodManager() {
   });
 
   return (
-    <>
+    <ParticleContainer>
       {blood.map((b) => (
         <Blood
           key={b.id}
@@ -44,7 +45,7 @@ export function BloodManager() {
         />
       ))}
       {/* <Blood x={100} y={100} size={10} onRemove={() => {}} /> */}
-    </>
+    </ParticleContainer>
   );
 }
 
@@ -82,8 +83,8 @@ function Blood({
         y: 0.5,
       }}
       alpha={opacity}
-      image="assets/blood.png"
-      scale={scale * size * 0.02}
+      texture={Texture.from("assets/blood.png")}
+      scale={scale * size * 0.1}
     />
   );
 }

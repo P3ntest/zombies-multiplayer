@@ -5,7 +5,6 @@ import { Level } from "./Level";
 import { useEffect, useRef } from "react";
 import { StageProvider } from "./stageContext";
 import "@pixi/events";
-import "@pixi/gif";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
 import { Zombies } from "./zombies/Zombies";
