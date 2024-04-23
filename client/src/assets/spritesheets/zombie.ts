@@ -1,17 +1,13 @@
-import { SpritesheetData } from "pixi.js";
+import { SpriteSheetJson } from "pixi.js";
 
 const numFrames = 17;
 const width = 4896;
 const widthPerFrame = width / numFrames;
 
-export const atlas: SpritesheetData = {
+export const zombieAtlas: SpriteSheetJson = {
   meta: {
     image: "assets/zombie/zombie.png",
-    size: {
-      w: width,
-      h: 311,
-    },
-    scale: 1,
+    scale: "1",
   },
   frames: Object.fromEntries(
     Array.from({ length: numFrames }).map((_, i) => [
@@ -46,17 +42,3 @@ export const atlas: SpritesheetData = {
     walk: Array.from({ length: numFrames }).map((_, i) => `zombie-${i}`),
   },
 };
-
-// export const zombieSpriteSheet = new Spritesheet(
-//   Texture.from("/assets/zombie/zombie.png"),
-//   atlas
-// );
-
-// await zombieSpriteSheet.parse();
-
-export const zombieAnimationSprites = new Array(17)
-  .fill(0)
-  .map(
-    (_, i) =>
-      `assets/zombie/frames/frame_${i < 10 ? "0" : ""}${i}_delay-0.04s.png`
-  );

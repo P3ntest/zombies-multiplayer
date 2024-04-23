@@ -1,10 +1,4 @@
-import {
-  AnimatedSprite,
-  Container,
-  ParticleContainer,
-  Sprite,
-  useTick,
-} from "@pixi/react";
+import { AnimatedSprite, Container, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { ZombieState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { ZombieType, zombieInfo } from "../../../../server/src/game/zombies";
@@ -16,13 +10,13 @@ import { ComponentProps } from "react";
 import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealthBar";
 import { EntityShadow } from "../Shadow";
-import { zombieAnimationSprites } from "../../assets/spritesheets/zombie";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
 import {
   playZombieDead,
   playZombieGrowl,
   playZombieHitSound,
 } from "../../lib/sound/sound";
+import { spriteSheets } from "../../assets/assetHandler";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -115,7 +109,7 @@ export function ZombieSprite({
         rotation={rotation}
         animationSpeed={0.36 * typeInfo.baseSpeed}
         isPlaying
-        images={zombieAnimationSprites}
+        textures={spriteSheets.zombieAtlas.animations.walk}
         tint={typeInfo.tint ?? 0xffffff}
         scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}

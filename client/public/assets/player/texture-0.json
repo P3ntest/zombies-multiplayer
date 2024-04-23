@@ -1,0 +1,3903 @@
+{
+  "frames": {
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_8.png": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 282,
+        "h": 163
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 53,
+        "y": 126,
+        "w": 282,
+        "h": 163
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_8.png": {
+      "frame": {
+        "x": 282,
+        "y": 0,
+        "w": 282,
+        "h": 163
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 53,
+        "y": 126,
+        "w": 282,
+        "h": 163
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_5.png": {
+      "frame": {
+        "x": 564,
+        "y": 0,
+        "w": 280,
+        "h": 159
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 24,
+        "y": 55,
+        "w": 280,
+        "h": 159
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_4.png": {
+      "frame": {
+        "x": 844,
+        "y": 0,
+        "w": 278,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 26,
+        "y": 54,
+        "w": 278,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_3.png": {
+      "frame": {
+        "x": 564,
+        "y": 159,
+        "w": 274,
+        "h": 162
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 52,
+        "w": 274,
+        "h": 162
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_10.png": {
+      "frame": {
+        "x": 0,
+        "y": 163,
+        "w": 272,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 24,
+        "w": 272,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_11.png": {
+      "frame": {
+        "x": 272,
+        "y": 163,
+        "w": 272,
+        "h": 173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 24,
+        "w": 272,
+        "h": 173
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_9.png": {
+      "frame": {
+        "x": 1122,
+        "y": 0,
+        "w": 272,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 25,
+        "w": 272,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_12.png": {
+      "frame": {
+        "x": 838,
+        "y": 160,
+        "w": 271,
+        "h": 173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 32,
+        "y": 24,
+        "w": 271,
+        "h": 173
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_8.png": {
+      "frame": {
+        "x": 838,
+        "y": 333,
+        "w": 271,
+        "h": 171
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 32,
+        "y": 26,
+        "w": 271,
+        "h": 171
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_2.png": {
+      "frame": {
+        "x": 544,
+        "y": 321,
+        "w": 271,
+        "h": 164
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 50,
+        "w": 271,
+        "h": 164
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_13.png": {
+      "frame": {
+        "x": 272,
+        "y": 336,
+        "w": 270,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 25,
+        "w": 270,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_7.png": {
+      "frame": {
+        "x": 0,
+        "y": 337,
+        "w": 270,
+        "h": 169
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 28,
+        "w": 270,
+        "h": 169
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_14.png": {
+      "frame": {
+        "x": 0,
+        "y": 506,
+        "w": 268,
+        "h": 170
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 27,
+        "w": 268,
+        "h": 170
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_15.png": {
+      "frame": {
+        "x": 542,
+        "y": 485,
+        "w": 268,
+        "h": 169
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 28,
+        "w": 268,
+        "h": 169
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_16.png": {
+      "frame": {
+        "x": 268,
+        "y": 508,
+        "w": 268,
+        "h": 168
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 29,
+        "w": 268,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_17.png": {
+      "frame": {
+        "x": 1394,
+        "y": 0,
+        "w": 268,
+        "h": 168
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 29,
+        "w": 268,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_18.png": {
+      "frame": {
+        "x": 1662,
+        "y": 0,
+        "w": 268,
+        "h": 168
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 29,
+        "w": 268,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_16.png": {
+      "frame": {
+        "x": 1930,
+        "y": 0,
+        "w": 130,
+        "h": 114
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 30,
+        "w": 130,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_16.png": {
+      "frame": {
+        "x": 1930,
+        "y": 130,
+        "w": 129,
+        "h": 114
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 32,
+        "w": 129,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_6.png": {
+      "frame": {
+        "x": 1394,
+        "y": 168,
+        "w": 268,
+        "h": 168
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 29,
+        "w": 268,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_2.png": {
+      "frame": {
+        "x": 1662,
+        "y": 168,
+        "w": 268,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/idle/survivor-idle_0.png": {
+      "frame": {
+        "x": 1930,
+        "y": 259,
+        "w": 98,
+        "h": 114
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 18,
+        "y": 20,
+        "w": 98,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 132,
+        "h": 155
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_3.png": {
+      "frame": {
+        "x": 1662,
+        "y": 335,
+        "w": 268,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_17.png": {
+      "frame": {
+        "x": 1930,
+        "y": 357,
+        "w": 111,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 30,
+        "y": 12,
+        "w": 111,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_13.png": {
+      "frame": {
+        "x": 1930,
+        "y": 457,
+        "w": 109,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 32,
+        "y": 12,
+        "w": 109,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_4.png": {
+      "frame": {
+        "x": 1109,
+        "y": 172,
+        "w": 268,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_5.png": {
+      "frame": {
+        "x": 1109,
+        "y": 339,
+        "w": 268,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_1.png": {
+      "frame": {
+        "x": 1377,
+        "y": 336,
+        "w": 268,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_19.png": {
+      "frame": {
+        "x": 1377,
+        "y": 502,
+        "w": 268,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 268,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_1.png": {
+      "frame": {
+        "x": 1645,
+        "y": 502,
+        "w": 268,
+        "h": 164
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 49,
+        "w": 268,
+        "h": 164
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_18.png": {
+      "frame": {
+        "x": 1913,
+        "y": 557,
+        "w": 129,
+        "h": 135
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 21,
+        "w": 129,
+        "h": 135
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/reload/survivor-reload_rifle_5.png": {
+      "frame": {
+        "x": 1645,
+        "y": 666,
+        "w": 268,
+        "h": 161
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 39,
+        "w": 268,
+        "h": 161
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_18.png": {
+      "frame": {
+        "x": 1913,
+        "y": 686,
+        "w": 130,
+        "h": 133
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 21,
+        "w": 130,
+        "h": 133
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_0.png": {
+      "frame": {
+        "x": 1913,
+        "y": 816,
+        "w": 130,
+        "h": 144
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 16,
+        "w": 130,
+        "h": 144
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/reload/survivor-reload_shotgun_5.png": {
+      "frame": {
+        "x": 810,
+        "y": 504,
+        "w": 268,
+        "h": 161
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 39,
+        "w": 268,
+        "h": 161
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/move/survivor-move_flashlight_0.png": {
+      "frame": {
+        "x": 536,
+        "y": 654,
+        "w": 267,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 30,
+        "w": 267,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 305,
+        "h": 231
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/reload/survivor-reload_rifle_6.png": {
+      "frame": {
+        "x": 1078,
+        "y": 506,
+        "w": 267,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 39,
+        "w": 267,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/reload/survivor-reload_shotgun_4.png": {
+      "frame": {
+        "x": 803,
+        "y": 665,
+        "w": 267,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 39,
+        "w": 267,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/reload/survivor-reload_shotgun_6.png": {
+      "frame": {
+        "x": 1070,
+        "y": 666,
+        "w": 267,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 39,
+        "w": 267,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_14.png": {
+      "frame": {
+        "x": 1337,
+        "y": 668,
+        "w": 267,
+        "h": 153
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 53,
+        "y": 122,
+        "w": 267,
+        "h": 153
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_14.png": {
+      "frame": {
+        "x": 1337,
+        "y": 821,
+        "w": 267,
+        "h": 153
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 53,
+        "y": 122,
+        "w": 267,
+        "h": 153
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_9.png": {
+      "frame": {
+        "x": 1604,
+        "y": 827,
+        "w": 214,
+        "h": 266
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 42,
+        "y": 19,
+        "w": 214,
+        "h": 266
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_13.png": {
+      "frame": {
+        "x": 1870,
+        "y": 960,
+        "w": 246,
+        "h": 178
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 19,
+        "w": 246,
+        "h": 178
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_7.png": {
+      "frame": {
+        "x": 1604,
+        "y": 1206,
+        "w": 266,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 51,
+        "y": 123,
+        "w": 266,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_5.png": {
+      "frame": {
+        "x": 1870,
+        "y": 1206,
+        "w": 161,
+        "h": 178
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 23,
+        "y": 42,
+        "w": 161,
+        "h": 178
+      },
+      "sourceSize": {
+        "w": 291,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_0.png": {
+      "frame": {
+        "x": 0,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 24,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_10.png": {
+      "frame": {
+        "x": 0,
+        "y": 820,
+        "w": 221,
+        "h": 254
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 41,
+        "y": 19,
+        "w": 221,
+        "h": 254
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_9.png": {
+      "frame": {
+        "x": 254,
+        "y": 820,
+        "w": 221,
+        "h": 229
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 60,
+        "y": 52,
+        "w": 221,
+        "h": 229
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_9.png": {
+      "frame": {
+        "x": 483,
+        "y": 820,
+        "w": 221,
+        "h": 229
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 60,
+        "y": 52,
+        "w": 221,
+        "h": 229
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_14.png": {
+      "frame": {
+        "x": 712,
+        "y": 820,
+        "w": 129,
+        "h": 91
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 44,
+        "w": 129,
+        "h": 91
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_1.png": {
+      "frame": {
+        "x": 266,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 24,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_18.png": {
+      "frame": {
+        "x": 532,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 24,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_0.png": {
+      "frame": {
+        "x": 798,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 41,
+        "y": 48,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/move/survivor-move_knife_19.png": {
+      "frame": {
+        "x": 803,
+        "y": 825,
+        "w": 216,
+        "h": 169
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 19,
+        "w": 216,
+        "h": 169
+      },
+      "sourceSize": {
+        "w": 279,
+        "h": 219
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_4.png": {
+      "frame": {
+        "x": 972,
+        "y": 826,
+        "w": 215,
+        "h": 200
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 22,
+        "y": 117,
+        "w": 215,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/reload/survivor-reload_handgun_5.png": {
+      "frame": {
+        "x": 1172,
+        "y": 826,
+        "w": 214,
+        "h": 163
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 41,
+        "w": 214,
+        "h": 163
+      },
+      "sourceSize": {
+        "w": 260,
+        "h": 230
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_1.png": {
+      "frame": {
+        "x": 0,
+        "y": 676,
+        "w": 129,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 17,
+        "w": 129,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_5.png": {
+      "frame": {
+        "x": 1870,
+        "y": 1367,
+        "w": 171,
+        "h": 177
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 21,
+        "w": 171,
+        "h": 177
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_8.png": {
+      "frame": {
+        "x": 1064,
+        "y": 1041,
+        "w": 211,
+        "h": 164
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 41,
+        "y": 42,
+        "w": 211,
+        "h": 164
+      },
+      "sourceSize": {
+        "w": 291,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/reload/survivor-reload_handgun_10.png": {
+      "frame": {
+        "x": 1275,
+        "y": 1041,
+        "w": 207,
+        "h": 164
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 40,
+        "w": 207,
+        "h": 164
+      },
+      "sourceSize": {
+        "w": 260,
+        "h": 230
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_13.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1041,
+        "w": 256,
+        "h": 162
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 52,
+        "y": 120,
+        "w": 256,
+        "h": 162
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_1.png": {
+      "frame": {
+        "x": 1738,
+        "y": 1041,
+        "w": 130,
+        "h": 140
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 18,
+        "w": 130,
+        "h": 140
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_1.png": {
+      "frame": {
+        "x": 129,
+        "y": 676,
+        "w": 140,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 15,
+        "y": 12,
+        "w": 140,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_11.png": {
+      "frame": {
+        "x": 229,
+        "y": 676,
+        "w": 139,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 17,
+        "y": 12,
+        "w": 139,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_17.png": {
+      "frame": {
+        "x": 329,
+        "y": 676,
+        "w": 130,
+        "h": 124
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 25,
+        "w": 130,
+        "h": 124
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_13.png": {
+      "frame": {
+        "x": 453,
+        "y": 676,
+        "w": 129,
+        "h": 82
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 48,
+        "w": 129,
+        "h": 82
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_16.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1203,
+        "w": 105,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 46,
+        "y": 12,
+        "w": 105,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_7.png": {
+      "frame": {
+        "x": 1064,
+        "y": 1205,
+        "w": 266,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 51,
+        "y": 123,
+        "w": 266,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/idle/survivor-idle_handgun_10.png": {
+      "frame": {
+        "x": 1330,
+        "y": 1205,
+        "w": 209,
+        "h": 152
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 38,
+        "w": 209,
+        "h": 152
+      },
+      "sourceSize": {
+        "w": 253,
+        "h": 216
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_14.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1303,
+        "w": 104,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 48,
+        "y": 12,
+        "w": 104,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_10.png": {
+      "frame": {
+        "x": 1586,
+        "y": 1380,
+        "w": 266,
+        "h": 168
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 21,
+        "w": 266,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_15.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1403,
+        "w": 130,
+        "h": 103
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 35,
+        "w": 130,
+        "h": 103
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_11.png": {
+      "frame": {
+        "x": 1852,
+        "y": 1538,
+        "w": 194,
+        "h": 169
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 42,
+        "y": 37,
+        "w": 194,
+        "h": 169
+      },
+      "sourceSize": {
+        "w": 291,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_11.png": {
+      "frame": {
+        "x": 0,
+        "y": 1707,
+        "w": 266,
+        "h": 168
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 21,
+        "w": 266,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_10.png": {
+      "frame": {
+        "x": 0,
+        "y": 1533,
+        "w": 235,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 17,
+        "w": 235,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/reload/survivor-reload_rifle_1.png": {
+      "frame": {
+        "x": 0,
+        "y": 1379,
+        "w": 260,
+        "h": 154
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 40,
+        "y": 38,
+        "w": 260,
+        "h": 154
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_2.png": {
+      "frame": {
+        "x": 0,
+        "y": 1206,
+        "w": 188,
+        "h": 173
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 42,
+        "w": 188,
+        "h": 173
+      },
+      "sourceSize": {
+        "w": 291,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_12.png": {
+      "frame": {
+        "x": 188,
+        "y": 1206,
+        "w": 235,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 235,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_11.png": {
+      "frame": {
+        "x": 0,
+        "y": 1973,
+        "w": 129,
+        "h": 72
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 53,
+        "w": 129,
+        "h": 72
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_10.png": {
+      "frame": {
+        "x": 129,
+        "y": 1973,
+        "w": 129,
+        "h": 70
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 54,
+        "w": 129,
+        "h": 70
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_12.png": {
+      "frame": {
+        "x": 168,
+        "y": 1707,
+        "w": 266,
+        "h": 167
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 22,
+        "w": 266,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_11.png": {
+      "frame": {
+        "x": 235,
+        "y": 1533,
+        "w": 235,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 17,
+        "w": 235,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/move/survivor-move_rifle_10.png": {
+      "frame": {
+        "x": 260,
+        "y": 1378,
+        "w": 256,
+        "h": 155
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 33,
+        "w": 256,
+        "h": 155
+      },
+      "sourceSize": {
+        "w": 313,
+        "h": 206
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_13.png": {
+      "frame": {
+        "x": 470,
+        "y": 1206,
+        "w": 235,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 235,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_14.png": {
+      "frame": {
+        "x": 705,
+        "y": 1206,
+        "w": 234,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 234,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_15.png": {
+      "frame": {
+        "x": 939,
+        "y": 1206,
+        "w": 129,
+        "h": 103
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 38,
+        "w": 129,
+        "h": 103
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_0.png": {
+      "frame": {
+        "x": 939,
+        "y": 1335,
+        "w": 176,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 12,
+        "w": 176,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_14.png": {
+      "frame": {
+        "x": 1039,
+        "y": 1379,
+        "w": 266,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 22,
+        "w": 266,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_13.png": {
+      "frame": {
+        "x": 1305,
+        "y": 1414,
+        "w": 254,
+        "h": 176
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 32,
+        "y": 34,
+        "w": 254,
+        "h": 176
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_6.png": {
+      "frame": {
+        "x": 1305,
+        "y": 1668,
+        "w": 207,
+        "h": 176
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 49,
+        "y": 21,
+        "w": 207,
+        "h": 176
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_10.png": {
+      "frame": {
+        "x": 1305,
+        "y": 1875,
+        "w": 176,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 15,
+        "y": 12,
+        "w": 176,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_11.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1533,
+        "w": 168,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 19,
+        "y": 12,
+        "w": 168,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_15.png": {
+      "frame": {
+        "x": 1581,
+        "y": 1548,
+        "w": 266,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 23,
+        "w": 266,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_1.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1701,
+        "w": 167,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 17,
+        "y": 12,
+        "w": 167,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_4.png": {
+      "frame": {
+        "x": 1847,
+        "y": 1707,
+        "w": 214,
+        "h": 200
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 23,
+        "y": 117,
+        "w": 214,
+        "h": 200
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_18.png": {
+      "frame": {
+        "x": 1847,
+        "y": 1921,
+        "w": 127,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 22,
+        "y": 12,
+        "w": 127,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_17.png": {
+      "frame": {
+        "x": 1581,
+        "y": 1714,
+        "w": 266,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 23,
+        "w": 266,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_12.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1868,
+        "w": 149,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 28,
+        "y": 12,
+        "w": 149,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/reload/survivor-reload_rifle_4.png": {
+      "frame": {
+        "x": 1581,
+        "y": 1880,
+        "w": 266,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 39,
+        "w": 266,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_13.png": {
+      "frame": {
+        "x": 1947,
+        "y": 1921,
+        "w": 126,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 12,
+        "w": 126,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/reload/survivor-reload_rifle_7.png": {
+      "frame": {
+        "x": 335,
+        "y": 1707,
+        "w": 266,
+        "h": 160
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 39,
+        "w": 266,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/move/survivor-move_knife_10.png": {
+      "frame": {
+        "x": 470,
+        "y": 1533,
+        "w": 232,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 20,
+        "w": 232,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 279,
+        "h": 219
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/move/survivor-move_shotgun_10.png": {
+      "frame": {
+        "x": 516,
+        "y": 1378,
+        "w": 256,
+        "h": 155
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 31,
+        "y": 33,
+        "w": 256,
+        "h": 155
+      },
+      "sourceSize": {
+        "w": 313,
+        "h": 206
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_13.png": {
+      "frame": {
+        "x": 772,
+        "y": 1378,
+        "w": 265,
+        "h": 167
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 22,
+        "w": 265,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_18.png": {
+      "frame": {
+        "x": 939,
+        "y": 1511,
+        "w": 149,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 26,
+        "y": 12,
+        "w": 149,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/reload/survivor-reload_shotgun_7.png": {
+      "frame": {
+        "x": 1039,
+        "y": 1643,
+        "w": 266,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 39,
+        "w": 266,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 322,
+        "h": 217
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_14.png": {
+      "frame": {
+        "x": 1039,
+        "y": 1546,
+        "w": 130,
+        "h": 94
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 40,
+        "w": 130,
+        "h": 94
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_16.png": {
+      "frame": {
+        "x": 1169,
+        "y": 1546,
+        "w": 94,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 38,
+        "y": 12,
+        "w": 94,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/meleeattack/survivor-meleeattack_knife_12.png": {
+      "frame": {
+        "x": 495,
+        "y": 1803,
+        "w": 242,
+        "h": 188
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 38,
+        "y": 19,
+        "w": 242,
+        "h": 188
+      },
+      "sourceSize": {
+        "w": 329,
+        "h": 300
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_14.png": {
+      "frame": {
+        "x": 495,
+        "y": 1707,
+        "w": 93,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 12,
+        "w": 93,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/handgun/meleeattack/survivor-meleeattack_handgun_7.png": {
+      "frame": {
+        "x": 683,
+        "y": 1803,
+        "w": 242,
+        "h": 161
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 52,
+        "w": 242,
+        "h": 161
+      },
+      "sourceSize": {
+        "w": 291,
+        "h": 256
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/meleeattack/survivor-meleeattack_flashlight_11.png": {
+      "frame": {
+        "x": 702,
+        "y": 1643,
+        "w": 216,
+        "h": 160
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 56,
+        "w": 216,
+        "h": 160
+      },
+      "sourceSize": {
+        "w": 316,
+        "h": 246
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/shotgun/meleeattack/survivor-meleeattack_shotgun_2.png": {
+      "frame": {
+        "x": 844,
+        "y": 1803,
+        "w": 241,
+        "h": 167
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 48,
+        "y": 117,
+        "w": 241,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/rifle/meleeattack/survivor-meleeattack_rifle_2.png": {
+      "frame": {
+        "x": 1011,
+        "y": 1803,
+        "w": 241,
+        "h": 166
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 48,
+        "y": 117,
+        "w": 241,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 358,
+        "h": 353
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_17.png": {
+      "frame": {
+        "x": 1177,
+        "y": 1803,
+        "w": 129,
+        "h": 126
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 26,
+        "w": 129,
+        "h": 126
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_17.png": {
+      "frame": {
+        "x": 1177,
+        "y": 1932,
+        "w": 126,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 38,
+        "y": 12,
+        "w": 126,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_15.png": {
+      "frame": {
+        "x": 595,
+        "y": 1707,
+        "w": 84,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 54,
+        "y": 12,
+        "w": 84,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_13.png": {
+      "frame": {
+        "x": 918,
+        "y": 1660,
+        "w": 130,
+        "h": 88
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 43,
+        "w": 130,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_19.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1701,
+        "w": 167,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 17,
+        "y": 12,
+        "w": 167,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_9.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1533,
+        "w": 168,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 19,
+        "y": 12,
+        "w": 168,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_8.png": {
+      "frame": {
+        "x": 1481,
+        "y": 1868,
+        "w": 149,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 28,
+        "y": 12,
+        "w": 149,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_7.png": {
+      "frame": {
+        "x": 1947,
+        "y": 1921,
+        "w": 126,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 12,
+        "w": 126,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_6.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1303,
+        "w": 104,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 48,
+        "y": 12,
+        "w": 104,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_5.png": {
+      "frame": {
+        "x": 595,
+        "y": 1707,
+        "w": 84,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 54,
+        "y": 12,
+        "w": 84,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_4.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1203,
+        "w": 105,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 46,
+        "y": 12,
+        "w": 105,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_3.png": {
+      "frame": {
+        "x": 1177,
+        "y": 1932,
+        "w": 126,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 38,
+        "y": 12,
+        "w": 126,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/run/survivor-run_2.png": {
+      "frame": {
+        "x": 939,
+        "y": 1511,
+        "w": 149,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 26,
+        "y": 12,
+        "w": 149,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 204,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_19.png": {
+      "frame": {
+        "x": 1738,
+        "y": 1041,
+        "w": 130,
+        "h": 140
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 18,
+        "w": 130,
+        "h": 140
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_7.png": {
+      "frame": {
+        "x": 918,
+        "y": 1660,
+        "w": 130,
+        "h": 88
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 43,
+        "w": 130,
+        "h": 88
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_6.png": {
+      "frame": {
+        "x": 1039,
+        "y": 1546,
+        "w": 130,
+        "h": 94
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 40,
+        "w": 130,
+        "h": 94
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_5.png": {
+      "frame": {
+        "x": 1482,
+        "y": 1403,
+        "w": 130,
+        "h": 103
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 35,
+        "w": 130,
+        "h": 103
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_4.png": {
+      "frame": {
+        "x": 1930,
+        "y": 0,
+        "w": 130,
+        "h": 114
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 30,
+        "w": 130,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_3.png": {
+      "frame": {
+        "x": 329,
+        "y": 676,
+        "w": 130,
+        "h": 124
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 25,
+        "w": 130,
+        "h": 124
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_left/survivor-strafe_left_2.png": {
+      "frame": {
+        "x": 1913,
+        "y": 686,
+        "w": 130,
+        "h": 133
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 21,
+        "w": 130,
+        "h": 133
+      },
+      "sourceSize": {
+        "w": 155,
+        "h": 174
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_19.png": {
+      "frame": {
+        "x": 0,
+        "y": 676,
+        "w": 129,
+        "h": 143
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 17,
+        "w": 129,
+        "h": 143
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_9.png": {
+      "frame": {
+        "x": 0,
+        "y": 1973,
+        "w": 129,
+        "h": 72
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 53,
+        "w": 129,
+        "h": 72
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_7.png": {
+      "frame": {
+        "x": 453,
+        "y": 676,
+        "w": 129,
+        "h": 82
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 48,
+        "w": 129,
+        "h": 82
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_6.png": {
+      "frame": {
+        "x": 712,
+        "y": 820,
+        "w": 129,
+        "h": 91
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 44,
+        "w": 129,
+        "h": 91
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_5.png": {
+      "frame": {
+        "x": 939,
+        "y": 1206,
+        "w": 129,
+        "h": 103
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 38,
+        "w": 129,
+        "h": 103
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_4.png": {
+      "frame": {
+        "x": 1930,
+        "y": 130,
+        "w": 129,
+        "h": 114
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 32,
+        "w": 129,
+        "h": 114
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_3.png": {
+      "frame": {
+        "x": 1177,
+        "y": 1803,
+        "w": 129,
+        "h": 126
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 26,
+        "w": 129,
+        "h": 126
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/strafe_right/survivor-strafe_right_2.png": {
+      "frame": {
+        "x": 1913,
+        "y": 557,
+        "w": 129,
+        "h": 135
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 12,
+        "y": 21,
+        "w": 129,
+        "h": 135
+      },
+      "sourceSize": {
+        "w": 154,
+        "h": 176
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_19.png": {
+      "frame": {
+        "x": 129,
+        "y": 676,
+        "w": 140,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 15,
+        "y": 12,
+        "w": 140,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_9.png": {
+      "frame": {
+        "x": 229,
+        "y": 676,
+        "w": 139,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 17,
+        "y": 12,
+        "w": 139,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_7.png": {
+      "frame": {
+        "x": 1930,
+        "y": 457,
+        "w": 109,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 32,
+        "y": 12,
+        "w": 109,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_6.png": {
+      "frame": {
+        "x": 495,
+        "y": 1707,
+        "w": 93,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 39,
+        "y": 12,
+        "w": 93,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_4.png": {
+      "frame": {
+        "x": 1169,
+        "y": 1546,
+        "w": 94,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 38,
+        "y": 12,
+        "w": 94,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_3.png": {
+      "frame": {
+        "x": 1930,
+        "y": 357,
+        "w": 111,
+        "h": 100
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 30,
+        "y": 12,
+        "w": 111,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/feet/walk/survivor-walk_2.png": {
+      "frame": {
+        "x": 1847,
+        "y": 1921,
+        "w": 127,
+        "h": 100
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 22,
+        "y": 12,
+        "w": 127,
+        "h": 100
+      },
+      "sourceSize": {
+        "w": 172,
+        "h": 124
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_19.png": {
+      "frame": {
+        "x": 266,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 24,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_9.png": {
+      "frame": {
+        "x": 0,
+        "y": 1707,
+        "w": 266,
+        "h": 168
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 21,
+        "w": 266,
+        "h": 168
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_8.png": {
+      "frame": {
+        "x": 168,
+        "y": 1707,
+        "w": 266,
+        "h": 167
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 33,
+        "y": 22,
+        "w": 266,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_7.png": {
+      "frame": {
+        "x": 772,
+        "y": 1378,
+        "w": 265,
+        "h": 167
+      },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 22,
+        "w": 265,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_6.png": {
+      "frame": {
+        "x": 1039,
+        "y": 1379,
+        "w": 266,
+        "h": 167
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 22,
+        "w": 266,
+        "h": 167
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_5.png": {
+      "frame": {
+        "x": 1581,
+        "y": 1548,
+        "w": 266,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 34,
+        "y": 23,
+        "w": 266,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_3.png": {
+      "frame": {
+        "x": 1581,
+        "y": 1714,
+        "w": 266,
+        "h": 166
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 23,
+        "w": 266,
+        "h": 166
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/flashlight/idle/survivor-idle_flashlight_2.png": {
+      "frame": {
+        "x": 532,
+        "y": 1041,
+        "w": 266,
+        "h": 165
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 35,
+        "y": 24,
+        "w": 266,
+        "h": 165
+      },
+      "sourceSize": {
+        "w": 303,
+        "h": 223
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_9.png": {
+      "frame": {
+        "x": 235,
+        "y": 1533,
+        "w": 235,
+        "h": 174
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 17,
+        "w": 235,
+        "h": 174
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_8.png": {
+      "frame": {
+        "x": 188,
+        "y": 1206,
+        "w": 235,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 235,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_7.png": {
+      "frame": {
+        "x": 470,
+        "y": 1206,
+        "w": 235,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 235,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    },
+    "Top_Down_Survivor/knife/idle/survivor-idle_knife_6.png": {
+      "frame": {
+        "x": 705,
+        "y": 1206,
+        "w": 234,
+        "h": 172
+      },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 37,
+        "y": 18,
+        "w": 234,
+        "h": 172
+      },
+      "sourceSize": {
+        "w": 289,
+        "h": 224
+      },
+      "pivot": {
+        "x": 0.5,
+        "y": 0.5
+      }
+    }
+  },
+  "meta": {
+    "app": "http://free-tex-packer.com",
+    "version": "0.6.7",
+    "image": "texture-0.png",
+    "format": "RGBA8888",
+    "size": {
+      "w": 2048,
+      "h": 2048
+    },
+    "scale": 1
+  }
+}

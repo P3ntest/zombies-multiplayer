@@ -59,7 +59,7 @@ export function PlayerSprite({
             <AnimatedSprite
               key={_gun + _animation}
               alpha={_gun === gun && _animation === animation ? 1 : 0}
-              images={playerAnimationSprites[_gun][_animation].frames}
+              textures={playerAnimationSprites[_gun][_animation].frames}
               animationSpeed={
                 playerAnimationSprites[_gun][_animation].animationSpeed
               }
@@ -144,7 +144,7 @@ function Feet({
           isPlaying
           anchor={{ x: 0.5, y: 0.5 }} // centered on his head
           scale={{ x: 0.5, y: 0.5 }}
-          images={animation.frames as string[]}
+          textures={animation.frames}
           animationSpeed={animation.animationSpeed * (backwards ? -1 : 1)}
         />
       ))}
