@@ -25,6 +25,13 @@ export class MyRoom extends Room<MyRoomState> {
   onCreate(options: any) {
     this.roomId = Math.random().toString(36).substr(2, 5);
 
+    const spawn = () => {
+      this.requestSpawnZombie();
+    };
+    this.clock.setInterval(() => {
+      spawn();
+    }, 1000);
+
     const roomOptions = options.quickPlay
       ? ({
           isPrivate: false,

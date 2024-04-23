@@ -104,7 +104,7 @@ function PlayerCamera({ x, y }: { x: number; y: number }) {
 
   useEffect(() => {
     setPosition(x, y);
-    setZoom(1);
+    setZoom(0.1);
   }, [x, y, setPosition, setZoom]);
 
   return null;

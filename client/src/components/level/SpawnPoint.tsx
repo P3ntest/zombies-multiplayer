@@ -29,8 +29,6 @@ export function SpawnPoint({
 
   const containerRef = useRef<PIXIContainer>(null);
 
-  const lastUpdatedRef = useRef<SpawnPoint | null>(null);
-
   useEffect(() => {
     setSpawnPoint(id, { x, y, type });
 
@@ -38,29 +36,6 @@ export function SpawnPoint({
       removeSpawnPoint(id);
     };
   }, [id, x, y, type, setSpawnPoint, removeSpawnPoint]);
-
-  useTick(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const worldTransform = container.worldTransform;
-
-    const updated = {
-      x: worldTransform.tx,
-      y: worldTransform.ty,
-      type,
-    };
-
-    if (
-      !lastUpdatedRef.current ||
-      lastUpdatedRef.current.x !== updated.x ||
-      lastUpdatedRef.current.y !== updated.y ||
-      lastUpdatedRef.current.type !== updated.type
-    ) {
-      lastUpdatedRef.current = updated;
-      setSpawnPoint(id, updated);
-    }
-  });
 
   return (
     <Container x={x} y={y}>
