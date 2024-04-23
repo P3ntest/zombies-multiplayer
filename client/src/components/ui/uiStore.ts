@@ -6,6 +6,9 @@ interface UIStore {
 
   chatOpen: boolean;
   setChatOpen: (chatOpen: boolean) => void;
+
+  leaderboardOpen: boolean;
+  setLeaderboardOpen: (leaderboardOpen: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -14,4 +17,7 @@ export const useUIStore = create<UIStore>((set) => ({
 
   chatOpen: false,
   setChatOpen: (chatOpen: boolean) => set({ chatOpen }),
+
+  leaderboardOpen: false,
+  setLeaderboardOpen: (leaderboardOpen: boolean) => set({ leaderboardOpen }),
 }));

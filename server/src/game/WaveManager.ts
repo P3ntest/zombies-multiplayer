@@ -62,6 +62,7 @@ export class WaveManager {
         this.room.revivePlayer(player.sessionId);
       } else {
         player.health = 100 + player.upgrades.health * 20;
+        player.wavesSurvived++;
       }
     }
 
