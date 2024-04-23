@@ -73,10 +73,14 @@ export class WaveManager {
     this.beginNextWaveTimeout();
   }
 
+  nextWaveStarting = false;
+
   beginNextWaveTimeout() {
-    if (this.waveRunning) return;
+    if (this.waveRunning && this.nextWaveStarting) return;
+    this.nextWaveStarting = true;
 
     this.room.clock.setTimeout(() => {
+      this.nextWaveStarting = false;
       this.beginNextWave();
     }, this.currentWave.postDelay);
     // interval to update nextWaveInSec

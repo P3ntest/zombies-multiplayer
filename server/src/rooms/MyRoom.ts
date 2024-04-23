@@ -71,6 +71,11 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("chatMessage", (client, message) => {
+      if (message == "/killall") {
+        this.state.zombies.clear();
+        this.waveManager.checkWaveEnd();
+        return;
+      }
       this.broadcastChat(
         `${this.state.players.get(client.id)?.name}: ${message}`
       );
