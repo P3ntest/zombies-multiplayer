@@ -48,7 +48,7 @@ function Player({ player }: { player: PlayerState }) {
     ) : (
       <>
         <SpectateControls x={player.x} y={player.y} />
-        <PlayerGrave x={player.x} y={player.y} />
+        {PlayerHealthState.DEAD && <PlayerGrave x={player.x} y={player.y} />}
       </>
     );
   } else {
@@ -59,8 +59,10 @@ function Player({ player }: { player: PlayerState }) {
 function OtherPlayer({ player }: { player: PlayerState }) {
   if (player.healthState === PlayerHealthState.ALIVE) {
     return <OtherAlivePlayer player={player} />;
-  } else {
+  } else if (player.healthState === PlayerHealthState.DEAD) {
     return <PlayerGrave x={player.x} y={player.y} />;
+  } else {
+    return null;
   }
 }
 

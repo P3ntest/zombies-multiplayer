@@ -263,6 +263,16 @@ export class MyRoom extends Room<MyRoomState> {
           break;
       }
     });
+
+    this.onMessage("spawnSelf", (client, message) => {
+      const player = this.state.players.get(client.id);
+      if (!player) return;
+
+      player.x = message.x;
+      player.y = message.y;
+      player.healthState = PlayerHealthState.ALIVE;
+      player.rotation = message.rotation ?? 0;
+    });
   }
 
   killPlayer(playerId: string) {
@@ -321,6 +331,11 @@ export class MyRoom extends Room<MyRoomState> {
     this.broadcast("chatMessage", { message, color });
   }
 
+  sendChatToPlayer(playerId: string, message: string, color?: string) {
+    const client = this.clients.find((c) => c.sessionId === playerId);
+    client?.send("chatMessage", { message, color });
+  }
+
   onJoin(client: Client, options: any) {
     console.log(client.sessionId, "joined!");
     const playerState = new PlayerState();
@@ -336,6 +351,19 @@ export class MyRoom extends Room<MyRoomState> {
     this.broadcastChat(`${playerState.name} has joined the game.`, "#33ff33");
 
     this.checkCanWaveStart();
+
+    if (!this.waveManager.waveRunning) this.spawnPlayer(client.id);
+    else
+      this.sendChatToPlayer(
+        client.id,
+        "Wave is running, please wait for the next wave to spawn.",
+        "#aa55cc"
+      );
+  }
+
+  spawnPlayer(clientId: string) {
+    const client = this.clients.find((c) => c.id === clientId);
+    client.send("requestSpawn");
   }
 
   checkCanWaveStart() {

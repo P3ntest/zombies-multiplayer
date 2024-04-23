@@ -1,6 +1,6 @@
 import { TilingSprite } from "@pixi/react";
 import { Wall } from "./Wall";
-import { ZombieSpawnPoint } from "./zombies/ZombieSpawner";
+import { SpawnPoint } from "./level/SpawnPoint";
 
 const map = `
 0000000000
@@ -30,6 +30,8 @@ export function Level() {
       <Wall x={-100} y={1500} width={200} height={3400} />
       <Wall x={3100} y={1500} width={200} height={3400} />
 
+      <SpawnPoint type="player" x={100} y={100} />
+
       {map.split("\n").map((row, y) =>
         row.split("").map((cell, x) => {
           if (cell === "X") {
@@ -44,7 +46,8 @@ export function Level() {
             );
           } else {
             return (
-              <ZombieSpawnPoint
+              <SpawnPoint
+                type="zombie"
                 key={`${x}-${y}`}
                 x={x * 300 + 150}
                 y={y * 300 - 150}
@@ -53,18 +56,6 @@ export function Level() {
           }
         })
       )}
-
-      {/* <ZombieSpawnPoint x={100} y={100} />
-      <ZombieSpawnPoint x={1900} y={100} />
-      <ZombieSpawnPoint x={100} y={1900} />
-      <ZombieSpawnPoint x={1900} y={1900} />
-
-      <ZombieSpawnPoint x={1000} y={100} />
-      <ZombieSpawnPoint x={1000} y={1900} />
-      <ZombieSpawnPoint x={100} y={1000} />
-      <ZombieSpawnPoint x={1900} y={1000} />
-
-      <ZombieSpawnPoint x={1000} y={1000} /> */}
     </>
   );
 }

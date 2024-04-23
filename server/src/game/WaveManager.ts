@@ -60,6 +60,8 @@ export class WaveManager {
     for (const player of this.room.state.players.values()) {
       if (player.healthState === PlayerHealthState.DEAD) {
         this.room.revivePlayer(player.sessionId);
+      } else if (player.healthState === PlayerHealthState.NOT_SPAWNED) {
+        this.room.spawnPlayer(player.sessionId);
       } else {
         player.health = 100 + player.upgrades.health * 20;
         player.wavesSurvived++;
