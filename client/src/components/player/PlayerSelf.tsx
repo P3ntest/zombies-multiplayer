@@ -1,7 +1,6 @@
 import { useApp, useTick } from "@pixi/react";
 import Matter, { Body } from "matter-js";
 import { useContext, useEffect, useState } from "react";
-import { useWindowSize } from "usehooks-ts";
 import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
 import {
@@ -9,13 +8,13 @@ import {
   useRoomMessageHandler,
 } from "../../lib/networking/hooks";
 import { useBodyRef } from "../../lib/physics/hooks";
+import { playHurtSound } from "../../lib/sound/sound";
 import { useCurrentPlayerDirection } from "../../lib/useControls";
 import { useCheckCollectCoins } from "../coins/coinLogic";
+import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
-import { useCameraStore } from "../graphics/cameraStore";
-import { playHurtSound } from "../../lib/sound/sound";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -94,18 +93,18 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         rotation={rotation}
         setCurrentAnimation={setCurrentAnimation}
       />
-      <PlayerCamera x={x} y={y} />
+      <PlayerCamera x={x} y={y} zoom={1 / (player.upgrades.scope + 1)} />
     </>
   );
 }
 
-function PlayerCamera({ x, y }: { x: number; y: number }) {
+function PlayerCamera({ x, y, zoom }: { x: number; y: number; zoom: number }) {
   const { setPosition, setZoom } = useCameraStore();
 
   useEffect(() => {
     setPosition(x, y);
-    setZoom(1.1);
-  }, [x, y, setPosition, setZoom]);
+    setZoom(zoom);
+  }, [x, y, setPosition, setZoom, zoom]);
 
   return null;
 }

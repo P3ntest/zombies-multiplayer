@@ -264,6 +264,9 @@ export class MyRoom extends Room<MyRoomState> {
         case "speed":
           upgrade.speed++;
           break;
+        case "scope":
+          upgrade.scope++;
+          break;
       }
     });
 

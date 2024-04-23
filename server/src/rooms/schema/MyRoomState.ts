@@ -14,6 +14,7 @@ export class PlayerUpgradeState extends Schema {
   @type("uint8") pierce: number = 0;
   @type("uint8") health: number = 0;
   @type("uint8") speed: number = 0;
+  @type("uint8") scope: number = 0;
 }
 
 export class PlayerState extends Schema {
@@ -32,7 +33,7 @@ export class PlayerState extends Schema {
   @type("number") health: number = 100;
   @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
-  @type("uint32") coins: number = 0;
+  @type("uint32") coins: number = 1000;
 
   @type("string") playerClass: PlayerClass = "pistol";
 
