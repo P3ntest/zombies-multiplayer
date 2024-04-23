@@ -10,6 +10,7 @@ export const PlayerHealthState = {
 export class PlayerUpgradeState extends Schema {
   @type("uint8") fireRate: number = 0;
   @type("uint8") damage: number = 0;
+  @type("uint8") pierce: number = 0;
 }
 
 export class PlayerState extends Schema {
@@ -26,7 +27,7 @@ export class PlayerState extends Schema {
   @type("number") health: number = 100;
   @type("uint8") healthState: number = PlayerHealthState.ALIVE;
 
-  @type("uint32") coins: number = 0;
+  @type("uint32") coins: number = 30;
 
   @type("string") playerClass: PlayerClass = "pistol";
 
