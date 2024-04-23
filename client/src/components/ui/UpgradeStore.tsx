@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useSelf } from "../../lib/networking/hooks";
 import { CoinSymbol } from "./GameUI";
@@ -28,6 +28,12 @@ const upgradeTypes = [
     name: "Health",
     maxLevel: 5,
     cost: (level: number) => Math.round(Math.pow(3, level) * 20),
+  },
+  {
+    id: "speed",
+    name: "Speed",
+    maxLevel: 3,
+    cost: (level: number) => Math.round(Math.pow(3, level) * 60),
   },
 ];
 

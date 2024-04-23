@@ -1,5 +1,9 @@
-import { listen } from "@colyseus/tools";
-import { Room, Client } from "@colyseus/core";
+import { Client, Room } from "@colyseus/core";
+import { WaveManager } from "../game/WaveManager";
+import { MapID, maps } from "../game/maps";
+import { calculateZombieSpawnType } from "../game/waves";
+import { ZombieType, zombieInfo } from "../game/zombies";
+import { genId } from "../util";
 import {
   BulletState,
   CoinState,
@@ -8,11 +12,6 @@ import {
   PlayerState,
   ZombieState,
 } from "./schema/MyRoomState";
-import { genId } from "../util";
-import { WaveManager } from "../game/WaveManager";
-import { ZombieType, zombieInfo } from "../game/zombies";
-import { calculateZombieSpawnType } from "../game/waves";
-import { MapID, maps } from "../game/maps";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -233,6 +232,9 @@ export class MyRoom extends Room<MyRoomState> {
         case "health":
           upgrade.health++;
           player.health = player.health + 20;
+          break;
+        case "speed":
+          upgrade.speed++;
           break;
       }
     });

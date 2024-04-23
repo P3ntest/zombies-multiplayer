@@ -1,16 +1,16 @@
+import { useApp, useTick } from "@pixi/react";
+import Matter, { Body } from "matter-js";
 import { useContext, useEffect, useState } from "react";
+import { useWindowSize } from "usehooks-ts";
 import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
-import { useApp, useTick } from "@pixi/react";
-import { stageContext } from "../stageContext";
-import { useAxis, useCurrentPlayerDirection } from "../../lib/useControls";
-import { PlayerSprite } from "./PlayerSprite";
-import { useBodyRef } from "../../lib/physics/hooks";
-import Matter, { Body } from "matter-js";
-import { GunManager } from "./GunManager";
-import { useCheckCollectCoins } from "../coins/coinLogic";
-import { useWindowSize } from "usehooks-ts";
 import { useNetworkTick } from "../../lib/networking/hooks";
+import { useBodyRef } from "../../lib/physics/hooks";
+import { useCurrentPlayerDirection } from "../../lib/useControls";
+import { useCheckCollectCoins } from "../coins/coinLogic";
+import { stageContext } from "../stageContext";
+import { GunManager } from "./GunManager";
+import { PlayerSprite } from "./PlayerSprite";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -41,8 +41,8 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     const rotation = Math.atan2(stageY - y, stageX - x);
 
     Body.setVelocity(collider.current, {
-      x: currentDirection.x,
-      y: currentDirection.y,
+      x: currentDirection.x + player.upgrades.speed * currentDirection.x * 0.4,
+      y: currentDirection.y + player.upgrades.speed * currentDirection.y * 0.4,
     });
 
     setX(collider.current.position.x);
