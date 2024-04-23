@@ -12,6 +12,7 @@ import {
   PlayerState,
   ZombieState,
 } from "./schema/MyRoomState";
+import { handleCommand } from "../game/console/commandHandler";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -70,10 +71,9 @@ export class MyRoom extends Room<MyRoomState> {
       player.currentAnimation = currentAnimation;
     });
 
-    this.onMessage("chatMessage", (client, message) => {
-      if (message == "/killall") {
-        this.state.zombies.clear();
-        this.waveManager.checkWaveEnd();
+    this.onMessage("chatMessage", (client, message: string) => {
+      if (message.startsWith("/")) {
+        handleCommand(this, client, message);
         return;
       }
       this.broadcastChat(
@@ -118,7 +118,6 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("meleeHitZombie", (client, message) => {
-      console.log("meleeHitZombie", message);
       const { zombieId, damage, knockBack } = message;
       const zombie = this.state.zombies.find((z) => z.id === zombieId);
       if (!zombie) return;
@@ -384,6 +383,12 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   checkCanWaveStart() {
+    if (
+      this.waveManager.waveRunning ||
+      this.waveManager.nextWaveStarting ||
+      this.state.isGameOver
+    )
+      return;
     if (this.waveStartType === "playerCount") {
       if (this.state.players.size >= this.requiredPlayerCount) {
         this.waveManager.beginNextWaveTimeout();

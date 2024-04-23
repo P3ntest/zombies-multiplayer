@@ -76,7 +76,7 @@ export class WaveManager {
   nextWaveStarting = false;
 
   beginNextWaveTimeout() {
-    if (this.waveRunning && this.nextWaveStarting) return;
+    if (this.waveRunning || this.nextWaveStarting) return;
     this.nextWaveStarting = true;
 
     this.room.clock.setTimeout(() => {

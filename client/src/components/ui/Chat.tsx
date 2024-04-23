@@ -3,6 +3,7 @@ import { useUIStore } from "./uiStore";
 import { twMerge } from "tailwind-merge";
 import { useColyseusRoom } from "../../colyseus";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
+import { useClientCommandInterceptor } from "../util/clientCommands";
 
 export function Chat() {
   const [messages, setMessages] = useState<
@@ -34,12 +35,16 @@ export function Chat() {
     inputRef.current && (inputRef.current.value = "");
   }, [setChatOpen]);
 
+  const interceptor = useClientCommandInterceptor();
+
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
       if (e.key === "Enter") {
         if (chatOpen) {
-          if (inputRef.current?.value)
-            room?.send("chatMessage", inputRef.current.value);
+          if (inputRef.current?.value) {
+            const message = interceptor(inputRef.current.value);
+            if (message) room?.send("chatMessage", inputRef.current.value);
+          }
           close();
         } else {
           setChatOpen(true);
