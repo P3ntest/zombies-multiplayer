@@ -69,6 +69,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         y={y}
         rotation={rotation}
         health={player.health}
+        maxHealth={100 + 20 * player.upgrades.health}
         velocityX={currentDirection.x}
         velocityY={currentDirection.y}
       />

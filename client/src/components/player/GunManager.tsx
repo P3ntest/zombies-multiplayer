@@ -1,11 +1,7 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import { useColyseusRoom } from "../../colyseus";
 import { useIsKeyDown } from "../../lib/useControls";
-import {
-  useNetworkTick,
-  useRoomMessageHandler,
-  useSelf,
-} from "../../lib/networking/hooks";
+import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playGunSound } from "../../lib/sound/sound";
 import { useTick } from "@pixi/react";
 
@@ -78,7 +74,8 @@ export function GunManager({
           shootBullet(originX, originY, randomRotation, 20, damage);
         }
       } else {
-        const pierces = self.playerClass === "pistol" ? 2 : 1;
+        const pierces =
+          self.upgrades.pierce + (self.playerClass === "pistol" ? 2 : 1);
         shootBullet(originX, originY, rotation, 20, damage, pierces);
       }
     },
@@ -91,6 +88,7 @@ export function GunManager({
       room,
       self.sessionId,
       self.upgrades.damage,
+      self.upgrades.pierce,
     ]
   );
 

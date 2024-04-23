@@ -16,6 +16,18 @@ const upgradeTypes = [
     maxLevel: 5,
     cost: (level: number) => Math.round(Math.pow(3, level) * 30),
   },
+  {
+    id: "pierce",
+    name: "Pierce",
+    maxLevel: 5,
+    cost: (level: number) => Math.round(Math.pow(3, level) * 50),
+  },
+  {
+    id: "health",
+    name: "Health",
+    maxLevel: 5,
+    cost: (level: number) => Math.round(Math.pow(3, level) * 20),
+  },
 ];
 
 export function UpgradeStore() {

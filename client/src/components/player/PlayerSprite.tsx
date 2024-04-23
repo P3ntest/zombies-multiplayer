@@ -1,6 +1,6 @@
 import { AnimatedSprite, Container, Graphics, Text } from "@pixi/react";
 import { EntityShadow } from "../Shadow";
-import { HealthBar } from "../HealhBar";
+import { HealthBar } from "../HealthBar";
 import {
   PlayerAnimation,
   PlayerGun,
@@ -22,6 +22,7 @@ export function PlayerSprite({
   y,
   rotation,
   health,
+  maxHealth,
   velocityX,
   velocityY,
   playerClass,
@@ -31,6 +32,7 @@ export function PlayerSprite({
   y: number;
   rotation: number;
   health?: number;
+  maxHealth?: number;
   velocityX: number;
   velocityY: number;
   playerClass: PlayerClass;
@@ -68,7 +70,7 @@ export function PlayerSprite({
       </Container>
       {health ? (
         <Container y={50}>
-          <HealthBar health={health} maxHealth={100} />
+          <HealthBar health={health} maxHealth={maxHealth ? maxHealth : 100} />
         </Container>
       ) : null}
       <NameTag name={name} />

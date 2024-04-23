@@ -100,6 +100,7 @@ function OtherAlivePlayer({ player }: { player: PlayerState }) {
       y={y}
       rotation={rotation}
       health={player.health}
+      maxHealth={player.upgrades.health * 20 + 100}
       velocityX={player.velocityX}
       velocityY={player.velocityY}
     />

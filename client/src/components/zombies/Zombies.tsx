@@ -14,7 +14,7 @@ import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
 import { ComponentProps } from "react";
 import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
-import { HealthBar } from "../HealhBar";
+import { HealthBar } from "../HealthBar";
 import { EntityShadow } from "../Shadow";
 import { zombieAnimationSprites } from "../../assets/spritesheets/zombie";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
