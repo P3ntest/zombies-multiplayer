@@ -1,4 +1,3 @@
-import { Room } from "@colyseus/core";
 import { MutableRefObject, useCallback, useState } from "react";
 import {
   PlayerState,
@@ -184,7 +183,7 @@ function attackLogic(
   zombie: ZombieState,
   x: number,
   y: number,
-  room: Room,
+  room: ReturnType<typeof useColyseusRoom>,
   currentTick: number,
   damage: number
 ) {
