@@ -28,6 +28,9 @@ export default config({
       const clientBuildPath = join(__dirname, "..", "client", "dist");
       console.log("clientBuildPath", clientBuildPath);
       app.use("/", compression(), express.static(clientBuildPath));
+      app.get("/auth/callback", (req, res) => {
+        res.sendFile(join(clientBuildPath, "index.html"));
+      });
     }
 
     /**
