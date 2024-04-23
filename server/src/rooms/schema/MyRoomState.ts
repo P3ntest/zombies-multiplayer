@@ -42,7 +42,6 @@ export class PlayerState extends Schema {
   @type("number") damageDealt: number = 0;
   @type("number") wavesSurvived: number = 0;
   @type("number") accuracy: number = 0;
-  @type("number") score: number = 0;
 }
 
 export class ZombieState extends Schema {

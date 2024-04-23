@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
+import { calculateScore } from "../../../../server/src/game/player";
 import { useColyseusState } from "../../colyseus";
 import { useUIStore } from "./uiStore";
 
@@ -59,7 +60,7 @@ export function LeaderBoard() {
                   <td className="px-6 py-4">{player.deaths}</td>
                   <td className="px-6 py-4">{player.accuracy}</td>
                   <td className="px-6 py-4">{player.wavesSurvived}</td>
-                  <td className="px-6 py-4">{player.score}</td>
+                  <td className="px-6 py-4">{calculateScore(player)}</td>
                 </tr>
               ))}
           </tbody>
