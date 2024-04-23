@@ -26,8 +26,6 @@ function UserInfo() {
     });
   });
 
-  console.log(userInfo);
-
   return (
     <div className="bg-slate-800 px-3 p-2 rounded text-slate-200 font-bold text-center">
       Logged in as {userInfo?.name}

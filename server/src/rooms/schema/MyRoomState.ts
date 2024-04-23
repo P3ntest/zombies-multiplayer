@@ -5,6 +5,7 @@ import { ZombieType } from "../../game/zombies";
 export const PlayerHealthState = {
   ALIVE: 0,
   DEAD: 1,
+  NOT_SPAWNED: 2,
 };
 
 export class PlayerUpgradeState extends Schema {
@@ -29,7 +30,7 @@ export class PlayerState extends Schema {
   @type("number") velocityY: number = 0;
 
   @type("number") health: number = 100;
-  @type("uint8") healthState: number = PlayerHealthState.ALIVE;
+  @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
   @type("uint32") coins: number = 0;
 
@@ -42,6 +43,8 @@ export class PlayerState extends Schema {
   @type("number") damageDealt: number = 0;
   @type("number") wavesSurvived: number = 0;
   @type("number") accuracy: number = 0;
+
+  @type("uint8") currentAnimation = 0;
 }
 
 export class ZombieState extends Schema {
@@ -69,6 +72,7 @@ export class BulletState extends Schema {
   @type("number") speed: number = 0;
   @type("number") damage: number = 0;
   @type("uint8") piercesLeft: number = 0;
+  @type("float32") knockBack: number = 1;
 }
 
 export class WaveInfoState extends Schema {

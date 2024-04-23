@@ -1,65 +1,19 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useId,
-  useRef,
-  useState,
-} from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
-import { Container, Graphics } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { useSpawnPoints } from "../level/spawnPointContext";
 
-// this context will hold all zombie spawn points
-interface ZombieSpawnPointContext {
-  spawnPoints: Record<string, { x: number; y: number }>;
-  setSpawnPoint: (id: string, x: number, y: number) => void;
-  removeSpawnPoint: (id: string) => void;
-}
-
-const ZombieSpawnPointContext = createContext<ZombieSpawnPointContext>({
-  spawnPoints: {},
-  setSpawnPoint: () => {},
-  removeSpawnPoint: () => {},
-});
-
-export function ZombieSpawner({ children }: { children: React.ReactNode }) {
-  const [spawnPoints, setSpawnPoints] = useState<
-    Record<string, { x: number; y: number }>
-  >({});
+export function ZombieSpawner() {
+  const spawnPoints = useSpawnPoints("zombie");
 
   const players = useColyseusState((state) => state.players);
   const room = useColyseusRoom();
-
-  const setSpawnPoint = useCallback(
-    (id: string, x: number, y: number) => {
-      setSpawnPoints((prev) => ({
-        ...prev,
-        [id]: { x, y },
-      }));
-    },
-    [setSpawnPoints]
-  );
-
-  const removeSpawnPoint = useCallback(
-    (id: string) => {
-      setSpawnPoints((prev) => {
-        const next = { ...prev };
-        delete next[id];
-        return next;
-      });
-    },
-    [setSpawnPoints]
-  );
-
   useRoomMessageHandler("requestSpawnZombie", ({ type }) => {
     const playersList = Array.from(players!.values());
 
     // calculate the distance to the closest player for all spawn points
-    const spawnPointDistances = Object.entries(spawnPoints)
-      .map(([, { x, y }]) => {
+    const spawnPointDistances = spawnPoints
+      .map(({ x, y }) => {
         const closestPlayer = playersList.reduce(
           (closest, player) => {
             const distance = Math.hypot(player.x - x, player.y - y);
@@ -87,41 +41,5 @@ export function ZombieSpawner({ children }: { children: React.ReactNode }) {
     });
   });
 
-  return (
-    <ZombieSpawnPointContext.Provider
-      value={{ spawnPoints, setSpawnPoint, removeSpawnPoint }}
-    >
-      {children}
-    </ZombieSpawnPointContext.Provider>
-  );
-}
-
-export function ZombieSpawnPoint({ x, y }: { x: number; y: number }) {
-  const id = useId();
-
-  const { setSpawnPoint, removeSpawnPoint } = useContext(
-    ZombieSpawnPointContext
-  );
-
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    setSpawnPoint(id, x, y);
-
-    return () => {
-      removeSpawnPoint(id);
-    };
-  }, [id, x, y, setSpawnPoint, removeSpawnPoint]);
-
-  return (
-    <Container ref={containerRef} x={x} y={y}>
-      {/* <Graphics
-        draw={(g) => {
-          g.beginFill(0xff0000);
-          g.drawRect(0, 0, 10, 10);
-          g.endFill();
-        }}
-      /> */}
-    </Container>
-  );
+  return null;
 }

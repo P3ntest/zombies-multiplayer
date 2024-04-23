@@ -17,6 +17,8 @@ import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 import { BloodManager } from "./effects/Blood";
 import { Camera } from "./graphics/Camera";
+import { SpawnPointManager } from "./level/SpawnPoint";
+import { PlayerSpawner } from "./player/PlayerSpawner";
 
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
@@ -51,9 +53,11 @@ export const MainStage = () => {
         <Resizer />
         <PhysicsProvider>
           <Camera>
-            <ZombieSpawner>
+            <SpawnPointManager>
+              <ZombieSpawner />
+              <PlayerSpawner />
               <Level />
-            </ZombieSpawner>
+            </SpawnPointManager>
             <Coins />
             <BloodManager />
             <Zombies />

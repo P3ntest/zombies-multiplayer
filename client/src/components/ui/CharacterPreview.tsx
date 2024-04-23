@@ -27,6 +27,7 @@ export function CharacterPreview({
       >
         <Floor />
         <PlayerSprite
+          currentAnimation={0}
           name={name}
           playerClass={selectedClass}
           x={0}

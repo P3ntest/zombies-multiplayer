@@ -53,9 +53,15 @@ function Zombie({ zombie }: { zombie: ZombieState }) {
 }
 
 function OtherZombie({ zombie }: { zombie: ZombieState }) {
-  const collider = useBodyRef(() => {
-    return Matter.Bodies.circle(zombie.x, zombie.y, 40);
-  });
+  const collider = useBodyRef(
+    () => {
+      return Matter.Bodies.circle(zombie.x, zombie.y, 40);
+    },
+    {
+      tags: ["zombie"],
+      id: zombie.id,
+    }
+  );
 
   useZombieBulletHitListener(collider.current, zombie.id);
 
