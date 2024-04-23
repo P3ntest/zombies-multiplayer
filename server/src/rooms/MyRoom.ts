@@ -7,7 +7,6 @@ import {
   PlayerHealthState,
   PlayerState,
   ZombieState,
-  resetPlayerUpgradeState,
 } from "./schema/MyRoomState";
 import { genId } from "../util";
 import { WaveManager } from "../game/WaveManager";
