@@ -8,9 +8,10 @@ import { useNetworkTick } from "../../lib/networking/hooks";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { useCurrentPlayerDirection } from "../../lib/useControls";
 import { useCheckCollectCoins } from "../coins/coinLogic";
-import { stageContext } from "../stageContext";
+import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
+import { useCameraStore } from "../graphics/cameraStore";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -24,7 +25,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   const [rotation, setRotation] = useState(0);
 
   const app = useApp();
-  const stageRef = useContext(stageContext);
+  const stageRef = useContext(cameraContext);
 
   const currentDirection = useCurrentPlayerDirection();
 
@@ -32,7 +33,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 
   useTick(() => {
     const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;
-    const { x: stageX, y: stageY } = stageRef?.levelContainer?.toLocal({
+    const { x: stageX, y: stageY } = stageRef?.camera?.toLocal({
       x: mouseX,
       y: mouseY,
     }) ?? { x: 0, y: 0 };
@@ -81,22 +82,12 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 }
 
 function PlayerCamera({ x, y }: { x: number; y: number }) {
-  const stageRef = useContext(stageContext);
-  const app = useApp();
-  const screen = useWindowSize();
+  const { setPosition, setZoom } = useCameraStore();
 
   useEffect(() => {
-    stageRef?.levelContainer?.pivot.set(x, y);
-    stageRef?.levelContainer?.position.set(screen.width / 2, screen.height / 2);
-  }, [
-    x,
-    y,
-    stageRef,
-    app.renderer.width,
-    app.renderer.height,
-    screen.height,
-    screen.width,
-  ]);
+    setPosition(x, y);
+    setZoom(1.5);
+  }, [x, y, setPosition]);
 
   return null;
 }

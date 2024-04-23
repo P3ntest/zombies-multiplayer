@@ -3,7 +3,7 @@ import { useWindowSize } from "usehooks-ts";
 import { Players } from "./player/Players";
 import { Level } from "./Level";
 import { useEffect, useRef } from "react";
-import { StageProvider } from "./stageContext";
+import { CameraProvider } from "./stageContext";
 import "@pixi/events";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
@@ -16,19 +16,18 @@ import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 import { BloodManager } from "./effects/Blood";
+import { Camera } from "./graphics/Camera";
 
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
  * It will render the game world and all entities in it, as well as handle UI and Controls
  */
 export const MainStage = () => {
-  const windowSize = useWindowSize();
   const mainContentRef = useRef(null);
+  const windowSize = useWindowSize();
+
   useBroadcastRoomMessages();
   useSetQueryOrReconnectToken();
-
-  const maxAxis = Math.max(windowSize.width, windowSize.height);
-  const scale = (maxAxis / 1920) * 1.2;
 
   return (
     <>
@@ -51,28 +50,16 @@ export const MainStage = () => {
       >
         <Resizer />
         <PhysicsProvider>
-          <Container
-            scale={scale}
-            ref={mainContentRef}
-            mousemove={(e) => {
-              console.log(e);
-            }}
-          >
-            <StageProvider
-              value={{
-                levelContainer: mainContentRef.current,
-              }}
-            >
-              <ZombieSpawner>
-                <Level />
-              </ZombieSpawner>
-              <Coins />
-              <BloodManager />
-              <Zombies />
-              <Bullets />
-              <Players />
-            </StageProvider>
-          </Container>
+          <Camera>
+            <ZombieSpawner>
+              <Level />
+            </ZombieSpawner>
+            <Coins />
+            <BloodManager />
+            <Zombies />
+            <Bullets />
+            <Players />
+          </Camera>
         </PhysicsProvider>
       </Stage>
     </>
