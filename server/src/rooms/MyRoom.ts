@@ -119,6 +119,7 @@ export class MyRoom extends Room<MyRoomState> {
       if (!bullet) return;
 
       zombie.health -= bullet.damage;
+      this.state.players.get(bullet.playerId)!.damageDealt += bullet.damage;
       if (zombie.health <= 0) {
         const index = this.state.zombies.findIndex((z) => z.id === zombieId);
         this.state.zombies.splice(index, 1);
@@ -133,6 +134,7 @@ export class MyRoom extends Room<MyRoomState> {
           y: zombie.y,
           size: 8,
         });
+        this.state.players.get(bullet.playerId)!.kills++;
         this.broadcast("zombieDead", { zombieId });
       }
 
@@ -246,6 +248,7 @@ export class MyRoom extends Room<MyRoomState> {
 
     player.health = 0;
     player.healthState = PlayerHealthState.DEAD;
+    player.deaths++;
     this.broadcastChat(`${player.name} has died!`, "#ff5555");
     this.broadcast("playerDied", { playerId });
     this.broadcast("blood", {
