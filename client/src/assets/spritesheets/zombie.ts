@@ -35,7 +35,7 @@ export const zombieAtlas: SpriteSheetJson = {
           w: widthPerFrame,
           h: 311,
         },
-      } as SpritesheetData["frames"]["zombie-0"],
+      } as SpriteSheetJson["frames"]["zombie-0"],
     ])
   ),
   animations: {
