@@ -1,6 +1,6 @@
-import { Schema, ArraySchema, type, MapSchema } from "@colyseus/schema";
-import { ZombieType } from "../../game/zombies";
+import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema";
 import { PlayerClass } from "../../game/player";
+import { ZombieType } from "../../game/zombies";
 
 export const PlayerHealthState = {
   ALIVE: 0,
@@ -12,6 +12,7 @@ export class PlayerUpgradeState extends Schema {
   @type("uint8") damage: number = 0;
   @type("uint8") pierce: number = 0;
   @type("uint8") health: number = 0;
+  @type("uint8") speed: number = 0;
 }
 
 export class PlayerState extends Schema {
