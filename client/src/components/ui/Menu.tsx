@@ -7,6 +7,7 @@ import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
 import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { JoinMenu } from "./JoinMenu";
+import { AuthSection } from "./mainMenu/AuthSection";
 
 export function Menu() {
   return (
@@ -61,6 +62,7 @@ function ClassSelector() {
         placeholder="Name"
         className="input button"
       />
+      <AuthSection />
     </div>
   );
 }
