@@ -7,22 +7,53 @@ import {
   PlayerHealthState,
   PlayerState,
   ZombieState,
+  resetPlayerUpgradeState,
 } from "./schema/MyRoomState";
 import { genId } from "../util";
 import { WaveManager } from "../game/WaveManager";
 import { ZombieType, zombieInfo } from "../game/zombies";
 import { calculateZombieSpawnType } from "../game/waves";
+import { MapID, maps } from "../game/maps";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
 
   waveManager = new WaveManager(this);
 
+  waveStartType: "manual" | "playerCount";
+  requiredPlayerCount = 1;
+  map: MapID = "dust3";
+
   onCreate(options: any) {
+    this.roomId = Math.random().toString(36).substr(2, 5);
+
+    const roomOptions = options.quickPlay
+      ? ({
+          isPrivate: false,
+          maxPlayers: 6,
+          waveStartType: "playerCount",
+          requiredPlayerCount: 2,
+          map: maps[Math.floor(Math.random() * maps.length)],
+        } as const)
+      : ({
+          isPrivate: options.isPrivate,
+          maxPlayers: options.maxPlayers,
+          waveStartType: options.waveStartType ?? "manual",
+          requiredPlayerCount: options.requiredPlayerCount ?? 1,
+          map: options.map ?? maps[Math.floor(Math.random() * maps.length)],
+        } as const);
+
+    this.maxClients = roomOptions.maxPlayers;
+    this.waveStartType = roomOptions.waveStartType;
+    this.requiredPlayerCount = roomOptions.requiredPlayerCount;
+    this.map = roomOptions.map;
+
+    if (roomOptions.isPrivate) {
+      this.setPrivate();
+    }
+
     this.setState(new MyRoomState());
     this.clock.start();
-
-    this.waveManager.init();
 
     this.clock.setInterval(() => {
       this.state.gameTick++;
@@ -215,6 +246,8 @@ export class MyRoom extends Room<MyRoomState> {
       size: 13,
       amount: 2,
     });
+
+    this.checkGameOver();
   }
 
   revivePlayer(playerId: string) {
@@ -237,13 +270,39 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.health = 100;
     playerState.playerClass = options.playerClass ?? "pistol";
     this.state.players.set(client.id, playerState);
+
+    this.checkCanWaveStart();
   }
 
-  onLeave(client: Client, consented: boolean) {
+  checkCanWaveStart() {
+    if (this.waveStartType === "playerCount") {
+      if (this.state.players.size >= this.requiredPlayerCount) {
+        this.waveManager.beginNextWaveTimeout();
+      }
+    }
+  }
+
+  async onLeave(client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
-    this.state.players.delete(client.id);
+    if (consented) {
+      this.removePlayerFromGame(client.id);
+    } else {
+      this.state.players.get(client.id)!.connected = false;
+
+      this.allowReconnection(client, 20)
+        .then(() => {
+          this.state.players.get(client.id)!.connected = true;
+        })
+        .catch(() => {
+          this.removePlayerFromGame(client.id);
+        });
+    }
 
     this.ensureZombieControl();
+  }
+
+  removePlayerFromGame(id: string) {
+    this.state.players.delete(id);
     this.removeOrphanBullets();
   }
 
@@ -284,10 +343,26 @@ export class MyRoom extends Room<MyRoomState> {
     );
   }
 
+  checkGameOver() {
+    for (const player of this.state.players.values()) {
+      if (player.healthState === PlayerHealthState.ALIVE) {
+        return;
+      }
+    }
+
+    this.broadcast("gameOver");
+    this.state.isGameOver = true;
+  }
+
+  getConnectedPlayers() {
+    return Array.from(this.state.players.values()).filter((p) => p.connected);
+  }
+
   requestSpawnZombie() {
+    if (this.state.isGameOver) return;
     // find a player which has the least number of zombies
-    const players = this.state.players;
-    const playerIds = Array.from(players.keys());
+    const players = this.getConnectedPlayers();
+    if (players.length === 0) return;
     const playerZombieCounts = new Map<string, number>();
     for (const zombie of this.state.zombies) {
       const count = playerZombieCounts.get(zombie.playerId) || 0;
@@ -295,28 +370,32 @@ export class MyRoom extends Room<MyRoomState> {
     }
 
     let minCount = Infinity;
-    let targetPlayerId = "";
-    for (const playerId of playerIds) {
-      const count = playerZombieCounts.get(playerId) || 0;
+    let targetPlayer = null;
+    for (const player of players) {
+      const count = playerZombieCounts.get(player.sessionId) ?? 0;
       if (count < minCount) {
         minCount = count;
-        targetPlayerId = playerId;
+        targetPlayer = player;
       }
     }
 
-    const client = this.clients.find((c) => c.sessionId === targetPlayerId);
-    client.send("requestSpawnZombie", {
+    const client = this.clients.find(
+      (c) => c.sessionId == targetPlayer?.sessionId
+    );
+    client?.send("requestSpawnZombie", {
       type: calculateZombieSpawnType(this.waveManager.currentWaveNumber),
     });
   }
 
   ensureZombieControl() {
     const zombies = this.state.zombies;
-    const players = this.state.players;
+    const players = Array.from(this.state.players.values()).filter(
+      (p) => p.connected
+    );
 
     for (const zombie of zombies) {
-      if (!players.has(zombie.playerId)) {
-        const playerIds = Array.from(players.keys());
+      if (!players.some((p) => p.sessionId === zombie.playerId)) {
+        const playerIds = Array.from(players.map((p) => p.sessionId));
         const randomPlayerId =
           playerIds[Math.floor(Math.random() * playerIds.length)];
         zombie.playerId = randomPlayerId;

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useSelf } from "../../lib/networking/hooks";
 import { CoinSymbol } from "./GameUI";
+import { useUIStore } from "./uiStore";
 
 const upgradeTypes = [
   {
@@ -31,12 +32,12 @@ const upgradeTypes = [
 ];
 
 export function UpgradeStore() {
-  const [open, setOpen] = useState(false);
+  const { buyMenuOpen: open, setBuyMenuOpen: setOpen } = useUIStore();
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "b") {
-        setOpen((value) => !value);
+        setOpen(!open);
       } else if (e.key === "Escape") {
         setOpen(false);
       }
@@ -45,7 +46,7 @@ export function UpgradeStore() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, []);
+  }, [setOpen, open]);
 
   if (!open) {
     return null;

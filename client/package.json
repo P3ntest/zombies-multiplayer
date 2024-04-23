@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@p3ntest/use-colyseus": "^0.0.7",
+    "@p3ntest/use-colyseus": "^0.0.8",
     "@pixi/events": "^7.4.2",
     "@pixi/gif": "^3.0.1",
     "@pixi/react": "^7.1.2",

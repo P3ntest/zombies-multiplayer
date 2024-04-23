@@ -4,11 +4,11 @@ import { MainStage } from "./components/MainStage";
 import { useControlEventListeners } from "./lib/useControls";
 import { MyRoomState } from "../../server/src/rooms/schema/MyRoomState";
 import { Menu } from "./components/ui/Menu";
-
-let connecting = false;
+import { useTryJoinByQueryOrReconnectToken } from "./lib/networking/hooks";
 
 export function App() {
   const room = useColyseusRoom();
+  useTryJoinByQueryOrReconnectToken();
 
   useControlEventListeners();
 

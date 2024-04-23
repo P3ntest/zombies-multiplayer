@@ -22,6 +22,8 @@ export class PlayerState extends Schema {
   @type("number") y: number = 0;
   @type("number") rotation: number = 0;
 
+  @type("boolean") connected: boolean = true;
+
   @type("number") velocityX: number = 0;
   @type("number") velocityY: number = 0;
 
@@ -101,4 +103,7 @@ export class MyRoomState extends Schema {
     array: CoinState,
   })
   coins = new ArraySchema<CoinState>();
+
+  @type("boolean")
+  isGameOver = false;
 }

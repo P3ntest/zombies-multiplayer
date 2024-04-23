@@ -71,6 +71,8 @@ export class WaveManager {
   }
 
   beginNextWaveTimeout() {
+    if (this.waveRunning) return;
+
     this.room.clock.setTimeout(() => {
       this.beginNextWave();
     }, this.currentWave.postDelay);
@@ -86,7 +88,14 @@ export class WaveManager {
     }, 1000);
   }
 
-  init() {
-    this.beginNextWaveTimeout();
+  reset() {
+    this.currentWaveNumber = 0;
+    this.currentWave = generateWave(this.currentWaveNumber);
+    this.waveRunning = false;
+    this.currentWaveSpawned = 0;
+    this.finishedSpawning = false;
+    this.room.state.waveInfo.currentWaveNumber = 0;
+    this.room.state.waveInfo.active = false;
+    this.currentSpawnInterval?.clear();
   }
 }

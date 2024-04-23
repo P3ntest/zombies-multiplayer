@@ -1,7 +1,14 @@
 import { useEffect, useRef } from "react";
-import { useColyseusRoom, useColyseusState } from "../../colyseus";
-import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
-
+import {
+  colyseusClient,
+  setCurrentRoom,
+  useColyseusRoom,
+  useColyseusState,
+} from "../../colyseus";
+import {
+  MyRoomState,
+  PlayerState,
+} from "../../../../server/src/rooms/schema/MyRoomState";
 // const networkTickRate = 20;
 
 export function useNetworkTick(callback: (tick: number) => void) {
@@ -71,4 +78,56 @@ export function useSelf(): PlayerState {
   const sessionId = useColyseusRoom()?.sessionId;
   const players = useColyseusState((s) => s.players);
   return { ...players!.get(sessionId!) } as PlayerState;
+}
+
+export function useSetQueryOrReconnectToken() {
+  const room = useColyseusRoom();
+  useEffect(() => {
+    if (!room?.id) return;
+    // the the ?roomId= query param
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("roomId", room?.id);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${urlParams}`
+    );
+    localStorage.setItem("reconnectToken", room?.reconnectionToken);
+  }, [room?.id, room?.reconnectionToken]);
+}
+
+let connecting = false;
+
+export function useTryJoinByQueryOrReconnectToken() {
+  const room = useColyseusRoom();
+  useEffect(() => {
+    if (connecting) return;
+    if (room) return;
+
+    const roomId = new URLSearchParams(window.location.search).get("roomId");
+    if (localStorage.getItem("reconnectToken")) {
+      console.log("trying to reconnect");
+      connecting = true;
+      colyseusClient
+        .reconnect<MyRoomState>(localStorage.getItem("reconnectToken")!)
+        .then(setCurrentRoom)
+        .then(() => {
+          console.log("reconnected");
+        })
+        .catch(console.error)
+        .finally(() => {
+          connecting = false;
+        });
+    } else if (roomId) {
+      console.log("trying to join by roomId in query", roomId);
+      connecting = true;
+      colyseusClient
+        .joinById<MyRoomState>(roomId.toLowerCase())
+        .then(setCurrentRoom)
+        .catch(console.error)
+        .finally(() => {
+          connecting = false;
+        });
+    }
+  }, [room]);
 }

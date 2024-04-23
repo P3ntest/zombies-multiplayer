@@ -3,6 +3,7 @@ import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playWaveStart } from "../../lib/sound/sound";
 import { useColyseusState } from "../../colyseus";
 import { UpgradeStore } from "./UpgradeStore";
+import { EscapeScreen } from "./EscapeScreen";
 
 const TITLE_DURATION = 4000;
 
@@ -27,6 +28,10 @@ export function GameUI() {
     showTitle(`Wave ${wave} complete!`);
   });
 
+  useRoomMessageHandler("gameOver", () => {
+    showTitle("Game Over!");
+  });
+
   return (
     <div
       style={{
@@ -43,6 +48,7 @@ export function GameUI() {
       <WaveInfo />
       <CoinInfo />
       <UpgradeStore />
+      <EscapeScreen />
     </div>
   );
 }
