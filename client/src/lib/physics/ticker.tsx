@@ -27,7 +27,9 @@ export class PhysicsTicker {
 
     this.tick += delta;
 
-    this.update(delta);
+    const maxDelta = 300;
+
+    this.update(Math.min(delta, maxDelta));
 
     requestAnimationFrame(() => this.loop());
   }
