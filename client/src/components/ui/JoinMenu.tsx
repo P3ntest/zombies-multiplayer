@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
 
 let connecting = false;
 
@@ -8,6 +9,7 @@ export function JoinMenu() {
   const [stage, setStage] = useState<
     "start" | "createRoom" | "joinId" | "roomsList"
   >("start");
+  const { selectedClass, name } = useCharacterCustomizationStore();
 
   const pressQuickPlay = useCallback(() => {
     if (connecting) return;
@@ -15,12 +17,15 @@ export function JoinMenu() {
     colyseusClient
       .joinOrCreate<MyRoomState>("my_room", {
         quickPlay: true,
+
+        playerName: name,
+        playerClass: selectedClass,
       })
       .then(setCurrentRoom)
       .finally(() => {
         connecting = false;
       });
-  }, []);
+  }, [name, selectedClass]);
 
   const pressSinglePlayer = useCallback(() => {
     if (connecting) return;
@@ -32,12 +37,15 @@ export function JoinMenu() {
         isPrivate: true,
         waveStartType: "playerCount",
         requiredPlayerCount: 1,
+
+        playerName: name,
+        playerClass: selectedClass,
       })
       .then(setCurrentRoom)
       .finally(() => {
         connecting = false;
       });
-  }, []);
+  }, [name, selectedClass]);
 
   const createRoom = useCallback(() => {
     if (connecting) return;
@@ -49,12 +57,15 @@ export function JoinMenu() {
         isPrivate: true,
         waveStartType: "playerCount",
         requiredPlayerCount: 2,
+
+        playerName: name,
+        playerClass: selectedClass,
       })
       .then(setCurrentRoom)
       .finally(() => {
         connecting = false;
       });
-  }, []);
+  }, [name, selectedClass]);
 
   return (
     <div className="bg-slate-700 bg-opacity-70 p-10 rounded-xl h-full">
@@ -93,6 +104,7 @@ export function JoinMenu() {
 
 function JoinByIdField() {
   const [error, setError] = useState<string | null>(null);
+  const { selectedClass, name } = useCharacterCustomizationStore();
 
   const [id, setId] = useState("");
 
@@ -105,7 +117,10 @@ function JoinByIdField() {
       return;
     }
     colyseusClient
-      .joinById<MyRoomState>(id.toLowerCase())
+      .joinById<MyRoomState>(id.toLowerCase(), {
+        playerName: name,
+        playerClass: selectedClass,
+      })
       .then(setCurrentRoom)
       .catch((e) => {
         setError(e.message);
@@ -113,7 +128,7 @@ function JoinByIdField() {
       .finally(() => {
         connecting = false;
       });
-  }, [id]);
+  }, [id, name, selectedClass]);
 
   return (
     <div>

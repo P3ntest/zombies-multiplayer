@@ -9,6 +9,7 @@ import {
   MyRoomState,
   PlayerState,
 } from "../../../../server/src/rooms/schema/MyRoomState";
+import { useCharacterCustomizationStore } from "../../components/ui/characterCusotmizationStore";
 // const networkTickRate = 20;
 
 export function useNetworkTick(callback: (tick: number) => void) {
@@ -100,6 +101,8 @@ let connecting = false;
 
 export function useTryJoinByQueryOrReconnectToken() {
   const room = useColyseusRoom();
+  const { selectedClass, name } = useCharacterCustomizationStore();
+
   useEffect(() => {
     if (connecting) return;
     if (room) return;
@@ -122,7 +125,10 @@ export function useTryJoinByQueryOrReconnectToken() {
       console.log("trying to join by roomId in query", roomId);
       connecting = true;
       colyseusClient
-        .joinById<MyRoomState>(roomId.toLowerCase())
+        .joinById<MyRoomState>(roomId.toLowerCase(), {
+          playerName: name,
+          playerClass: selectedClass,
+        })
         .then(setCurrentRoom)
         .catch(console.error)
         .finally(() => {

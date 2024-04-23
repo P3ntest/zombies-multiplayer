@@ -8,10 +8,7 @@ import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { JoinMenu } from "./JoinMenu";
 
-let connecting = false;
-
 export function Menu() {
-  const { selectedClass, name } = useCharacterCustomizationStore();
   return (
     <div
       className="min-h-screen flex flex-row items-center justify-center gap-4 pt-10"
