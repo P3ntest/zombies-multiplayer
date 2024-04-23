@@ -2,6 +2,7 @@ import { Container, Graphics, Text } from "@pixi/react";
 import type { Graphics as G } from "@pixi/graphics";
 import { useCallback } from "react";
 import { TextStyle } from "pixi.js";
+import { useLerped } from "../lib/useLerped";
 
 export function HealthBar({
   health,
@@ -10,6 +11,8 @@ export function HealthBar({
   health: number;
   maxHealth: number;
 }) {
+  const lerpedHealth = useLerped(health, 0.3);
+
   const draw = useCallback(
     (g: G) => {
       g.beginFill(0xff0000);
@@ -17,11 +20,11 @@ export function HealthBar({
       g.endFill();
 
       g.beginFill(0x00ff00);
-      const healthRel = (health / maxHealth) * 100;
+      const healthRel = (lerpedHealth / maxHealth) * 100;
       g.drawRect(0, 0, healthRel, 10);
       g.endFill();
     },
-    [health, maxHealth]
+    [lerpedHealth, maxHealth]
   );
 
   if (health >= maxHealth) {
