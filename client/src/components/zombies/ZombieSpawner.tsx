@@ -12,8 +12,8 @@ export function ZombieSpawner() {
     const playersList = Array.from(players!.values());
 
     // calculate the distance to the closest player for all spawn points
-    const spawnPointDistances = Object.entries(spawnPoints)
-      .map(([, { x, y }]) => {
+    const spawnPointDistances = spawnPoints
+      .map(({ x, y }) => {
         const closestPlayer = playersList.reduce(
           (closest, player) => {
             const distance = Math.hypot(player.x - x, player.y - y);
