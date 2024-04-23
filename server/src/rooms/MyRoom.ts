@@ -194,6 +194,10 @@ export class MyRoom extends Room<MyRoomState> {
         case "pierce":
           upgrade.pierce++;
           break;
+        case "health":
+          upgrade.health++;
+          player.health = player.health + 20;
+          break;
       }
     });
   }

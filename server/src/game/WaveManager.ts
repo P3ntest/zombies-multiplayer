@@ -61,7 +61,7 @@ export class WaveManager {
       if (player.healthState === PlayerHealthState.DEAD) {
         this.room.revivePlayer(player.sessionId);
       } else {
-        player.health = 100;
+        player.health = 100 + player.upgrades.health * 20;
       }
     }
 
