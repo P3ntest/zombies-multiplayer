@@ -14,6 +14,7 @@ import { zombieInfo } from "../../../../server/src/game/zombies";
 import { useTick } from "@pixi/react";
 import { bodyMeta } from "../../lib/physics/hooks";
 import { calculateNextPointPathFinding } from "./pathfinding/astar";
+import { zombieUpdatesBatch } from "../../lib/networking/batches";
 
 export function useZombieLogic(
   zombie: ZombieState,
@@ -79,7 +80,7 @@ export function useZombieLogic(
 
         if (!newTarget) return;
 
-        room?.send("updateZombie", {
+        zombieUpdatesBatch.add({
           id: zombie.id,
           targetPlayerId: newTarget.sessionId,
         });
@@ -91,7 +92,7 @@ export function useZombieLogic(
         const newTarget =
           visiblePlayers[Math.floor(Math.random() * visiblePlayers.length)];
 
-        room?.send("updateZombie", {
+        zombieUpdatesBatch.add({
           id: zombie.id,
           targetPlayerId: newTarget.sessionId,
         });
@@ -111,18 +112,11 @@ export function useZombieLogic(
           );
       }
     },
-    [
-      alivePlayers,
-      collider,
-      room,
-      zombie.id,
-      zombie.targetPlayerId,
-      zombieType.size,
-    ]
+    [alivePlayers, collider, zombie.id, zombie.targetPlayerId, zombieType.size]
   );
 
   useNetworkTick((currentTick) => {
-    room?.send("updateZombie", {
+    zombieUpdatesBatch.add({
       id: zombie.id,
       x: collider.current.position.x,
       y: collider.current.position.y,

@@ -109,14 +109,12 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("updateZombie", (client, message) => {
-      const { id, x, y, rotation, targetPlayerId } = message;
-      const zombie = this.state.zombies.find((z) => z.id === id);
-      if (!zombie) return;
-
-      x && (zombie.x = x);
-      y && (zombie.y = y);
-      rotation && (zombie.rotation = rotation);
-      targetPlayerId != undefined && (zombie.targetPlayerId = targetPlayerId);
+      this.updateZombie(message);
+    });
+    this.onMessage("updateZombieBatch", (client, message) => {
+      for (const update of message) {
+        this.updateZombie(update);
+      }
     });
 
     this.onMessage("meleeHitZombie", (client, message) => {
@@ -278,6 +276,17 @@ export class MyRoom extends Room<MyRoomState> {
       player.healthState = PlayerHealthState.ALIVE;
       player.rotation = message.rotation ?? 0;
     });
+  }
+
+  updateZombie(message: any) {
+    const { id, x, y, rotation, targetPlayerId } = message;
+    const zombie = this.state.zombies.find((z) => z.id === id);
+    if (!zombie) return;
+
+    x && (zombie.x = x);
+    y && (zombie.y = y);
+    rotation && (zombie.rotation = rotation);
+    targetPlayerId != undefined && (zombie.targetPlayerId = targetPlayerId);
   }
 
   killPlayer(playerId: string) {

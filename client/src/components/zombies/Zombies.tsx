@@ -10,17 +10,22 @@ import { ComponentProps } from "react";
 import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealthBar";
 import { EntityShadow } from "../Shadow";
-import { useRoomMessageHandler } from "../../lib/networking/hooks";
+import {
+  useNetworkTick,
+  useRoomMessageHandler,
+} from "../../lib/networking/hooks";
 import {
   playZombieDead,
   playZombieGrowl,
   playZombieHitSound,
 } from "../../lib/sound/sound";
 import { spriteSheets } from "../../assets/assetHandler";
+import { zombieUpdatesBatch } from "../../lib/networking/batches";
 
 export function Zombies() {
   const state = useColyseusState();
   const zombies = state?.zombies;
+  const room = useColyseusRoom();
 
   useRoomMessageHandler("zombieHit", () => {
     playZombieHitSound();
@@ -29,6 +34,11 @@ export function Zombies() {
 
   useRoomMessageHandler("zombieDead", () => {
     playZombieDead();
+  });
+
+  useNetworkTick(() => {
+    room?.send("updateZombieBatch", Array.from(zombieUpdatesBatch));
+    zombieUpdatesBatch.clear();
   });
 
   return (
