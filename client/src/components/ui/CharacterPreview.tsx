@@ -11,14 +11,6 @@ export function CharacterPreview({
   name: string;
   selectedClass: PlayerClass;
 }) {
-  const [rotation, setRotation] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation((r) => r + 0.0005);
-    }, 1000 / 60);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <Stage
       width={PREVIEW_SIZE}
@@ -39,7 +31,7 @@ export function CharacterPreview({
           playerClass={selectedClass}
           x={0}
           y={0}
-          rotation={0 * rotation}
+          rotation={0}
           velocityX={10}
           velocityY={10}
           health={100}
@@ -52,7 +44,7 @@ export function CharacterPreview({
 function Floor() {
   const [floorX, setFloorX] = useState(0);
   useTick((delta) => {
-    setFloorX((x) => (x - 1.8 * delta) % (PREVIEW_SIZE * 100));
+    setFloorX((x) => (x - 1.8 * delta) % (PREVIEW_SIZE * 99));
   });
 
   return (

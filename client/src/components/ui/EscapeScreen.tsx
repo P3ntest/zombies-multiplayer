@@ -4,7 +4,9 @@ import { useColyseusRoom } from "../../colyseus";
 
 export function EscapeScreen() {
   const [open, setOpen] = useState(false);
-  const buyMenuOpen = useUIStore((state) => state.buyMenuOpen);
+  const otherMenuOpen = useUIStore(
+    (state) => state.buyMenuOpen || state.chatOpen
+  );
   const room = useColyseusRoom();
 
   const onLeave = useCallback(() => {
@@ -16,7 +18,7 @@ export function EscapeScreen() {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (buyMenuOpen) return;
+      if (otherMenuOpen) return;
       if (e.key === "Escape") {
         setOpen(!open);
       }
@@ -25,7 +27,7 @@ export function EscapeScreen() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, buyMenuOpen]);
+  }, [open, otherMenuOpen]);
 
   if (!open) {
     return null;

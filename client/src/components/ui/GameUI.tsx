@@ -4,6 +4,7 @@ import { playWaveStart } from "../../lib/sound/sound";
 import { useColyseusState } from "../../colyseus";
 import { UpgradeStore } from "./UpgradeStore";
 import { EscapeScreen } from "./EscapeScreen";
+import { Chat } from "./Chat";
 
 const TITLE_DURATION = 4000;
 
@@ -49,6 +50,7 @@ export function GameUI() {
       <CoinInfo />
       <UpgradeStore />
       <EscapeScreen />
+      <Chat />
     </div>
   );
 }

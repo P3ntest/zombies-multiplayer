@@ -3,7 +3,7 @@ import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
 import { useApp, useTick } from "@pixi/react";
 import { stageContext } from "../stageContext";
-import { useAxis } from "../../lib/useControls";
+import { useAxis, useCurrentPlayerDirection } from "../../lib/useControls";
 import { PlayerSprite } from "./PlayerSprite";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
@@ -99,26 +99,4 @@ function PlayerCamera({ x, y }: { x: number; y: number }) {
   ]);
 
   return null;
-}
-
-export function useCurrentPlayerDirection() {
-  const axis = useAxis();
-  const speed = 4;
-
-  const speedX = axis.x;
-  const speedY = axis.y;
-
-  const mag = Math.sqrt(speedX ** 2 + speedY ** 2);
-
-  if (mag === 0) {
-    return { x: 0, y: 0 };
-  }
-
-  const normalizedX = (speedX / mag) * speed;
-  const normalizedY = (speedY / mag) * speed;
-
-  return {
-    x: normalizedX,
-    y: normalizedY,
-  };
 }

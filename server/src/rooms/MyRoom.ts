@@ -69,6 +69,12 @@ export class MyRoom extends Room<MyRoomState> {
       player.rotation = rotation;
     });
 
+    this.onMessage("chatMessage", (client, message) => {
+      this.broadcastChat(
+        `${this.state.players.get(client.id)?.name}: ${message}`
+      );
+    });
+
     this.onMessage("shoot", (client, message) => {
       const { originX, originY, rotation, speed, damage, pierces } = message;
 
@@ -238,6 +244,7 @@ export class MyRoom extends Room<MyRoomState> {
 
     player.health = 0;
     player.healthState = PlayerHealthState.DEAD;
+    this.broadcastChat(`${player.name} has died!`, "#ff5555");
     this.broadcast("playerDied", { playerId });
     this.broadcast("blood", {
       x: player.x,
@@ -258,6 +265,10 @@ export class MyRoom extends Room<MyRoomState> {
     this.broadcast("playerRevived", { playerId });
   }
 
+  broadcastChat(message: string, color?: string) {
+    this.broadcast("chatMessage", { message, color });
+  }
+
   onJoin(client: Client, options: any) {
     console.log(client.sessionId, "joined!");
     const playerState = new PlayerState();
@@ -269,6 +280,8 @@ export class MyRoom extends Room<MyRoomState> {
     playerState.health = 100;
     playerState.playerClass = options.playerClass ?? "pistol";
     this.state.players.set(client.id, playerState);
+
+    this.broadcastChat(`${playerState.name} has joined the game.`, "#33ff33");
 
     this.checkCanWaveStart();
   }
@@ -285,15 +298,34 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(client.sessionId, "left!");
     if (consented) {
       this.removePlayerFromGame(client.id);
+      this.broadcastChat(
+        `${this.state.players.get(client.id)?.name} has left the game.`,
+        "#ffff33"
+      );
     } else {
       this.state.players.get(client.id)!.connected = false;
+
+      this.broadcastChat(
+        `${
+          this.state.players.get(client.id)?.name
+        } has disconnected. Waiting for reconnection...`,
+        "#ffff33"
+      );
 
       this.allowReconnection(client, 20)
         .then(() => {
           this.state.players.get(client.id)!.connected = true;
+          this.broadcastChat(
+            `${this.state.players.get(client.id)?.name} has reconnected!`,
+            "#ffff33"
+          );
         })
         .catch(() => {
           this.removePlayerFromGame(client.id);
+          this.broadcastChat(
+            `${this.state.players.get(client.id)?.name} timed out.`,
+            "#ffff33"
+          );
         });
     }
 

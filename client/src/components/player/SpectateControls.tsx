@@ -2,7 +2,7 @@ import { useApp, useTick } from "@pixi/react";
 import { useContext, useEffect, useState } from "react";
 import { stageContext } from "../stageContext";
 import { useWindowSize } from "usehooks-ts";
-import { useCurrentPlayerDirection } from "./PlayerSelf";
+import { useCurrentPlayerDirection } from "../../lib/useControls";
 
 export function SpectateControls({ x, y }: { x: number; y: number }) {
   const [realX, setRealX] = useState(x);

@@ -33,9 +33,11 @@ const upgradeTypes = [
 
 export function UpgradeStore() {
   const { buyMenuOpen: open, setBuyMenuOpen: setOpen } = useUIStore();
+  const chatOpen = useUIStore((s) => s.chatOpen);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
+      if (chatOpen) return;
       if (e.key === "b") {
         setOpen(!open);
       } else if (e.key === "Escape") {
@@ -46,7 +48,7 @@ export function UpgradeStore() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [setOpen, open]);
+  }, [setOpen, open, chatOpen]);
 
   if (!open) {
     return null;

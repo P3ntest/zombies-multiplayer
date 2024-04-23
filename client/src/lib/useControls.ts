@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { create } from "zustand";
+import { useUIStore } from "../components/ui/uiStore";
 
 interface ControlsStore {
   keysDown: Set<string>;
@@ -77,4 +78,31 @@ export function useAxis() {
   const y = (keysDown.has("s") ? 1 : 0) + (keysDown.has("w") ? -1 : 0);
 
   return { x, y };
+}
+
+export function useCurrentPlayerDirection() {
+  const chatOpen = useUIStore((state) => state.chatOpen);
+  const axis = useAxis();
+
+  if (chatOpen) {
+    return { x: 0, y: 0 };
+  }
+  const speed = 4;
+
+  const speedX = axis.x;
+  const speedY = axis.y;
+
+  const mag = Math.sqrt(speedX ** 2 + speedY ** 2);
+
+  if (mag === 0) {
+    return { x: 0, y: 0 };
+  }
+
+  const normalizedX = (speedX / mag) * speed;
+  const normalizedY = (speedY / mag) * speed;
+
+  return {
+    x: normalizedX,
+    y: normalizedY,
+  };
 }
