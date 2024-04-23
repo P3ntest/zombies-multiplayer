@@ -1,4 +1,5 @@
 import { PlayerClass } from "../../../../server/src/game/player";
+import { useVolumeStore } from "../../components/ui/soundStore";
 
 export function playSound(
   path: string,
@@ -6,8 +7,9 @@ export function playSound(
     volume: number;
   }>
 ) {
+  const { volume } = useVolumeStore.getState();
   const audio = new Audio(path);
-  audio.volume = 0.2 * (opts?.volume ?? 1);
+  audio.volume = 0.2 * (opts?.volume ?? 1) * volume;
 
   audio.play();
 }
