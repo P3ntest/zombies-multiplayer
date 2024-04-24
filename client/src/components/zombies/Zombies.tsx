@@ -65,7 +65,9 @@ function Zombie({ zombie }: { zombie: ZombieState }) {
 function OtherZombie({ zombie }: { zombie: ZombieState }) {
   const collider = useBodyRef(
     () => {
-      return Matter.Bodies.circle(zombie.x, zombie.y, 40);
+      return Matter.Bodies.circle(zombie.x, zombie.y, 40, {
+        density: 0.003,
+      });
     },
     {
       tags: ["zombie"],

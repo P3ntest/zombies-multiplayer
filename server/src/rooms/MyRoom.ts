@@ -117,6 +117,17 @@ export class MyRoom extends Room<MyRoomState> {
       }
     });
 
+    this.onMessage("zombieDespawn", (client, message) => {
+      const zombie = this.state.zombies.find((z) => z.id === message.zombieId);
+      if (!zombie) return;
+      this.requestSpawnZombie(zombie);
+      this.state.zombies = this.state.zombies.filter((z) => z.id !== zombie.id);
+      this.broadcastChat(
+        `A Zombie has been teleported back to a spawn point due to being stuck.`,
+        "#cccccc"
+      );
+    });
+
     this.onMessage("meleeHitZombie", (client, message) => {
       const { zombieId, damage, knockBack } = message;
       const zombie = this.state.zombies.find((z) => z.id === zombieId);
@@ -205,7 +216,20 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("spawnZombie", (client, message) => {
-      const { x, y, type } = message;
+      const { x, y, type, respawnId } = message;
+
+      if (respawnId) {
+        const zombie = this.zombieRespawnData.get(respawnId);
+        if (zombie) {
+          console.log("respawning zombie", zombie.id);
+          zombie.x = x;
+          zombie.y = y;
+          zombie.id = genId();
+          this.state.zombies.push(zombie);
+          return;
+        }
+      }
+
       const zombie = new ZombieState();
       const typeInfo = zombieInfo[type as ZombieType];
       const health = Math.round(
@@ -221,7 +245,6 @@ export class MyRoom extends Room<MyRoomState> {
       zombie.zombieType = type;
       zombie.playerId = client.sessionId;
       this.state.zombies.push(zombie);
-      this.broadcast("spawnZombie", { id: zombie.id });
     });
 
     this.onMessage("collectCoin", (client, message) => {
@@ -491,7 +514,8 @@ export class MyRoom extends Room<MyRoomState> {
     return Array.from(this.state.players.values()).filter((p) => p.connected);
   }
 
-  requestSpawnZombie() {
+  zombieRespawnData: Map<string, ZombieState> = new Map();
+  requestSpawnZombie(existing?: ZombieState) {
     if (this.state.isGameOver) return;
     // find a player which has the least number of zombies
     const players = this.getConnectedPlayers();
@@ -515,8 +539,12 @@ export class MyRoom extends Room<MyRoomState> {
     const client = this.clients.find(
       (c) => c.sessionId == targetPlayer?.sessionId
     );
+    if (existing) {
+      this.zombieRespawnData.set(existing.id, existing.clone());
+    }
     client?.send("requestSpawnZombie", {
       type: calculateZombieSpawnType(this.waveManager.currentWaveNumber),
+      respawnId: existing?.id,
     });
   }
 

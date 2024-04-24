@@ -12,11 +12,11 @@ export function calculateNextPointPathFinding(
   const grid = generateObstaclePathFindingGrid();
   const startGridPoint = findClosestWalkablePoint(
     grid.data,
-    grid.mapPointToGrid(start)
+    grid.mapPointToGrid(start) ?? grid.mapPointToGrid(grid.centerCoordinates)!
   );
   const endGridPoint = findClosestWalkablePoint(
     grid.data,
-    grid.mapPointToGrid(end)
+    grid.mapPointToGrid(end) ?? grid.mapPointToGrid(grid.centerCoordinates)!
   );
 
   const finder = new PF.AStarFinder({
@@ -35,7 +35,7 @@ export function calculateNextPointPathFinding(
 
   if (pathPoints.length === 0) {
     console.log("No path found");
-    return end;
+    return null;
   }
 
   const pointsICanSee = [];

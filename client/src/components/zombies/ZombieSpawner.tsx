@@ -8,7 +8,7 @@ export function ZombieSpawner() {
 
   const players = useColyseusState((state) => state.players);
   const room = useColyseusRoom();
-  useRoomMessageHandler("requestSpawnZombie", ({ type }) => {
+  useRoomMessageHandler("requestSpawnZombie", ({ type, respawnId }) => {
     const playersList = Array.from(players!.values());
 
     // calculate the distance to the closest player for all spawn points
@@ -38,6 +38,7 @@ export function ZombieSpawner() {
       x: spawnPoint.x,
       y: spawnPoint.y,
       type,
+      respawnId,
     });
   });
 

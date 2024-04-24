@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback, useState } from "react";
+import { MutableRefObject, useCallback, useRef, useState } from "react";
 import {
   PlayerState,
   ZombieState,
@@ -37,6 +37,8 @@ export function useZombieLogic(
 
   const room = useColyseusRoom();
   const alivePlayers = useAlivePlayers();
+
+  const failedPathFindAttempts = useRef(0);
 
   useRoomMessageHandler("zombieHit", (message) => {
     const { zombieId, angle, knockBack } = message;
@@ -100,19 +102,38 @@ export function useZombieLogic(
       }
 
       if (currentTargetVisible) {
+        failedPathFindAttempts.current = 0;
         setCurrentTarget("direct");
       } else {
-        pathFind &&
-          setCurrentTarget(
-            calculateNextPointPathFinding(
-              collider.current.position,
-              currentTargetPlayer,
-              zombieType.size * 40 * 2
-            )
+        if (pathFind) {
+          const nextPoint = calculateNextPointPathFinding(
+            collider.current.position,
+            currentTargetPlayer,
+            zombieType.size * 40 * 2
           );
+          if (!nextPoint) {
+            failedPathFindAttempts.current++;
+            setCurrentTarget("direct");
+
+            if (failedPathFindAttempts.current > 5) {
+              room?.send("zombieDespawn", { zombieId: zombie.id });
+              return;
+            }
+          } else {
+            failedPathFindAttempts.current = 0;
+            setCurrentTarget(nextPoint);
+          }
+        }
       }
     },
-    [alivePlayers, collider, zombie.id, zombie.targetPlayerId, zombieType.size]
+    [
+      alivePlayers,
+      collider,
+      zombie.id,
+      zombie.targetPlayerId,
+      zombieType.size,
+      room,
+    ]
   );
 
   useNetworkTick((currentTick) => {

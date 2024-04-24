@@ -7,11 +7,15 @@ export type PathFindingGrid = {
   height: number;
   data: number[][];
   pfGrid: PF.Grid;
-  mapPointToGrid: (point: { x: number; y: number }) => { x: number; y: number };
+  mapPointToGrid: (point: {
+    x: number;
+    y: number;
+  }) => { x: number; y: number } | null;
   mapGridToPoint: (gridPoint: { x: number; y: number }) => {
     x: number;
     y: number;
   };
+  centerCoordinates: { x: number; y: number };
 };
 
 let cachedGridHash: string | null = null;
@@ -48,6 +52,14 @@ export function generateObstaclePathFindingGrid() {
   });
 
   const resolution = 0.008; // grid fields per pixel
+
+  // add two fields of padding
+
+  minX -= 2 / resolution;
+  minY -= 2 / resolution;
+  maxX += 2 / resolution;
+  maxY += 2 / resolution;
+
   const width = Math.ceil((maxX - minX) * resolution);
   const height = Math.ceil((maxY - minY) * resolution);
   const grid = new Array(width).fill(null).map(() => new Array(height).fill(0));
@@ -67,20 +79,34 @@ export function generateObstaclePathFindingGrid() {
     }
   }
 
+  const mapPointToGrid = (point: { x: number; y: number }) => {
+    // check if the point is outside of the grid
+    if (point.x < minX || point.y < minY || point.x > maxX || point.y > maxY) {
+      return null;
+    }
+    return {
+      x: Math.round((point.x - minX) * resolution),
+      y: Math.round((point.y - minY) * resolution),
+    };
+  };
+
+  const mapGridToPoint = (gridPoint: { x: number; y: number }) => ({
+    x: minX + gridPoint.x / resolution,
+    y: minY + gridPoint.y / resolution,
+  });
+
   cachedGridHash = verticesHash;
   cachedGrid = {
     width,
     height,
     data: grid,
     pfGrid: new PF.Grid(grid),
-    mapPointToGrid: (point) => ({
-      x: Math.round((point.x - minX) * resolution),
-      y: Math.round((point.y - minY) * resolution),
-    }),
-    mapGridToPoint: (gridPoint) => ({
-      x: minX + gridPoint.x / resolution,
-      y: minY + gridPoint.y / resolution,
-    }),
+    mapPointToGrid,
+    mapGridToPoint,
+    centerCoordinates: {
+      x: minX + width / 2 / resolution,
+      y: minY + height / 2 / resolution,
+    },
   };
 
   return cachedGrid!;

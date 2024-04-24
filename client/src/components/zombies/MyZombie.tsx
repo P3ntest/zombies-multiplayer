@@ -12,7 +12,9 @@ export function MyZombie({ zombie }: { zombie: ZombieState }) {
   const zombieType = zombieInfo[zombie.zombieType];
   const collider = useBodyRef(
     () => {
-      return Matter.Bodies.circle(zombie.x, zombie.y, 40 * zombieType.size);
+      return Matter.Bodies.circle(zombie.x, zombie.y, 40 * zombieType.size, {
+        density: 0.003,
+      });
     },
     { tags: ["zombie"], id: zombie.id }
   );
