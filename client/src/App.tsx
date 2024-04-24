@@ -9,11 +9,16 @@ import { LogtoProvider } from "@logto/react";
 import { logtoConfig } from "./lib/auth/logto";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
+import { MapEditor } from "./editor/MapEditor";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/editor",
+    element: <MapEditor />,
   },
   {
     path: "/auth/callback",

@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
+import { useNavigate } from "react-router-dom";
 
 let connecting = false;
 
@@ -10,6 +11,7 @@ export function JoinMenu() {
     "start" | "createRoom" | "joinId" | "roomsList"
   >("start");
   const { selectedClass, name } = useCharacterCustomizationStore();
+  const navigate = useNavigate();
 
   const pressQuickPlay = useCallback(() => {
     if (connecting) return;
@@ -96,6 +98,14 @@ export function JoinMenu() {
             </button>
             <JoinByIdField />
           </div>
+          <button
+            className="button"
+            onClick={() => {
+              navigate("/editor");
+            }}
+          >
+            Map Editor
+          </button>
         </div>
       )}
     </div>

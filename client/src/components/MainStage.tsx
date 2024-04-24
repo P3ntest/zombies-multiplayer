@@ -19,6 +19,7 @@ import { BloodManager } from "./effects/Blood";
 import { Camera } from "./graphics/Camera";
 import { SpawnPointManager } from "./level/SpawnPoint";
 import { PlayerSpawner } from "./player/PlayerSpawner";
+import { FullScreenStage } from "./graphics/FullScreenStage";
 
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
@@ -34,22 +35,7 @@ export const MainStage = () => {
   return (
     <>
       <GameUI />
-      <Stage
-        options={{
-          background: "transparent",
-          resolution: window.devicePixelRatio,
-        }}
-        style={{
-          width: "100vw",
-          height: "100vh",
-        }}
-        width={
-          windowSize.width && windowSize.width > 0 ? windowSize.width : 800
-        }
-        height={
-          windowSize.height && windowSize.height > 0 ? windowSize.height : 600
-        }
-      >
+      <FullScreenStage>
         <Resizer />
         <PhysicsProvider>
           <Camera>
@@ -65,7 +51,7 @@ export const MainStage = () => {
             <Players />
           </Camera>
         </PhysicsProvider>
-      </Stage>
+      </FullScreenStage>
     </>
   );
 };

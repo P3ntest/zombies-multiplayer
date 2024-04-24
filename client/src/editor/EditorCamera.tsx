@@ -1,12 +1,15 @@
-import { ReactNode, useRef } from "react";
-import { useCameraStore } from "./cameraStore";
+import { useEditor } from "./mapEditorStore";
 import { useWindowSize } from "usehooks-ts";
-import { Container, useTick } from "@pixi/react";
-import { CameraProvider } from "../stageContext";
 import { Container as PIXIContainer } from "pixi.js";
+import { useTick, Container } from "@pixi/react";
+import { ReactNode, useRef } from "react";
 
-export function Camera({ children }: { children: ReactNode }) {
-  const { x, y, zoom } = useCameraStore();
+export function EditorCamera({ children }: { children: ReactNode }) {
+  const { x, y, zoom } = useEditor((state) => ({
+    x: state.cameraX,
+    y: state.cameraY,
+    zoom: state.zoom,
+  }));
 
   const windowSize = useWindowSize();
   const maxAxis = Math.max(windowSize.width, windowSize.height);
@@ -43,9 +46,7 @@ export function Camera({ children }: { children: ReactNode }) {
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     <Container x={x} y={y} scale={{ x: zoom, y: zoom }} ref={camRef}>
-      <CameraProvider value={{ camera: camRef.current }}>
-        {children}
-      </CameraProvider>
+      {children}
     </Container>
   );
 }
