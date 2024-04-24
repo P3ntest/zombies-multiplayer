@@ -31,7 +31,6 @@ export function Level() {
       <Wall x={3100} y={1500} width={200} height={3400} />
 
       <SpawnPoint type="player" x={100} y={100} />
-      <SpawnPoint type="zombie" x={-500} y={-500} />
 
       {map.split("\n").map((row, y) =>
         row.split("").map((cell, x) => {
@@ -46,13 +45,14 @@ export function Level() {
               />
             );
           } else {
-            return null;
-            // <SpawnPoint
-            //   type="zombie"
-            //   key={`${x}-${y}`}
-            //   x={x * 300 + 150}
-            //   y={y * 300 - 150}
-            // />
+            return (
+              <SpawnPoint
+                type="zombie"
+                key={`${x}-${y}`}
+                x={x * 300 + 150}
+                y={y * 300 - 150}
+              />
+            );
           }
         })
       )}
