@@ -1,7 +1,7 @@
 export const playerConfig = {
   healthUpgrade: {
     type: "lin",
-    factor: 20,
+    factor: 80,
   } as UpgradeCalc,
   speedUpgrade: {
     type: "lin",
