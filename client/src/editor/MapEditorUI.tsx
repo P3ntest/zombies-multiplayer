@@ -5,6 +5,7 @@ import {
   AssetSource,
   MapObject,
 } from "../../../server/src/game/mapEditor/editorTypes";
+import { twMerge } from "tailwind-merge";
 export function MapEditorUI() {
   return (
     <div
@@ -63,7 +64,22 @@ function CreatePanel() {
           >
             Asset
           </button>
-          <button className="button">Spawn Point</button>
+          <button
+            className="button"
+            onClick={() => {
+              create({
+                objectType: "spawnPoint",
+                x,
+                y,
+                rotation: 0,
+                id: Math.random().toString(36).substr(2, 5),
+                scale: 1,
+                spawns: "player",
+              });
+            }}
+          >
+            Spawn Point
+          </button>
         </div>
       </div>
     </div>
@@ -209,6 +225,35 @@ function Inspector() {
                 updateObject(selectedObject.id, { sprite: source })
               }
             />
+          </div>
+        )}
+        {selectedObject.objectType === "spawnPoint" && (
+          <div>
+            <h2 className="text-white font-bold text-lg mb-1">Spawns</h2>
+            <div className="flex flex-row items-center gap-2">
+              <button
+                className={twMerge(
+                  "input transition-all",
+                  selectedObject.spawns == "player" && "bg-slate-600"
+                )}
+                onClick={() =>
+                  updateObject(selectedObject.id, { spawns: "player" })
+                }
+              >
+                Player
+              </button>
+              <button
+                className={twMerge(
+                  "input transition-all",
+                  selectedObject.spawns == "zombie" && "bg-slate-600"
+                )}
+                onClick={() =>
+                  updateObject(selectedObject.id, { spawns: "zombie" })
+                }
+              >
+                Zombie
+              </button>
+            </div>
           </div>
         )}
       </div>

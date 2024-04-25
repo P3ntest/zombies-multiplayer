@@ -1,24 +1,20 @@
+import { Container, Graphics, Sprite, TilingSprite, useApp } from "@pixi/react";
 import {
-  Container,
-  Graphics,
-  TilingSprite,
-  useApp,
-  useTick,
-} from "@pixi/react";
-import {
-  AssetObject,
   MapObject,
+  SpawnPoint,
 } from "../../../server/src/game/mapEditor/editorTypes";
 import { FullScreenStage } from "../components/graphics/FullScreenStage";
 import { AssetObjectInstance } from "../components/level/AssetObjectInstance";
 import { EditorCamera, EditorControls } from "./EditorCamera";
 import { useEditor } from "./mapEditorStore";
-import { Container as PIXIContainer } from "pixi.js";
-import { useEffect, useRef, useState } from "react";
+import { Container as PIXIContainer, Texture } from "pixi.js";
+import { ComponentProps, useEffect, useRef } from "react";
 import { useCamera } from "../components/stageContext";
 import { Resizer } from "../components/MainStage";
 import * as PIXI from "pixi.js";
 import { MapEditorUI } from "./MapEditorUI";
+import { zombieAtlas } from "../assets/spritesheets/zombie";
+import { spriteSheets } from "../assets/assetHandler";
 
 export function MapEditor() {
   return (
@@ -60,9 +56,7 @@ function VisualObjectsEditor() {
   return (
     <>
       {objects.map((object) => {
-        if (object.objectType === "asset") {
-          return <LevelObject key={object.id} asset={object} />;
-        }
+        return <LevelObject key={object.id} asset={object} />;
       })}
     </>
   );
@@ -86,7 +80,6 @@ function LevelObject({ asset }: { asset: MapObject }) {
     const thisContainer = containerRef.current;
 
     const pointerDown = (e: PIXI.FederatedPointerEvent) => {
-      console.log("pointerDown");
       if (!camera) return;
 
       const newPosition = e.getLocalPosition(camera);
@@ -154,12 +147,49 @@ function LevelObject({ asset }: { asset: MapObject }) {
     <>
       <Container ref={containerRef} cursor="pointer" eventMode="dynamic">
         {asset.objectType === "asset" && (
-          <AssetObjectInstance
-            asset={asset}
-            tint={thisSelected ? 0xff3333 : 0xffffff}
-          />
+          <>
+            <AssetObjectInstance
+              asset={asset}
+              tint={thisSelected ? 0xff3333 : 0xffffff}
+            />
+          </>
+        )}
+        {asset.objectType === "spawnPoint" && (
+          <>
+            <SpawnPointDisplay
+              spawnPoint={asset}
+              tint={thisSelected ? 0xff3333 : 0xffffff}
+            />
+          </>
         )}
       </Container>
     </>
+  );
+}
+
+function SpawnPointDisplay({
+  spawnPoint,
+  ...props
+}: { spawnPoint: SpawnPoint } & Partial<ComponentProps<typeof Sprite>>) {
+  const scale = spawnPoint.spawns == "zombie" ? 0.4 : 0.5;
+
+  return (
+    <Container x={spawnPoint.x} y={spawnPoint.y}>
+      <Sprite
+        texture={
+          spawnPoint.spawns == "zombie"
+            ? Texture.from(
+                "Top_Down_Survivor/rifle/idle/survivor-idle_rifle_0.png"
+              )
+            : spriteSheets.zombieAtlas.animations.walk[0]
+        }
+        scale={scale}
+        anchor={{
+          x: 0.5,
+          y: 0.5,
+        }}
+        {...props}
+      />
+    </Container>
   );
 }
