@@ -12,7 +12,7 @@ export function UpgradeStore() {
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (chatOpen) return;
-      if (e.key === "b") {
+      if (e.key === "b" || e.key === "B") {
         setOpen(!open);
       } else if (e.key === "Escape") {
         setOpen(false);

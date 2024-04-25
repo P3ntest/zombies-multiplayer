@@ -1,10 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { useUIStore } from "./uiStore";
-import {
-  disconnectFromColyseus,
-  setCurrentRoom,
-  useColyseusRoom,
-} from "../../colyseus";
+import { disconnectFromColyseus, useColyseusRoom } from "../../colyseus";
 import { useVolumeStore } from "./soundStore";
 import { useNavigate } from "react-router-dom";
 
@@ -57,7 +53,7 @@ export function EscapeScreen() {
             X
           </div>
         </div>
-        <div className="m-8">
+        <div className="flex flex-col gap-3 mt-5">
           <label
             htmlFor="default-range"
             className="block mb-2 text-md font-medium text-gray-900 dark:text-white"

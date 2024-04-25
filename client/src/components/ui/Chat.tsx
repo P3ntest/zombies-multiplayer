@@ -58,7 +58,7 @@ export function Chat() {
     return () => {
       window.removeEventListener("keydown", keydown);
     };
-  }, [chatOpen, setChatOpen, close, room]);
+  }, [chatOpen, setChatOpen, close, room, interceptor]);
 
   return (
     <div className="fixed bottom-0 left-0">

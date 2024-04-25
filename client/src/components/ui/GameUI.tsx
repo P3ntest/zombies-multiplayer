@@ -1,16 +1,22 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playWaveStart } from "../../lib/sound/sound";
-import { useColyseusState } from "../../colyseus";
+import {
+  disconnectFromColyseus,
+  useColyseusRoom,
+  useColyseusState,
+} from "../../colyseus";
 import { UpgradeStore } from "./UpgradeStore";
 import { EscapeScreen } from "./EscapeScreen";
 import { Chat } from "./Chat";
 import { LeaderBoard } from "./LeaderBoard";
+import { useNavigate } from "react-router-dom";
 
 const TITLE_DURATION = 4000;
 
 export function GameUI() {
   const [waveTitle, setWaveTitle] = useState<string | null>(null);
+  const [gameOver, setGameOver] = useState<boolean>(false);
 
   const showTitle = useCallback((title: string) => {
     setWaveTitle(title);
@@ -31,7 +37,7 @@ export function GameUI() {
   });
 
   useRoomMessageHandler("gameOver", () => {
-    showTitle("Game Over!");
+    setGameOver(true);
   });
 
   return (
@@ -47,12 +53,13 @@ export function GameUI() {
       }}
     >
       {waveTitle && <WaveTitle title={waveTitle} key={waveTitle} />}
+      {gameOver && <GameOverScreen />}
       <WaveInfo />
       <CoinInfo />
       <UpgradeStore />
       <EscapeScreen />
       <Chat />
-      <LeaderBoard />
+      {!gameOver && <LeaderBoard gameOver={false} />}
     </div>
   );
 }
@@ -151,6 +158,40 @@ function WaveTitle({ title }: { title: string }) {
       className="text-5xl font-extrabold ui-text"
     >
       {title}
+    </div>
+  );
+}
+
+function GameOverScreen() {
+  const room = useColyseusRoom();
+  const navigate = useNavigate();
+
+  const onLeave = useCallback(() => {
+    localStorage.removeItem("reconnectToken");
+    room?.leave(true).finally(() => {
+      disconnectFromColyseus();
+      navigate("/");
+    });
+  }, [room, navigate]);
+
+  return (
+    <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-auto">
+      <div className="p-6 rounded-lg pointer-events-auto">
+        <div className="flex flex-row items-center justify-between gap-5">
+          <div className="text-9xl font-extrabold ui-text">Game Over!</div>
+        </div>
+        <div className="flex flex-col items-center justify-between gap-5">
+          <LeaderBoard gameOver={true} />
+        </div>
+        <div className="flex flex-col items-center gap-3 mt-5">
+          <button
+            className="bg-red-500 text-white px-4 py-2 rounded-lg w-3/6"
+            onClick={onLeave}
+          >
+            Back To Lobby
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
