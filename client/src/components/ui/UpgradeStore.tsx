@@ -3,45 +3,7 @@ import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useSelf } from "../../lib/networking/hooks";
 import { CoinSymbol } from "./GameUI";
 import { useUIStore } from "./uiStore";
-
-const upgradeTypes = [
-  {
-    id: "damage",
-    name: "Damage",
-    maxLevel: 10,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
-  },
-  {
-    id: "fireRate",
-    name: "Fire Rate",
-    maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
-  },
-  {
-    id: "pierce",
-    name: "Pierce",
-    maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 50),
-  },
-  {
-    id: "health",
-    name: "Health",
-    maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 20),
-  },
-  {
-    id: "speed",
-    name: "Speed",
-    maxLevel: 3,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 60),
-  },
-  {
-    id: "scope",
-    name: "Scope",
-    maxLevel: 3,
-    cost: (level: number) => Math.round(Math.pow(2, level) * 40),
-  },
-];
+import { upgradeConfig } from "../../../../server/src/game/config";
 
 export function UpgradeStore() {
   const { buyMenuOpen: open, setBuyMenuOpen: setOpen } = useUIStore();
@@ -110,7 +72,7 @@ function StoreModal() {
         Upgrade Store
       </h3>
       <div className="grid grid-cols-3 gap-4">
-        {upgradeTypes.map((upgrade) => {
+        {upgradeConfig.map((upgrade) => {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const level = ((upgrades as any)[upgrade.id] as number) ?? 0;
           return (

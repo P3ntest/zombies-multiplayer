@@ -13,6 +13,7 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
+import { coinConfig } from "../game/config";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -347,7 +348,9 @@ export class MyRoom extends Room<MyRoomState> {
     this.spawnCoins(
       zombie.x,
       zombie.y,
-      Math.floor((Math.random() * zombie.maxHealth) / 30) + 1
+      Math.floor(
+        Math.random() * zombie.maxHealth * coinConfig.spawnMultiplier
+      ) + 1
     );
     this.broadcast("blood", {
       x: zombie.x,

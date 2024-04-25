@@ -15,6 +15,7 @@ import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
+import { playerConfig } from "../../../../server/src/game/config";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -53,8 +54,8 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     const rotation = Math.atan2(stageY - y, stageX - x);
 
     Body.setVelocity(collider.current, {
-      x: currentDirection.x + player.upgrades.speed * currentDirection.x * 0.4,
-      y: currentDirection.y + player.upgrades.speed * currentDirection.y * 0.4,
+      x: playerConfig.walkingSpeed(currentDirection.x, player.upgrades.speed),
+      y: playerConfig.walkingSpeed(currentDirection.y, player.upgrades.speed),
     });
 
     setX(collider.current.position.x);
@@ -83,7 +84,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         y={y}
         rotation={rotation}
         health={player.health}
-        maxHealth={100 + 20 * player.upgrades.health}
+        maxHealth={playerConfig.maxHealth(player.upgrades.health)}
         velocityX={currentDirection.x}
         velocityY={currentDirection.y}
       />
@@ -93,7 +94,11 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         rotation={rotation}
         setCurrentAnimation={setCurrentAnimation}
       />
-      <PlayerCamera x={x} y={y} zoom={1 / (player.upgrades.scope + 1)} />
+      <PlayerCamera
+        x={x}
+        y={y}
+        zoom={playerConfig.zoom(player.upgrades.scope)}
+      />
     </>
   );
 }

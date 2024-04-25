@@ -1,4 +1,5 @@
 import { PlayerState } from "../rooms/schema/MyRoomState";
+import { weaponConfig } from "./config";
 
 export type PlayerClass = "pistol" | "shotgun" | "rifle" | "melee";
 
@@ -15,4 +16,8 @@ export function calculateScore(player: PlayerState) {
     player.wavesSurvived * 100 +
     player.accuracy * 100
   );
+}
+
+export function getWeaponData(playerClass: PlayerClass) {
+  return weaponConfig.weapons[playerClass];
 }
