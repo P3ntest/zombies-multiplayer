@@ -68,7 +68,9 @@ export class MyRoom extends Room<MyRoomState> {
       player.velocityX = velocityX;
       player.velocityY = velocityY;
       player.rotation = rotation;
-      player.currentAnimation = currentAnimation;
+
+      currentAnimation != undefined &&
+        (player.currentAnimation = currentAnimation);
     });
 
     this.onMessage("chatMessage", (client, message: string) => {
@@ -406,18 +408,6 @@ export class MyRoom extends Room<MyRoomState> {
         "Wave is running, please wait for the next wave to spawn.",
         "#aa55cc"
       );
-
-    //TEMP: create a bunch of coins
-    for (let i = 0; i < 500; i++) {
-      const coin = new CoinState();
-      coin.id = this.highestCoinId++;
-      // coin.x = 100;
-      // coin.y = 100 + i * 10;
-      coin.x = 100 + Math.random() * 100;
-      coin.y = 500 + Math.random() * 100;
-      coin.value = Math.floor(Math.random() * 1000) + 1;
-      this.state.coins.push(coin);
-    }
   }
 
   spawnPlayer(clientId: string) {

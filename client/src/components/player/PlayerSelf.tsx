@@ -1,6 +1,6 @@
 import { useApp, useTick } from "@pixi/react";
 import Matter, { Body } from "matter-js";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom } from "../../colyseus";
 import {
@@ -25,6 +25,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   const room = useColyseusRoom();
 
   const [currentAnimation, setCurrentAnimation] = useState(0);
+  const lastAnimationSent = useRef(0);
 
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
@@ -73,13 +74,17 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 
   useNetworkTick(() => {
     room?.send("move", {
-      x: collider.current.position.x,
-      y: collider.current.position.y,
+      x: Math.round(collider.current.position.x),
+      y: Math.round(collider.current.position.y),
       velocityX: collider.current.velocity.x,
       velocityY: collider.current.velocity.y,
       rotation,
-      currentAnimation,
+      currentAnimation:
+        lastAnimationSent.current === currentAnimation
+          ? undefined
+          : currentAnimation,
     });
+    lastAnimationSent.current = currentAnimation;
   });
 
   return (
