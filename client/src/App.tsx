@@ -7,18 +7,24 @@ import { useAssetStore, useEnsureAssetsLoaded } from "./assets/assetHandler";
 import { Spinner } from "./components/util/Spinner";
 import { LogtoProvider } from "@logto/react";
 import { logtoConfig } from "./lib/auth/logto";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
 import { MapEditor } from "./editor/MapEditor";
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "/editor",
-    element: <MapEditor />,
+    // path: "/",
+    element: <AssetLoadLayout />,
+    children: [
+      {
+        path: "/",
+        element: <App />,
+      },
+      {
+        path: "/editor",
+        element: <MapEditor />,
+      },
+    ],
   },
   {
     path: "/auth/callback",
@@ -34,7 +40,7 @@ export function Router() {
   );
 }
 
-export function App() {
+function AssetLoadLayout() {
   useEnsureAssetsLoaded();
   const { ready, isLoading } = useAssetStore();
 
@@ -45,9 +51,13 @@ export function App() {
           <Spinner />
         </div>
       )}
-      {ready && <Game />}
+      {ready && <Outlet />}
     </>
   );
+}
+
+export function App() {
+  return <Game />;
 }
 
 function Game() {

@@ -9,6 +9,7 @@ export function FullScreenStage({ children }: { children: React.ReactNode }) {
       options={{
         background: "transparent",
         resolution: window.devicePixelRatio,
+        eventMode: "static",
       }}
       style={{
         width: "100vw",

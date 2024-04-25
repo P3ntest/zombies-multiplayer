@@ -80,14 +80,13 @@ export function useAxis() {
   return { x, y };
 }
 
-export function useCurrentPlayerDirection() {
+export function useCurrentPlayerDirection(speed = 4) {
   const chatOpen = useUIStore((state) => state.chatOpen);
   const axis = useAxis();
 
   if (chatOpen) {
     return { x: 0, y: 0 };
   }
-  const speed = 4;
 
   const speedX = axis.x;
   const speedY = axis.y;

@@ -23,14 +23,36 @@ export const Collider = Transform.extend({
   shape: ColliderShape,
 });
 
+export const BuiltInAsset = z.object({
+  assetSource: z.literal("builtIn"),
+  assetPath: z.string(),
+});
+
+export const ExternalAsset = z.object({
+  assetSource: z.literal("external"),
+  assetUrl: z.string(),
+});
+
+export const AssetSource = z.discriminatedUnion("assetSource", [
+  BuiltInAsset,
+  ExternalAsset,
+]);
+
 export const AssetObject = Transform.extend({
   objectType: z.literal("asset"),
   colliders: z.array(Collider),
+  sprite: AssetSource,
+  id: z.string(),
+
+  tiling: z.boolean(),
+  width: z.number(),
+  height: z.number(),
 });
 
 export const SpawnPoint = Transform.extend({
   objectType: z.literal("spawnPoint"),
   spawns: z.enum(["player", "zombie"]),
+  id: z.string(),
 });
 
 export const MapObject = z.discriminatedUnion("objectType", [
@@ -43,3 +65,11 @@ export const GameLevel = z.object({
 });
 
 export type GameLevel = z.infer<typeof GameLevel>;
+export type MapObject = z.infer<typeof MapObject>;
+export type AssetObject = z.infer<typeof AssetObject>;
+export type SpawnPoint = z.infer<typeof SpawnPoint>;
+export type Collider = z.infer<typeof Collider>;
+export type ColliderShape = z.infer<typeof ColliderShape>;
+export type BuiltInAsset = z.infer<typeof BuiltInAsset>;
+export type ExternalAsset = z.infer<typeof ExternalAsset>;
+export type AssetSource = z.infer<typeof AssetSource>;

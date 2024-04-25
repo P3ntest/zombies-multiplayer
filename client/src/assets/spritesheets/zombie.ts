@@ -6,7 +6,7 @@ const widthPerFrame = width / numFrames;
 
 export const zombieAtlas: SpriteSheetJson = {
   meta: {
-    image: "assets/zombie/zombie.png",
+    image: "/assets/zombie/zombie.png",
     scale: "1",
   },
   frames: Object.fromEntries(

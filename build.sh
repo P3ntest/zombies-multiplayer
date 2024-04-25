@@ -1,0 +1,1 @@
+bunx concurrently "cd client && bun run build" "cd server && bun run build"

@@ -16,7 +16,7 @@ import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 import { BloodManager } from "./effects/Blood";
-import { Camera } from "./graphics/Camera";
+import { GameCamera } from "./graphics/Camera";
 import { SpawnPointManager } from "./level/SpawnPoint";
 import { PlayerSpawner } from "./player/PlayerSpawner";
 import { FullScreenStage } from "./graphics/FullScreenStage";
@@ -26,9 +26,6 @@ import { FullScreenStage } from "./graphics/FullScreenStage";
  * It will render the game world and all entities in it, as well as handle UI and Controls
  */
 export const MainStage = () => {
-  const mainContentRef = useRef(null);
-  const windowSize = useWindowSize();
-
   useBroadcastRoomMessages();
   useSetQueryOrReconnectToken();
 
@@ -38,7 +35,7 @@ export const MainStage = () => {
       <FullScreenStage>
         <Resizer />
         <PhysicsProvider>
-          <Camera>
+          <GameCamera>
             <SpawnPointManager>
               <ZombieSpawner />
               <PlayerSpawner />
@@ -49,14 +46,14 @@ export const MainStage = () => {
             <Zombies />
             <Bullets />
             <Players />
-          </Camera>
+          </GameCamera>
         </PhysicsProvider>
       </FullScreenStage>
     </>
   );
 };
 
-function Resizer() {
+export function Resizer() {
   const app = useApp();
   useEffect(() => {
     const resize = () => {

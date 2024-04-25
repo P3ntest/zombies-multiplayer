@@ -5,12 +5,30 @@ import { Container, useTick } from "@pixi/react";
 import { CameraProvider } from "../stageContext";
 import { Container as PIXIContainer } from "pixi.js";
 
-export function Camera({ children }: { children: ReactNode }) {
-  const { x, y, zoom } = useCameraStore();
-
+export function GameCamera({ children }: { children: ReactNode }) {
   const windowSize = useWindowSize();
   const maxAxis = Math.max(windowSize.width, windowSize.height);
-  const scale = (maxAxis / 1920) * 1.2 * zoom;
+  const zoom = (maxAxis / 1920) * 1.2 * useCameraStore((state) => state.zoom);
+  return (
+    <GenericCamera {...useCameraStore()} zoom={zoom}>
+      {children}
+    </GenericCamera>
+  );
+}
+
+export function GenericCamera({
+  x,
+  y,
+  zoom,
+  children,
+}: {
+  x: number;
+  y: number;
+  zoom: number;
+  children: ReactNode;
+}) {
+  const windowSize = useWindowSize();
+  const scale = zoom;
 
   const camRef = useRef<PIXIContainer>(null);
 

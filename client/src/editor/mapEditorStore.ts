@@ -1,7 +1,18 @@
 import { create } from "zustand";
-import { GameLevel } from "./../../../server/src/game/mapEditor/editorTypes";
+import {
+  GameLevel,
+  MapObject,
+} from "./../../../server/src/game/mapEditor/editorTypes";
+import { produce } from "immer";
+import { persist } from "zustand/middleware";
 interface MapEditorStore {
   level: GameLevel;
+  updateObject: (id: string, asset: Partial<MapObject>) => void;
+  addObject: (asset: MapObject) => void;
+  deleteObject: (id: string) => void;
+
+  selectedObject: string | null;
+  setSelectedObject: (id: string | null) => void;
 
   zoom: number;
   cameraX: number;
@@ -10,14 +21,70 @@ interface MapEditorStore {
   setZoom: (zoom: number) => void;
 }
 
-export const useEditor = create<MapEditorStore>((set) => ({
-  level: {
-    objects: [],
-  },
+export const useEditor = create(
+  persist<MapEditorStore>(
+    (set) => ({
+      level: {
+        objects: [
+          {
+            objectType: "asset",
+            id: "1",
+            x: 0,
+            y: 0,
+            rotation: 0,
+            scale: 1,
+            colliders: [],
+            tiling: true,
+            width: 101,
+            height: 100,
+            sprite: {
+              assetSource: "external",
+              assetUrl: "/assets/sandwall.jpeg",
+            },
+          },
+        ],
+      },
+      updateObject: (id, asset) =>
+        set((state) => {
+          // with immer
+          return produce(state, (draft) => {
+            const index = draft.level.objects.findIndex((o) => o.id === id);
+            if (index === -1) return;
+            draft.level.objects[index] = {
+              ...draft.level.objects[index],
+              ...asset,
+            } as MapObject;
+          });
+        }),
+      addObject: (asset) =>
+        set((state) => {
+          // with immer
+          return produce(state, (draft) => {
+            draft.level.objects.push(asset);
+          });
+        }),
+      deleteObject: (id) =>
+        set((state) => {
+          // with immer
+          return produce(state, (draft) => {
+            const index = draft.level.objects.findIndex((o) => o.id === id);
+            if (index === -1) return;
+            draft.level.objects.splice(index, 1);
+          });
+        }),
 
-  zoom: 1,
-  cameraX: 0,
-  cameraY: 0,
-  setCamera: (x, y) => set({ cameraX: x, cameraY: y }),
-  setZoom: (zoom) => set({ zoom }),
-}));
+      selectedObject: null,
+      setSelectedObject: (id) => set({ selectedObject: id }),
+
+      zoom: 1,
+      cameraX: 0,
+      cameraY: 0,
+      setCamera: (x, y) => set({ cameraX: x, cameraY: y }),
+      setZoom: (zoom) => set({ zoom }),
+    }),
+    {
+      name: "mapEditor",
+      getStorage: () => localStorage,
+    }
+  )
+);
