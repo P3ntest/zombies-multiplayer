@@ -1,6 +1,5 @@
 import { useColyseusRoom } from "./colyseus";
-import { LevelLoaderSuspense, MainStage } from "./components/MainStage";
-import { useControlEventListeners } from "./lib/useControls";
+import { MainStage } from "./components/MainStage";
 import { Menu } from "./components/ui/Menu";
 import { useTryJoinByQueryOrReconnectToken } from "./lib/networking/hooks";
 import { useAssetStore, useEnsureAssetsLoaded } from "./assets/assetHandler";

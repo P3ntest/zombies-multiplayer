@@ -433,6 +433,7 @@ function ColliderEditor() {
                         ...collider,
                         shape: {
                           ...collider.shape,
+                          //@ts-expect-error this is fine
                           radius: parseFloat(e.target.value),
                         },
                       };
