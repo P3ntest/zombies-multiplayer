@@ -1,6 +1,7 @@
 import { ArraySchema, MapSchema, Schema, type } from "@colyseus/schema";
 import { PlayerClass } from "../../game/player";
 import { ZombieType } from "../../game/zombies";
+import { playerConfig } from "../../game/config";
 
 export const PlayerHealthState = {
   ALIVE: 0,
@@ -30,7 +31,7 @@ export class PlayerState extends Schema {
   @type("number") velocityX: number = 0;
   @type("number") velocityY: number = 0;
 
-  @type("number") health: number = 100;
+  @type("number") health: number = playerConfig.startingHealth;
   @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
   @type("uint32") coins: number = 0;

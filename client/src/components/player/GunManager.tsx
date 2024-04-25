@@ -4,9 +4,13 @@ import { useIsKeyDown } from "../../lib/useControls";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playGunSound, playMeleeSound } from "../../lib/sound/sound";
 import { useTick } from "@pixi/react";
-import { PlayerAnimations } from "../../../../server/src/game/player";
+import {
+  PlayerAnimations,
+  getWeaponData,
+} from "../../../../server/src/game/player";
 import { bodyMeta, getBodiesWithTag } from "../../lib/physics/hooks";
 import Matter from "matter-js";
+import { calcUpgrade, weaponConfig } from "../../../../server/src/game/config";
 
 export function GunManager({
   x,
@@ -78,8 +82,12 @@ export function GunManager({
         if (zombieId) {
           room?.send("meleeHitZombie", {
             zombieId,
-            damage: 30 * 1.4 ** self.upgrades.damage,
-            knockBack: 4,
+            damage: calcUpgrade(
+              weaponConfig.damageUpgrade,
+              self.upgrades.damage,
+              weaponConfig.weapons.melee.damage
+            ),
+            knockBack: weaponConfig.weapons.melee.knockBack,
           });
         }
       },
@@ -100,21 +108,17 @@ export function GunManager({
       const originX = x + Math.cos(rotation) * barrelMoveForwardFactor;
       const originY = y + Math.sin(rotation) * barrelMoveForwardFactor;
 
-      const damage =
-        {
-          pistol: 30,
-          shotgun: 10,
-          rifle: 10,
-          melee: 0,
-        }[self.playerClass] *
-        1.4 ** self.upgrades.damage;
-
-      const knockBack = {
-        pistol: 2.6,
-        shotgun: 1,
-        rifle: 1,
-        melee: 0,
-      }[self.playerClass];
+      const weapon = getWeaponData(self.playerClass);
+      const damage = calcUpgrade(
+        weaponConfig.damageUpgrade,
+        self.upgrades.damage,
+        weapon.damage
+      );
+      const pierces = calcUpgrade(
+        weaponConfig.pierceUpgrade,
+        self.upgrades.pierce,
+        weapon.pierce
+      );
 
       room?.send("shotSound", {
         playerClass: self.playerClass,
@@ -122,24 +126,29 @@ export function GunManager({
       });
       playGunSound(self.playerClass, (coolDownTicksAfter / 20) * 1000);
 
-      const pierces =
-        self.upgrades.pierce + (self.playerClass === "pistol" ? 2 : 1);
-
       if (self.playerClass === "shotgun") {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < weaponConfig.weapons.shotgun.bulletAmount; i++) {
           const randomRotation = rotation + (Math.random() - 0.5) * 0.5;
           shootBullet(
             originX,
             originY,
             randomRotation,
-            20,
+            weapon.bulletSpeed,
             damage,
             pierces,
-            knockBack
+            weapon.knockBack
           );
         }
       } else {
-        shootBullet(originX, originY, rotation, 20, damage, pierces, knockBack);
+        shootBullet(
+          originX,
+          originY,
+          rotation,
+          weapon.bulletSpeed,
+          damage,
+          pierces,
+          weapon.knockBack
+        );
       }
     },
     [
@@ -187,13 +196,12 @@ export function GunManager({
     }
     if (isShooting && shootCoolDown.current <= 0) {
       const coolDownTicks =
-        {
-          pistol: 20,
-          shotgun: 30,
-          rifle: 5,
-          melee: 10,
-        }[self.playerClass] *
-        0.8 ** self.upgrades.fireRate;
+        200 /
+        calcUpgrade(
+          weaponConfig.fireRateUpgrade,
+          self.upgrades.fireRate,
+          getWeaponData(self.playerClass).fireRate
+        );
       shoot(coolDownTicks);
 
       shootCoolDown.current = (coolDownTicks / 20) * 1000;
