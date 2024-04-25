@@ -15,6 +15,7 @@
     "@p3ntest/use-colyseus": "^0.0.8",
     "@pixi/events": "^7.4.2",
     "@pixi/react": "^7.1.2",
+    "@pixi/sound": "5.2.3",
     "express": "^4.19.2",
     "immer": "^10.0.4",
     "matter-js": "^0.19.0",
