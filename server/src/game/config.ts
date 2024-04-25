@@ -31,7 +31,8 @@ export const weaponConfig = {
   } as UpgradeCalc,
   weapons: {
     pistol: {
-      damage: 30,
+      //4800 dmg per second
+      damage: 40,
       knockBack: 1,
       fireRate: 10, // 10 = 1 bullet per second
       pierce: 2,
@@ -39,23 +40,27 @@ export const weaponConfig = {
       bulletSpeed: 30,
     },
     shotgun: {
-      damage: 10,
+      //4500 dmg per second
+      damage: 15,
       knockBack: 0.5,
       fireRate: 10,
       pierce: 1,
       range: 8,
       bulletSpeed: 20,
+      bulletAmount: 5,
     },
     rifle: {
+      //5400 dmg per second
       damage: 15,
       knockBack: 0.05,
-      fireRate: 60,
+      fireRate: 52,
       pierce: 1,
       range: 10,
       bulletSpeed: 20,
     },
     melee: {
-      damage: 20,
+      //2970 dmg per second
+      damage: 33,
       knockBack: 0,
       fireRate: 15,
       pierce: 10,
@@ -131,18 +136,64 @@ export const upgradeConfig = [
 export const coinConfig = {
   spawnMultiplier: 0.08,
 };
-export interface UpgradeCalc {
+
+export const waveConfig = {
+  zombies: {
+    type: "exp",
+    factor: 1.45,
+    base: 20,
+  } as UpgradeCalc,
+  zombieSpawnInterval: {
+    max: 200,
+    factor: -50,
+    base: 1000,
+  },
+  zombieHealthMultiplier: {
+    type: "exp",
+    factor: 1.15,
+  } as UpgradeCalc,
+  zombieAttackMultiplier: {
+    type: "exp",
+    factor: 1.15,
+  } as UpgradeCalc,
+  spawnChances: {
+    normal: 100,
+    baby: {
+      min: 40,
+      factor: 5,
+    } as SpawnChance,
+    greenMutant: {
+      min: 40,
+      factor: 2,
+    } as SpawnChance,
+    tank: {
+      min: 40,
+      factor: 2,
+    } as SpawnChance,
+    blueMutant: {
+      min: 40,
+      factor: 1,
+    } as SpawnChance,
+  },
+  postDelay: 5000,
+};
+export type UpgradeCalc = {
   type: "lin" | "exp" | "add";
   factor: number;
   base?: number;
-}
+};
+
+export type SpawnChance = {
+  min: number;
+  factor: number;
+};
 
 export function calcUpgrade(
   upgrade: UpgradeCalc,
   level: number,
   base?: number
 ) {
-  if (base == null) base = upgrade.base!;
+  if (base == null) base = upgrade.base || 0;
   switch (upgrade.type) {
     case "lin":
       return base + upgrade.factor * level;

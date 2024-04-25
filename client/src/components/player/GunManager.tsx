@@ -127,7 +127,7 @@ export function GunManager({
       playGunSound(self.playerClass, (coolDownTicksAfter / 20) * 1000);
 
       if (self.playerClass === "shotgun") {
-        for (let i = 0; i < 5; i++) {
+        for (let i = 0; i < weaponConfig.weapons.shotgun.bulletAmount; i++) {
           const randomRotation = rotation + (Math.random() - 0.5) * 0.5;
           shootBullet(
             originX,
