@@ -178,7 +178,6 @@ export function GunManager({
       ) {
         meleeCoolDown.current.hasAttacked = true;
         melee();
-        console.log("melee");
       }
       return;
     } else {
