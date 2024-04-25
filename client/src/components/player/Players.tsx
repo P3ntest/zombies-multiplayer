@@ -13,6 +13,7 @@ import { SpectateControls } from "./SpectateControls";
 import { useState } from "react";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playSelfDied } from "../../lib/sound/sound";
+import { Texture } from "pixi.js";
 
 export function Players() {
   const state = useColyseusState();
@@ -74,7 +75,7 @@ function PlayerGrave({ x, y }: { x: number; y: number }) {
       x={x}
       y={y}
       rotation={rotation}
-      image="assets/dogtag.png"
+      texture={Texture.from("dogtag.png")}
       scale={0.2}
     />
   );

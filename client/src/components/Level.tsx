@@ -1,6 +1,7 @@
 import { TilingSprite } from "@pixi/react";
 import { Wall } from "./Wall";
 import { SpawnPoint } from "./level/SpawnPoint";
+import { Texture } from "pixi.js";
 
 const map = `
 0000000000
@@ -21,7 +22,7 @@ export function Level() {
       <TilingSprite
         tilePosition={{ x: 100, y: 100 }}
         // tileScale={{ x: 1, y: 1 }}
-        image="/assets/sand.jpg"
+        texture={Texture.from("/assets/sand.jpg")}
         width={3000}
         height={3000}
       />

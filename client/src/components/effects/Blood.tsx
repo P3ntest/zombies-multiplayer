@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRoomMessageHandler } from "../../lib/networking/hooks";
 import { ParticleContainer, Sprite, useTick } from "@pixi/react";
 import { playSplat } from "../../lib/sound/sound";
@@ -83,7 +83,7 @@ function Blood({
         y: 0.5,
       }}
       alpha={opacity}
-      texture={Texture.from("assets/blood.png")}
+      texture={Texture.from("blood.png")}
       scale={scale * size * 0.1}
     />
   );

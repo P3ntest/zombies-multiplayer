@@ -2,6 +2,7 @@ import { Container, Stage, TilingSprite, useTick } from "@pixi/react";
 import React, { useEffect, useState } from "react";
 import { PlayerSprite } from "../player/PlayerSprite";
 import { PlayerClass } from "../../../../server/src/game/player";
+import { Texture } from "pixi.js";
 const PREVIEW_SIZE = 250;
 
 export function CharacterPreview({
@@ -51,7 +52,7 @@ function Floor() {
   return (
     <TilingSprite
       tilePosition={{ x: 0, y: 0 }}
-      image="assets/sand.jpg"
+      texture={Texture.from("assets/sand.jpg")}
       x={floorX - PREVIEW_SIZE / 2}
       y={-PREVIEW_SIZE / 2}
       tileScale={{

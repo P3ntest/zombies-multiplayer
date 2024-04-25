@@ -46,8 +46,7 @@ function _Coin({ coin }: { coin: CoinState }) {
       y={coin.y}
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tint={(tint as any)[coin.value] ?? 0xffffff}
-      image="assets/coin.png"
-      // texture={Texture.from("assets/coin.png")}
+      texture={Texture.from("coin.png")}
       anchor={[0.5, 0.5]}
       scale={[scale, scale]}
     />

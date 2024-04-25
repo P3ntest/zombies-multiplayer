@@ -1,5 +1,7 @@
+import { Assets } from "pixi.js";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { useVolumeStore } from "../../components/ui/soundStore";
+import { Sound, spri } from "@pixi/sound";
 
 export function playSound(
   path: string,
@@ -8,10 +10,16 @@ export function playSound(
   }>
 ) {
   const { volume } = useVolumeStore.getState();
-  const audio = new Audio(path);
-  audio.volume = 0.2 * (opts?.volume ?? 1) * volume;
+  Assets.load(path).then((s: Sound | null) => {
+    if (!s) throw new Error("Sound not found " + path);
 
-  audio.play();
+    s.volume = (opts?.volume ?? 1) * volume * 0.2;
+    s.play();
+  });
+  // const audio = new Audio(path);
+  // audio.volume = 0.2 * (opts?.volume ?? 1) * volume;
+
+  // audio.play();
 }
 
 export function playGunSound(gun: PlayerClass, msCoolDown: number = 1000) {
@@ -33,7 +41,7 @@ export function playGunSound(gun: PlayerClass, msCoolDown: number = 1000) {
 }
 
 export function playZombieHitSound() {
-  playSound("/assets/sounds/impact.flac", {
+  playSound("/assets/sounds/impact.ogg", {
     volume: 0.5,
   });
 }
@@ -46,7 +54,7 @@ export function playWaveStart() {
   playSound("/assets/sounds/waveStart.wav");
 }
 
-const growls = new Array(17)
+const growls = new Array(16)
   .fill(0)
   .map((_, i) => `/assets/sounds/growls/monster/monster.${i + 1}.ogg`);
 
@@ -66,7 +74,7 @@ export function playCoinPickup() {
 }
 
 export function playSplat() {
-  playSound("/assets/sounds/splat.flac");
+  playSound("/assets/sounds/splat.ogg");
 }
 
 export function playSelfDied() {
@@ -76,7 +84,7 @@ export function playSelfDied() {
 }
 
 export function playHurtSound() {
-  playSound("/assets/sounds/hurt.flac");
+  playSound("/assets/sounds/hurt.ogg");
 }
 
 export function playMeleeSound(hit: boolean) {

@@ -1,7 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 import { useUIStore } from "./uiStore";
-import { useColyseusRoom } from "../../colyseus";
+import {
+  disconnectFromColyseus,
+  setCurrentRoom,
+  useColyseusRoom,
+} from "../../colyseus";
 import { useVolumeStore } from "./soundStore";
+import { useNavigate } from "react-router-dom";
 
 export function EscapeScreen() {
   const { volume, setVolume } = useVolumeStore();
@@ -11,13 +16,15 @@ export function EscapeScreen() {
     (state) => state.buyMenuOpen || state.chatOpen
   );
   const room = useColyseusRoom();
+  const navigate = useNavigate();
 
   const onLeave = useCallback(() => {
     localStorage.removeItem("reconnectToken");
     room?.leave(true).finally(() => {
-      window.location.href = "/";
+      disconnectFromColyseus();
+      navigate("/");
     });
-  }, [room]);
+  }, [room, navigate]);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {

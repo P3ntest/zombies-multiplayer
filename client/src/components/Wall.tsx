@@ -1,6 +1,7 @@
 import { Bodies } from "matter-js";
 import { useBodyRef } from "../lib/physics/hooks";
 import { TilingSprite } from "@pixi/react";
+import { Texture } from "pixi.js";
 
 export function Wall({
   x,
@@ -28,7 +29,7 @@ export function Wall({
       anchor={{ x: 0.5, y: 0.5 }}
       width={width}
       height={height}
-      image="/assets/sandwall.jpeg"
+      texture={Texture.from("/assets/sandwall.jpeg")}
     />
   );
 }

@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { zombieAtlas } from "./spritesheets/zombie";
 import { Assets, Spritesheet, Texture } from "pixi.js";
 import { loadPlayerAnimationSprites } from "./spritesheets/playerAnimationAtlas";
-
+import "@pixi/sound";
 interface AssetStore {
   ready: boolean;
   setReady: (ready: boolean) => void;
@@ -41,11 +41,15 @@ const additionalResources = [
   "/assets/player/texture-0.json",
   "/assets/player/texture-2.json",
   "/assets/player/texture-1.json",
-  "/assets/blood.png",
 ];
 
 async function loadAssets() {
-  await Assets.load("/assets/manifest.json");
+  console.time("loadAssets");
+  await Assets.init({
+    manifest: "/assets/manifest.json",
+    basePath: "/assets",
+  });
+  await Assets.loadBundle("default");
   // load all textures
   const textures = [
     ...Object.values(atlasMap).map((atlas) => atlas.meta.image),
@@ -62,4 +66,5 @@ async function loadAssets() {
     }),
     loadPlayerAnimationSprites(),
   ]);
+  console.timeEnd("loadAssets");
 }

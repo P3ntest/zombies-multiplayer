@@ -26,7 +26,7 @@ export function MapEditor() {
           <TilingSprite
             tilePosition={{ x: 0, y: 0 }}
             // tileScale={{ x: 1, y: 1 }}
-            image="/assets/sand.jpg"
+            texture={Texture.from("/assets/sand.jpg")}
             width={3000}
             height={3000}
           />

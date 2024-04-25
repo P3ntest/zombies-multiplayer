@@ -765,18 +765,18 @@
         },
         {
           "alias": [
-            "sounds/hurt.flac"
+            "sounds/hurt.ogg"
           ],
           "src": [
-            "sounds/hurt.flac"
+            "sounds/hurt.ogg"
           ]
         },
         {
           "alias": [
-            "sounds/impact.flac"
+            "sounds/impact.ogg"
           ],
           "src": [
-            "sounds/impact.flac"
+            "sounds/impact.ogg"
           ]
         },
         {
@@ -949,10 +949,10 @@
         },
         {
           "alias": [
-            "sounds/splat.flac"
+            "sounds/splat.ogg"
           ],
           "src": [
-            "sounds/splat.flac"
+            "sounds/splat.ogg"
           ]
         },
         {
