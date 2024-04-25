@@ -193,7 +193,7 @@ export function calcUpgrade(
   level: number,
   base?: number
 ) {
-  if (base == null) base = upgrade.base || 0;
+  if (base == null) base = upgrade.base || 1;
   switch (upgrade.type) {
     case "lin":
       return base + upgrade.factor * level;
