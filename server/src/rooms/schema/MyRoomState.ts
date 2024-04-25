@@ -47,6 +47,8 @@ export class PlayerState extends Schema {
   @type("uint32") accuracy: number = 0;
 
   @type("uint8") currentAnimation = 0;
+
+  @type("boolean") finishedLoading = false;
 }
 
 export class ZombieState extends Schema {
@@ -119,4 +121,7 @@ export class MyRoomState extends Schema {
 
   @type("boolean")
   isGameOver = false;
+
+  @type("string")
+  mapId: string = "";
 }

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
-import { disconnectFromColyseus, useColyseusRoom } from "../../colyseus";
-import { useCharacterCustomizationStore } from "../ui/characterCusotmizationStore";
+import { disconnectFromColyseus } from "../../colyseus";
+import { trpc } from "../../lib/trpc/trpcClient";
 
 export function useClientCommandInterceptor() {
   return useCallback((message: string) => {
@@ -10,6 +10,9 @@ export function useClientCommandInterceptor() {
       case "disconnect":
       case "leave":
         disconnectFromColyseus();
+        break;
+      case "test":
+        trpc.helloWorld.query().then(console.log);
         break;
       default:
         return message;

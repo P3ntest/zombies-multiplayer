@@ -1,5 +1,5 @@
 import { useColyseusRoom } from "./colyseus";
-import { MainStage } from "./components/MainStage";
+import { LevelLoaderSuspense, MainStage } from "./components/MainStage";
 import { useControlEventListeners } from "./lib/useControls";
 import { Menu } from "./components/ui/Menu";
 import { useTryJoinByQueryOrReconnectToken } from "./lib/networking/hooks";
@@ -10,6 +10,7 @@ import { logtoConfig } from "./lib/auth/logto";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
 import { MapEditor } from "./editor/MapEditor";
+import { LogtoTokenSetterForTrpc } from "./components/ui/mainMenu/AuthSection";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
 export function Router() {
   return (
     <LogtoProvider config={logtoConfig}>
+      <LogtoTokenSetterForTrpc />
       <RouterProvider router={router} />
     </LogtoProvider>
   );

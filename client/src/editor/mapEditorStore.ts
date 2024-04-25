@@ -25,24 +25,7 @@ export const useEditor = create(
   persist<MapEditorStore>(
     (set) => ({
       level: {
-        objects: [
-          {
-            objectType: "asset",
-            id: "1",
-            x: 0,
-            y: 0,
-            rotation: 0,
-            scale: 1,
-            colliders: [],
-            tiling: true,
-            width: 101,
-            height: 100,
-            sprite: {
-              assetSource: "external",
-              assetUrl: "/assets/sandwall.jpeg",
-            },
-          },
-        ],
+        objects: [],
       },
       updateObject: (id, asset) =>
         set((state) => {

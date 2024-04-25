@@ -2,62 +2,72 @@ import PF from "pathfinding";
 import { generateObstaclePathFindingGrid } from "./grid";
 import { getObstacles } from "../zombieLogic";
 import Matter from "matter-js";
+import { usePaddedLevelBounds } from "../../level/levelContext";
 
-export function calculateNextPointPathFinding(
-  start: { x: number; y: number },
-  end: { x: number; y: number },
-  zombieWidth: number = 40
-) {
-  const obstacles = getObstacles();
-  const grid = generateObstaclePathFindingGrid();
-  const startGridPoint = findClosestWalkablePoint(
-    grid.data,
-    grid.mapPointToGrid(start) ?? grid.mapPointToGrid(grid.centerCoordinates)!
-  );
-  const endGridPoint = findClosestWalkablePoint(
-    grid.data,
-    grid.mapPointToGrid(end) ?? grid.mapPointToGrid(grid.centerCoordinates)!
-  );
-
-  const finder = new PF.AStarFinder({
-    heuristic: PF.Heuristic.euclidean,
-  });
-
-  const pathPoints = finder
-    .findPath(
-      startGridPoint.y, // y and x are flipped in the grid, so we need to flip them here
-      startGridPoint.x,
-      endGridPoint.y,
-      endGridPoint.x,
-      new PF.Grid(grid.data)
-    )
-    .map(([y, x]) => ({ x, y }));
-
-  if (pathPoints.length === 0) {
-    console.log("No path found");
-    return null;
-  }
-
-  const pointsICanSee = [];
-
-  let furthestVisiblePoint = 0;
-  while (
-    Matter.Query.ray(
-      obstacles,
-      start,
-      grid.mapGridToPoint(pathPoints[furthestVisiblePoint]),
-      zombieWidth
-    ).length === 0
+export function useCalculateNextPointPathFinding() {
+  const levelBounds = usePaddedLevelBounds();
+  return function calculateNextPointPathFinding(
+    start: { x: number; y: number },
+    end: { x: number; y: number },
+    zombieWidth: number = 40
   ) {
-    pointsICanSee.push(pathPoints[furthestVisiblePoint]);
-    furthestVisiblePoint++;
-    if (furthestVisiblePoint >= pathPoints.length) {
-      break;
-    }
-  }
+    const obstacles = getObstacles();
+    const grid = generateObstaclePathFindingGrid(levelBounds);
+    const startGridPoint = findClosestWalkablePoint(
+      grid.data,
+      grid.mapPointToGrid(start) ?? grid.mapPointToGrid(grid.centerCoordinates)!
+    );
+    const endGridPoint = findClosestWalkablePoint(
+      grid.data,
+      grid.mapPointToGrid(end) ?? grid.mapPointToGrid(grid.centerCoordinates)!
+    );
 
-  const nextPoint = grid.mapGridToPoint(pathPoints[furthestVisiblePoint]);
-  return nextPoint;
+    const finder = new PF.AStarFinder({
+      heuristic: PF.Heuristic.euclidean,
+    });
+
+    const pathPoints = finder
+      .findPath(
+        startGridPoint.y, // y and x are flipped in the grid, so we need to flip them here
+        startGridPoint.x,
+        endGridPoint.y,
+        endGridPoint.x,
+        new PF.Grid(grid.data)
+      )
+      .map(([y, x]) => ({ x, y }));
+
+    if (pathPoints.length === 0) {
+      console.log("No path found");
+      return null;
+    }
+
+    const pointsICanSee = [];
+
+    let furthestVisiblePoint = 0;
+    while (
+      Matter.Query.ray(
+        obstacles,
+        start,
+        grid.mapGridToPoint(pathPoints[furthestVisiblePoint]),
+        zombieWidth
+      ).length === 0
+    ) {
+      pointsICanSee.push(pathPoints[furthestVisiblePoint]);
+      furthestVisiblePoint++;
+      if (furthestVisiblePoint >= pathPoints.length) {
+        break;
+      }
+    }
+
+    const nextPoint = grid.mapGridToPoint(pathPoints[furthestVisiblePoint]);
+    printPathFindingGrid(
+      grid.data,
+      pointsICanSee,
+      startGridPoint,
+      endGridPoint
+    );
+    return nextPoint;
+  };
 }
 
 export function printPathFindingGrid(

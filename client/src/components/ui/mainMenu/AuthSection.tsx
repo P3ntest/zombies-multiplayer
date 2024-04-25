@@ -1,6 +1,25 @@
 import { useLogto } from "@logto/react";
 import { useEffect, useState } from "react";
 
+export let currentLogtoToken: string | null = null;
+
+export function LogtoTokenSetterForTrpc() {
+  const { getAccessToken, isAuthenticated } = useLogto();
+  useEffect(() => {
+    if (!isAuthenticated) {
+      currentLogtoToken = null;
+    } else {
+      getAccessToken("https://apocalypse.p3ntest.dev/").then((token) => {
+        if (token) {
+          currentLogtoToken = token;
+        }
+      });
+    }
+  }, [getAccessToken, isAuthenticated]);
+
+  return null;
+}
+
 export function AuthSection() {
   const { signIn, isAuthenticated } = useLogto();
 
@@ -24,7 +43,7 @@ function UserInfo() {
     fetchUserInfo().then((info) => {
       setUserInfo(info);
     });
-  });
+  }, [fetchUserInfo]);
 
   return (
     <div className="bg-slate-800 px-3 p-2 rounded text-slate-200 font-bold text-center">

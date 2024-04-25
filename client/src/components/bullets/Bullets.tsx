@@ -12,11 +12,12 @@ import { useRerender } from "../../lib/useRerender";
 import { bulletHitListeners } from "./bullet";
 
 export function Bullets() {
-  const state = useColyseusState((state) => state.bullets);
+  const state = useColyseusState();
+  const bullets = state?.bullets;
 
   return (
     <Container>
-      {state?.map((bullet) => (
+      {bullets?.map((bullet) => (
         <Bullet key={bullet.id} bullet={bullet} />
       ))}
     </Container>

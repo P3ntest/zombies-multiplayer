@@ -19,7 +19,9 @@ export const ColliderShape = z.discriminatedUnion("shape", [
   }),
 ]);
 
-export const Collider = Transform.extend({
+export const AssetCollider = Transform.omit({
+  scale: true,
+}).extend({
   shape: ColliderShape,
 });
 
@@ -40,7 +42,7 @@ export const AssetSource = z.discriminatedUnion("assetSource", [
 
 export const AssetObject = Transform.extend({
   objectType: z.literal("asset"),
-  colliders: z.array(Collider),
+  colliders: z.array(AssetCollider),
   sprite: AssetSource,
   id: z.string(),
 
@@ -68,7 +70,7 @@ export type GameLevel = z.infer<typeof GameLevel>;
 export type MapObject = z.infer<typeof MapObject>;
 export type AssetObject = z.infer<typeof AssetObject>;
 export type SpawnPoint = z.infer<typeof SpawnPoint>;
-export type Collider = z.infer<typeof Collider>;
+export type AssetCollider = z.infer<typeof AssetCollider>;
 export type ColliderShape = z.infer<typeof ColliderShape>;
 export type BuiltInAsset = z.infer<typeof BuiltInAsset>;
 export type ExternalAsset = z.infer<typeof ExternalAsset>;

@@ -1,3 +1,4 @@
+import { mapRouter } from "./../../../../../server/src/trpc/mapRouter";
 import Matter from "matter-js";
 import { getObstacles } from "../zombieLogic";
 import PF from "pathfinding";
@@ -22,7 +23,12 @@ let cachedGridHash: string | null = null;
 let cachedGrid: PathFindingGrid | null = null;
 
 // we generate an image
-export function generateObstaclePathFindingGrid() {
+export function generateObstaclePathFindingGrid(minSize?: {
+  minX: number;
+  minY: number;
+  maxX: number;
+  maxY: number;
+}) {
   const obstacles = getObstacles();
 
   const verticesHash = obstacles
@@ -51,7 +57,14 @@ export function generateObstaclePathFindingGrid() {
     });
   });
 
-  const resolution = 0.008; // grid fields per pixel
+  if (minSize) {
+    minX = Math.min(minSize.minX, minX);
+    minY = Math.min(minSize.minY, minY);
+    maxX = Math.max(minSize.maxX, maxX);
+    maxY = Math.max(minSize.maxY, maxY);
+  }
+
+  const resolution = 0.01; // grid fields per pixel
 
   // add two fields of padding
 
@@ -64,6 +77,20 @@ export function generateObstaclePathFindingGrid() {
   const height = Math.ceil((maxY - minY) * resolution);
   const grid = new Array(width).fill(null).map(() => new Array(height).fill(0));
 
+  const paddedObstacles = obstacles.map((body) => {
+    const PADDING = 200;
+    // we want to add padding around the vertices
+    const middle = Matter.Vertices.centre(body.vertices);
+    const paddedVertices = body.vertices.map((vertex) => {
+      const angle = Math.atan2(vertex.y - middle.y, vertex.x - middle.x);
+      return {
+        x: vertex.x + Math.cos(angle) * PADDING,
+        y: vertex.y + Math.sin(angle) * PADDING,
+      };
+    });
+    return paddedVertices;
+  });
+
   for (let x = 0; x < width; x++) {
     for (let y = 0; y < height; y++) {
       const point = {
@@ -71,8 +98,8 @@ export function generateObstaclePathFindingGrid() {
         y: minY + y / resolution,
       };
 
-      const isObstacle = obstacles.some((body) =>
-        Matter.Vertices.contains(body.vertices, point)
+      const isObstacle = paddedObstacles.some((vertices) =>
+        Matter.Vertices.contains(vertices, point)
       );
 
       grid[x][y] = isObstacle ? 1 : 0;

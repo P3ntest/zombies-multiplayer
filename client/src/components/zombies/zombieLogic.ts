@@ -13,8 +13,8 @@ import {
 import { zombieInfo } from "../../../../server/src/game/zombies";
 import { useTick } from "@pixi/react";
 import { bodyMeta } from "../../lib/physics/hooks";
-import { calculateNextPointPathFinding } from "./pathfinding/astar";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
+import { useCalculateNextPointPathFinding } from "./pathfinding/astar";
 
 export function useZombieLogic(
   zombie: ZombieState,
@@ -39,6 +39,8 @@ export function useZombieLogic(
   const alivePlayers = useAlivePlayers();
 
   const failedPathFindAttempts = useRef(0);
+
+  const calculateNextPointPathFinding = useCalculateNextPointPathFinding();
 
   useRoomMessageHandler("zombieHit", (message) => {
     const { zombieId, angle, knockBack } = message;

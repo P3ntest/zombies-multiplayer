@@ -1,20 +1,21 @@
 import { Container, Graphics, Sprite, TilingSprite, useApp } from "@pixi/react";
 import {
+  AssetCollider,
+  AssetObject,
   MapObject,
   SpawnPoint,
 } from "../../../server/src/game/mapEditor/editorTypes";
 import { FullScreenStage } from "../components/graphics/FullScreenStage";
-import { AssetObjectInstance } from "../components/level/AssetObjectInstance";
+import { AssetObjectRendering } from "../components/level/AssetObjectInstance";
 import { EditorCamera, EditorControls } from "./EditorCamera";
 import { useEditor } from "./mapEditorStore";
 import { Container as PIXIContainer, Texture } from "pixi.js";
-import { ComponentProps, useEffect, useRef } from "react";
+import { ComponentProps, useCallback, useEffect, useRef } from "react";
 import { useCamera } from "../components/stageContext";
-import { Resizer } from "../components/MainStage";
 import * as PIXI from "pixi.js";
 import { MapEditorUI } from "./MapEditorUI";
-import { zombieAtlas } from "../assets/spritesheets/zombie";
 import { spriteSheets } from "../assets/assetHandler";
+import { TempFloor } from "../components/level/LevelInstanceRenderer";
 
 export function MapEditor() {
   return (
@@ -22,14 +23,7 @@ export function MapEditor() {
       <MapEditorUI />
       <FullScreenStage>
         <EditorCamera>
-          <Resizer />
-          <TilingSprite
-            tilePosition={{ x: 0, y: 0 }}
-            // tileScale={{ x: 1, y: 1 }}
-            texture={Texture.from("/assets/sand.jpg")}
-            width={3000}
-            height={3000}
-          />
+          <TempFloor />
           <EditorControls />
           <VisualObjectsEditor />
         </EditorCamera>
@@ -148,10 +142,11 @@ function LevelObject({ asset }: { asset: MapObject }) {
       <Container ref={containerRef} cursor="pointer" eventMode="dynamic">
         {asset.objectType === "asset" && (
           <>
-            <AssetObjectInstance
+            <AssetObjectRendering
               asset={asset}
               tint={thisSelected ? 0xff3333 : 0xffffff}
             />
+            {thisSelected && <VisualColliders asset={asset} />}
           </>
         )}
         {asset.objectType === "spawnPoint" && (
@@ -167,6 +162,60 @@ function LevelObject({ asset }: { asset: MapObject }) {
   );
 }
 
+function VisualColliders({ asset }: { asset: AssetObject }) {
+  return (
+    <Container
+      x={asset.x}
+      y={asset.y}
+      rotation={asset.rotation}
+      scale={asset.scale}
+    >
+      {asset.colliders.map((collider, i) => {
+        return <VisualCollider key={i} collider={collider} />;
+      })}
+    </Container>
+  );
+}
+
+function VisualCollider({ collider }: { collider: AssetCollider }) {
+  const draw = useCallback(
+    (g: PIXI.Graphics) => {
+      g.clear();
+
+      // only outline for now
+      g.lineStyle(4, 0x00ff00);
+      if (collider.shape.shape === "circle") {
+        g.drawCircle(0, 0, collider.shape.radius);
+      } else if (collider.shape.shape === "rectangle") {
+        g.drawRect(
+          -collider.shape.width / 2,
+          -collider.shape.height / 2,
+          collider.shape.width,
+          collider.shape.height
+        );
+      }
+    },
+    [
+      collider.shape.shape,
+      // @ts-expect-error - is not casted
+      collider.shape.radius,
+      // @ts-expect-error - is not casted
+      collider.shape.width,
+      // @ts-expect-error - is not casted
+      collider.shape.height,
+    ]
+  );
+
+  return (
+    <Graphics
+      draw={draw}
+      x={collider.x}
+      y={collider.y}
+      rotation={collider.rotation}
+    />
+  );
+}
+
 function SpawnPointDisplay({
   spawnPoint,
   ...props
@@ -177,7 +226,7 @@ function SpawnPointDisplay({
     <Container x={spawnPoint.x} y={spawnPoint.y}>
       <Sprite
         texture={
-          spawnPoint.spawns == "zombie"
+          spawnPoint.spawns == "player"
             ? Texture.from(
                 "Top_Down_Survivor/rifle/idle/survivor-idle_rifle_0.png"
               )

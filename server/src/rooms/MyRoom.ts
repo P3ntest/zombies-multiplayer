@@ -14,6 +14,7 @@ import {
 import { handleCommand } from "../game/console/commandHandler";
 import { coinConfig } from "../game/config";
 import { getMaxHealth } from "../game/player";
+import { prisma } from "../prisma";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -22,9 +23,8 @@ export class MyRoom extends Room<MyRoomState> {
 
   waveStartType: "manual" | "playerCount";
   requiredPlayerCount = 1;
-  map: MapID = "dust3";
 
-  onCreate(options: any) {
+  async onCreate(options: any) {
     this.roomId = Math.random().toString(36).substr(2, 5);
 
     const roomOptions = options.quickPlay
@@ -46,13 +46,21 @@ export class MyRoom extends Room<MyRoomState> {
     this.maxClients = roomOptions.maxPlayers;
     this.waveStartType = roomOptions.waveStartType;
     this.requiredPlayerCount = roomOptions.requiredPlayerCount;
-    this.map = roomOptions.map;
+
+    const amountMaps = await prisma.map.count();
+    const selectedMap = await prisma.map.findFirst({
+      skip: Math.floor(Math.random() * amountMaps),
+    });
+
+    const roomState = new MyRoomState();
+
+    roomState.mapId = selectedMap?.id ?? "default";
 
     if (roomOptions.isPrivate) {
       this.setPrivate();
     }
 
-    this.setState(new MyRoomState());
+    this.setState(roomState);
     this.clock.start();
 
     this.clock.setInterval(() => {
@@ -84,6 +92,23 @@ export class MyRoom extends Room<MyRoomState> {
       );
     });
 
+    this.onMessage("finishedLoading", (client, message) => {
+      this.state.players.get(client.id)!.finishedLoading = true;
+
+      //TEMP:
+      this.requestSpawnZombie();
+
+      this.checkCanWaveStart();
+
+      if (!this.waveManager.waveRunning) this.spawnPlayer(client.id);
+      else
+        this.sendChatToPlayer(
+          client.id,
+          "Wave is running, please wait for the next wave to spawn.",
+          "#aa55cc"
+        );
+    });
+
     this.onMessage("shoot", (client, message) => {
       const { originX, originY, rotation, speed, damage, pierces, knockBack } =
         message;
@@ -108,7 +133,11 @@ export class MyRoom extends Room<MyRoomState> {
 
     this.onMessage("destroyBullet", (client, message) => {
       const index = this.state.bullets.findIndex((b) => b.id === message.id);
-      this.state.bullets.splice(index, 1);
+      try {
+        this.state.bullets.splice(index, 1);
+      } catch (e) {
+        console.error(e);
+      }
     });
 
     this.onMessage("updateZombie", (client, message) => {
@@ -399,16 +428,6 @@ export class MyRoom extends Room<MyRoomState> {
     this.state.players.set(client.id, playerState);
 
     this.broadcastChat(`${playerState.name} has joined the game.`, "#33ff33");
-
-    this.checkCanWaveStart();
-
-    if (!this.waveManager.waveRunning) this.spawnPlayer(client.id);
-    else
-      this.sendChatToPlayer(
-        client.id,
-        "Wave is running, please wait for the next wave to spawn.",
-        "#aa55cc"
-      );
   }
 
   spawnPlayer(clientId: string) {

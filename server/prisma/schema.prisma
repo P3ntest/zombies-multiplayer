@@ -16,4 +16,17 @@ datasource db {
 model User {
   id   String @id
   name String
+
+  maps Map[]
+}
+
+model Map {
+  id    String @id @default(cuid())
+  name  String
+  level Json
+
+  verified Boolean @default(false)
+
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
 }

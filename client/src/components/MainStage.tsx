@@ -1,9 +1,6 @@
-import { Container, Stage, useApp } from "@pixi/react";
-import { useWindowSize } from "usehooks-ts";
+import { useApp } from "@pixi/react";
 import { Players } from "./player/Players";
-import { Level } from "./Level";
-import { useEffect, useRef } from "react";
-import { CameraProvider } from "./stageContext";
+import { useEffect, useMemo } from "react";
 import "@pixi/events";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
@@ -17,9 +14,11 @@ import { GameUI } from "./ui/GameUI";
 import { Coins } from "./coins/Coins";
 import { BloodManager } from "./effects/Blood";
 import { GameCamera } from "./graphics/Camera";
-import { SpawnPointManager } from "./level/SpawnPoint";
 import { PlayerSpawner } from "./player/PlayerSpawner";
 import { FullScreenStage } from "./graphics/FullScreenStage";
+import { LevelInstanceRenderer } from "./level/LevelInstanceRenderer";
+import { useCurrentRemoveLevel } from "./level/useRemoteLevel";
+import { LevelProvider } from "./level/levelContext";
 
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
@@ -28,26 +27,39 @@ import { FullScreenStage } from "./graphics/FullScreenStage";
 export const MainStage = () => {
   useBroadcastRoomMessages();
   useSetQueryOrReconnectToken();
+  const level = useCurrentRemoveLevel();
+
+  if (!level) {
+    return <div>Loading Level</div>;
+  }
 
   return (
     <>
-      <GameUI />
+      <LevelProvider
+        value={{
+          level: level,
+        }}
+      >
+        <GameUI />
+      </LevelProvider>
       <FullScreenStage>
-        <Resizer />
-        <PhysicsProvider>
-          <GameCamera>
-            <SpawnPointManager>
+        <LevelProvider value={{ level }}>
+          <Resizer />
+          <PhysicsProvider>
+            <GameCamera>
               <ZombieSpawner />
               <PlayerSpawner />
-              <Level />
-            </SpawnPointManager>
-            <Coins />
-            <BloodManager />
-            <Zombies />
-            <Bullets />
-            <Players />
-          </GameCamera>
-        </PhysicsProvider>
+
+              <LevelInstanceRenderer level={level} />
+
+              <Coins />
+              <BloodManager />
+              <Zombies />
+              <Bullets />
+              <Players />
+            </GameCamera>
+          </PhysicsProvider>
+        </LevelProvider>
       </FullScreenStage>
     </>
   );
