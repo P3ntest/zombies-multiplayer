@@ -62,7 +62,7 @@ function StoreModal() {
 
   return (
     <div
-      className="bg-slate-800 bg-opacity-50 p-4 rounded-lg"
+      className="bg-slate-800 bg-opacity-50 p-4 rounded-lg select-none"
       style={{
         pointerEvents: "auto",
       }}
