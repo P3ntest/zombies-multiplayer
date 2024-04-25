@@ -45,6 +45,7 @@ const additionalResources = [
 ];
 
 async function loadAssets() {
+  await Assets.load("/assets/manifest.json");
   // load all textures
   const textures = [
     ...Object.values(atlasMap).map((atlas) => atlas.meta.image),

@@ -1,0 +1,993 @@
+{
+  "bundles": [
+    {
+      "name": "default",
+      "assets": [
+        {
+          "alias": [
+            "apocalypseWallpaper.png"
+          ],
+          "src": [
+            "apocalypseWallpaper.png"
+          ]
+        },
+        {
+          "alias": [
+            "blood.png"
+          ],
+          "src": [
+            "blood.png"
+          ]
+        },
+        {
+          "alias": [
+            "coin.png"
+          ],
+          "src": [
+            "coin.png"
+          ]
+        },
+        {
+          "alias": [
+            "dogtag.png"
+          ],
+          "src": [
+            "dogtag.png"
+          ]
+        },
+        {
+          "alias": [
+            "editor/box.jpg"
+          ],
+          "src": [
+            "editor/box.jpg"
+          ]
+        },
+        {
+          "alias": [
+            "editor/missing.png"
+          ],
+          "src": [
+            "editor/missing.png"
+          ]
+        },
+        {
+          "alias": [
+            "editor/prototype.png"
+          ],
+          "src": [
+            "editor/prototype.png"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-0.json"
+          ],
+          "src": [
+            "player/texture-0.json"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-0.png"
+          ],
+          "src": [
+            "player/texture-0.png"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-1.json"
+          ],
+          "src": [
+            "player/texture-1.json"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-1.png"
+          ],
+          "src": [
+            "player/texture-1.png"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-2.json"
+          ],
+          "src": [
+            "player/texture-2.json"
+          ]
+        },
+        {
+          "alias": [
+            "player/texture-2.png"
+          ],
+          "src": [
+            "player/texture-2.png"
+          ]
+        },
+        {
+          "alias": [
+            "sand.jpg"
+          ],
+          "src": [
+            "sand.jpg"
+          ]
+        },
+        {
+          "alias": [
+            "sandwall.jpeg"
+          ],
+          "src": [
+            "sandwall.jpeg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_00.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_00.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_01.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_01.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_02.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_02.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_03.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_03.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_04.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_04.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_05.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_05.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_06.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_06.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_07.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_07.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_08.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_08.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_09.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_09.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_10.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_10.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_11.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_11.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_12.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_12.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_13.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_13.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_14.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_14.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_15.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_15.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_16.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_16.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_17.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_17.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_18.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_18.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_19.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_19.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_20.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_20.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_21.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_21.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_22.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_22.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_23.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_23.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_24.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_24.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_25.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_25.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_26.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_26.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_27.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_27.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_28.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_28.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_29.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_29.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_30.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_30.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_31.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_31.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_32.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_32.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_33.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_33.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_34.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_34.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_35.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_35.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_36.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_36.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_37.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_37.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_38.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_38.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_39.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_39.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_40.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_40.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_41.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_41.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_42.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_42.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_43.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_43.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_44.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_44.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_45.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_45.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_46.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_46.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_47.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_47.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_48.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_48.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_49.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_49.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_50.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_50.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_51.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_51.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_52.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_52.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_53.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_53.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_54.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_54.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/coins/Coins_Single_55.mp3"
+          ],
+          "src": [
+            "sounds/coins/Coins_Single_55.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growl1.wav"
+          ],
+          "src": [
+            "sounds/growl1.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growl2.wav"
+          ],
+          "src": [
+            "sounds/growl2.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/growl1.wav"
+          ],
+          "src": [
+            "sounds/growls/growl1.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/growl2.wav"
+          ],
+          "src": [
+            "sounds/growls/growl2.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.1.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.1.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.10.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.10.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.11.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.11.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.12.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.12.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.13.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.13.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.14.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.14.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.15.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.15.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.16.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.16.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.2.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.2.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.3.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.3.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.4.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.4.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.5.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.5.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.6.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.6.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.7.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.7.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.8.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.8.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/growls/monster/monster.9.ogg"
+          ],
+          "src": [
+            "sounds/growls/monster/monster.9.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/guns/9mm.mp3"
+          ],
+          "src": [
+            "sounds/guns/9mm.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/guns/rifle.mp3"
+          ],
+          "src": [
+            "sounds/guns/rifle.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/guns/shotgun.mp3"
+          ],
+          "src": [
+            "sounds/guns/shotgun.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/guns/shotgun_rack.mp3"
+          ],
+          "src": [
+            "sounds/guns/shotgun_rack.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/hurt.flac"
+          ],
+          "src": [
+            "sounds/hurt.flac"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/impact.flac"
+          ],
+          "src": [
+            "sounds/impact.flac"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.1.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.1.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.10.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.10.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.11.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.11.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.12.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.12.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.13.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.13.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.14.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.14.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.15.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.15.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.16.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.16.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.2.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.2.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.3.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.3.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.4.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.4.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.5.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.5.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.6.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.6.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.7.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.7.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.8.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.8.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/monster/monster.9.ogg"
+          ],
+          "src": [
+            "sounds/monster/monster.9.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/playerdies.mp3"
+          ],
+          "src": [
+            "sounds/playerdies.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/positive.ogg"
+          ],
+          "src": [
+            "sounds/positive.ogg"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/punch.mp3"
+          ],
+          "src": [
+            "sounds/punch.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/punchMiss.mp3"
+          ],
+          "src": [
+            "sounds/punchMiss.mp3"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/shot.wav"
+          ],
+          "src": [
+            "sounds/shot.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/splat.flac"
+          ],
+          "src": [
+            "sounds/splat.flac"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/waveStart.wav"
+          ],
+          "src": [
+            "sounds/waveStart.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/zombieBig.wav"
+          ],
+          "src": [
+            "sounds/zombieBig.wav"
+          ]
+        },
+        {
+          "alias": [
+            "sounds/zombieDeath.wav"
+          ],
+          "src": [
+            "sounds/zombieDeath.wav"
+          ]
+        },
+        {
+          "alias": [
+            "zombie/zombie.png"
+          ],
+          "src": [
+            "zombie/zombie.png"
+          ]
+        }
+      ]
+    }
+  ]
+}
