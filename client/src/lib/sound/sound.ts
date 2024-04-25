@@ -1,7 +1,7 @@
 import { Assets } from "pixi.js";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { useVolumeStore } from "../../components/ui/soundStore";
-import { Sound, spri } from "@pixi/sound";
+import { Sound } from "@pixi/sound";
 
 export function playSound(
   path: string,
