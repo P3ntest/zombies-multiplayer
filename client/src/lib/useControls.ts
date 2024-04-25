@@ -41,11 +41,13 @@ export function useControlEventListeners() {
   const { onKeydown, onKeyup } = useControlsStore();
   useEffect(() => {
     const keydownListener = (event: KeyboardEvent) => {
-      const key = event.key;
+      event.preventDefault();
+      const key = event.key.toLowerCase();
       onKeydown(key);
     };
     const keyupListener = (event: KeyboardEvent) => {
-      const key = event.key;
+      event.preventDefault();
+      const key = event.key.toLowerCase();
       onKeyup(key);
     };
     window.addEventListener("keydown", keydownListener);
