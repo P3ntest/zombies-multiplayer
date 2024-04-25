@@ -144,8 +144,8 @@ export const waveConfig = {
     base: 20,
   } as UpgradeCalc,
   zombieSpawnInterval: {
-    max: 200,
-    factor: -50,
+    max: 40,
+    factor: -60,
     base: 1000,
   },
   zombieHealthMultiplier: {
