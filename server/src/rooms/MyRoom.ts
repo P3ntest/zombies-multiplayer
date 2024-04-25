@@ -425,11 +425,11 @@ export class MyRoom extends Room<MyRoomState> {
   async onLeave(client: Client, consented: boolean) {
     console.log(client.sessionId, "left!");
     if (consented) {
-      this.removePlayerFromGame(client.id);
       this.broadcastChat(
         `${this.state.players.get(client.id)?.name} has left the game.`,
         "#ffff33"
       );
+      this.removePlayerFromGame(client.id);
     } else {
       this.state.players.get(client.id)!.connected = false;
 
@@ -449,11 +449,11 @@ export class MyRoom extends Room<MyRoomState> {
           );
         })
         .catch(() => {
-          this.removePlayerFromGame(client.id);
           this.broadcastChat(
             `${this.state.players.get(client.id)?.name} timed out.`,
             "#ffff33"
           );
+          this.removePlayerFromGame(client.id);
         });
     }
 
