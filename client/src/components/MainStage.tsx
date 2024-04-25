@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useApp } from "@pixi/react";
 import { Players } from "./player/Players";
-import { useEffect, useMemo } from "react";
+import { useEffect, useId, useMemo } from "react";
 import "@pixi/events";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
@@ -17,49 +18,48 @@ import { GameCamera } from "./graphics/Camera";
 import { PlayerSpawner } from "./player/PlayerSpawner";
 import { FullScreenStage } from "./graphics/FullScreenStage";
 import { LevelInstanceRenderer } from "./level/LevelInstanceRenderer";
-import { useCurrentRemoveLevel } from "./level/useRemoteLevel";
+import { useCurrentRemoteLevel } from "./level/useRemoteLevel";
 import { LevelProvider } from "./level/levelContext";
-
+import { useControlEventListeners } from "../lib/useControls";
+import testlevel from "./testlevel.json";
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
  * It will render the game world and all entities in it, as well as handle UI and Controls
  */
 export const MainStage = () => {
   useBroadcastRoomMessages();
+  useControlEventListeners();
   useSetQueryOrReconnectToken();
-  const level = useCurrentRemoveLevel();
+  const level = useCurrentRemoteLevel();
 
-  if (!level) {
-    return <div>Loading Level</div>;
-  }
+  // if (!level) {
+  //   return <div>Loading Level</div>;
+  // }
 
   return (
     <>
-      <LevelProvider
-        value={{
-          level: level,
-        }}
-      >
-        <GameUI />
-      </LevelProvider>
+      <GameUI />
       <FullScreenStage>
-        <LevelProvider value={{ level }}>
-          <Resizer />
-          <PhysicsProvider>
-            <GameCamera>
-              <ZombieSpawner />
-              <PlayerSpawner />
-
-              <LevelInstanceRenderer level={level} />
-
-              <Coins />
-              <BloodManager />
-              <Zombies />
-              <Bullets />
-              <Players />
-            </GameCamera>
-          </PhysicsProvider>
-        </LevelProvider>
+        <Resizer />
+        {/* For some damn reason the camera must be here from the beginning */}
+        <GameCamera>
+          {level && (
+            <LevelProvider value={{ level }}>
+              <PhysicsProvider>
+                <>
+                  <ZombieSpawner />
+                  <PlayerSpawner />
+                  <LevelInstanceRenderer level={level as any} />
+                  <Coins />
+                  <BloodManager />
+                  <Zombies />
+                  <Bullets />
+                  <Players />
+                </>
+              </PhysicsProvider>
+            </LevelProvider>
+          )}
+        </GameCamera>
       </FullScreenStage>
     </>
   );

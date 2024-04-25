@@ -93,20 +93,24 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("finishedLoading", (client, message) => {
-      this.state.players.get(client.id)!.finishedLoading = true;
+      const player = this.state.players.get(client.id)!;
+      player.finishedLoading = true;
 
       //TEMP:
-      this.requestSpawnZombie();
+      // this.requestSpawnZombie();
 
       this.checkCanWaveStart();
+      this.ensureZombieControl();
 
-      if (!this.waveManager.waveRunning) this.spawnPlayer(client.id);
-      else
-        this.sendChatToPlayer(
-          client.id,
-          "Wave is running, please wait for the next wave to spawn.",
-          "#aa55cc"
-        );
+      if (player.healthState === PlayerHealthState.NOT_SPAWNED) {
+        if (!this.waveManager.waveRunning) this.spawnPlayer(client.id);
+        else
+          this.sendChatToPlayer(
+            client.id,
+            "Wave is running, please wait for the next wave to spawn.",
+            "#aa55cc"
+          );
+      }
     });
 
     this.onMessage("shoot", (client, message) => {
@@ -132,12 +136,7 @@ export class MyRoom extends Room<MyRoomState> {
     });
 
     this.onMessage("destroyBullet", (client, message) => {
-      const index = this.state.bullets.findIndex((b) => b.id === message.id);
-      try {
-        this.state.bullets.splice(index, 1);
-      } catch (e) {
-        console.error(e);
-      }
+      this.state.bullets = this.state.bullets.filter((b) => b.id !== message);
     });
 
     this.onMessage("updateZombie", (client, message) => {
@@ -431,6 +430,7 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   spawnPlayer(clientId: string) {
+    console.log("spawning player", clientId);
     const client = this.clients.find((c) => c.id === clientId);
     client.send("requestSpawn");
   }
@@ -457,8 +457,11 @@ export class MyRoom extends Room<MyRoomState> {
         "#ffff33"
       );
       this.removePlayerFromGame(client.id);
+      console.log(client.sessionId, "consented and left!");
     } else {
-      this.state.players.get(client.id)!.connected = false;
+      const player = this.state.players.get(client.id)!;
+      player.connected = false;
+      player.finishedLoading = false;
 
       this.broadcastChat(
         `${
@@ -467,6 +470,8 @@ export class MyRoom extends Room<MyRoomState> {
         "#ffff33"
       );
 
+      console.log(client.sessionId, "left without consent!");
+
       this.allowReconnection(client, 20)
         .then(() => {
           this.state.players.get(client.id)!.connected = true;
@@ -474,12 +479,14 @@ export class MyRoom extends Room<MyRoomState> {
             `${this.state.players.get(client.id)?.name} has reconnected!`,
             "#ffff33"
           );
+          console.log(client.sessionId, "reconnected!");
         })
         .catch(() => {
           this.broadcastChat(
             `${this.state.players.get(client.id)?.name} timed out.`,
             "#ffff33"
           );
+          console.log(client.sessionId, "timed out!");
           this.removePlayerFromGame(client.id);
         });
     }
@@ -581,7 +588,7 @@ export class MyRoom extends Room<MyRoomState> {
   ensureZombieControl() {
     const zombies = this.state.zombies;
     const players = Array.from(this.state.players.values()).filter(
-      (p) => p.connected
+      (p) => p.connected && p.finishedLoading
     );
 
     for (const zombie of zombies) {

@@ -19,18 +19,23 @@ import { calcUpgrade, playerConfig } from "../../../../server/src/game/config";
 import { getMaxHealth } from "../../../../server/src/game/player";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
+  useEffect(() => {
+    console.log("player", player);
+  }, [player]);
   const collider = useBodyRef(() => {
     return Matter.Bodies.circle(player.x, player.y, 40);
   });
 
   const room = useColyseusRoom();
 
-  const [currentAnimation, setCurrentAnimation] = useState(0);
-  const lastAnimationSent = useRef(0);
+  const [currentAnimation, setCurrentAnimation] = useState(
+    player.currentAnimation
+  );
+  const lastAnimationSent = useRef(player.currentAnimation);
 
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [rotation, setRotation] = useState(0);
+  const [x, setX] = useState(player.x);
+  const [y, setY] = useState(player.y);
+  const [rotation, setRotation] = useState(player.rotation);
 
   const app = useApp();
   const stageRef = useContext(cameraContext);
@@ -51,6 +56,12 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
       x: mouseX,
       y: mouseY,
     }) ?? { x: 0, y: 0 };
+    console.log(
+      stageRef?.camera?.toLocal({
+        x: 0,
+        y: 0,
+      })
+    );
 
     // the player always looks at the mouse
     const rotation = Math.atan2(stageY - y, stageX - x);

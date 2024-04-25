@@ -77,8 +77,8 @@ export function useRoomMessageHandler(
 
 export function useSelf(): PlayerState {
   const sessionId = useColyseusRoom()?.sessionId;
-  const players = useColyseusState((s) => s.players);
-  return { ...players!.get(sessionId!) } as PlayerState;
+  const players = useColyseusState((s) => s.players)!;
+  return players.get(sessionId!)!;
 }
 
 export function useSetQueryOrReconnectToken() {

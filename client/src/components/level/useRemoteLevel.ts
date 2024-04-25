@@ -3,7 +3,7 @@ import { GameLevel } from "../../../../server/src/game/mapEditor/editorTypes";
 import { trpc } from "../../lib/trpc/trpcClient";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 
-export function useRemoveLevel(mapId: string | undefined) {
+export function useRemoteLevel(mapId: string | undefined) {
   const [level, setLevel] = useState<GameLevel | null>(null);
   const room = useColyseusRoom();
   useEffect(() => {
@@ -19,9 +19,9 @@ export function useRemoveLevel(mapId: string | undefined) {
   return level;
 }
 
-export function useCurrentRemoveLevel() {
+export function useCurrentRemoteLevel() {
   const mapId = useColyseusState((state) => state.mapId);
-  const level = useRemoveLevel(mapId);
+  const level = useRemoteLevel(mapId);
 
   return level;
 }

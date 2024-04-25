@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, useMemo, useRef } from "react";
 import { useCameraStore } from "./cameraStore";
 import { useWindowSize } from "usehooks-ts";
 import { Container, useTick } from "@pixi/react";
@@ -34,6 +34,7 @@ export function GenericCamera({
 
   const currentTarget = useRef({ x: 0, y: 0 });
   const currentScale = useRef(1);
+  const id = useMemo(() => Math.random().toString(26), []);
 
   useTick(() => {
     const cam = camRef.current;
@@ -60,7 +61,7 @@ export function GenericCamera({
 
   return (
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    <Container x={x} y={y} scale={{ x: zoom, y: zoom }} ref={camRef}>
+    <Container x={x} y={y} scale={{ x: zoom, y: zoom }} ref={camRef} name={id}>
       <CameraProvider value={{ camera: camRef.current }}>
         {children}
       </CameraProvider>

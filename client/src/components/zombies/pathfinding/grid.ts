@@ -1,7 +1,7 @@
-import { mapRouter } from "./../../../../../server/src/trpc/mapRouter";
 import Matter from "matter-js";
 import { getObstacles } from "../zombieLogic";
 import PF from "pathfinding";
+import offsetPolygon from "offset-polygon";
 
 export type PathFindingGrid = {
   width: number;
@@ -23,23 +23,36 @@ let cachedGridHash: string | null = null;
 let cachedGrid: PathFindingGrid | null = null;
 
 // we generate an image
-export function generateObstaclePathFindingGrid(minSize?: {
-  minX: number;
-  minY: number;
-  maxX: number;
-  maxY: number;
-}) {
+export function generateObstaclePathFindingGrid(
+  minSize: {
+    minX: number;
+    minY: number;
+    maxX: number;
+    maxY: number;
+  },
+  zombieSizeMultiplier: number
+) {
   const obstacles = getObstacles();
 
-  const verticesHash = obstacles
-    .map((body) =>
-      body.vertices
-        .map((vertex) => Math.round(vertex.x) + ":" + Math.round(vertex.y))
-        .join(",")
-    )
-    .join(";");
+  const mapHash =
+    obstacles
+      .map((body) =>
+        body.vertices
+          .map((vertex) => Math.round(vertex.x) + ":" + Math.round(vertex.y))
+          .join(",")
+      )
+      .join(";") +
+    [
+      minSize?.minX,
+      minSize?.minY,
+      minSize?.maxX,
+      minSize?.maxY,
+      zombieSizeMultiplier,
+    ].join(",") +
+    ";" +
+    zombieSizeMultiplier;
 
-  if (cachedGridHash === verticesHash) {
+  if (cachedGridHash === mapHash) {
     return cachedGrid!;
   }
 
@@ -64,7 +77,7 @@ export function generateObstaclePathFindingGrid(minSize?: {
     maxY = Math.max(minSize.maxY, maxY);
   }
 
-  const resolution = 0.01; // grid fields per pixel
+  const resolution = 0.015; // grid fields per pixel
 
   // add two fields of padding
 
@@ -78,16 +91,9 @@ export function generateObstaclePathFindingGrid(minSize?: {
   const grid = new Array(width).fill(null).map(() => new Array(height).fill(0));
 
   const paddedObstacles = obstacles.map((body) => {
-    const PADDING = 200;
+    const PADDING = 125 * zombieSizeMultiplier;
     // we want to add padding around the vertices
-    const middle = Matter.Vertices.centre(body.vertices);
-    const paddedVertices = body.vertices.map((vertex) => {
-      const angle = Math.atan2(vertex.y - middle.y, vertex.x - middle.x);
-      return {
-        x: vertex.x + Math.cos(angle) * PADDING,
-        y: vertex.y + Math.sin(angle) * PADDING,
-      };
-    });
+    const paddedVertices = offsetPolygon(body.vertices, PADDING);
     return paddedVertices;
   });
 
@@ -122,7 +128,7 @@ export function generateObstaclePathFindingGrid(minSize?: {
     y: minY + gridPoint.y / resolution,
   });
 
-  cachedGridHash = verticesHash;
+  cachedGridHash = mapHash;
   cachedGrid = {
     width,
     height,

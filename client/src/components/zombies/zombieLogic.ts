@@ -111,7 +111,7 @@ export function useZombieLogic(
           const nextPoint = calculateNextPointPathFinding(
             collider.current.position,
             currentTargetPlayer,
-            zombieType.size * 40 * 2
+            zombieType.size
           );
           if (!nextPoint) {
             failedPathFindAttempts.current++;

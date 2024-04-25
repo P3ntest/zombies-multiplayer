@@ -1,7 +1,7 @@
 import { Container, Graphics, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { BulletState } from "../../../../server/src/rooms/schema/MyRoomState";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   getBodyMeta,
   useBodyRef,
@@ -47,7 +47,7 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
 
   const destroyBullet = useCallback(() => {
     if (localDestroyed) return;
-    room?.send("destroyBullet", { id: bullet.id });
+    room?.send("destroyBullet", bullet.id);
     setLocalDestroyed(true);
   }, [room, bullet, localDestroyed]);
 
@@ -77,7 +77,7 @@ function MyBullet({ bullet }: { bullet: BulletState }) {
     );
 
     if (distance > 10000) {
-      room?.send("destroyBullet", { id: bullet.id });
+      room?.send("destroyBullet", bullet.id);
     }
 
     rerender();

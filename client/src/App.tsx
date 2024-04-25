@@ -66,8 +66,6 @@ function Game() {
   const room = useColyseusRoom();
   useTryJoinByQueryOrReconnectToken();
 
-  useControlEventListeners();
-
   if (!room) {
     return <Menu />;
   }

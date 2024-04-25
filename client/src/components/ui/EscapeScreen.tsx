@@ -11,16 +11,11 @@ export function EscapeScreen() {
   const otherMenuOpen = useUIStore(
     (state) => state.buyMenuOpen || state.chatOpen
   );
-  const room = useColyseusRoom();
-  const navigate = useNavigate();
 
   const onLeave = useCallback(() => {
     localStorage.removeItem("reconnectToken");
-    room?.leave(true).finally(() => {
-      disconnectFromColyseus();
-      navigate("/");
-    });
-  }, [room, navigate]);
+    disconnectFromColyseus(true);
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {

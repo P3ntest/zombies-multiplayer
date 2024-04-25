@@ -1,0 +1,112 @@
+{
+    "objects": [
+        {
+            "x": 1186,
+            "y": -133,
+            "id": "80elo",
+            "scale": 1,
+            "spawns": "player",
+            "rotation": 0,
+            "objectType": "spawnPoint"
+        },
+        {
+            "x": 1272,
+            "y": 191,
+            "id": "ta0p8",
+            "scale": 1,
+            "width": 1000,
+            "height": 10,
+            "sprite": {
+                "assetUrl": "/assets/editor/missing.png",
+                "assetSource": "external"
+            },
+            "tiling": true,
+            "rotation": 0,
+            "colliders": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "shape": {
+                        "shape": "rectangle",
+                        "width": 1000,
+                        "height": 10
+                    },
+                    "rotation": 0
+                }
+            ],
+            "objectType": "asset"
+        },
+        {
+            "x": 1096,
+            "y": 622,
+            "id": "ytbnb",
+            "scale": 1,
+            "spawns": "zombie",
+            "rotation": 0,
+            "objectType": "spawnPoint"
+        },
+        {
+            "x": 995,
+            "y": -678,
+            "id": "1nn2d",
+            "scale": 1,
+            "width": 100,
+            "height": 100,
+            "sprite": {
+                "assetUrl": "/assets/editor/missing.png",
+                "assetSource": "external"
+            },
+            "tiling": false,
+            "rotation": 0,
+            "colliders": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "shape": {
+                        "shape": "rectangle",
+                        "width": 150,
+                        "height": 150
+                    },
+                    "rotation": 0
+                }
+            ],
+            "objectType": "asset"
+        },
+        {
+            "x": 809,
+            "y": -264,
+            "id": "tbaiu",
+            "scale": 1,
+            "width": 10,
+            "height": 1000,
+            "sprite": {
+                "assetUrl": "/assets/editor/missing.png",
+                "assetSource": "external"
+            },
+            "tiling": true,
+            "rotation": 0,
+            "colliders": [
+                {
+                    "x": 0,
+                    "y": 0,
+                    "shape": {
+                        "shape": "rectangle",
+                        "width": 10,
+                        "height": 1000
+                    },
+                    "rotation": 0
+                }
+            ],
+            "objectType": "asset"
+        },
+        {
+            "x": 234,
+            "y": -45,
+            "id": "ej9tm",
+            "scale": 1,
+            "spawns": "zombie",
+            "rotation": 0,
+            "objectType": "spawnPoint"
+        }
+    ]
+}

@@ -70,8 +70,8 @@ export class ZombieState extends Schema {
 export class BulletState extends Schema {
   @type("uint32") id: number = 0;
   @type("string") playerId: string = "";
-  @type("uint32") originX: number = 0;
-  @type("uint32") originY: number = 0;
+  @type("int32") originX: number = 0;
+  @type("int32") originY: number = 0;
   @type("float32") rotation: number = 0;
   @type("float32") speed: number = 0;
   @type("uint32") damage: number = 0;
