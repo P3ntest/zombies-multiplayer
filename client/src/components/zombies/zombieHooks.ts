@@ -4,7 +4,7 @@ import { useColyseusRoom } from "../../colyseus";
 import { useEffect } from "react";
 import { playZombieGrowl } from "../../lib/sound/sound";
 
-export function useZombieBulletHitListener(body: Body, zombieId: string) {
+export function useZombieBulletHitListener(body: Body, zombieId: number) {
   const room = useColyseusRoom();
   useBulletHitListener(body, (bullet) => {
     room?.send("zombieHit", { zombieId, bulletId: bullet.id });

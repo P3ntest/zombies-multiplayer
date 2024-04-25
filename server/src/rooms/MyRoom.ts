@@ -3,7 +3,6 @@ import { WaveManager } from "../game/WaveManager";
 import { MapID, maps } from "../game/maps";
 import { calculateZombieSpawnType } from "../game/waves";
 import { ZombieType, zombieInfo } from "../game/zombies";
-import { genId } from "../util";
 import {
   BulletState,
   CoinState,
@@ -87,7 +86,7 @@ export class MyRoom extends Room<MyRoomState> {
         message;
 
       const bullet = new BulletState();
-      bullet.id = genId();
+      bullet.id = this.highestBulletId++;
       bullet.playerId = client.sessionId;
       bullet.originX = originX;
       bullet.piercesLeft = pierces;
@@ -225,7 +224,7 @@ export class MyRoom extends Room<MyRoomState> {
           console.log("respawning zombie", zombie.id);
           zombie.x = x;
           zombie.y = y;
-          zombie.id = genId();
+          zombie.id = this.highestZombieId++;
           this.state.zombies.push(zombie);
           return;
         }
@@ -237,7 +236,7 @@ export class MyRoom extends Room<MyRoomState> {
         typeInfo.baseHealth *
           this.waveManager.currentWave.zombieHealthMultiplier
       );
-      zombie.id = genId();
+      zombie.id = this.highestZombieId++;
       zombie.health = health;
       zombie.maxHealth = health;
       zombie.x = x;
@@ -248,18 +247,20 @@ export class MyRoom extends Room<MyRoomState> {
       this.state.zombies.push(zombie);
     });
 
-    this.onMessage("collectCoin", (client, message) => {
-      const { id } = message;
-      const coinIndex = this.state.coins.findIndex((c) => c.id === id);
-      if (coinIndex === -1) return;
-      const coin = this.state.coins[coinIndex];
+    this.onMessage("collectCoinBatch", (client, message) => {
+      const ids = message;
+      for (const id of ids) {
+        const coinIndex = this.state.coins.findIndex((c) => c.id === id);
+        if (coinIndex === -1) return;
+        const coin = this.state.coins[coinIndex];
 
-      // give it to all players
-      this.state.players.forEach((player) => {
-        player.coins += coin.value;
-      });
+        // give it to all players
+        this.state.players.forEach((player) => {
+          player.coins += coin.value;
+        });
 
-      this.state.coins.splice(coinIndex, 1);
+        this.state.coins.splice(coinIndex, 1);
+      }
     });
 
     this.onMessage("buyUpgrade", (client, message) => {
@@ -304,6 +305,10 @@ export class MyRoom extends Room<MyRoomState> {
     });
   }
 
+  highestZombieId = 0;
+  highestCoinId = 0;
+  highestBulletId = 0;
+
   updateZombie(message: any) {
     const { id, x, y, rotation, targetPlayerId } = message;
     const zombie = this.state.zombies.find((z) => z.id === id);
@@ -334,7 +339,7 @@ export class MyRoom extends Room<MyRoomState> {
     this.checkGameOver();
   }
 
-  killZombie(zombieId: string, playerI?: string) {
+  killZombie(zombieId: number, playerI?: string) {
     if (playerI) {
       const player = this.state.players.get(playerI);
       if (player) {
@@ -401,6 +406,18 @@ export class MyRoom extends Room<MyRoomState> {
         "Wave is running, please wait for the next wave to spawn.",
         "#aa55cc"
       );
+
+    //TEMP: create a bunch of coins
+    for (let i = 0; i < 500; i++) {
+      const coin = new CoinState();
+      coin.id = this.highestCoinId++;
+      // coin.x = 100;
+      // coin.y = 100 + i * 10;
+      coin.x = 100 + Math.random() * 100;
+      coin.y = 500 + Math.random() * 100;
+      coin.value = Math.floor(Math.random() * 1000) + 1;
+      this.state.coins.push(coin);
+    }
   }
 
   spawnPlayer(clientId: string) {
@@ -483,7 +500,7 @@ export class MyRoom extends Room<MyRoomState> {
     const spreadRadius = 10 + Math.sqrt(coins.length) * 10;
     for (const value of coins) {
       const coin = new CoinState();
-      coin.id = genId();
+      coin.id = this.highestCoinId++;
       coin.x = x + Math.random() * spreadRadius * 2 - spreadRadius;
       coin.y = y + Math.random() * spreadRadius * 2 - spreadRadius;
       coin.value = value;
@@ -517,7 +534,7 @@ export class MyRoom extends Room<MyRoomState> {
     return Array.from(this.state.players.values()).filter((p) => p.connected);
   }
 
-  zombieRespawnData: Map<string, ZombieState> = new Map();
+  zombieRespawnData: Map<number, ZombieState> = new Map();
   requestSpawnZombie(existing?: ZombieState) {
     if (this.state.isGameOver) return;
     // find a player which has the least number of zombies

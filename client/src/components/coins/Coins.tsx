@@ -1,10 +1,21 @@
 import { ParticleContainer, Sprite } from "@pixi/react";
-import { useColyseusState } from "../../colyseus";
+import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { CoinState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { memo } from "react";
+import { Texture } from "pixi.js";
+import { useNetworkTick } from "../../lib/networking/hooks";
+import { collectedCoinsBatch } from "./coinLogic";
 
 export function Coins() {
   const coins = useColyseusState((state) => state.coins);
+  const room = useColyseusRoom();
+
+  useNetworkTick(() => {
+    if (collectedCoinsBatch.size > 0) {
+      room?.send("collectCoinBatch", Array.from(collectedCoinsBatch));
+      collectedCoinsBatch.clear();
+    }
+  });
 
   if (!coins) {
     return null;
@@ -36,6 +47,7 @@ function _Coin({ coin }: { coin: CoinState }) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       tint={(tint as any)[coin.value] ?? 0xffffff}
       image="assets/coin.png"
+      // texture={Texture.from("assets/coin.png")}
       anchor={[0.5, 0.5]}
       scale={[scale, scale]}
     />

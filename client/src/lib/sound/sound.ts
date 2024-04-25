@@ -5,7 +5,7 @@ export function playSound(
   path: string,
   opts?: Partial<{
     volume: number;
-  }>,
+  }>
 ) {
   const { volume } = useVolumeStore.getState();
   const audio = new Audio(path);
@@ -18,12 +18,9 @@ export function playGunSound(gun: PlayerClass, msCoolDown: number = 1000) {
   switch (gun) {
     case "shotgun":
       playSound("/assets/sounds/guns/shotgun.mp3");
-      setTimeout(
-        () => {
-          playSound("/assets/sounds/guns/shotgun_rack.mp3");
-        },
-        Math.min(msCoolDown - 800, 500),
-      ); // 800ms is the sound length
+      setTimeout(() => {
+        playSound("/assets/sounds/guns/shotgun_rack.mp3");
+      }, Math.min(msCoolDown - 800, 500)); // 800ms is the sound length
       break;
     case "rifle":
       playSound("/assets/sounds/guns/rifle.mp3");
@@ -59,10 +56,10 @@ export function playZombieGrowl(volume: number = 1) {
   });
 }
 
-const coins = new Array(55)
+const coins = new Array(56)
   .fill(0)
   .map(
-    (_, i) => `/assets/sounds/coins/Coins_Single_${i < 10 ? "0" : ""}${i}.mp3`,
+    (_, i) => `/assets/sounds/coins/Coins_Single_${i < 10 ? "0" : ""}${i}.mp3`
   );
 export function playCoinPickup() {
   playSound(coins[Math.floor(Math.random() * coins.length)]);
