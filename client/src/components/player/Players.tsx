@@ -14,6 +14,7 @@ import { useState } from "react";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playSelfDied } from "../../lib/sound/sound";
 import { Texture } from "pixi.js";
+import { getMaxHealth } from "../../../../server/src/game/player";
 
 export function Players() {
   const state = useColyseusState();
@@ -104,7 +105,7 @@ function OtherAlivePlayer({ player }: { player: PlayerState }) {
       y={y}
       rotation={rotation}
       health={player.health}
-      maxHealth={player.upgrades.health * 20 + 100}
+      maxHealth={getMaxHealth(player)}
       velocityX={player.velocityX}
       velocityY={player.velocityY}
     />

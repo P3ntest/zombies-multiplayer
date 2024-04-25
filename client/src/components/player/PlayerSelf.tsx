@@ -16,6 +16,7 @@ import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
 import { calcUpgrade, playerConfig } from "../../../../server/src/game/config";
+import { getMaxHealth } from "../../../../server/src/game/player";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -97,11 +98,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         y={y}
         rotation={rotation}
         health={player.health}
-        maxHealth={calcUpgrade(
-          playerConfig.healthUpgrade,
-          player.upgrades.health,
-          playerConfig.startingHealth
-        )}
+        maxHealth={getMaxHealth(player)}
         velocityX={currentDirection.x}
         velocityY={currentDirection.y}
       />

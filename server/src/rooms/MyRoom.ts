@@ -13,6 +13,7 @@ import {
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
 import { coinConfig } from "../game/config";
+import { getMaxHealth } from "../game/player";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -371,7 +372,7 @@ export class MyRoom extends Room<MyRoomState> {
     const player = this.state.players.get(playerId);
     if (!player) return;
 
-    player.health = 100;
+    player.health = getMaxHealth(player);
     player.healthState = PlayerHealthState.ALIVE;
     this.broadcast("playerRevived", { playerId });
   }

@@ -1,5 +1,5 @@
 import { PlayerState } from "../rooms/schema/MyRoomState";
-import { weaponConfig } from "./config";
+import { calcUpgrade, playerConfig, weaponConfig } from "./config";
 
 export type PlayerClass = "pistol" | "shotgun" | "rifle" | "melee";
 
@@ -20,4 +20,12 @@ export function calculateScore(player: PlayerState) {
 
 export function getWeaponData(playerClass: PlayerClass) {
   return weaponConfig.weapons[playerClass];
+}
+
+export function getMaxHealth(player: PlayerState) {
+  return calcUpgrade(
+    playerConfig.healthUpgrade,
+    player.upgrades.health,
+    playerConfig.startingHealth
+  );
 }
