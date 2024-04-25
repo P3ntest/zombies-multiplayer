@@ -10,7 +10,7 @@ import {
 } from "../../../../server/src/game/player";
 import { bodyMeta, getBodiesWithTag } from "../../lib/physics/hooks";
 import Matter from "matter-js";
-import { weaponConfig } from "../../../../server/src/game/config";
+import { calcUpgrade, weaponConfig } from "../../../../server/src/game/config";
 
 export function GunManager({
   x,
@@ -82,9 +82,11 @@ export function GunManager({
         if (zombieId) {
           room?.send("meleeHitZombie", {
             zombieId,
-            damage:
-              weaponConfig.weapons.melee.damage *
-              weaponConfig.damageMultiplier(self.upgrades.damage),
+            damage: calcUpgrade(
+              weaponConfig.damageUpgrade,
+              self.upgrades.damage,
+              weaponConfig.weapons.melee.damage
+            ),
             knockBack: weaponConfig.weapons.melee.knockBack,
           });
         }
@@ -107,10 +109,16 @@ export function GunManager({
       const originY = y + Math.sin(rotation) * barrelMoveForwardFactor;
 
       const weapon = getWeaponData(self.playerClass);
-      const damage =
-        weapon.damage * weaponConfig.damageMultiplier(self.upgrades.damage);
-      const pierces =
-        weapon.pierce + weaponConfig.pierceAdd(self.upgrades.pierce);
+      const damage = calcUpgrade(
+        weaponConfig.damageUpgrade,
+        self.upgrades.damage,
+        weapon.damage
+      );
+      const pierces = calcUpgrade(
+        weaponConfig.pierceUpgrade,
+        self.upgrades.pierce,
+        weapon.pierce
+      );
 
       room?.send("shotSound", {
         playerClass: self.playerClass,
@@ -189,8 +197,11 @@ export function GunManager({
     if (isShooting && shootCoolDown.current <= 0) {
       const coolDownTicks =
         200 /
-        (getWeaponData(self.playerClass).fireRate *
-          weaponConfig.fireRateMultiplier(self.upgrades.fireRate));
+        calcUpgrade(
+          weaponConfig.fireRateUpgrade,
+          self.upgrades.fireRate,
+          getWeaponData(self.playerClass).fireRate
+        );
       shoot(coolDownTicks);
 
       shootCoolDown.current = (coolDownTicks / 20) * 1000;

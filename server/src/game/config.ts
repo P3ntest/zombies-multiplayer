@@ -1,15 +1,34 @@
 export const playerConfig = {
+  healthUpgrade: {
+    type: "lin",
+    factor: 20,
+  } as UpgradeCalc,
+  speedUpgrade: {
+    type: "lin",
+    factor: 0.3,
+  } as UpgradeCalc,
+  zoomUpgrade: {
+    type: "lin",
+    factor: 0.625,
+  } as UpgradeCalc,
   startingHealth: 100,
-  walkingSpeed: (direction: number, speedUpgrades: number) =>
-    direction + speedUpgrades * direction * 0.3,
-  zoom: (zoomUpgrades: number) => 0.8 / (zoomUpgrades * 0.5 + 1),
-  maxHealth: (healthUpgrades: number) => 100 + 20 * healthUpgrades,
+  baseZoom: 1.25,
+  baseSpeed: 1,
 };
 
 export const weaponConfig = {
-  damageMultiplier: (damageUpgrades: number) => 1.4 ** damageUpgrades,
-  fireRateMultiplier: (fireRateUpgrades: number) => 1.2 ** fireRateUpgrades,
-  pierceAdd: (pierceUpgrades: number) => pierceUpgrades,
+  damageUpgrade: {
+    type: "exp",
+    factor: 1.4,
+  } as UpgradeCalc,
+  fireRateUpgrade: {
+    type: "exp",
+    factor: 1.2,
+  } as UpgradeCalc,
+  pierceUpgrade: {
+    type: "add",
+    factor: 1,
+  } as UpgradeCalc,
   weapons: {
     pistol: {
       damage: 30,
@@ -51,40 +70,85 @@ export const upgradeConfig = [
     id: "damage",
     name: "Damage",
     maxLevel: 10,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
+    cost: {
+      type: "exp",
+      factor: 3,
+      base: 30,
+    } as UpgradeCalc,
   },
   {
     id: "fireRate",
     name: "Fire Rate",
     maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 30),
+    cost: {
+      type: "exp",
+      factor: 3,
+      base: 30,
+    } as UpgradeCalc,
   },
   {
     id: "pierce",
     name: "Pierce",
     maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 50),
+    cost: {
+      type: "exp",
+      factor: 3,
+      base: 50,
+    } as UpgradeCalc,
   },
   {
     id: "health",
     name: "Health",
     maxLevel: 5,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 20),
+    cost: {
+      type: "exp",
+      factor: 3,
+      base: 20,
+    } as UpgradeCalc,
   },
   {
     id: "speed",
     name: "Speed",
     maxLevel: 3,
-    cost: (level: number) => Math.round(Math.pow(3, level) * 60),
+    cost: {
+      type: "exp",
+      factor: 3,
+      base: 60,
+    } as UpgradeCalc,
   },
   {
     id: "scope",
     name: "Scope",
     maxLevel: 3,
-    cost: (level: number) => Math.round(Math.pow(4, level) * 60),
+    cost: {
+      type: "exp",
+      factor: 4,
+      base: 60,
+    } as UpgradeCalc,
   },
 ];
 
 export const coinConfig = {
   spawnMultiplier: 0.08,
 };
+export interface UpgradeCalc {
+  type: "lin" | "exp" | "add";
+  factor: number;
+  base?: number;
+}
+
+export function calcUpgrade(
+  upgrade: UpgradeCalc,
+  level: number,
+  base?: number
+) {
+  if (base == null) base = upgrade.base!;
+  switch (upgrade.type) {
+    case "lin":
+      return base + upgrade.factor * level;
+    case "exp":
+      return base * Math.pow(upgrade.factor, level);
+    case "add":
+      return base + upgrade.factor * level;
+  }
+}

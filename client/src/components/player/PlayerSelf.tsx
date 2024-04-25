@@ -15,7 +15,7 @@ import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
-import { playerConfig } from "../../../../server/src/game/config";
+import { calcUpgrade, playerConfig } from "../../../../server/src/game/config";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
   const collider = useBodyRef(() => {
@@ -54,8 +54,16 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     const rotation = Math.atan2(stageY - y, stageX - x);
 
     Body.setVelocity(collider.current, {
-      x: playerConfig.walkingSpeed(currentDirection.x, player.upgrades.speed),
-      y: playerConfig.walkingSpeed(currentDirection.y, player.upgrades.speed),
+      x: calcUpgrade(
+        playerConfig.speedUpgrade,
+        player.upgrades.speed * currentDirection.x,
+        currentDirection.x * playerConfig.baseSpeed
+      ),
+      y: calcUpgrade(
+        playerConfig.speedUpgrade,
+        player.upgrades.speed * currentDirection.y,
+        currentDirection.y * playerConfig.baseSpeed
+      ),
     });
 
     setX(collider.current.position.x);
@@ -84,7 +92,11 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         y={y}
         rotation={rotation}
         health={player.health}
-        maxHealth={playerConfig.maxHealth(player.upgrades.health)}
+        maxHealth={calcUpgrade(
+          playerConfig.healthUpgrade,
+          player.upgrades.health,
+          playerConfig.startingHealth
+        )}
         velocityX={currentDirection.x}
         velocityY={currentDirection.y}
       />
@@ -97,7 +109,14 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
       <PlayerCamera
         x={x}
         y={y}
-        zoom={playerConfig.zoom(player.upgrades.scope)}
+        zoom={
+          1 /
+          calcUpgrade(
+            playerConfig.zoomUpgrade,
+            player.upgrades.scope,
+            playerConfig.baseZoom
+          )
+        }
       />
     </>
   );
