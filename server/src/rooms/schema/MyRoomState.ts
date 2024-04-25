@@ -34,7 +34,7 @@ export class PlayerState extends Schema {
   @type("number") health: number = playerConfig.startingHealth;
   @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
-  @type("uint32") coins: number = 100000;
+  @type("uint32") coins: number = 0;
 
   @type("string") playerClass: PlayerClass = "pistol";
 
