@@ -31,7 +31,7 @@
     "prisma": "^5.13.0",
     "rimraf": "^5.0.0",
     "tsx": "^3.12.6",
-    "typescript": "^5.0.4"
+    "typescript": "^5.2.2"
   },
   "dependencies": {
     "@colyseus/monitor": "^0.15.0",
