@@ -11,6 +11,7 @@ export function FullScreenStage({ children }: { children: React.ReactNode }) {
         resolution: window.devicePixelRatio,
         eventMode: "static",
       }}
+      raf
       style={{
         width: "100vw",
         height: "100vh",

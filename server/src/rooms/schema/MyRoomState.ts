@@ -21,16 +21,16 @@ export class PlayerState extends Schema {
   @type("string") name: string = "Unnamed";
   @type("string") sessionId: string = "";
 
-  @type("number") x: number = 0;
-  @type("number") y: number = 0;
-  @type("number") rotation: number = 0;
+  @type("int32") x: number = 0;
+  @type("int32") y: number = 0;
+  @type("float32") rotation: number = 0;
 
   @type("boolean") connected: boolean = true;
 
-  @type("number") velocityX: number = 0;
-  @type("number") velocityY: number = 0;
+  @type("float32") velocityX: number = 0;
+  @type("float32") velocityY: number = 0;
 
-  @type("number") health: number = 100;
+  @type("uint32") health: number = 100;
   @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
   @type("uint32") coins: number = 0;
@@ -39,23 +39,23 @@ export class PlayerState extends Schema {
 
   @type(PlayerUpgradeState) upgrades = new PlayerUpgradeState();
 
-  @type("number") kills: number = 0;
-  @type("number") deaths: number = 0;
-  @type("number") damageDealt: number = 0;
-  @type("number") wavesSurvived: number = 0;
-  @type("number") accuracy: number = 0;
+  @type("uint32") kills: number = 0;
+  @type("uint32") deaths: number = 0;
+  @type("uint32") damageDealt: number = 0;
+  @type("uint32") wavesSurvived: number = 0;
+  @type("uint32") accuracy: number = 0;
 
   @type("uint8") currentAnimation = 0;
 }
 
 export class ZombieState extends Schema {
-  @type("string") id: string = "";
-  @type("number") x: number = 0;
-  @type("number") y: number = 0;
-  @type("number") rotation: number = 0;
+  @type("uint32") id: number = 0;
+  @type("int32") x: number = 0;
+  @type("int32") y: number = 0;
+  @type("float32") rotation: number = 0;
   @type("string") playerId: string = "";
-  @type("number") health: number = 100;
-  @type("number") maxHealth: number = 100;
+  @type("uint32") health: number = 100;
+  @type("uint32") maxHealth: number = 100;
   @type("string") targetPlayerId: string = "";
 
   @type("uint32") lastAttackTick: number = 0;
@@ -65,28 +65,28 @@ export class ZombieState extends Schema {
 }
 
 export class BulletState extends Schema {
-  @type("string") id: string = "";
+  @type("uint32") id: number = 0;
   @type("string") playerId: string = "";
-  @type("number") originX: number = 0;
-  @type("number") originY: number = 0;
-  @type("number") rotation: number = 0;
-  @type("number") speed: number = 0;
-  @type("number") damage: number = 0;
+  @type("uint32") originX: number = 0;
+  @type("uint32") originY: number = 0;
+  @type("float32") rotation: number = 0;
+  @type("float32") speed: number = 0;
+  @type("uint32") damage: number = 0;
   @type("uint8") piercesLeft: number = 0;
   @type("float32") knockBack: number = 1;
 }
 
 export class WaveInfoState extends Schema {
-  @type("number") currentWaveNumber: number = 0;
+  @type("uint32") currentWaveNumber: number = 0;
   @type("boolean") active: boolean = false;
-  @type("number") nextWaveStartsInSec: number = 0;
+  @type("uint16") nextWaveStartsInSec: number = 0;
 }
 
 export class CoinState extends Schema {
-  @type("string") id: string = "";
-  @type("number") x: number = 0;
-  @type("number") y: number = 0;
-  @type("number") value: number = 1;
+  @type("uint32") id: number = 0;
+  @type("int32") x: number = 0;
+  @type("int32") y: number = 0;
+  @type("uint32") value: number = 1;
 }
 
 export class MyRoomState extends Schema {
