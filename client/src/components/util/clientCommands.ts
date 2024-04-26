@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { disconnectFromColyseus, useColyseusState } from "../../colyseus";
 import { trpc } from "../../lib/trpc/trpcClient";
-import { useLevelIdMaybe } from "../level/levelContext";
 
 export function useClientCommandInterceptor(
   respond: ({ message }: { message: string; color?: string }) => void
