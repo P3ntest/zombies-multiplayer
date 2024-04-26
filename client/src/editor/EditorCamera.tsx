@@ -22,9 +22,7 @@ export function EditorControls() {
         .setZoom(minmax(useEditor.getState().zoom + e.deltaY * 0.001, 0.1, 10));
     };
     window.addEventListener("wheel", wheelListener);
-    console.log("wheel listener added");
     return () => {
-      console.log("wheel listener removed");
       window.removeEventListener("wheel", wheelListener);
     };
   }, []);
