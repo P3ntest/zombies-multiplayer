@@ -7,8 +7,7 @@ import {
   MapObject,
 } from "../../../server/src/game/mapEditor/editorTypes";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
-import { trpc } from "../lib/trpc/trpcClient";
+
 import { FileOptions } from "./FilesUI";
 import { useNavigate } from "react-router-dom";
 export function MapEditorUI() {
@@ -60,6 +59,7 @@ function CreatePanel() {
                 height: 100,
                 colliders: [],
                 rotation: 0,
+                zHeight: 100,
                 id: Math.random().toString(36).substr(2, 5),
                 scale: 1,
                 tiling: false,
@@ -112,8 +112,6 @@ function Inspector() {
   const deleteObject = useEditor((state) => state.deleteObject);
 
   if (!selectedObject) return null;
-
-  console.log(selectedObject);
 
   const field = ({
     key,
@@ -186,6 +184,22 @@ function Inspector() {
 
         {selectedObject.objectType === "asset" && (
           <div>
+            <div className="flex flex-row gap-2 items-center my-2">
+              <h2 className="text-white font-bold text-lg mb-1">Height</h2>
+              <input
+                type="range"
+                value={selectedObject.zHeight}
+                min={0}
+                max={100}
+                step={1}
+                onChange={(e) =>
+                  updateObject(selectedObject.id, {
+                    zHeight: parseInt(e.target.value),
+                  } as any)
+                }
+                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+              />
+            </div>
             <div className="flex flex-row gap-2">
               <div>
                 <h2 className="text-white font-bold text-lg mb-1">Rotation</h2>
@@ -330,7 +344,7 @@ function ColliderEditor() {
   const selectedObjectId = useEditor((state) => state.selectedObject);
   const updateObject = useEditor((state) => state.updateObject);
   const updateColliders = (colliders: AssetCollider[]) => {
-    updateObject(selectedObjectId!, { colliders });
+    updateObject(selectedObjectId!, { colliders }, true);
   };
 
   return (
@@ -510,6 +524,24 @@ function ColliderEditor() {
                   </div>
                 </div>
               )}
+              <div className="flex flex-row items-center justify-between gap-3">
+                <h2 className="text-white font-bold text-lg mb-1">
+                  Destroys Bullets
+                </h2>
+                <input
+                  className="w-6 h-6 rounded-xl"
+                  type="checkbox"
+                  checked={collider.destroyBullet ?? true}
+                  onChange={(e) => {
+                    const newColliders = [...colliders!];
+                    newColliders[index] = {
+                      ...collider,
+                      destroyBullet: e.target.checked,
+                    };
+                    updateColliders(newColliders);
+                  }}
+                />
+              </div>
             </div>
           );
         })}

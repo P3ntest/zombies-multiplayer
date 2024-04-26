@@ -37,16 +37,16 @@ export function useIsKeyDown(key: string) {
   return isMouseDown;
 }
 
-export function useControlEventListeners() {
+export function useControlEventListeners(preventTab = true) {
   const { onKeydown, onKeyup } = useControlsStore();
   useEffect(() => {
     const keydownListener = (event: KeyboardEvent) => {
-      if (event.key == "Tab") event.preventDefault();
+      if (event.key == "Tab" && preventTab) event.preventDefault();
       const key = event.key.toLowerCase();
       onKeydown(key);
     };
     const keyupListener = (event: KeyboardEvent) => {
-      if (event.key == "Tab") event.preventDefault();
+      if (event.key == "Tab" && preventTab) event.preventDefault();
       const key = event.key.toLowerCase();
       onKeyup(key);
     };
@@ -70,7 +70,7 @@ export function useControlEventListeners() {
       window.removeEventListener("mousedown", mouseDownListener);
       window.removeEventListener("mouseup", mouseUpListener);
     };
-  }, [onKeydown, onKeyup]);
+  }, [onKeydown, onKeyup, preventTab]);
 }
 
 export function useAxis() {

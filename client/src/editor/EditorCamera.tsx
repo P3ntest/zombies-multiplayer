@@ -10,19 +10,38 @@ import {
 import { GenericCamera } from "../components/graphics/Camera";
 
 export function EditorControls() {
-  useControlEventListeners();
-  const { setCamera, setZoom, cameraX, cameraY, zoom } = useEditor();
+  useControlEventListeners(false);
+  const zoom = useEditor((state) => state.zoom);
+  const { setCamera, cameraX, cameraY, undo } = useEditor();
 
   useEffect(() => {
     const wheelListener = (e: WheelEvent) => {
       e.preventDefault();
-      setZoom(minmax(zoom + e.deltaY * 0.001, 0.1, 10));
+      useEditor
+        .getState()
+        .setZoom(minmax(useEditor.getState().zoom + e.deltaY * 0.001, 0.1, 10));
     };
     window.addEventListener("wheel", wheelListener);
+    console.log("wheel listener added");
     return () => {
+      console.log("wheel listener removed");
       window.removeEventListener("wheel", wheelListener);
     };
-  }, [setZoom, zoom]);
+  }, []);
+
+  useEffect(() => {
+    const keyDownListener = (e: KeyboardEvent) => {
+      // undo
+      if (e.key === "z" && e.ctrlKey) {
+        e.preventDefault();
+        undo();
+      }
+    };
+    window.addEventListener("keydown", keyDownListener);
+    return () => {
+      window.removeEventListener("keydown", keyDownListener);
+    };
+  }, [undo]);
 
   const dir = useCurrentPlayerDirection(10);
 

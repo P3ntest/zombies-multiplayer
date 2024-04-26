@@ -18,6 +18,8 @@ import { spriteSheets } from "../assets/assetHandler";
 import { TempFloor } from "../components/level/LevelInstanceRenderer";
 
 export function MapEditor() {
+  useEffect(() => {});
+
   return (
     <div>
       <MapEditorUI />
@@ -52,11 +54,11 @@ function VisualObjectsEditor() {
   }, [setSelectedObject, deleteObject, selectedObject]);
 
   return (
-    <>
+    <Container sortableChildren>
       {objects.map((object) => {
         return <LevelObject key={object.id} asset={object} />;
       })}
-    </>
+    </Container>
   );
 }
 
@@ -94,10 +96,14 @@ function LevelObject({ asset }: { asset: MapObject }) {
       if (dragging.current) {
         if (!camera) return;
         const newPosition = e.getLocalPosition(camera);
-        updateObject(asset.id, {
-          x: Math.round(newPosition.x - draggingOffset.current.x),
-          y: Math.round(newPosition.y - draggingOffset.current.y),
-        });
+        updateObject(
+          asset.id,
+          {
+            x: Math.round(newPosition.x - draggingOffset.current.x),
+            y: Math.round(newPosition.y - draggingOffset.current.y),
+          },
+          false
+        );
       }
     };
     const pointerUp = () => {
@@ -143,7 +149,12 @@ function LevelObject({ asset }: { asset: MapObject }) {
 
   return (
     <>
-      <Container ref={containerRef} cursor="pointer" eventMode="dynamic">
+      <Container
+        ref={containerRef}
+        cursor="pointer"
+        eventMode="dynamic"
+        zIndex={asset.objectType === "spawnPoint" ? 1000 : asset.zHeight ?? 100}
+      >
         {asset.objectType === "asset" && (
           <>
             <AssetObjectRendering

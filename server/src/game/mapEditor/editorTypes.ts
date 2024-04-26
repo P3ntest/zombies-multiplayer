@@ -41,6 +41,7 @@ export const AssetCollider = Transform.omit({
   scale: true,
 }).extend({
   shape: ColliderShape,
+  destroyBullet: z.boolean().default(true),
 });
 
 export const BuiltInAsset = z.object({
@@ -63,6 +64,8 @@ export const AssetObject = Transform.extend({
   colliders: z.array(AssetCollider),
   sprite: AssetSource,
   id: z.string(),
+
+  zHeight: IntLike.default(0),
 
   tiling: z.boolean(),
   width: IntLike,

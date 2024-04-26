@@ -81,6 +81,13 @@ function AssetObjectCollider({
   collider: AssetCollider;
   asset: AssetObject;
 }) {
+  const tags = useMemo(() => {
+    const tags = ["obstacle"];
+    if (collider.destroyBullet) {
+      tags.push("destroyBullet");
+    }
+    return tags;
+  }, [collider.destroyBullet]);
   useBodyRef(
     () => {
       // the asset has x, y, rotation, scale
@@ -132,7 +139,7 @@ function AssetObjectCollider({
       }
     },
     {
-      tags: ["destroyBullet", "obstacle"],
+      tags,
     }
   );
   return null;
