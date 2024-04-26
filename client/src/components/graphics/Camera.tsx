@@ -21,11 +21,13 @@ export function GenericCamera({
   y,
   zoom,
   children,
+  lerp = 0.04,
 }: {
   x: number;
   y: number;
   zoom: number;
   children: ReactNode;
+  lerp?: number;
 }) {
   const windowSize = useWindowSize();
   const scale = zoom;
@@ -44,7 +46,7 @@ export function GenericCamera({
     // stageRef?.levelContainer?.pivot.set(x, y);
     // stageRef?.levelContainer?.position.set(screen.width / 2, screen.height / 2);
 
-    const LERP = 0.04;
+    const LERP = lerp;
 
     currentTarget.current.x =
       currentTarget.current.x + (x - currentTarget.current.x) * LERP;
@@ -52,7 +54,7 @@ export function GenericCamera({
       currentTarget.current.y + (y - currentTarget.current.y) * LERP;
 
     currentScale.current =
-      currentScale.current + (scale - currentScale.current) * 0.1;
+      currentScale.current + (scale - currentScale.current) * LERP;
 
     cam.pivot.set(currentTarget.current.x, currentTarget.current.y);
     cam.position.set(windowSize.width / 2, windowSize.height / 2);

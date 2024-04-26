@@ -32,14 +32,14 @@ export function EditorControls() {
       // undo
       if (e.key === "z" && e.ctrlKey) {
         e.preventDefault();
-        undo();
+        useEditor.getState().undo();
       }
     };
     window.addEventListener("keydown", keyDownListener);
     return () => {
       window.removeEventListener("keydown", keyDownListener);
     };
-  }, [undo]);
+  }, []);
 
   const dir = useCurrentPlayerDirection(10);
 
@@ -53,13 +53,15 @@ export function EditorControls() {
 }
 
 export function EditorCamera({ children }: { children: ReactNode }) {
-  const props = useEditor((state) => ({
-    x: state.cameraX,
-    y: state.cameraY,
-    zoom: state.zoom,
-  }));
+  const x = useEditor((state) => state.cameraX);
+  const y = useEditor((state) => state.cameraY);
+  const zoom = useEditor((state) => state.zoom);
 
-  return <GenericCamera {...props}>{children}</GenericCamera>;
+  return (
+    <GenericCamera x={x} y={y} zoom={zoom} lerp={0.2}>
+      {children}
+    </GenericCamera>
+  );
 }
 
 function minmax(value: number, min: number, max: number) {

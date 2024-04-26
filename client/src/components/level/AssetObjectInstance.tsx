@@ -30,18 +30,27 @@ export function AssetObjectRendering({
       });
   }, [asset.sprite, missingTexture]);
 
-  const common = {
-    texture: actualTexture ?? missingTexture,
-    x: asset.x,
-    y: asset.y,
-    rotation: asset.rotation,
-    scale: asset.scale,
-    anchor: {
-      x: 0.5,
-      y: 0.5,
-    },
-    ...spriteProps,
-  };
+  const common = useMemo(
+    () => ({
+      texture: actualTexture ?? missingTexture,
+      x: asset.x,
+      y: asset.y,
+      rotation: asset.rotation,
+      scale: asset.scale,
+      anchor: {
+        x: 0.5,
+        y: 0.5,
+      },
+    }),
+    [
+      actualTexture,
+      missingTexture,
+      asset.x,
+      asset.y,
+      asset.rotation,
+      asset.scale,
+    ]
+  );
 
   if (asset.tiling) {
     return (
@@ -54,6 +63,7 @@ export function AssetObjectRendering({
         }}
         width={asset.width}
         height={asset.height}
+        {...spriteProps}
       />
     );
   } else {
@@ -61,6 +71,7 @@ export function AssetObjectRendering({
       <Sprite
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         {...(common as any)}
+        {...spriteProps}
       />
     );
   }

@@ -110,3 +110,12 @@ export const useEditor = create(
     }
   )
 );
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(window as any).exportMap = () => {
+  console.log(JSON.stringify(useEditor.getState().level));
+};
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(window as any).importMap = (level: string) => {
+  useEditor.getState().loadLevel(JSON.parse(level));
+};
