@@ -28,19 +28,19 @@ export function EditorControls() {
     };
   }, []);
 
-  useEffect(() => {
-    const keyDownListener = (e: KeyboardEvent) => {
-      // undo
-      if (e.key === "z" && e.ctrlKey) {
-        e.preventDefault();
-        useEditor.getState().undo();
-      }
-    };
-    window.addEventListener("keydown", keyDownListener);
-    return () => {
-      window.removeEventListener("keydown", keyDownListener);
-    };
-  }, []);
+  // useEffect(() => {
+  //   const keyDownListener = (e: KeyboardEvent) => {
+  //     // undo
+  //     if (e.key === "z" && e.ctrlKey) {
+  //       e.preventDefault();
+  //       useEditor.getState().undo();
+  //     }
+  //   };
+  //   window.addEventListener("keydown", keyDownListener);
+  //   return () => {
+  //     window.removeEventListener("keydown", keyDownListener);
+  //   };
+  // }, []);
 
   const dir = useCurrentPlayerDirection(10);
 
