@@ -50,7 +50,6 @@ export function Chat() {
 
   useEffect(() => {
     currentCallback.current = (e: KeyboardEvent) => {
-      console.log(e.key);
       if (e.key === "Enter") {
         if (chatOpen) {
           if (inputRef.current?.value) {
@@ -73,9 +72,7 @@ export function Chat() {
       currentCallback.current && currentCallback.current(e);
     };
     window.addEventListener("keydown", callback);
-    console.log("added");
     return () => {
-      console.log("removed");
       window.removeEventListener("keydown", callback);
     };
   }, []);

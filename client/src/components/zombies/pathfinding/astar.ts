@@ -89,7 +89,6 @@ export function printPathFindingGrid(
     };
   }
 ) {
-  return;
   const otherPointIndex = Object.entries(otherPoints).reduce(
     (acc, [key, value]) => {
       const { x, y } = value;
