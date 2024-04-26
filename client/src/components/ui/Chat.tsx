@@ -46,8 +46,11 @@ export function Chat() {
     ]);
   });
 
+  const currentCallback = useRef(null);
+
   useEffect(() => {
-    const keydown = (e: KeyboardEvent) => {
+    currentCallback.current = (e: KeyboardEvent) => {
+      console.log(e.key);
       if (e.key === "Enter") {
         if (chatOpen) {
           if (inputRef.current?.value) {
@@ -63,11 +66,19 @@ export function Chat() {
         close();
       }
     };
-    window.addEventListener("keydown", keydown);
-    return () => {
-      window.removeEventListener("keydown", keydown);
-    };
   }, [chatOpen, setChatOpen, close, room, interceptor]);
+
+  useEffect(() => {
+    const callback = (e) => {
+      currentCallback.current && currentCallback.current(e);
+    };
+    window.addEventListener("keydown", callback);
+    console.log("added");
+    return () => {
+      console.log("removed");
+      window.removeEventListener("keydown", callback);
+    };
+  }, []);
 
   return (
     <div className="fixed bottom-0 left-0">

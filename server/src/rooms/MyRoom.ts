@@ -62,7 +62,7 @@ export class MyRoom extends Room<MyRoomState> {
         skip: Math.floor(Math.random() * amountVerifiedMaps),
       });
       if (!selectedMap) {
-        console.error("No maps found.");
+        throw new Error("No verified maps found.");
         return;
       }
       await prisma.map.update({

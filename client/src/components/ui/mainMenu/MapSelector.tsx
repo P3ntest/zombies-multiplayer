@@ -85,7 +85,7 @@ function MapCard({ info, onSelect }: { info: MapInfo; onSelect: onSelect }) {
     >
       <MapPreviewRenderer level={info.level} size={140} />
       <h4 className="text-white font-bold text-xl max-w-sm text-ellipsis w-60 text-nowrap overflow-hidden">
-        {info.name} is a very long name for a map that is very long
+        {info.name}
       </h4>
     </div>
   );

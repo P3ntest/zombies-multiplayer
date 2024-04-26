@@ -26,6 +26,32 @@ export const mapRouter = router({
       published: map.published,
     } satisfies MapInfo;
   }),
+  verifyMap: authProcedure
+    .input(
+      z.object({
+        mapId: z.string(),
+        verify: z.boolean(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      if (!ctx.user.scopePermissions.includes("verify:maps")) {
+        return "Unauthorized";
+      }
+      const update = await prisma.map.update({
+        where: {
+          id: input.mapId,
+        },
+        data: {
+          verified: input.verify,
+        },
+      });
+      if (update) {
+        return `Map ${update.name} has been ${
+          update.verified ? "verified" : "unverified"
+        }`;
+      }
+      return "Operation failed";
+    }),
   myMaps: authProcedure.query(async ({ ctx }) => {
     const maps = await prisma.map.findMany({
       where: {
