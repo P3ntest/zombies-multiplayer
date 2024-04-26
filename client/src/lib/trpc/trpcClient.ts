@@ -1,4 +1,4 @@
-import { AppRouter } from "../../../../server/src/trpc/router";
+import type { AppRouter } from "../../../../server/src/trpc/router";
 
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
 import { currentLogtoToken } from "../../components/ui/mainMenu/AuthSection";
