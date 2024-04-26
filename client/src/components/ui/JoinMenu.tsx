@@ -61,7 +61,7 @@ export function JoinMenu() {
             disabled={connecting}
             onClick={() => {
               setStep("roomSettings");
-              setSelectedRoom("multiPlayer");
+              setSelectedRoom("singlePlayer");
             }}
           >
             Single Player
@@ -183,7 +183,9 @@ function RoomSettings({
         }}
       />
       <div className="flex flex-row gap-2 items-center">
-        <h3 className="text-white font-bold text-2xl">Room Settings</h3>
+        <h3 className="text-white font-bold text-2xl">
+          {roomType == "multiPlayer" ? "Room" : "Single Player"} Settings
+        </h3>
         <button onClick={onBack} className="button">
           Back
         </button>

@@ -112,9 +112,6 @@ export class MyRoom extends Room<MyRoomState> {
       const player = this.state.players.get(client.id)!;
       player.finishedLoading = true;
 
-      //TEMP:
-      // this.requestSpawnZombie();
-
       this.checkCanWaveStart();
       this.ensureZombieControl();
 
@@ -452,13 +449,20 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   checkCanWaveStart() {
+    console.log("checking can wave start");
     if (
       this.waveManager.waveRunning ||
       this.waveManager.nextWaveStarting ||
       this.state.isGameOver
     )
       return;
+    console.log("can wave start1");
     if (this.waveStartType === "playerCount") {
+      console.log(
+        "can wave start2",
+        this.state.players.size,
+        this.requiredPlayerCount
+      );
       if (this.state.players.size >= this.requiredPlayerCount) {
         this.waveManager.beginNextWaveTimeout();
       }
