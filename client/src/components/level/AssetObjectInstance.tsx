@@ -3,8 +3,8 @@ import {
   AssetCollider,
   AssetObject,
 } from "../../../../server/src/game/mapEditor/editorTypes";
-import { Texture } from "pixi.js";
-import { ComponentProps } from "react";
+import { Texture, Assets } from "pixi.js";
+import { ComponentProps, useEffect, useMemo, useState } from "react";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { Bodies } from "matter-js";
 
@@ -13,14 +13,25 @@ export function AssetObjectRendering({
   ...spriteProps
 }: { asset: AssetObject } & Partial<ComponentProps<typeof Sprite>> &
   Partial<ComponentProps<typeof TilingSprite>>) {
-  const texture =
-    asset.sprite.assetSource === "builtIn" ? asset.sprite.assetPath : undefined;
-  const image =
-    asset.sprite.assetSource === "external" ? asset.sprite.assetUrl : undefined;
+  const missingTexture = useMemo(() => {
+    return Texture.from("/assets/editor/missing.png");
+  }, []);
+
+  const [actualTexture, setActualTexture] = useState<Texture | null>(
+    missingTexture
+  );
+
+  useEffect(() => {
+    Assets.load(asset.sprite.assetPath)
+      .then(setActualTexture)
+      .catch(() => {
+        setActualTexture(missingTexture);
+        console.error("Failed to load asset", asset.sprite.assetPath);
+      });
+  }, [asset.sprite, missingTexture]);
 
   const common = {
-    texture: texture ? Texture.from(texture) : undefined,
-    image,
+    texture: actualTexture ?? missingTexture,
     x: asset.x,
     y: asset.y,
     rotation: asset.rotation,

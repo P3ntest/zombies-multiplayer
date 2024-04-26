@@ -10,6 +10,7 @@ interface MapEditorStore {
   updateObject: (id: string, asset: Partial<MapObject>) => void;
   addObject: (asset: MapObject) => void;
   deleteObject: (id: string) => void;
+  resetLevel: () => void;
 
   selectedObject: string | null;
   setSelectedObject: (id: string | null) => void;
@@ -54,6 +55,13 @@ export const useEditor = create(
             if (index === -1) return;
             draft.level.objects.splice(index, 1);
           });
+        }),
+
+      resetLevel: () =>
+        set({
+          level: {
+            objects: [],
+          },
         }),
 
       selectedObject: null,

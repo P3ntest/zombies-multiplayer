@@ -7,7 +7,7 @@ import {
   MapObject,
 } from "../../../server/src/game/mapEditor/editorTypes";
 import { twMerge } from "tailwind-merge";
-import { useCallback } from "react";
+import { useState } from "react";
 import { trpc } from "../lib/trpc/trpcClient";
 export function MapEditorUI() {
   return (
@@ -29,20 +29,41 @@ export function MapEditorUI() {
 
 function FileOptions() {
   const level = useEditor((state) => state.level);
+  const resetLevel = useEditor((state) => state.resetLevel);
+  const [confirmReset, setConfirmReset] = useState(false);
   return (
-    <div>
-      <button
-        className="button"
-        onClick={() => {
-          const name = prompt("Enter a name for the map");
-          trpc.maps.saveNewMap.mutate({
-            name: name || "Unnamed Map",
-            level,
-          });
-        }}
-      >
-        Save
-      </button>
+    <div className="">
+      <h2 className="text-white font-bold text-lg mb-1">File</h2>
+      <div className="flex flex-row items-center gap-2">
+        <button
+          className="button"
+          onClick={() => {
+            const name = prompt("Enter a name for the map");
+            trpc.maps.saveNewMap.mutate({
+              name: name || "Unnamed Map",
+              level,
+            });
+          }}
+        >
+          Save
+        </button>
+        <button
+          className={twMerge("button", confirmReset && "bg-red-500")}
+          onClick={() => {
+            if (confirmReset) {
+              resetLevel();
+              setConfirmReset(false);
+            } else {
+              setConfirmReset(true);
+              setTimeout(() => {
+                setConfirmReset(false);
+              }, 2000);
+            }
+          }}
+        >
+          {confirmReset ? "Confirm?" : "Reset Level"}
+        </button>
+      </div>
     </div>
   );
 }
@@ -79,8 +100,8 @@ function CreatePanel() {
                 scale: 1,
                 tiling: false,
                 sprite: {
-                  assetSource: "external",
-                  assetUrl: "/assets/editor/missing.png",
+                  assetSource: "builtIn",
+                  assetPath: "/assets/editor/missing.png",
                 },
               })
             }
@@ -294,15 +315,15 @@ function SourceEditor({
   source: AssetSource;
   setSource: (source: AssetSource) => void;
 }) {
-  if (source.assetSource == "external") {
+  if (source.assetSource == "builtIn") {
     return (
       <div>
         <input
           type="text"
-          value={source.assetUrl}
+          value={source.assetPath}
           className="input"
           onChange={(e) => {
-            setSource({ ...source, assetUrl: e.target.value });
+            setSource({ ...source, assetPath: e.target.value });
           }}
         />
       </div>
