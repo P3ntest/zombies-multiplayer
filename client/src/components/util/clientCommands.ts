@@ -42,12 +42,3 @@ export function useClientCommandInterceptor(
     [respond, testConnection, currentMapId, verifyMap]
   );
 }
-
-// function useJoinCommand() {
-//   const room = useColyseusRoom();
-//   const { name, selectedClass } = useCharacterCustomizationStore();
-
-//   return useCallback(async () => {
-//     await disconnectFromColyseus().catch(console.error);
-//   }, [room]);
-// }
