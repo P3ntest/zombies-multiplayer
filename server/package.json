@@ -7,6 +7,7 @@
   "engines": {
     "node": ">= 16.13.0"
   },
+  "type": "module",
   "scripts": {
     "start": "tsx watch src/index.ts",
     "loadtest": "tsx loadtest/example.ts --room my_room --numClients 2",

@@ -17,7 +17,6 @@
     "@pixi/react": "^7.1.2",
     "@pixi/sound": "5.2.3",
     "@trpc/client": "next",
-    "@trpc/server": "next",
     "express": "^4.19.2",
     "immer": "^10.0.4",
     "matter-js": "^0.19.0",

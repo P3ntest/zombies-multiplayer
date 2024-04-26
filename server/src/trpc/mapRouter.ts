@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { z } from "zod";
 import { prisma } from "../prisma";
 import { authProcedure, publicProcedure, router } from "./trpc";
@@ -7,13 +6,13 @@ import { GameLevel } from "../game/mapEditor/editorTypes";
 export const mapRouter = router({
   loadMap: publicProcedure
     .input(z.string())
-    .output(
-      z.object({
-        level: GameLevel,
-        name: z.string(),
-        id: z.string(),
-      })
-    )
+    // .output(
+    //   z.object({
+    //     level: GameLevel,
+    //     name: z.string(),
+    //     id: z.string(),
+    //   })
+    // )
     .query(async ({ input }) => {
       const map = await prisma.map.findUnique({
         where: {

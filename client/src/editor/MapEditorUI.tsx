@@ -375,7 +375,6 @@ function ColliderEditor() {
                     const newColliders = [...colliders!];
                     newColliders[index] = {
                       ...collider,
-                      //@ts-expect-error this is fine
                       shape: {
                         shape: e.target.value as "circle" | "rectangle",
                         ...(e.target.value === "circle"

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { prisma } from "../prisma";
