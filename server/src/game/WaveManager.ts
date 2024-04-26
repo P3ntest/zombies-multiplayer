@@ -2,6 +2,7 @@ import { Delayed } from "colyseus";
 import { MyRoom } from "../rooms/MyRoom";
 import { generateWave } from "./waves";
 import { PlayerHealthState } from "../rooms/schema/MyRoomState";
+import { getMaxHealth } from "./player";
 
 export class WaveManager {
   constructor(private room: MyRoom) {}
@@ -66,7 +67,7 @@ export class WaveManager {
       } else if (player.healthState === PlayerHealthState.NOT_SPAWNED) {
         this.room.spawnPlayer(player.sessionId);
       } else {
-        player.health = 100 + player.upgrades.health * 20;
+        player.health = getMaxHealth(player);
         player.wavesSurvived++;
       }
     }
