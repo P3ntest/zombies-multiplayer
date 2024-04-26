@@ -34,18 +34,22 @@ export function MapEditor() {
 
 function VisualObjectsEditor() {
   const objects = useEditor((state) => state.level.objects);
-  const { setSelectedObject } = useEditor();
+  const { setSelectedObject, deleteObject, selectedObject } = useEditor();
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setSelectedObject(null);
+      } else if (e.key == "Delete") {
+        if (selectedObject) {
+          deleteObject(selectedObject);
+        }
       }
     };
     window.addEventListener("keydown", keydown);
     return () => {
       window.removeEventListener("keydown", keydown);
     };
-  }, [setSelectedObject]);
+  }, [setSelectedObject, deleteObject, selectedObject]);
 
   return (
     <>
@@ -216,7 +220,7 @@ function VisualCollider({ collider }: { collider: AssetCollider }) {
   );
 }
 
-function SpawnPointDisplay({
+export function SpawnPointDisplay({
   spawnPoint,
   ...props
 }: { spawnPoint: SpawnPoint } & Partial<ComponentProps<typeof Sprite>>) {

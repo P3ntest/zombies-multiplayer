@@ -35,7 +35,16 @@ export function Chat() {
     inputRef.current && (inputRef.current.value = "");
   }, [setChatOpen]);
 
-  const interceptor = useClientCommandInterceptor();
+  const interceptor = useClientCommandInterceptor((message) => {
+    setMessages((messages) => [
+      ...messages,
+      {
+        content: message.message,
+        time: new Date(),
+        color: message.color,
+      },
+    ]);
+  });
 
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {

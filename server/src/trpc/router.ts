@@ -2,8 +2,8 @@ import { mapRouter } from "./mapRouter";
 import { authProcedure, publicProcedure, router } from "./trpc";
 
 export const appRouter = router({
-  helloWorld: authProcedure.query(() => {
-    return "Hello, world!";
+  testConnection: authProcedure.mutation(() => {
+    return "Connection Test Successful!";
   }),
   maps: mapRouter,
 });

@@ -3,15 +3,17 @@ import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
 import { useNavigate } from "react-router-dom";
+import { MapSelector } from "./mainMenu/MapSelector";
 
 let connecting = false;
 
 export function JoinMenu() {
-  const [stage, setStage] = useState<
-    "start" | "createRoom" | "joinId" | "roomsList"
-  >("start");
   const { selectedClass, name } = useCharacterCustomizationStore();
   const navigate = useNavigate();
+  const [selectedRoom, setSelectedRoom] = useState<
+    "singlePlayer" | "multiPlayer"
+  >("multiPlayer");
+  const [step, setStep] = useState<"main" | "roomSettings">("main");
 
   const pressQuickPlay = useCallback(() => {
     if (connecting) return;
@@ -29,85 +31,62 @@ export function JoinMenu() {
       });
   }, [name, selectedClass]);
 
-  const pressSinglePlayer = useCallback(() => {
-    if (connecting) return;
-    connecting = true;
-    colyseusClient
-      .joinOrCreate<MyRoomState>("my_room", {
-        quickPlay: false,
-        maxPlayers: 1,
-        isPrivate: true,
-        waveStartType: "playerCount",
-        requiredPlayerCount: 1,
-
-        playerName: name,
-        playerClass: selectedClass,
-      })
-      .then(setCurrentRoom)
-      .finally(() => {
-        connecting = false;
-      });
-  }, [name, selectedClass]);
-
-  const createRoom = useCallback(() => {
-    if (connecting) return;
-    connecting = true;
-    colyseusClient
-      .create<MyRoomState>("my_room", {
-        quickPlay: false,
-        maxPlayers: 10,
-        isPrivate: true,
-        waveStartType: "playerCount",
-        requiredPlayerCount: 2,
-
-        playerName: name,
-        playerClass: selectedClass,
-      })
-      .then(setCurrentRoom)
-      .finally(() => {
-        connecting = false;
-      });
-  }, [name, selectedClass]);
+  if (step === "roomSettings") {
+    return (
+      <div className="bg-slate-700 bg-opacity-70 p-10 rounded-xl h-full">
+        <RoomSettings
+          roomType={selectedRoom}
+          onBack={() => {
+            setStep("main");
+          }}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-700 bg-opacity-70 p-10 rounded-xl h-full">
-      {stage === "start" && (
-        <div className="w-full flex flex-col items-center gap-10">
-          <h3 className="text-white font-bold text-2xl">Join a game</h3>
-          <div className="flex flex-col gap-4 w-80">
-            <button
-              className="button"
-              disabled={connecting}
-              onClick={pressQuickPlay}
-            >
-              QuickPlay
-            </button>
-            <button
-              className="button"
-              disabled={connecting}
-              onClick={pressSinglePlayer}
-            >
-              Single Player
-            </button>
-            <button
-              className="button"
-              disabled={connecting}
-              onClick={createRoom}
-            >
-              Create Room
-            </button>
-            <JoinByIdField />
-          </div>
+      <div className="w-full flex flex-col items-center gap-10">
+        <h3 className="text-white font-bold text-2xl">Join a game</h3>
+        <div className="flex flex-col gap-4 w-80">
           <button
             className="button"
+            disabled={connecting}
+            onClick={pressQuickPlay}
+          >
+            QuickPlay
+          </button>
+          <button
+            className="button"
+            disabled={connecting}
             onClick={() => {
-              navigate("/editor");
+              setStep("roomSettings");
+              setSelectedRoom("multiPlayer");
             }}
           >
-            Map Editor
+            Single Player
           </button>
+          <button
+            className="button"
+            disabled={connecting}
+            onClick={() => {
+              setStep("roomSettings");
+              setSelectedRoom("multiPlayer");
+            }}
+          >
+            Create Room
+          </button>
+          <JoinByIdField />
         </div>
-      )}
+        <button
+          className="button"
+          onClick={() => {
+            navigate("/editor");
+          }}
+        >
+          Map Editor
+        </button>
+      </div>
     </div>
   );
 }
@@ -155,6 +134,76 @@ function JoinByIdField() {
         </button>
       </div>
       {error && <div className="text-red-500">{error}</div>}
+    </div>
+  );
+}
+
+function RoomSettings({
+  roomType,
+  onBack,
+}: {
+  roomType: "singlePlayer" | "multiPlayer";
+  onBack: () => void;
+}) {
+  const { selectedClass, name } = useCharacterCustomizationStore();
+
+  const [mapId, setMapId] = useState<string>("");
+  const [mapName, setMapName] = useState<string>("Random Official Map");
+
+  const [mapSelectorOpen, setMapSelectorOpen] = useState(false);
+
+  const pressCreate = useCallback(() => {
+    if (connecting) return;
+    connecting = true;
+    colyseusClient
+      .create<MyRoomState>("my_room", {
+        quickPlay: false,
+        maxPlayers: roomType === "singlePlayer" ? 1 : 10,
+        isPrivate: true,
+        waveStartType: "playerCount",
+        requiredPlayerCount: roomType === "singlePlayer" ? 1 : 2,
+        mapId: mapId || undefined,
+
+        playerName: name,
+        playerClass: selectedClass,
+      })
+      .then(setCurrentRoom)
+      .finally(() => {
+        connecting = false;
+      });
+  }, [name, selectedClass, roomType, mapId]);
+  return (
+    <div className="flex flex-col gap-2 items-start">
+      <MapSelector
+        open={mapSelectorOpen}
+        onClose={() => setMapSelectorOpen(false)}
+        onSelect={(mapId, mapName) => {
+          setMapId(mapId);
+          setMapName(mapName);
+        }}
+      />
+      <div className="flex flex-row gap-2 items-center">
+        <h3 className="text-white font-bold text-2xl">Room Settings</h3>
+        <button onClick={onBack} className="button">
+          Back
+        </button>
+      </div>
+
+      <div className="flex flex-row items-center gap-3">
+        <h4 className="text-white font-bold text-lg">Map: {mapName}</h4>
+        <button
+          className="button text-sm p-1 px-2"
+          onClick={() => {
+            setMapSelectorOpen(true);
+          }}
+        >
+          Select Map
+        </button>
+      </div>
+
+      <button onClick={pressCreate} className="button">
+        Create Room
+      </button>
     </div>
   );
 }

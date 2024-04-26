@@ -30,11 +30,7 @@ export const MainStage = () => {
   useBroadcastRoomMessages();
   useControlEventListeners();
   useSetQueryOrReconnectToken();
-  const level = useCurrentRemoteLevel();
-
-  // if (!level) {
-  //   return <div>Loading Level</div>;
-  // }
+  const level = useCurrentRemoteLevel()?.level ?? null;
 
   return (
     <>

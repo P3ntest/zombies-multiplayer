@@ -9,6 +9,8 @@ import {
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import { trpc } from "../lib/trpc/trpcClient";
+import { FileOptions } from "./FilesUI";
+import { useNavigate } from "react-router-dom";
 export function MapEditorUI() {
   return (
     <div
@@ -27,47 +29,6 @@ export function MapEditorUI() {
   );
 }
 
-function FileOptions() {
-  const level = useEditor((state) => state.level);
-  const resetLevel = useEditor((state) => state.resetLevel);
-  const [confirmReset, setConfirmReset] = useState(false);
-  return (
-    <div className="">
-      <h2 className="text-white font-bold text-lg mb-1">File</h2>
-      <div className="flex flex-row items-center gap-2">
-        <button
-          className="button"
-          onClick={() => {
-            const name = prompt("Enter a name for the map");
-            trpc.maps.saveNewMap.mutate({
-              name: name || "Unnamed Map",
-              level,
-            });
-          }}
-        >
-          Save
-        </button>
-        <button
-          className={twMerge("button", confirmReset && "bg-red-500")}
-          onClick={() => {
-            if (confirmReset) {
-              resetLevel();
-              setConfirmReset(false);
-            } else {
-              setConfirmReset(true);
-              setTimeout(() => {
-                setConfirmReset(false);
-              }, 2000);
-            }
-          }}
-        >
-          {confirmReset ? "Confirm?" : "Reset Level"}
-        </button>
-      </div>
-    </div>
-  );
-}
-
 function CreatePanel() {
   const addObject = useEditor((state) => state.addObject);
   const setSelectedObject = useEditor((state) => state.setSelectedObject);
@@ -80,11 +41,14 @@ function CreatePanel() {
     setSelectedObject(obj.id);
   };
 
+  const navigate = useNavigate();
+
   return (
     <div className="absolute top-0 left-0 p-5 w-96">
-      <div className="bg-slate-900 p-4 rounded-xl pointer-events-auto">
-        <h1 className="text-white font-bold text-xl mb-3">Create</h1>
-        <div className="flex flex-row gap-2">
+      <div className="bg-slate-900 p-4 rounded-xl pointer-events-auto flex flex-col gap-4">
+        <div>
+          <h1 className="text-white font-bold text-xl mb-3">Create</h1>
+          <div className="flex flex-row gap-2"></div>
           <button
             className="button"
             onClick={() =>
@@ -126,6 +90,14 @@ function CreatePanel() {
           </button>
         </div>
         <FileOptions />
+        <button
+          className="button"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Back to Main Menu
+        </button>
       </div>
     </div>
   );

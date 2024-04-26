@@ -4,12 +4,16 @@ import { Menu } from "./components/ui/Menu";
 import { useTryJoinByQueryOrReconnectToken } from "./lib/networking/hooks";
 import { useAssetStore, useEnsureAssetsLoaded } from "./assets/assetHandler";
 import { Spinner } from "./components/util/Spinner";
-import { LogtoProvider } from "@logto/react";
+import { LogtoProvider, useLogto } from "@logto/react";
 import { logtoConfig } from "./lib/auth/logto";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
 import { MapEditor } from "./editor/MapEditor";
-import { LogtoTokenSetterForTrpc } from "./components/ui/mainMenu/AuthSection";
+import { useState } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { trpc } from "./lib/trpc/trpcClient";
+import { httpBatchLink } from "@trpc/client";
+import { TrpcWrapper } from "./lib/trpc/TrpcWrapper";
 
 const router = createBrowserRouter([
   {
@@ -35,8 +39,9 @@ const router = createBrowserRouter([
 export function Router() {
   return (
     <LogtoProvider config={logtoConfig}>
-      <LogtoTokenSetterForTrpc />
-      <RouterProvider router={router} />
+      <TrpcWrapper>
+        <RouterProvider router={router} />
+      </TrpcWrapper>
     </LogtoProvider>
   );
 }

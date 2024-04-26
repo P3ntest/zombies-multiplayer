@@ -1,27 +1,28 @@
-import { useEffect, useState } from "react";
-import { GameLevel } from "../../../../server/src/game/mapEditor/editorTypes";
 import { trpc } from "../../lib/trpc/trpcClient";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
+import { useEffect } from "react";
+import { GameLevel } from "../../../../server/src/game/mapEditor/editorTypes";
 
 export function useRemoteLevel(mapId: string | undefined) {
-  const [level, setLevel] = useState<GameLevel | null>(null);
-  const room = useColyseusRoom();
-  useEffect(() => {
-    if (mapId && !level) {
-      console.log("loading map", mapId);
-      trpc.maps.loadMap.query(mapId).then((level) => {
-        setLevel(level.level);
-        room?.send("finishedLoading");
-      });
-    }
-  }, [mapId, level, room]);
+  const level = trpc.maps.loadMap.useQuery(mapId);
 
-  return level;
+  if (!level.data) {
+    return null;
+  }
+
+  return level.data;
 }
 
 export function useCurrentRemoteLevel() {
   const mapId = useColyseusState((state) => state.mapId);
+  const room = useColyseusRoom();
   const level = useRemoteLevel(mapId);
+
+  useEffect(() => {
+    if (level) {
+      room.send("finishedLoading");
+    }
+  }, [level, room]);
 
   return level;
 }

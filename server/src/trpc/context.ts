@@ -23,15 +23,23 @@ export const createContext = async (opts: CreateExpressContextOptions) => {
   });
 
   const { sub } = payload;
+  const scopePermissions = ((payload.scope as string) ?? "").split(" ");
 
   const user = await prisma.user.upsert({
     where: {
       id: sub,
     },
-    update: {},
+    update: {
+      scopePermissions: {
+        set: scopePermissions,
+      },
+    },
     create: {
       id: sub,
       name: "Anonymous",
+      scopePermissions: {
+        set: scopePermissions,
+      },
     },
   });
 

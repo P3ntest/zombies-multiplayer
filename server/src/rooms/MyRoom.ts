@@ -33,28 +33,44 @@ export class MyRoom extends Room<MyRoomState> {
           maxPlayers: 6,
           waveStartType: "playerCount",
           requiredPlayerCount: 2,
-          map: maps[Math.floor(Math.random() * maps.length)],
+          mapId: null,
         } as const)
       : ({
           isPrivate: options.isPrivate,
           maxPlayers: options.maxPlayers,
           waveStartType: options.waveStartType ?? "manual",
           requiredPlayerCount: options.requiredPlayerCount ?? 1,
-          map: options.map ?? maps[Math.floor(Math.random() * maps.length)],
+          mapId: options.mapId,
         } as const);
 
     this.maxClients = roomOptions.maxPlayers;
     this.waveStartType = roomOptions.waveStartType;
     this.requiredPlayerCount = roomOptions.requiredPlayerCount;
 
-    const amountMaps = await prisma.map.count();
-    const selectedMap = await prisma.map.findFirst({
-      skip: Math.floor(Math.random() * amountMaps),
-    });
-
     const roomState = new MyRoomState();
 
-    roomState.mapId = selectedMap?.id ?? "default";
+    if (roomOptions.mapId) {
+      roomState.mapId = roomOptions.mapId;
+    } else {
+      const amountVerifiedMaps = await prisma.map.count({
+        where: { verified: true },
+      });
+      const selectedMap = await prisma.map.findFirst({
+        where: {
+          verified: true,
+        },
+        skip: Math.floor(Math.random() * amountVerifiedMaps),
+      });
+      if (!selectedMap) {
+        console.error("No maps found.");
+        return;
+      }
+      await prisma.map.update({
+        where: { id: selectedMap.id },
+        data: { plays: { increment: 1 } },
+      });
+      roomState.mapId = selectedMap.id;
+    }
 
     if (roomOptions.isPrivate) {
       this.setPrivate();

@@ -17,7 +17,8 @@ model User {
   id   String @id
   name String
 
-  maps Map[]
+  maps             Map[]
+  scopePermissions String[]
 }
 
 model Map {
@@ -25,7 +26,13 @@ model Map {
   name  String
   level Json
 
-  verified Boolean @default(false)
+  verified  Boolean @default(false)
+  published Boolean @default(false)
+
+  plays Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   authorId String
   author   User   @relation(fields: [authorId], references: [id])

@@ -45,7 +45,7 @@ function ClassSelector() {
             <button
               className={twMerge(
                 "button",
-                selectedClass === playerClass && "button_selected"
+                selectedClass === playerClass && "bg-slate-300 text-slate-900"
               )}
               key={playerClass}
               onClick={() => setSelectedClass(playerClass)}

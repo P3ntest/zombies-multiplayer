@@ -8,10 +8,6 @@ body {
   @apply bg-slate-800 text-slate-300 p-2 rounded uppercase font-bold hover:bg-slate-500 hover:scale-110 transition-all;
 }
 
-.button_selected {
-  @apply bg-slate-300 text-slate-900 scale-105;
-}
-
 .ui-text {
   text-shadow: 3px 5px 2px #474747;
   user-select: none;

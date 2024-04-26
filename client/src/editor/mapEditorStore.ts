@@ -11,6 +11,7 @@ interface MapEditorStore {
   addObject: (asset: MapObject) => void;
   deleteObject: (id: string) => void;
   resetLevel: () => void;
+  loadLevel: (level: GameLevel) => void;
 
   selectedObject: string | null;
   setSelectedObject: (id: string | null) => void;
@@ -63,6 +64,7 @@ export const useEditor = create(
             objects: [],
           },
         }),
+      loadLevel: (level) => set({ level }),
 
       selectedObject: null,
       setSelectedObject: (id) => set({ selectedObject: id }),

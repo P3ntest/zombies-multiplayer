@@ -19,9 +19,6 @@ import { calcUpgrade, playerConfig } from "../../../../server/src/game/config";
 import { getMaxHealth } from "../../../../server/src/game/player";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
-  useEffect(() => {
-    console.log("player", player);
-  }, [player]);
   const collider = useBodyRef(() => {
     return Matter.Bodies.circle(player.x, player.y, 40);
   });
@@ -56,12 +53,6 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
       x: mouseX,
       y: mouseY,
     }) ?? { x: 0, y: 0 };
-    console.log(
-      stageRef?.camera?.toLocal({
-        x: 0,
-        y: 0,
-      })
-    );
 
     // the player always looks at the mouse
     const rotation = Math.atan2(stageY - y, stageX - x);
