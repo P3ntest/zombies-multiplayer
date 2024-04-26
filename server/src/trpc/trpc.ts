@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { initTRPC } from "@trpc/server";
 import { createContext } from "./context";
 

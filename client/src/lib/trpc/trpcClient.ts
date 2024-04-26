@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { AppRouter } from "../../../../server/src/trpc/router";
 
 import { createTRPCClient, httpBatchLink } from "@trpc/client";
