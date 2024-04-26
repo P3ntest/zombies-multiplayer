@@ -117,5 +117,5 @@ export const useEditor = create(
 };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (window as any).importMap = (level: string) => {
-  useEditor.getState().loadLevel(JSON.parse(level));
+  useEditor.getState().loadLevel(GameLevel.parse(JSON.parse(level)));
 };

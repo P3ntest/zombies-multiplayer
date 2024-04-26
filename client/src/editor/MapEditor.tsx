@@ -9,6 +9,7 @@ import { MapEditorUI } from "./MapEditorUI";
 import { spriteSheets } from "../assets/assetHandler";
 import { TempFloor } from "../components/level/LevelInstanceRenderer";
 import { LevelObject } from "./LevelObject";
+import { FpsTracker } from "../components/util/FpsDisplay";
 
 export function MapEditor() {
   return (
@@ -20,12 +21,14 @@ export function MapEditor() {
           <EditorControls />
           <VisualObjectsEditor />
         </EditorCamera>
+        <FpsTracker />
       </FullScreenStage>
     </div>
   );
 }
 
 function VisualObjectsEditor() {
+  console.time("VisualObjectsEditor");
   const objects = useEditor((state) => state.level.objects);
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
@@ -45,13 +48,15 @@ function VisualObjectsEditor() {
     };
   }, []);
 
-  return (
+  const returning = (
     <Container sortableChildren>
       {objects.map((object) => {
         return <LevelObject key={object.id} asset={object} />;
       })}
     </Container>
   );
+  console.timeEnd("VisualObjectsEditor");
+  return returning;
 }
 
 export function SpawnPointDisplay({

@@ -12,11 +12,12 @@ import { GenericCamera } from "../components/graphics/Camera";
 export function EditorControls() {
   useControlEventListeners(false);
   const zoom = useEditor((state) => state.zoom);
-  const { setCamera, cameraX, cameraY, undo } = useEditor();
+  const setCamera = useEditor((state) => state.setCamera);
+  const cameraX = useEditor((state) => state.cameraX);
+  const cameraY = useEditor((state) => state.cameraY);
 
   useEffect(() => {
     const wheelListener = (e: WheelEvent) => {
-      e.preventDefault();
       useEditor
         .getState()
         .setZoom(minmax(useEditor.getState().zoom + e.deltaY * 0.001, 0.1, 10));
