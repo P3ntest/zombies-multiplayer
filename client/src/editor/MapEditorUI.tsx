@@ -108,6 +108,7 @@ function Inspector() {
     state.level.objects.find((o) => o.id === state.selectedObject)
   );
   const updateObject = useEditor((state) => state.updateObject);
+  const addObject = useEditor((state) => state.addObject);
   const deleteObject = useEditor((state) => state.deleteObject);
 
   if (!selectedObject) return null;
@@ -149,12 +150,27 @@ function Inspector() {
       <div className="bg-slate-900 p-4 rounded-xl pointer-events-auto max-h-full overflow-y-scroll">
         <div className="flex flex-row items-center justify-between">
           <h1 className="text-white font-bold text-xl mb-3">Inspector</h1>
-          <button
-            className="button button-red"
-            onClick={() => deleteObject(selectedObject.id)}
-          >
-            Delete
-          </button>
+          <div className="flex flex-row gap-2">
+            <button
+              className="button"
+              onClick={() => {
+                addObject({
+                  ...selectedObject,
+                  id: Math.random().toString(36).substr(2, 5),
+                  x: selectedObject.x + 10,
+                  y: selectedObject.y + 10,
+                });
+              }}
+            >
+              Duplicate
+            </button>
+            <button
+              className="button"
+              onClick={() => deleteObject(selectedObject.id)}
+            >
+              Delete
+            </button>
+          </div>
         </div>
         <h2 className="text-white font-bold text-lg mb-1">Position</h2>
         <div className="flex flex-row gap-2">

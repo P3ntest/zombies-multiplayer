@@ -152,7 +152,7 @@ function MapCard({ id }: { id: string }) {
   );
 }
 
-function ConfirmButton({
+export function ConfirmButton({
   children,
   onClick,
 }: {
