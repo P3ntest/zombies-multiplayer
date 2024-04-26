@@ -23,7 +23,10 @@ export class WaveManager {
     this.currentWaveNumber++;
     this.room.state.waveInfo.currentWaveNumber = this.currentWaveNumber;
     this.room.state.waveInfo.active = true;
-    this.currentWave = generateWave(this.currentWaveNumber);
+    this.currentWave = generateWave(
+      this.currentWaveNumber,
+      this.room.state.players.size
+    );
     this.waveRunning = true;
     this.currentWaveSpawned = 0;
     this.finishedSpawning = false;
@@ -97,7 +100,10 @@ export class WaveManager {
 
   reset() {
     this.currentWaveNumber = 0;
-    this.currentWave = generateWave(this.currentWaveNumber);
+    this.currentWave = generateWave(
+      this.currentWaveNumber,
+      this.room.state.players.size
+    );
     this.waveRunning = false;
     this.currentWaveSpawned = 0;
     this.finishedSpawning = false;

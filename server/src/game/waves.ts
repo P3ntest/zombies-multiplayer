@@ -1,7 +1,7 @@
 import { SpawnChance, calcUpgrade, waveConfig } from "./config";
 import { ZombieType } from "./zombies";
 
-export function generateWave(wave: number) {
+export function generateWave(wave: number, players: number = 1) {
   wave--; // 0-indexed
 
   return {
@@ -14,7 +14,7 @@ export function generateWave(wave: number) {
     ),
     zombieHealthMultiplier: calcUpgrade(
       waveConfig.zombieHealthMultiplier,
-      wave
+      wave * players
     ),
     zombieAttackMultiplier: calcUpgrade(
       waveConfig.zombieAttackMultiplier,
