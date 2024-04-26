@@ -12,9 +12,10 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
-import { coinConfig } from "../game/config";
+import { calcUpgrade, coinConfig, playerConfig } from "../game/config";
 import { getMaxHealth } from "../game/player";
 import { prisma } from "../prisma";
+import { PrismaClient } from "@prisma/client";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -51,6 +52,7 @@ export class MyRoom extends Room<MyRoomState> {
 
     if (roomOptions.mapId) {
       roomState.mapId = roomOptions.mapId;
+      const prisma: PrismaClient = new PrismaClient();
     } else {
       const amountVerifiedMaps = await prisma.map.count({
         where: { verified: true },
@@ -327,7 +329,11 @@ export class MyRoom extends Room<MyRoomState> {
           break;
         case "health":
           upgrade.health++;
-          player.health = player.health + 20;
+          player.health += calcUpgrade(
+            playerConfig.healthUpgrade,
+            player.upgrades.health,
+            0
+          );
           break;
         case "speed":
           upgrade.speed++;
