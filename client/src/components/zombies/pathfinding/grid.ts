@@ -91,7 +91,7 @@ export function generateObstaclePathFindingGrid(
   const grid = new Array(width).fill(null).map(() => new Array(height).fill(0));
 
   const paddedObstacles = obstacles.map((body) => {
-    const PADDING = 0 * zombieSizeMultiplier;
+    const PADDING = 10 * zombieSizeMultiplier;
     // we want to add padding around the vertices
     const paddedVertices = offsetPolygon(body.vertices, PADDING);
     return paddedVertices;
