@@ -91,5 +91,5 @@ export type SpawnPoint = z.infer<typeof SpawnPoint>;
 export type AssetCollider = z.infer<typeof AssetCollider>;
 export type ColliderShape = z.infer<typeof ColliderShape>;
 export type BuiltInAsset = z.infer<typeof BuiltInAsset>;
-export type ExternalAsset = z.infer<typeof ExternalAsset>;
+// export type ExternalAsset = z.infer<typeof ExternalAsset>;
 export type AssetSource = z.infer<typeof AssetSource>;
