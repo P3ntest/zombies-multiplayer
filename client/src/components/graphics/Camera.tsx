@@ -62,7 +62,7 @@ export function GenericCamera({
   });
 
   return (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     <Container x={x} y={y} scale={{ x: zoom, y: zoom }} ref={camRef} name={id}>
       <CameraProvider value={{ camera: camRef.current }}>
         {children}

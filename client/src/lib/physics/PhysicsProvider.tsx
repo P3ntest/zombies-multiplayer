@@ -1,6 +1,6 @@
-import Matter, { Engine, Render } from "matter-js";
+import Matter from "matter-js";
 import { useRef, useEffect } from "react";
-import { PhysicsContextProvider, physicsContext } from "./context";
+import { PhysicsContextProvider } from "./context";
 import { PhysicsTicker } from "./ticker";
 
 export function PhysicsProvider({ children }: { children: React.ReactNode }) {

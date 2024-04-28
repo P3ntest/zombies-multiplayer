@@ -9,7 +9,6 @@ import {
 } from "./AssetObjectInstance";
 import { Texture } from "pixi.js";
 import { useMemo } from "react";
-import { produce } from "immer";
 import { SpawnPointDisplay } from "../../editor/MapEditor";
 import { LogtoProvider } from "@logto/react";
 import { logtoConfig } from "../../lib/auth/logto";

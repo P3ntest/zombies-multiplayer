@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { physicsContext } from "./context";
 import Matter, { Composite } from "matter-js";
 

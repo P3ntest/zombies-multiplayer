@@ -1,7 +1,7 @@
 import { Container, Graphics, useTick } from "@pixi/react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { BulletState } from "../../../../server/src/rooms/schema/MyRoomState";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import {
   getBodyMeta,
   useBodyRef,

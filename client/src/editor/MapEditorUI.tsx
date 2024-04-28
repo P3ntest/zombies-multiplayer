@@ -127,7 +127,7 @@ function Inspector() {
     type?: "number" | "text";
     step?: number;
   }) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+     
     const value = (selectedObject as any)[key];
     const displayValue = typeof value === "number" ? value : value;
     return (

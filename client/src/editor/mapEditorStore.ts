@@ -5,7 +5,6 @@ import {
 } from "./../../../server/src/game/mapEditor/editorTypes";
 import { produce } from "immer";
 import { persist } from "zustand/middleware";
-import * as lodash from "lodash";
 interface MapEditorStore {
   level: GameLevel;
   updateObject: (

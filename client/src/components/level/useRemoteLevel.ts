@@ -1,7 +1,6 @@
 import { trpc } from "../../lib/trpc/trpcClient";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useEffect } from "react";
-import { GameLevel } from "../../../../server/src/game/mapEditor/editorTypes";
 
 export function useRemoteLevel(mapId: string | undefined) {
   const level = trpc.maps.loadMap.useQuery(mapId);

@@ -1,5 +1,5 @@
 import { Container, Stage, TilingSprite, useTick } from "@pixi/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { PlayerSprite } from "../player/PlayerSprite";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { Texture } from "pixi.js";

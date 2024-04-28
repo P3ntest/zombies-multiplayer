@@ -1,5 +1,5 @@
 import { mapRouter } from "./mapRouter";
-import { authProcedure, publicProcedure, router } from "./trpc";
+import { authProcedure, router } from "./trpc";
 
 export const appRouter = router({
   testConnection: authProcedure.mutation(() => {

@@ -1,6 +1,5 @@
 import { Client, Room } from "@colyseus/core";
 import { WaveManager } from "../game/WaveManager";
-import { MapID, maps } from "../game/maps";
 import { calculateZombieSpawnType } from "../game/waves";
 import { ZombieType, zombieInfo } from "../game/zombies";
 import {

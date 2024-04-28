@@ -1,8 +1,6 @@
 import { useEditor } from "./mapEditorStore";
-import { useWindowSize } from "usehooks-ts";
-import { Container as PIXIContainer } from "pixi.js";
-import { useTick, Container } from "@pixi/react";
-import { ReactNode, useEffect, useRef } from "react";
+import { useTick } from "@pixi/react";
+import { ReactNode, useEffect } from "react";
 import {
   useControlEventListeners,
   useCurrentPlayerDirection,

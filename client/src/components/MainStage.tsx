@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useApp } from "@pixi/react";
 import { Players } from "./player/Players";
-import { useEffect, useId, useMemo } from "react";
+import { useEffect } from "react";
 import "@pixi/events";
 import { PhysicsProvider } from "../lib/physics/PhysicsProvider";
 import { Bullets } from "./bullets/Bullets";
@@ -21,7 +21,6 @@ import { LevelInstanceRenderer } from "./level/LevelInstanceRenderer";
 import { useCurrentRemoteLevel } from "./level/useRemoteLevel";
 import { LevelProvider } from "./level/levelContext";
 import { useControlEventListeners } from "../lib/useControls";
-import testlevel from "./testlevel.json";
 /**
  * This renders the actual ingame content. It requires to be connected to a game room.
  * It will render the game world and all entities in it, as well as handle UI and Controls
