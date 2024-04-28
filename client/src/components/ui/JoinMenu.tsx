@@ -50,14 +50,14 @@ export function JoinMenu() {
         <h3 className="text-white font-bold text-2xl">Join a game</h3>
         <div className="flex flex-col gap-4 w-80">
           <button
-            className="button"
+            className="btn"
             disabled={connecting}
             onClick={pressQuickPlay}
           >
             QuickPlay
           </button>
           <button
-            className="button"
+            className="btn"
             disabled={connecting}
             onClick={() => {
               setStep("roomSettings");
@@ -67,7 +67,7 @@ export function JoinMenu() {
             Single Player
           </button>
           <button
-            className="button"
+            className="btn"
             disabled={connecting}
             onClick={() => {
               setStep("roomSettings");
@@ -79,7 +79,7 @@ export function JoinMenu() {
           <JoinByIdField />
         </div>
         <button
-          className="button"
+          className="btn"
           onClick={() => {
             navigate("/editor");
           }}
@@ -124,12 +124,12 @@ function JoinByIdField() {
       <div className="w-full flex flex-row justify-stretch gap-4">
         <input
           type="text"
-          className="button flex-1 bg-slate-700 border-slate-800 border-2"
+          className="input flex-1 uppercase"
           placeholder="Room ID"
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
-        <button className="button" onClick={pressJoin}>
+        <button className="btn" onClick={pressJoin}>
           Join
         </button>
       </div>
@@ -186,7 +186,7 @@ function RoomSettings({
         <h3 className="text-white font-bold text-2xl">
           {roomType == "multiPlayer" ? "Room" : "Single Player"} Settings
         </h3>
-        <button onClick={onBack} className="button">
+        <button onClick={onBack} className="btn">
           Back
         </button>
       </div>
@@ -194,7 +194,7 @@ function RoomSettings({
       <div className="flex flex-row items-center gap-3">
         <h4 className="text-white font-bold text-lg">Map: {mapName}</h4>
         <button
-          className="button text-sm p-1 px-2"
+          className="btn text-sm p-1 px-2"
           onClick={() => {
             setMapSelectorOpen(true);
           }}
@@ -203,7 +203,7 @@ function RoomSettings({
         </button>
       </div>
 
-      <button onClick={pressCreate} className="button">
+      <button onClick={pressCreate} className="btn">
         Create Room
       </button>
     </div>

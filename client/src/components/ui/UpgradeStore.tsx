@@ -82,7 +82,7 @@ function StoreModal() {
                 Level: {level} / {upgrade.maxLevel}
               </p>
               <button
-                className="button flex flex-row items-center m-auto"
+                className="btn flex flex-row items-center m-auto"
                 disabled={
                   level >= upgrade.maxLevel ||
                   coins < calcUpgrade(upgrade.cost, level)

@@ -11,6 +11,9 @@ import { Texture } from "pixi.js";
 import { useMemo } from "react";
 import { produce } from "immer";
 import { SpawnPointDisplay } from "../../editor/MapEditor";
+import { LogtoProvider } from "@logto/react";
+import { logtoConfig } from "../../lib/auth/logto";
+import { TrpcWrapper } from "../../lib/trpc/TrpcWrapper";
 
 export function LevelInstanceRenderer({ level }: { level: GameLevel }) {
   return (
@@ -30,33 +33,37 @@ export function MapPreviewRenderer({
 }) {
   //filter out colliders
   const filtered = useMemo(() => {
-    return produce(level, (draft) => {
-      draft.objects.forEach((object) => {
-        if (object.objectType == "asset") {
-          object.colliders = [];
-        }
-      });
-    });
+    return {
+      ...level,
+      objects: level.objects.filter(
+        (object) => object.objectType !== "spawnPoint"
+      ),
+    };
   }, [level]);
+  console.log("filtered", filtered);
   return (
     <Stage raf={false} width={size} height={size}>
-      <Container
-        anchor={{
-          x: 0.5,
-          y: 0.5,
-        }}
-        position={{
-          x: size / 2,
-          y: size / 2,
-        }}
-        scale={{
-          x: 0.1 * (size / 250),
-          y: 0.1 * (size / 250),
-        }}
-      >
-        <TempFloor />
-        <LevelObjects objects={filtered.objects} renderSpawnPoints />
-      </Container>
+      <LogtoProvider config={logtoConfig}>
+        <TrpcWrapper>
+          <Container
+            anchor={{
+              x: 0.5,
+              y: 0.5,
+            }}
+            position={{
+              x: size / 2,
+              y: size / 2,
+            }}
+            scale={{
+              x: 0.1 * (size / 250),
+              y: 0.1 * (size / 250),
+            }}
+          >
+            <TempFloor />
+            <LevelObjects objects={filtered.objects} renderSpawnPoints />
+          </Container>
+        </TrpcWrapper>
+      </LogtoProvider>
     </Stage>
   );
 }
@@ -68,6 +75,7 @@ function LevelObjects({
   objects: MapObject[];
   renderSpawnPoints?: boolean;
 }) {
+  console.log("objects", objects);
   return (
     <Container>
       {objects

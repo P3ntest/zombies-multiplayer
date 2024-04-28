@@ -35,7 +35,7 @@ function ClassSelector() {
     useCharacterCustomizationStore();
 
   return (
-    <div className="flex flex-col items-center gap-4 bg-slate-700 bg-opacity-70 p-10 rounded-xl">
+    <div className="flex flex-col items-center gap-4 p-10 card bg-neutral">
       <h3 className="text-white font-bold text-2xl">Choose your survivor</h3>
 
       <CharacterPreview name={name} selectedClass={selectedClass} />
@@ -44,8 +44,9 @@ function ClassSelector() {
           return (
             <button
               className={twMerge(
-                "button",
-                selectedClass === playerClass && "bg-slate-300 text-slate-900"
+                "btn uppercase",
+                selectedClass !== playerClass && "",
+                selectedClass === playerClass && "btn-primary"
               )}
               key={playerClass}
               onClick={() => setSelectedClass(playerClass)}
@@ -60,7 +61,7 @@ function ClassSelector() {
         value={name}
         onChange={(e) => setName(e.target.value.substring(0, 16))}
         placeholder="Name"
-        className="input button"
+        className="input"
       />
       <AuthSection />
     </div>

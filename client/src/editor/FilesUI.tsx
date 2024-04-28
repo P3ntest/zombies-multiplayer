@@ -21,7 +21,7 @@ export function FileOptions() {
       <div className="flex flex-col gap-2 items-start">
         <div className="flex flex-row items-center gap-2">
           <button
-            className="button"
+            className="btn"
             onClick={async () => {
               const name = prompt("Enter a name for the map");
               await saveMap.mutateAsync({
@@ -54,7 +54,7 @@ export function FileOptions() {
           </button>
         </div>
 
-        <button className="button" onClick={() => setOpenMapOpen(true)}>
+        <button className="btn" onClick={() => setOpenMapOpen(true)}>
           My Maps
         </button>
       </div>
@@ -162,7 +162,7 @@ export function ConfirmButton({
   const [confirm, setConfirm] = useState(false);
   return (
     <button
-      className={twMerge("button", confirm && "bg-red-500 hover:bg-red-700")}
+      className={twMerge("btn", confirm && "bg-red-500 hover:bg-red-700")}
       onClick={() => {
         if (confirm) {
           onClick();

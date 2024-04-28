@@ -8,7 +8,7 @@ export function AuthSection() {
 
   return (
     <button
-      className="button"
+      className="btn"
       onClick={() => signIn(window.location.origin + "/auth/callback")}
     >
       Sign in
@@ -29,7 +29,7 @@ function UserInfo() {
   return (
     <div>
       <button
-        className="button"
+        className="btn"
         onClick={() => {
           signOut(window.location.origin);
         }}
