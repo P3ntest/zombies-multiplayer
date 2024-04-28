@@ -184,10 +184,7 @@ function GameOverScreen() {
           <LeaderBoard gameOver={true} />
         </div>
         <div className="flex flex-col items-center gap-3 mt-5">
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-lg w-3/6"
-            onClick={onLeave}
-          >
+          <button className="btn btn-secondary" onClick={onLeave}>
             Back To Lobby
           </button>
         </div>

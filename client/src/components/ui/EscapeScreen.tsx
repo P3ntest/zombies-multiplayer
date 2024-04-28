@@ -66,10 +66,7 @@ export function EscapeScreen() {
           />
         </div>
         <div className="flex flex-col gap-3 mt-5">
-          <button
-            className="bg-red-500 text-white px-4 py-2 rounded-lg"
-            onClick={onLeave}
-          >
+          <button className="btn btn-secondary" onClick={onLeave}>
             Leave Game
           </button>
         </div>

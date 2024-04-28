@@ -190,9 +190,6 @@ function RoomSettings({
         <h3 className="text-white font-bold text-2xl">
           {roomType == "multiPlayer" ? "Room" : "Single Player"} Settings
         </h3>
-        <button onClick={onBack} className="btn">
-          Back
-        </button>
       </div>
 
       <div className="flex flex-row items-center gap-3">
@@ -207,8 +204,11 @@ function RoomSettings({
         </button>
       </div>
 
-      <button onClick={pressCreate} className="btn">
+      <button onClick={pressCreate} className="btn btn-primary">
         Create Room
+      </button>
+      <button onClick={onBack} className="btn btn-secondary">
+        Back
       </button>
     </div>
   );
