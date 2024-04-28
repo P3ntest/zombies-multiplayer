@@ -26,7 +26,6 @@ export function AssetObjectRendering({
 
   useEffect(() => {
     if (asset.sprite.assetSource === "custom") {
-      console.log("loading custom asset", customAssetUrl);
       Assets.load(customAssetUrl)
         .then(setActualTexture)
         .catch((e) => {

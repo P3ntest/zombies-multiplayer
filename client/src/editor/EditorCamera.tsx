@@ -1,5 +1,5 @@
 import { useEditor } from "./mapEditorStore";
-import { useTick } from "@pixi/react";
+import { useApp, useTick } from "@pixi/react";
 import { ReactNode, useEffect } from "react";
 import {
   useControlEventListeners,
@@ -13,6 +13,7 @@ export function EditorControls() {
   const setCamera = useEditor((state) => state.setCamera);
   const cameraX = useEditor((state) => state.cameraX);
   const cameraY = useEditor((state) => state.cameraY);
+  // const app = useApp();
 
   useEffect(() => {
     const wheelListener = (e: WheelEvent) => {
@@ -25,20 +26,6 @@ export function EditorControls() {
       window.removeEventListener("wheel", wheelListener);
     };
   }, []);
-
-  // useEffect(() => {
-  //   const keyDownListener = (e: KeyboardEvent) => {
-  //     // undo
-  //     if (e.key === "z" && e.ctrlKey) {
-  //       e.preventDefault();
-  //       useEditor.getState().undo();
-  //     }
-  //   };
-  //   window.addEventListener("keydown", keyDownListener);
-  //   return () => {
-  //     window.removeEventListener("keydown", keyDownListener);
-  //   };
-  // }, []);
 
   const dir = useCurrentPlayerDirection(10);
 

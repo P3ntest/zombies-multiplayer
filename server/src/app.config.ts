@@ -6,11 +6,13 @@ import express from "express";
 import { join } from "path";
 import compression from "compression";
 import * as trpcExpress from "@trpc/server/adapters/express";
+import fileUpload from "express-fileupload";
 /**
  * Import your Room files
  */
 import { MyRoom } from "./rooms/MyRoom";
-import { createContext } from "./trpc/context";
+import { createContext, extractUserFromRequest } from "./trpc/context";
+import { handleAssetUpload } from "./trpc/assetRouter";
 
 export default config({
   initializeGameServer: (gameServer) => {
@@ -42,6 +44,24 @@ export default config({
         router: appRouter,
         createContext,
       })
+    );
+
+    app.post(
+      "/createAsset",
+      fileUpload({
+        limits: { fileSize: 10 * 1024 * 1024 }, // 10MB
+      }),
+      async (req, res) => {
+        console.log("uploading file");
+        const user = await extractUserFromRequest(req);
+        if (!user) {
+          return res.status(401).send("Unauthorized");
+        }
+        await handleAssetUpload(user.user.id, req.files?.file as any, {
+          name: req.body.assetName,
+        });
+        res.send("ok");
+      }
     );
 
     /**

@@ -4,6 +4,8 @@ import { useWindowSize } from "usehooks-ts";
 import { TrpcWrapper } from "../../lib/trpc/TrpcWrapper";
 import { logtoConfig } from "../../lib/auth/logto";
 import { LogtoProvider } from "@logto/react";
+import { useClientSettings } from "../ui/soundStore";
+import { FpsTracker } from "../util/FpsDisplay";
 
 export function FullScreenStage({ children }: { children: React.ReactNode }) {
   const windowSize = useWindowSize();
@@ -23,6 +25,8 @@ export function FullScreenStage({ children }: { children: React.ReactNode }) {
     };
   }, []);
 
+  const showFps = useClientSettings((state) => state.showFps);
+
   return (
     <Stage
       options={options}
@@ -36,6 +40,7 @@ export function FullScreenStage({ children }: { children: React.ReactNode }) {
       <LogtoProvider config={logtoConfig}>
         <TrpcWrapper>{children}</TrpcWrapper>
       </LogtoProvider>
+      {showFps && <FpsTracker />}
     </Stage>
   );
 }

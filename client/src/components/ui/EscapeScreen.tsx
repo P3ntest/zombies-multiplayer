@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { useUIStore } from "./uiStore";
 import { disconnectFromColyseus } from "../../colyseus";
-import { useVolumeStore } from "./soundStore";
+import { useClientSettings } from "./soundStore";
 
 export function EscapeScreen() {
-  const { volume, setVolume } = useVolumeStore();
+  const { volume, setVolume } = useClientSettings();
 
   const [open, setOpen] = useState(false);
   const otherMenuOpen = useUIStore(

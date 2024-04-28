@@ -23,6 +23,9 @@ interface MapEditorStore {
   selectedObject: string | null;
   setSelectedObject: (id: string | null) => void;
 
+  currentView: "editor" | "myMaps";
+  setCurrentView: (view: "editor" | "myMaps") => void;
+
   zoom: number;
   cameraX: number;
   cameraY: number;
@@ -96,6 +99,9 @@ export const useEditor = create(
 
       selectedObject: null,
       setSelectedObject: (id) => set({ selectedObject: id }),
+
+      currentView: "editor",
+      setCurrentView: (view) => set({ currentView: view }),
 
       zoom: 1,
       cameraX: 0,
