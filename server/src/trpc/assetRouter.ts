@@ -92,7 +92,12 @@ export const assetRouter = router({
 
 export async function handleAssetUpload(
   userId: string,
-  file: Request["files"]["file"],
+  //@ts-nocheck
+  file: {
+    data: Buffer;
+    mimetype: string;
+    name: string;
+  },
   options: {
     name?: string;
   }

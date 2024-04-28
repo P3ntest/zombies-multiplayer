@@ -12,7 +12,7 @@ import fileUpload from "express-fileupload";
  */
 import { MyRoom } from "./rooms/MyRoom";
 import { createContext, extractUserFromRequest } from "./trpc/context";
-import { handleAssetUpload, handleFileUpload } from "./trpc/assetRouter";
+import { handleAssetUpload } from "./trpc/assetRouter";
 
 export default config({
   initializeGameServer: (gameServer) => {
@@ -57,7 +57,7 @@ export default config({
         if (!user) {
           return res.status(401).send("Unauthorized");
         }
-        await handleAssetUpload(user.user.id, req.files?.file, {
+        await handleAssetUpload(user.user.id, req.files?.file as any, {
           name: req.body.assetName,
         });
         res.send("ok");
