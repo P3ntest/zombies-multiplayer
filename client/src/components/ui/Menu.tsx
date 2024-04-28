@@ -12,7 +12,7 @@ import { AuthSection } from "./mainMenu/AuthSection";
 export function Menu() {
   return (
     <div
-      className="min-h-screen flex flex-row items-center justify-center gap-4 pt-10"
+      className="h-screen flex flex-row items-center justify-center gap-4 pt-10"
       style={{
         backgroundImage: "url('/assets/apocalypseWallpaper.png')",
         backgroundSize: "cover",
@@ -35,7 +35,7 @@ function ClassSelector() {
     useCharacterCustomizationStore();
 
   return (
-    <div className="flex flex-col items-center gap-4 p-10 card bg-neutral">
+    <div className="flex flex-col items-center gap-4 p-10 card bg-neutral bg-opacity-80">
       <h3 className="text-white font-bold text-2xl">Choose your survivor</h3>
 
       <CharacterPreview name={name} selectedClass={selectedClass} />
@@ -61,7 +61,7 @@ function ClassSelector() {
         value={name}
         onChange={(e) => setName(e.target.value.substring(0, 16))}
         placeholder="Name"
-        className="input"
+        className="input uppercase"
       />
       <AuthSection />
     </div>

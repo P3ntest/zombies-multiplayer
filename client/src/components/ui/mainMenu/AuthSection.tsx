@@ -27,7 +27,8 @@ function UserInfo() {
   }, [fetchUserInfo]);
 
   return (
-    <div>
+    <div className="card">
+      <div className="card">Logged in as {userInfo?.name}</div>
       <button
         className="btn"
         onClick={() => {
@@ -36,9 +37,6 @@ function UserInfo() {
       >
         Sign out
       </button>
-      <div className="bg-slate-800 px-3 p-2 rounded text-slate-200 font-bold text-center">
-        Logged in as {userInfo?.name}
-      </div>
     </div>
   );
 }

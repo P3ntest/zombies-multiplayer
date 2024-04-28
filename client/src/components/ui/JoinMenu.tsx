@@ -4,6 +4,7 @@ import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
 import { useNavigate } from "react-router-dom";
 import { MapSelector } from "./mainMenu/MapSelector";
+import { twMerge } from "tailwind-merge";
 
 let connecting = false;
 
@@ -33,7 +34,7 @@ export function JoinMenu() {
 
   if (step === "roomSettings") {
     return (
-      <div className="bg-slate-700 bg-opacity-70 p-10 rounded-xl h-full">
+      <div className="card bg-neutral h-full p-10">
         <RoomSettings
           roomType={selectedRoom}
           onBack={() => {
@@ -45,19 +46,19 @@ export function JoinMenu() {
   }
 
   return (
-    <div className="bg-slate-700 bg-opacity-70 p-10 rounded-xl h-full">
+    <div className="card bg-neutral h-full p-10 bg-opacity-80">
       <div className="w-full flex flex-col items-center gap-10">
         <h3 className="text-white font-bold text-2xl">Join a game</h3>
         <div className="flex flex-col gap-4 w-80">
           <button
-            className="btn"
+            className="btn btn-primary"
             disabled={connecting}
             onClick={pressQuickPlay}
           >
             QuickPlay
           </button>
           <button
-            className="btn"
+            className="btn "
             disabled={connecting}
             onClick={() => {
               setStep("roomSettings");
@@ -121,15 +122,18 @@ function JoinByIdField() {
 
   return (
     <div>
-      <div className="w-full flex flex-row justify-stretch gap-4">
+      <div className="w-full flex flex-row justify-stretch join">
         <input
           type="text"
-          className="input flex-1 uppercase"
+          className="input flex-1 uppercase join-item"
           placeholder="Room ID"
           value={id}
           onChange={(e) => setId(e.target.value)}
         />
-        <button className="btn" onClick={pressJoin}>
+        <button
+          className={twMerge("btn join-item", id && "btn-primary")}
+          onClick={pressJoin}
+        >
           Join
         </button>
       </div>
