@@ -115,7 +115,7 @@ export class MyRoom extends Room<MyRoomState> {
       player.finishedLoading = true;
 
       //TEMP: for testing
-      this.requestSpawnZombie();
+      // this.requestSpawnZombie();
 
       this.checkCanWaveStart();
       this.ensureZombieControl();
