@@ -59,7 +59,11 @@ export function MapPreviewRenderer({
             }}
           >
             <TempFloor />
-            <LevelObjects objects={filtered.objects} renderSpawnPoints />
+            <LevelObjects
+              renderColliders={false}
+              objects={filtered.objects}
+              renderSpawnPoints
+            />
           </Container>
         </TrpcWrapper>
       </LogtoProvider>
@@ -70,9 +74,11 @@ export function MapPreviewRenderer({
 function LevelObjects({
   objects,
   renderSpawnPoints = false,
+  renderColliders = true,
 }: {
   objects: MapObject[];
   renderSpawnPoints?: boolean;
+  renderColliders?: boolean;
 }) {
   return (
     <Container>
@@ -88,6 +94,7 @@ function LevelObjects({
               key={object.id}
               asset={object}
               renderSpawnPoints={renderSpawnPoints}
+              renderColliders={renderColliders}
             />
           );
         })}
@@ -98,15 +105,17 @@ function LevelObjects({
 function LevelObject({
   asset,
   renderSpawnPoints,
+  renderColliders,
 }: {
   asset: MapObject;
   renderSpawnPoints?: boolean;
+  renderColliders?: boolean;
 }) {
   if (asset.objectType == "asset") {
     return (
       <>
         <AssetObjectRendering asset={asset} />
-        <AssetObjectColliders asset={asset} />
+        {renderColliders && <AssetObjectColliders asset={asset} />}
       </>
     );
   } else if (asset.objectType == "spawnPoint" && renderSpawnPoints) {
