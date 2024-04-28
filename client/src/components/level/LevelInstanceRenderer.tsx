@@ -68,15 +68,25 @@ function LevelObjects({
   objects: MapObject[];
   renderSpawnPoints?: boolean;
 }) {
-  return objects.map((object) => {
-    return (
-      <LevelObject
-        key={object.id}
-        asset={object}
-        renderSpawnPoints={renderSpawnPoints}
-      />
-    );
-  });
+  return (
+    <Container>
+      {objects
+        .sort(
+          (a, b) =>
+            (b.objectType == "asset" ? b.height : 0) -
+            (a.objectType == "asset" ? a.height : 0)
+        )
+        .map((object) => {
+          return (
+            <LevelObject
+              key={object.id}
+              asset={object}
+              renderSpawnPoints={renderSpawnPoints}
+            />
+          );
+        })}
+    </Container>
+  );
 }
 
 function LevelObject({
