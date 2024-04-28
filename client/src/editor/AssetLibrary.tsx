@@ -31,10 +31,6 @@ export function AssetLibrary({
 
   return (
     <CenteredFullScreen onClose={onClose}>
-      <UploadAssetModal
-        open={uploadModalOpen}
-        onClose={() => setUploadModalOpen(false)}
-      />
       <div className="p-3 w-96 bg-base-300 card">
         <div className="flex flex-row gap-2">
           <input
@@ -75,6 +71,10 @@ export function AssetLibrary({
           ))}
         </div>
       </div>
+      <UploadAssetModal
+        open={uploadModalOpen}
+        onClose={() => setUploadModalOpen(false)}
+      />
     </CenteredFullScreen>
   );
 }
@@ -119,7 +119,7 @@ function UploadAssetModal({
   return (
     <CenteredFullScreen onClose={onClose}>
       <form
-        className="card bg-base-100 p-4"
+        className="card bg-base-100 p-4 z-40"
         onSubmit={(e) => {
           e.preventDefault();
           onUpload(e);
