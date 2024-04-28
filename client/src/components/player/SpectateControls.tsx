@@ -1,7 +1,5 @@
-import { useApp, useTick } from "@pixi/react";
-import { useContext, useEffect, useState } from "react";
-import { cameraContext } from "../stageContext";
-import { useWindowSize } from "usehooks-ts";
+import { useTick } from "@pixi/react";
+import { useEffect, useState } from "react";
 import { useCurrentPlayerDirection } from "../../lib/useControls";
 import { useCameraStore } from "../graphics/cameraStore";
 

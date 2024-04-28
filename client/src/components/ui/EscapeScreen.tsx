@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useUIStore } from "./uiStore";
-import { disconnectFromColyseus, useColyseusRoom } from "../../colyseus";
+import { disconnectFromColyseus } from "../../colyseus";
 import { useVolumeStore } from "./soundStore";
-import { useNavigate } from "react-router-dom";
 
 export function EscapeScreen() {
   const { volume, setVolume } = useVolumeStore();

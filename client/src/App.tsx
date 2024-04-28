@@ -4,15 +4,11 @@ import { Menu } from "./components/ui/Menu";
 import { useTryJoinByQueryOrReconnectToken } from "./lib/networking/hooks";
 import { useAssetStore, useEnsureAssetsLoaded } from "./assets/assetHandler";
 import { Spinner } from "./components/util/Spinner";
-import { LogtoProvider, useLogto } from "@logto/react";
+import { LogtoProvider } from "@logto/react";
 import { logtoConfig } from "./lib/auth/logto";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
 import { MapEditor } from "./editor/MapEditor";
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { trpc } from "./lib/trpc/trpcClient";
-import { httpBatchLink } from "@trpc/client";
 import { TrpcWrapper } from "./lib/trpc/TrpcWrapper";
 
 const router = createBrowserRouter([

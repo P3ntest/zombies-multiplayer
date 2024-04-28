@@ -1,11 +1,7 @@
 import { CharacterPreview } from "./CharacterPreview";
 import { PlayerClass } from "../../../../server/src/game/player";
-import { Container, Stage } from "@pixi/react";
-import { PlayerSprite } from "../player/PlayerSprite";
 import { twMerge } from "tailwind-merge";
 import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
-import { colyseusClient, setCurrentRoom } from "../../colyseus";
-import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { JoinMenu } from "./JoinMenu";
 import { AuthSection } from "./mainMenu/AuthSection";
 

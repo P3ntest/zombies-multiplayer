@@ -1,4 +1,4 @@
-import { useColyseusRoom, useColyseusState } from "../../colyseus";
+import { useColyseusState } from "../../colyseus";
 import { useNetworkTick } from "../../lib/networking/hooks";
 import { playCoinPickup } from "../../lib/sound/sound";
 

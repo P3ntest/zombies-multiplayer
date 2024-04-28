@@ -2,8 +2,6 @@ import { z } from "zod";
 import { prisma } from "../prisma";
 import { authProcedure, publicProcedure, router } from "./trpc";
 import axios from "axios";
-import { Request, Response } from "express";
-import { extractUserFromRequest } from "./context";
 
 const assetsClient = axios.create({
   baseURL: process.env.ASSETS_SERVICE_URL,
