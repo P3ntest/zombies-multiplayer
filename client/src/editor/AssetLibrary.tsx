@@ -3,6 +3,9 @@ import { CenteredFullScreen } from "../components/ui/uiUtils";
 import { trpc } from "../lib/trpc/trpcClient";
 import { useDebounceValue } from "usehooks-ts";
 import { useCustomAssetBaseUrl } from "./assets/hooks";
+import { backendUrl } from "../lib/trpc/backendUrl";
+import { useLogto } from "@logto/react";
+import { twMerge } from "tailwind-merge";
 
 export function AssetLibrary({
   open,
@@ -32,17 +35,17 @@ export function AssetLibrary({
         open={uploadModalOpen}
         onClose={() => setUploadModalOpen(false)}
       />
-      <div className="bg-slate-700 p-4 rounded-lg w-96">
+      <div className="p-3 w-96 bg-base-300 card">
         <div className="flex flex-row gap-2">
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Search assets"
-            className="bg-slate-600 text-white p-2 rounded-lg w-full mb-4"
+            className="input input-primary flex-1"
           />
           <button
-            className="bg-slate-600 text-white p-2 rounded-lg w-full mb-4 flex-1"
+            className="btn btn-primary"
             onClick={() => {
               setUploadModalOpen(true);
             }}
@@ -83,16 +86,31 @@ function UploadAssetModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const uploadAsset = trpc.maps.assets.uploadAssetFromUrl.useMutation();
+  // const uploadAsset = trpc.maps.assets.uploadAssetFromUrl.useMutation();
   const utils = trpc.useUtils();
+  const { getAccessToken } = useLogto();
+  const [loading, setLoading] = useState(false);
+
+  const [name, setName] = useState("");
 
   const onUpload = async (e: React.FormEvent<HTMLFormElement>) => {
-    // if there is a file the blob has to be converted to base64
-    await uploadAsset.mutateAsync({
-      name: e.currentTarget.assetName.value,
-      externalUrl: e.currentTarget.url.value,
-    });
-    await utils.maps.assets.invalidate();
+    e.preventDefault();
+    setLoading(true);
+    await fetch(`${backendUrl}/createAsset`, {
+      method: "POST",
+      body: new FormData(e.currentTarget),
+      headers: {
+        Authorization: `Bearer ${await getAccessToken(
+          "https://apocalypse.p3ntest.dev/"
+        )}`,
+      },
+    })
+      .then(() => utils.maps.assets.invalidate())
+      .finally(() => {
+        console.log("done");
+        setLoading(false);
+      });
+
     onClose();
   };
 
@@ -101,7 +119,7 @@ function UploadAssetModal({
   return (
     <CenteredFullScreen onClose={onClose}>
       <form
-        className="bg-slate-900 p-4 rounded-lg w-96"
+        className="card bg-base-100 p-4"
         onSubmit={(e) => {
           e.preventDefault();
           onUpload(e);
@@ -110,22 +128,24 @@ function UploadAssetModal({
         <div className="flex flex-col gap-2">
           <h1 className="text-2xl text-white">Upload</h1>
           <input
-            placeholder="URL"
-            type="text"
-            name="url"
-            className="bg-slate-600 text-white p-2 rounded-lg w-full"
+            type="file"
+            className="file-input file-input-secondary"
+            name="file"
           />
-          <h2 className="text-2xl text-white">Data</h2>
           <input
             type="text"
             name="assetName"
-            className="bg-slate-600 text-white p-2 rounded-lg w-full"
+            className="input input-secondary"
             placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <button
-            className="bg-slate-600 text-white p-2 rounded-lg w-full"
+            className={twMerge("btn btn-primary")}
             type="submit"
+            disabled={loading || !name}
           >
+            {loading && <span className="loading loading-spinner"></span>}
             Upload
           </button>
         </div>

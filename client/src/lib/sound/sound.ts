@@ -1,6 +1,6 @@
 import { Assets } from "pixi.js";
 import { PlayerClass } from "../../../../server/src/game/player";
-import { useVolumeStore } from "../../components/ui/soundStore";
+import { useClientSettings } from "../../components/ui/soundStore";
 import { Sound } from "@pixi/sound";
 
 export function playSound(
@@ -9,7 +9,7 @@ export function playSound(
     volume: number;
   }>
 ) {
-  const { volume } = useVolumeStore.getState();
+  const { volume } = useClientSettings.getState();
   Assets.load(path).then((s: Sound | null) => {
     if (!s) throw new Error("Sound not found " + path);
 

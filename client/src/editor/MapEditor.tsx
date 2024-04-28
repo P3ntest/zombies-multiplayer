@@ -9,26 +9,24 @@ import { MapEditorUI } from "./MapEditorUI";
 import { spriteSheets } from "../assets/assetHandler";
 import { TempFloor } from "../components/level/LevelInstanceRenderer";
 import { LevelObject } from "./LevelObject";
-import { FpsTracker } from "../components/util/FpsDisplay";
 
 export function MapEditor() {
   return (
     <div>
-      <MapEditorUI />
-      <FullScreenStage>
-        <EditorCamera>
-          <TempFloor />
-          <EditorControls />
-          <VisualObjectsEditor />
-        </EditorCamera>
-        <FpsTracker />
-      </FullScreenStage>
+      <MapEditorUI>
+        <FullScreenStage>
+          <EditorCamera>
+            <TempFloor />
+            <EditorControls />
+            <VisualObjectsEditor />
+          </EditorCamera>
+        </FullScreenStage>
+      </MapEditorUI>
     </div>
   );
 }
 
 function VisualObjectsEditor() {
-  console.time("VisualObjectsEditor");
   const objects = useEditor((state) => state.level.objects);
   useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
@@ -55,7 +53,6 @@ function VisualObjectsEditor() {
       })}
     </Container>
   );
-  console.timeEnd("VisualObjectsEditor");
   return returning;
 }
 

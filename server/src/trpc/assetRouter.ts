@@ -2,6 +2,7 @@ import { z } from "zod";
 import { prisma } from "../prisma";
 import { authProcedure, publicProcedure, router } from "./trpc";
 import axios from "axios";
+import { Request } from "express";
 
 const assetsClient = axios.create({
   baseURL: process.env.ASSETS_SERVICE_URL,
@@ -88,3 +89,34 @@ export const assetRouter = router({
       return uploadId.id;
     }),
 });
+
+export async function handleAssetUpload(
+  userId: string,
+  file: Request["files"]["file"],
+  options: {
+    name?: string;
+  }
+) {
+  if (Array.isArray(file)) {
+    file = file[0];
+  }
+  // the same as above but with a file
+  console.log("Generating Asset from file");
+  const formData = new FormData();
+  const buffer = file.data;
+  const blob = new Blob([buffer], { type: file.mimetype });
+  formData.append("file", blob, file.name);
+  const response = await assetsClient.post("/upload", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+  await prisma.customAsset.create({
+    data: {
+      uploadId: response.data.id,
+      name: options.name ?? file.name,
+      uploadedById: userId,
+    },
+  });
+  console.log("Generated Asset", response.data.id, options.name ?? file.name);
+}

@@ -74,7 +74,6 @@ function LevelObjects({
   objects: MapObject[];
   renderSpawnPoints?: boolean;
 }) {
-  console.log("objects", objects);
   return (
     <Container>
       {objects

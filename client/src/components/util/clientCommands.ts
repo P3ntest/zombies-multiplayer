@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { disconnectFromColyseus, useColyseusState } from "../../colyseus";
 import { trpc } from "../../lib/trpc/trpcClient";
+import { useClientSettings } from "../ui/soundStore";
 
 export function useClientCommandInterceptor(
   respond: ({ message }: { message: string; color?: string }) => void
@@ -20,6 +21,9 @@ export function useClientCommandInterceptor(
           break;
         case "test":
           testConnection.mutateAsync().then((msg) => respond({ message: msg }));
+          break;
+        case "showfps":
+          useClientSettings.getState().setShowFps(true);
           break;
         case "verifymap":
           if (!currentMapId) {

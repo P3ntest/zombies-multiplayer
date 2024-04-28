@@ -3,9 +3,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink } from "@trpc/client";
 import { ReactNode, useState } from "react";
 import { trpc } from "./trpcClient";
-
-const url =
-  window.location.hostname === "localhost" ? "http://localhost:2567" : "";
+import { backendUrl } from "./backendUrl";
 
 export function TrpcWrapper({ children }: { children: ReactNode }) {
   const { getAccessToken } = useLogto();
@@ -15,7 +13,7 @@ export function TrpcWrapper({ children }: { children: ReactNode }) {
     trpc.createClient({
       links: [
         httpBatchLink({
-          url: `${url}/trpc`,
+          url: `${backendUrl}/trpc`,
           async headers() {
             return {
               authorization:
