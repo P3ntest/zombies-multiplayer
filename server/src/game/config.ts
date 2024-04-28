@@ -70,15 +70,19 @@ export const weaponConfig = {
   },
 };
 
+export const skillPointConfig = {
+  multiplier: 1,
+};
+
 export const upgradeConfig = [
   {
     id: "damage",
     name: "Damage",
     maxLevel: 10,
     cost: {
-      type: "exp",
-      factor: 3,
-      base: 30,
+      type: "lin",
+      factor: 1,
+      base: 1,
     } as UpgradeCalc,
   },
   {
@@ -86,9 +90,9 @@ export const upgradeConfig = [
     name: "Fire Rate",
     maxLevel: 5,
     cost: {
-      type: "exp",
-      factor: 3,
-      base: 30,
+      type: "lin",
+      factor: 1,
+      base: 1,
     } as UpgradeCalc,
   },
   {
@@ -96,9 +100,9 @@ export const upgradeConfig = [
     name: "Pierce",
     maxLevel: 5,
     cost: {
-      type: "exp",
-      factor: 3,
-      base: 50,
+      type: "lin",
+      factor: 2,
+      base: 2,
     } as UpgradeCalc,
   },
   {
@@ -106,9 +110,9 @@ export const upgradeConfig = [
     name: "Health",
     maxLevel: 5,
     cost: {
-      type: "exp",
-      factor: 3,
-      base: 20,
+      type: "lin",
+      factor: 1,
+      base: 1,
     } as UpgradeCalc,
   },
   {
@@ -116,9 +120,9 @@ export const upgradeConfig = [
     name: "Speed",
     maxLevel: 3,
     cost: {
-      type: "exp",
-      factor: 3,
-      base: 60,
+      type: "lin",
+      factor: 2,
+      base: 2,
     } as UpgradeCalc,
   },
   {
@@ -126,16 +130,12 @@ export const upgradeConfig = [
     name: "Scope",
     maxLevel: 3,
     cost: {
-      type: "exp",
-      factor: 4,
-      base: 60,
+      type: "lin",
+      factor: 3,
+      base: 3,
     } as UpgradeCalc,
   },
 ];
-
-export const coinConfig = {
-  spawnMultiplier: 0.08,
-};
 
 export const waveConfig = {
   zombies: {

@@ -10,7 +10,6 @@ import {
 import { useBodyRef } from "../../lib/physics/hooks";
 import { playHurtSound } from "../../lib/sound/sound";
 import { useCurrentPlayerDirection } from "../../lib/useControls";
-import { useCheckCollectCoins } from "../coins/coinLogic";
 import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
@@ -44,8 +43,6 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
       playHurtSound();
     }
   });
-
-  useCheckCollectCoins(x, y);
 
   useTick(() => {
     const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;

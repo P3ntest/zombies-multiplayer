@@ -12,7 +12,6 @@ import {
 } from "../lib/networking/hooks";
 import { ZombieSpawner } from "./zombies/ZombieSpawner";
 import { GameUI } from "./ui/GameUI";
-import { Coins } from "./coins/Coins";
 import { BloodManager } from "./effects/Blood";
 import { GameCamera } from "./graphics/Camera";
 import { PlayerSpawner } from "./player/PlayerSpawner";
@@ -22,7 +21,7 @@ import { useCurrentRemoteLevel } from "./level/useRemoteLevel";
 import { LevelProvider } from "./level/levelContext";
 import { useControlEventListeners } from "../lib/useControls";
 /**
- * This renders the actual ingame content. It requires to be connected to a game room.
+ * This renders the actual in game content. It requires to be connected to a game room.
  * It will render the game world and all entities in it, as well as handle UI and Controls
  */
 export const MainStage = () => {
@@ -45,7 +44,6 @@ export const MainStage = () => {
                   <ZombieSpawner />
                   <PlayerSpawner />
                   <LevelInstanceRenderer level={level as any} />
-                  <Coins />
                   <BloodManager />
                   <Zombies />
                   <Bullets />

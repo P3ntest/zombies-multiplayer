@@ -64,15 +64,6 @@ export function playZombieGrowl(volume: number = 1) {
   });
 }
 
-const coins = new Array(56)
-  .fill(0)
-  .map(
-    (_, i) => `/assets/sounds/coins/Coins_Single_${i < 10 ? "0" : ""}${i}.mp3`
-  );
-export function playCoinPickup() {
-  playSound(coins[Math.floor(Math.random() * coins.length)]);
-}
-
 export function playSplat() {
   playSound("/assets/sounds/splat.ogg");
 }

@@ -55,7 +55,7 @@ export function GameUI() {
       {waveTitle && <WaveTitle title={waveTitle} key={waveTitle} />}
       {gameOver && <GameOverScreen />}
       <WaveInfo />
-      <CoinInfo />
+      <SkillPointInfo />
       <UpgradeStore />
       <EscapeScreen />
       <Chat />
@@ -64,9 +64,9 @@ export function GameUI() {
   );
 }
 
-function CoinInfo() {
+function SkillPointInfo() {
   const me = useSelf();
-  const coins = me?.coins ?? 0;
+  const skillPoints = me?.skillPoints ?? 0;
   return (
     <div
       style={{
@@ -81,18 +81,18 @@ function CoinInfo() {
       }}
       className="ui-text flex flex-row items-center gap-2"
     >
-      {coins} <CoinSymbol />
+      {skillPoints} <SkillPointSymbol />
     </div>
   );
 }
 
-export function CoinSymbol() {
+export function SkillPointSymbol() {
   return (
     <img
-      src="assets/coin.png"
+      src="assets/ui/skillPoint.png"
       style={{
-        width: "1.2rem",
-        height: "1.2rem",
+        width: "2.5rem",
+        height: "2.5rem",
       }}
       alt=""
     />

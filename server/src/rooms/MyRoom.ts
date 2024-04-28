@@ -4,14 +4,13 @@ import { calculateZombieSpawnType } from "../game/waves";
 import { ZombieType, zombieInfo } from "../game/zombies";
 import {
   BulletState,
-  CoinState,
   MyRoomState,
   PlayerHealthState,
   PlayerState,
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
-import { calcUpgrade, coinConfig, playerConfig } from "../game/config";
+import { calcUpgrade, playerConfig } from "../game/config";
 import { getMaxHealth } from "../game/player";
 import { prisma } from "../prisma";
 import { PrismaClient } from "@prisma/client";
@@ -64,7 +63,6 @@ export class MyRoom extends Room<MyRoomState> {
       });
       if (!selectedMap) {
         throw new Error("No verified maps found.");
-        return;
       }
       await prisma.map.update({
         where: { id: selectedMap.id },
@@ -295,28 +293,12 @@ export class MyRoom extends Room<MyRoomState> {
       this.state.zombies.push(zombie);
     });
 
-    this.onMessage("collectCoinBatch", (client, message) => {
-      const ids = message;
-      for (const id of ids) {
-        const coinIndex = this.state.coins.findIndex((c) => c.id === id);
-        if (coinIndex === -1) return;
-        const coin = this.state.coins[coinIndex];
-
-        // give it to all players
-        this.state.players.forEach((player) => {
-          player.coins += coin.value;
-        });
-
-        this.state.coins.splice(coinIndex, 1);
-      }
-    });
-
     this.onMessage("buyUpgrade", (client, message) => {
-      const { upgradeType, coins } = message;
+      const { upgradeType, skillPoints } = message;
       const player = this.state.players.get(client.id);
       if (!player) return;
-      if (player.coins < coins) return;
-      player.coins -= coins;
+      if (player.skillPoints < skillPoints) return;
+      player.skillPoints -= skillPoints;
       const upgrade = player.upgrades;
 
       switch (upgradeType) {
@@ -358,7 +340,6 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   highestZombieId = 0;
-  highestCoinId = 0;
   highestBulletId = 0;
 
   updateZombie(message: any) {
@@ -402,13 +383,6 @@ export class MyRoom extends Room<MyRoomState> {
     const zombie = this.state.zombies.find((z) => z.id === zombieId);
     this.state.zombies = this.state.zombies.filter((z) => z.id !== zombieId);
     this.waveManager.checkWaveEnd();
-    this.spawnCoins(
-      zombie.x,
-      zombie.y,
-      Math.floor(
-        Math.random() * zombie.maxHealth * coinConfig.spawnMultiplier
-      ) + 1
-    );
     this.broadcast("blood", {
       x: zombie.x,
       y: zombie.y,
@@ -525,32 +499,6 @@ export class MyRoom extends Room<MyRoomState> {
   removePlayerFromGame(id: string) {
     this.state.players.delete(id);
     this.removeOrphanBullets();
-  }
-
-  spawnCoins(x: number, y: number, amount: number) {
-    // dynamically create combusted coins with 10x the value.
-    // ex: 11111 -> 10000 + 1000 + 100 + 10 + 1
-    amount = Math.floor(amount);
-    let coinValue = amount;
-    let coins = [];
-    const highestDigit = Math.floor(Math.log10(amount));
-    for (let i = highestDigit; i >= 0; i--) {
-      const digitValue = Math.pow(10, i);
-      while (coinValue >= digitValue) {
-        coinValue -= digitValue;
-        coins.push(digitValue);
-      }
-    }
-
-    const spreadRadius = 10 + Math.sqrt(coins.length) * 10;
-    for (const value of coins) {
-      const coin = new CoinState();
-      coin.id = this.highestCoinId++;
-      coin.x = x + Math.random() * spreadRadius * 2 - spreadRadius;
-      coin.y = y + Math.random() * spreadRadius * 2 - spreadRadius;
-      coin.value = value;
-      this.state.coins.push(coin);
-    }
   }
 
   onDispose() {

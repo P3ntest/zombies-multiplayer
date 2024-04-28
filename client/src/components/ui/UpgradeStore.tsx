@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useSelf } from "../../lib/networking/hooks";
-import { CoinSymbol } from "./GameUI";
+import { SkillPointSymbol } from "./GameUI";
 import { useUIStore } from "./uiStore";
 import { calcUpgrade, upgradeConfig } from "../../../../server/src/game/config";
 
@@ -52,7 +52,7 @@ function StoreModal() {
   const sessionId = useSelf()?.sessionId;
 
   const upgrades = state?.players?.get(sessionId!)?.upgrades ?? {};
-  const coins = state?.players?.get(sessionId!)?.coins ?? 0;
+  const skillPoints = state?.players?.get(sessionId!)?.skillPoints ?? 0;
 
   const room = useColyseusRoom();
 
@@ -85,12 +85,12 @@ function StoreModal() {
                 className="btn flex flex-row items-center m-auto"
                 disabled={
                   level >= upgrade.maxLevel ||
-                  coins < calcUpgrade(upgrade.cost, level)
+                  skillPoints < calcUpgrade(upgrade.cost, level)
                 }
                 onClick={() => {
                   room?.send("buyUpgrade", {
                     upgradeType: upgrade.id,
-                    coins: calcUpgrade(upgrade.cost, level),
+                    skillPoints: calcUpgrade(upgrade.cost, level),
                   });
                 }}
               >
@@ -108,18 +108,18 @@ function StoreModal() {
   );
 }
 
-function ButtonContent(upgardeCost: number, level: number, maxLevel: number) {
+function ButtonContent(upgradeCost: number, level: number, maxLevel: number) {
   if (level >= maxLevel) {
     return <div>MAX</div>;
   }
-  if (upgardeCost === 0) {
+  if (upgradeCost === 0) {
     return <div>Free</div>;
   }
   return (
     <div className="flex flex-row items-center ">
-      <div>{upgardeCost}</div>
+      <div>{upgradeCost}</div>
       <div className="pl-1 pr-2">
-        <CoinSymbol />
+        <SkillPointSymbol />
       </div>
       <div>Upgrade</div>
     </div>

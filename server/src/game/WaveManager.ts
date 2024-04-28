@@ -3,6 +3,7 @@ import { MyRoom } from "../rooms/MyRoom";
 import { generateWave } from "./waves";
 import { PlayerHealthState } from "../rooms/schema/MyRoomState";
 import { getMaxHealth } from "./player";
+import { skillPointConfig } from "./config";
 
 export class WaveManager {
   constructor(private room: MyRoom) {}
@@ -59,9 +60,19 @@ export class WaveManager {
       wave: this.currentWaveNumber,
     });
 
+    this.room.broadcastChat(
+      `Wave ${this.currentWaveNumber} survived! You all get ${Math.floor(
+        this.currentWaveNumber * skillPointConfig.multiplier
+      )} skill points.`,
+      "#ffff33"
+    );
+
     this.room.state.waveInfo.active = false;
 
     for (const player of this.room.state.players.values()) {
+      player.skillPoints += Math.floor(
+        this.currentWaveNumber * skillPointConfig.multiplier
+      );
       if (player.healthState === PlayerHealthState.DEAD) {
         this.room.revivePlayer(player.sessionId);
       } else if (player.healthState === PlayerHealthState.NOT_SPAWNED) {

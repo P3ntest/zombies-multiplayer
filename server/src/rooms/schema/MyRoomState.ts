@@ -34,7 +34,7 @@ export class PlayerState extends Schema {
   @type("uint32") health: number = playerConfig.startingHealth;
   @type("uint8") healthState: number = PlayerHealthState.NOT_SPAWNED;
 
-  @type("uint32") coins: number = 0;
+  @type("uint32") skillPoints: number = 0;
 
   @type("string") playerClass: PlayerClass = "pistol";
 
@@ -85,13 +85,6 @@ export class WaveInfoState extends Schema {
   @type("uint16") nextWaveStartsInSec: number = 0;
 }
 
-export class CoinState extends Schema {
-  @type("uint32") id: number = 0;
-  @type("int32") x: number = 0;
-  @type("int32") y: number = 0;
-  @type("uint32") value: number = 1;
-}
-
 export class MyRoomState extends Schema {
   @type({
     map: PlayerState,
@@ -113,11 +106,6 @@ export class MyRoomState extends Schema {
 
   @type(WaveInfoState)
   waveInfo = new WaveInfoState();
-
-  @type({
-    array: CoinState,
-  })
-  coins = new ArraySchema<CoinState>();
 
   @type("boolean")
   isGameOver = false;

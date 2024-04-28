@@ -21,14 +21,6 @@
         },
         {
           "alias": [
-            "coin.png"
-          ],
-          "src": [
-            "coin.png"
-          ]
-        },
-        {
-          "alias": [
             "dogtag.png"
           ],
           "src": [
@@ -977,6 +969,14 @@
           ],
           "src": [
             "sounds/zombieDeath.wav"
+          ]
+        },
+        {
+          "alias": [
+            "ui/skillPoint.png"
+          ],
+          "src": [
+            "ui/skillPoint.png"
           ]
         },
         {
