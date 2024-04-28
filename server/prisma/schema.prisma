@@ -17,8 +17,9 @@ model User {
   id   String @id
   name String
 
-  maps             Map[]
-  scopePermissions String[]
+  maps                 Map[]
+  scopePermissions     String[]
+  uploadedCustomAssets CustomAsset[]
 }
 
 model Map {
@@ -36,4 +37,17 @@ model Map {
 
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
+}
+
+model CustomAsset {
+  id          String   @id @default(cuid())
+  uploadId    String
+  name        String
+  description String?
+  tags        String[]
+
+  verified Boolean @default(false)
+
+  uploadedBy   User?   @relation(fields: [uploadedById], references: [id])
+  uploadedById String?
 }

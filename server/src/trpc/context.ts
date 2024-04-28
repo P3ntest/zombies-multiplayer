@@ -1,19 +1,20 @@
 import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { prisma } from "../prisma";
+import { Request } from "express";
 
 const jwks = createRemoteJWKSet(
   new URL("https://zombies-auth.p3ntest.dev/oidc/jwks")
 );
 
-export const createContext = async (opts: CreateExpressContextOptions) => {
-  if (!opts.req.headers.authorization) {
+export async function extractUserFromRequest(req: Request) {
+  if (!req.headers.authorization) {
     return null;
   }
-  if (!opts.req.headers.authorization.startsWith("Bearer ")) {
+  if (!req.headers.authorization.startsWith("Bearer ")) {
     return null;
   }
-  const token = opts.req.headers.authorization.replace("Bearer ", "");
+  const token = req.headers.authorization.replace("Bearer ", "");
 
   const { payload } = await jwtVerify(token, jwks, {
     // Expected issuer of the token, issued by the Logto server
@@ -46,4 +47,8 @@ export const createContext = async (opts: CreateExpressContextOptions) => {
   return {
     user,
   };
+}
+
+export const createContext = async (opts: CreateExpressContextOptions) => {
+  return await extractUserFromRequest(opts.req);
 };

@@ -7,12 +7,15 @@ import { Texture, Assets } from "pixi.js";
 import { ComponentProps, useEffect, useMemo, useState } from "react";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { Bodies } from "matter-js";
+import { useCustomAsset } from "../../editor/assets/hooks";
 
 export function AssetObjectRendering({
   asset,
   ...spriteProps
 }: { asset: AssetObject } & Partial<ComponentProps<typeof Sprite>> &
   Partial<ComponentProps<typeof TilingSprite>>) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const customAssetUrl = useCustomAsset((asset.sprite as any).uploadId);
   const missingTexture = useMemo(() => {
     return Texture.from("/assets/editor/missing.png");
   }, []);
@@ -22,13 +25,24 @@ export function AssetObjectRendering({
   );
 
   useEffect(() => {
-    Assets.load(asset.sprite.assetPath)
-      .then(setActualTexture)
-      .catch(() => {
-        setActualTexture(missingTexture);
-        console.error("Failed to load asset", asset.sprite.assetPath);
-      });
-  }, [asset.sprite, missingTexture]);
+    if (asset.sprite.assetSource === "custom") {
+      console.log("loading custom asset", customAssetUrl);
+      Assets.load(customAssetUrl)
+        .then(setActualTexture)
+        .catch((e) => {
+          console.error(e);
+          setActualTexture(missingTexture);
+          console.error("Failed to load asset", customAssetUrl);
+        });
+    } else if (asset.sprite.assetSource === "builtIn") {
+      Assets.load(asset.sprite.assetPath)
+        .then(setActualTexture)
+        .catch(() => {
+          setActualTexture(missingTexture);
+          console.error("Failed to load asset");
+        });
+    }
+  }, [asset.sprite, missingTexture, customAssetUrl]);
 
   const common = useMemo(
     () => ({

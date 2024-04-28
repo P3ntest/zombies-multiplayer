@@ -2,6 +2,7 @@ import { z } from "zod";
 import { prisma } from "../prisma";
 import { authProcedure, publicProcedure, router } from "./trpc";
 import { GameLevel } from "../game/mapEditor/editorTypes";
+import { assetRouter } from "./assetRouter";
 
 export type MapInfo = {
   id: string;
@@ -12,6 +13,7 @@ export type MapInfo = {
 };
 
 export const mapRouter = router({
+  assets: assetRouter,
   loadMap: publicProcedure.input(z.string()).query(async ({ input }) => {
     const map = await prisma.map.findUnique({
       where: {

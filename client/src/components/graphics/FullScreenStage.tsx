@@ -1,6 +1,9 @@
 import { Stage } from "@pixi/react";
 import { useMemo } from "react";
 import { useWindowSize } from "usehooks-ts";
+import { TrpcWrapper } from "../../lib/trpc/TrpcWrapper";
+import { logtoConfig } from "../../lib/auth/logto";
+import { LogtoProvider } from "@logto/react";
 
 export function FullScreenStage({ children }: { children: React.ReactNode }) {
   const windowSize = useWindowSize();
@@ -30,7 +33,9 @@ export function FullScreenStage({ children }: { children: React.ReactNode }) {
         windowSize.height && windowSize.height > 0 ? windowSize.height : 600
       }
     >
-      {children}
+      <LogtoProvider config={logtoConfig}>
+        <TrpcWrapper>{children}</TrpcWrapper>
+      </LogtoProvider>
     </Stage>
   );
 }

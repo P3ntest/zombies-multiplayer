@@ -10,6 +10,9 @@ import { twMerge } from "tailwind-merge";
 
 import { FileOptions } from "./FilesUI";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { AssetLibrary } from "./AssetLibrary";
+import { useCustomAsset } from "./assets/hooks";
 export function MapEditorUI() {
   return (
     <div
@@ -64,8 +67,8 @@ function CreatePanel() {
                 scale: 1,
                 tiling: false,
                 sprite: {
-                  assetSource: "builtIn",
-                  assetPath: "/assets/editor/missing.png",
+                  assetSource: "custom",
+                  uploadId: "",
                 },
               })
             }
@@ -200,30 +203,40 @@ function Inspector() {
                 className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
               />
             </div>
-            <div className="flex flex-row gap-2">
-              <div>
+            <div className="flex flex-row gap-2 justify-stretch">
+              <div className="flex flex-col justify-stretch flex-1">
                 <h2 className="text-white font-bold text-lg mb-1">Rotation</h2>
 
                 <input
-                  type="text"
-                  className="input"
+                  type="range"
                   value={Math.floor(selectedObject.rotation * (180 / Math.PI))}
+                  min={0}
+                  max={360}
+                  step={1}
                   onChange={(e) => {
                     const value = Math.floor(parseFloat(e.target.value)) || 0;
                     updateObject(selectedObject.id, {
                       rotation: value * (Math.PI / 180),
                     });
                   }}
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                 />
               </div>
-              <div>
+              <div className="flex flex-col justify-stretch flex-1">
                 <h2 className="text-white font-bold text-lg mb-1">Scale</h2>
-
-                {field({
-                  key: "scale",
-                  type: "number",
-                  step: 0.1,
-                })}
+                <input
+                  type="range"
+                  value={selectedObject.scale}
+                  min={0.04}
+                  max={5}
+                  step={0.01}
+                  onChange={(e) =>
+                    updateObject(selectedObject.id, {
+                      scale: parseFloat(e.target.value),
+                    } as any)
+                  }
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                />
               </div>
             </div>
             <h2 className="text-white font-bold text-lg mb-1">Tiling</h2>
@@ -266,7 +279,6 @@ function Inspector() {
                 </div>
               </div>
             )}
-            <h2 className="text-white font-bold text-lg mb-1">Sprite Source</h2>
             <SourceEditor
               source={selectedObject.sprite}
               setSource={(source) =>
@@ -317,22 +329,64 @@ function SourceEditor({
   source: AssetSource;
   setSource: (source: AssetSource) => void;
 }) {
-  if (source.assetSource == "builtIn") {
-    return (
-      <div>
-        <input
-          type="text"
-          value={source.assetPath}
-          className="input"
-          onChange={(e) => {
-            setSource({ ...source, assetPath: e.target.value });
-          }}
-        />
-      </div>
-    );
-  }
+  const customAssetUrl = useCustomAsset((source as any).uploadId);
+  const [libraryOpen, setLibraryOpen] = useState(false);
 
-  return null;
+  return (
+    <div>
+      <h2 className="text-white font-bold text-lg mb-1">Source</h2>
+      <select
+        value={source.assetSource}
+        className="input"
+        onChange={(e) => {
+          setSource({ assetSource: e.target.value } as any);
+        }}
+      >
+        <option value="builtIn">Built In</option>
+        <option value="custom">Custom</option>
+      </select>
+      {source.assetSource == "builtIn" ? (
+        <div>
+          <input
+            type="text"
+            value={source.assetPath}
+            className="input"
+            onChange={(e) => {
+              setSource({ ...source, assetPath: e.target.value });
+            }}
+          />
+        </div>
+      ) : (
+        <div>
+          <AssetLibrary
+            open={libraryOpen}
+            onClose={() => setLibraryOpen(false)}
+            onSelect={(id) => {
+              setSource({ assetSource: "custom", uploadId: id });
+              setLibraryOpen(false);
+            }}
+          />
+          <div className="flex flex-row gap-3 items-center">
+            {source.uploadId && (
+              <img
+                src={customAssetUrl}
+                className="rounded-lg w-40 h-40"
+                alt=""
+              />
+            )}
+            <button
+              className="button"
+              onClick={() => {
+                setLibraryOpen(true);
+              }}
+            >
+              Select Asset
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function ColliderEditor() {

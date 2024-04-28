@@ -49,6 +49,11 @@ export const BuiltInAsset = z.object({
   assetPath: z.string(),
 });
 
+export const CustomAsset = z.object({
+  assetSource: z.literal("custom"),
+  uploadId: z.string(),
+});
+
 // export const ExternalAsset = z.object({
 //   assetSource: z.literal("external"),
 //   assetUrl: z.string(),
@@ -56,6 +61,7 @@ export const BuiltInAsset = z.object({
 
 export const AssetSource = z.discriminatedUnion("assetSource", [
   BuiltInAsset,
+  CustomAsset,
   // ExternalAsset,
 ]);
 
@@ -94,5 +100,6 @@ export type SpawnPoint = z.infer<typeof SpawnPoint>;
 export type AssetCollider = z.infer<typeof AssetCollider>;
 export type ColliderShape = z.infer<typeof ColliderShape>;
 export type BuiltInAsset = z.infer<typeof BuiltInAsset>;
+export type CustomAsset = z.infer<typeof CustomAsset>;
 // export type ExternalAsset = z.infer<typeof ExternalAsset>;
 export type AssetSource = z.infer<typeof AssetSource>;
