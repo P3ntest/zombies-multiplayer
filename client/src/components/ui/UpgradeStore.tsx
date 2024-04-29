@@ -3,7 +3,10 @@ import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { useSelf } from "../../lib/networking/hooks";
 import { SkillPointSymbol } from "./GameUI";
 import { useUIStore } from "./uiStore";
-import { calcUpgrade, upgradeConfig } from "../../../../server/src/game/config";
+import {
+  callWaveBasedFunction,
+  upgradeConfig,
+} from "../../../../server/src/game/config";
 
 export function UpgradeStore() {
   const { buyMenuOpen: open, setBuyMenuOpen: setOpen } = useUIStore();
@@ -85,17 +88,17 @@ function StoreModal() {
                 className="btn flex flex-row items-center m-auto"
                 disabled={
                   level >= upgrade.maxLevel ||
-                  skillPoints < calcUpgrade(upgrade.cost, level)
+                  skillPoints < callWaveBasedFunction(upgrade.cost, level)
                 }
                 onClick={() => {
                   room?.send("buyUpgrade", {
                     upgradeType: upgrade.id,
-                    skillPoints: calcUpgrade(upgrade.cost, level),
+                    skillPoints: callWaveBasedFunction(upgrade.cost, level),
                   });
                 }}
               >
                 {ButtonContent(
-                  calcUpgrade(upgrade.cost, level),
+                  callWaveBasedFunction(upgrade.cost, level),
                   level,
                   upgrade.maxLevel
                 )}

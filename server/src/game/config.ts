@@ -2,15 +2,15 @@ export const playerConfig = {
   healthUpgrade: {
     type: "lin",
     factor: 80,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   speedUpgrade: {
     type: "lin",
     factor: 0.3,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   zoomUpgrade: {
     type: "lin",
     factor: 0.625,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   startingHealth: 100,
   baseZoom: 1.25,
   baseSpeed: 1,
@@ -20,15 +20,15 @@ export const weaponConfig = {
   damageUpgrade: {
     type: "exp",
     factor: 1.4,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   fireRateUpgrade: {
     type: "exp",
     factor: 1.2,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   pierceUpgrade: {
     type: "add",
     factor: 1,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   weapons: {
     pistol: {
       //4800 dmg per second
@@ -83,7 +83,7 @@ export const upgradeConfig = [
       type: "lin",
       factor: 1,
       base: 1,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
   {
     id: "fireRate",
@@ -93,7 +93,7 @@ export const upgradeConfig = [
       type: "lin",
       factor: 1,
       base: 1,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
   {
     id: "pierce",
@@ -103,7 +103,7 @@ export const upgradeConfig = [
       type: "lin",
       factor: 2,
       base: 2,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
   {
     id: "health",
@@ -113,7 +113,7 @@ export const upgradeConfig = [
       type: "lin",
       factor: 1,
       base: 1,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
   {
     id: "speed",
@@ -123,7 +123,7 @@ export const upgradeConfig = [
       type: "lin",
       factor: 2,
       base: 2,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
   {
     id: "scope",
@@ -133,16 +133,17 @@ export const upgradeConfig = [
       type: "lin",
       factor: 3,
       base: 3,
-    } as UpgradeCalc,
+    } as WaveBasedFunction,
   },
 ];
 
 export const waveConfig = {
   zombies: {
     type: "exp",
-    factor: 1.45,
-    base: 20,
-  } as UpgradeCalc,
+    factor: 1.1,
+    base: 30,
+    max: 100,
+  } as WaveBasedFunction,
   zombieSpawnInterval: {
     max: 40,
     factor: -60,
@@ -151,55 +152,59 @@ export const waveConfig = {
   zombieHealthMultiplier: {
     type: "exp",
     factor: 1.15,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   zombieAttackMultiplier: {
     type: "exp",
     factor: 1.15,
-  } as UpgradeCalc,
+  } as WaveBasedFunction,
   spawnChances: {
     normal: 100,
     baby: {
-      min: 40,
+      max: 40,
       factor: 5,
     } as SpawnChance,
     greenMutant: {
-      min: 40,
+      max: 40,
       factor: 2,
     } as SpawnChance,
     tank: {
-      min: 40,
-      factor: 2,
+      max: 10,
+      factor: 1,
     } as SpawnChance,
     blueMutant: {
-      min: 40,
+      max: 40,
       factor: 1,
     } as SpawnChance,
   },
   postDelay: 5000,
 };
-export type UpgradeCalc = {
+export type WaveBasedFunction = {
   type: "lin" | "exp" | "add";
   factor: number;
   base?: number;
+  max?: number;
 };
 
 export type SpawnChance = {
-  min: number;
+  max: number;
   factor: number;
 };
 
-export function calcUpgrade(
-  upgrade: UpgradeCalc,
+export function callWaveBasedFunction(
+  upgrade: WaveBasedFunction,
   level: number,
   base?: number
 ) {
   if (base == null) base = upgrade.base || 1;
-  switch (upgrade.type) {
-    case "lin":
-      return base + upgrade.factor * level;
-    case "exp":
-      return base * Math.pow(upgrade.factor, level);
-    case "add":
-      return base + upgrade.factor * level;
+  function value() {
+    switch (upgrade.type) {
+      case "lin":
+        return base + upgrade.factor * level;
+      case "exp":
+        return base * Math.pow(upgrade.factor, level);
+      case "add":
+        return base + upgrade.factor * level;
+    }
   }
+  return Math.min(upgrade.max || Infinity, value());
 }

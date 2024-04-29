@@ -1,4 +1,4 @@
-import { SpawnChance, calcUpgrade, waveConfig } from "./config";
+import { SpawnChance, callWaveBasedFunction, waveConfig } from "./config";
 import { ZombieType } from "./zombies";
 
 export function generateWave(wave: number, players: number = 1) {
@@ -6,26 +6,26 @@ export function generateWave(wave: number, players: number = 1) {
 
   return {
     wave,
-    zombies: calcUpgrade(waveConfig.zombies, wave),
+    zombies: callWaveBasedFunction(waveConfig.zombies, wave),
     zombieSpawnInterval: Math.max(
       waveConfig.zombieSpawnInterval.max,
       waveConfig.zombieSpawnInterval.base +
         waveConfig.zombieSpawnInterval.factor * wave
     ),
-    zombieHealthMultiplier: calcUpgrade(
+    zombieHealthMultiplier: callWaveBasedFunction(
       waveConfig.zombieHealthMultiplier,
       wave * players
     ),
-    zombieAttackMultiplier: calcUpgrade(
+    zombieAttackMultiplier: callWaveBasedFunction(
       waveConfig.zombieAttackMultiplier,
       wave
     ),
     spawnChances: {
       normal: waveConfig.spawnChances.normal,
-      baby: caclSpawnChance(wave, "baby"),
-      greenMutant: caclSpawnChance(wave, "greenMutant"),
-      tank: caclSpawnChance(wave, "tank"),
-      blueMutant: caclSpawnChance(wave, "blueMutant"),
+      baby: calcSpawnChange(wave, "baby"),
+      greenMutant: calcSpawnChange(wave, "greenMutant"),
+      tank: calcSpawnChange(wave, "tank"),
+      blueMutant: calcSpawnChange(wave, "blueMutant"),
     },
     postDelay: waveConfig.postDelay,
   };
@@ -43,7 +43,7 @@ export function calculateZombieSpawnType(wave: number): ZombieType {
   }
 }
 
-function caclSpawnChance(wave: number, type: ZombieType) {
+function calcSpawnChange(wave: number, type: ZombieType) {
   const spawnChance = waveConfig.spawnChances[type] as SpawnChance;
-  return Math.min(spawnChance.min, wave * spawnChance.factor);
+  return Math.min(spawnChance.max, wave * spawnChance.factor);
 }

@@ -1,5 +1,5 @@
 import { PlayerState } from "../rooms/schema/MyRoomState";
-import { calcUpgrade, playerConfig, weaponConfig } from "./config";
+import { callWaveBasedFunction, playerConfig, weaponConfig } from "./config";
 
 export type PlayerClass = "pistol" | "shotgun" | "rifle" | "melee";
 
@@ -23,7 +23,7 @@ export function getWeaponData(playerClass: PlayerClass) {
 }
 
 export function getMaxHealth(player: PlayerState) {
-  return calcUpgrade(
+  return callWaveBasedFunction(
     playerConfig.healthUpgrade,
     player.upgrades.health,
     playerConfig.startingHealth

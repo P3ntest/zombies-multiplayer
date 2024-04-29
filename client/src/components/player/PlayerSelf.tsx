@@ -14,7 +14,10 @@ import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
-import { calcUpgrade, playerConfig } from "../../../../server/src/game/config";
+import {
+  callWaveBasedFunction,
+  playerConfig,
+} from "../../../../server/src/game/config";
 import { getMaxHealth } from "../../../../server/src/game/player";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
@@ -55,12 +58,12 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
     const rotation = Math.atan2(stageY - y, stageX - x);
 
     Body.setVelocity(collider.current, {
-      x: calcUpgrade(
+      x: callWaveBasedFunction(
         playerConfig.speedUpgrade,
         player.upgrades.speed * currentDirection.x,
         currentDirection.x * playerConfig.baseSpeed
       ),
-      y: calcUpgrade(
+      y: callWaveBasedFunction(
         playerConfig.speedUpgrade,
         player.upgrades.speed * currentDirection.y,
         currentDirection.y * playerConfig.baseSpeed
@@ -112,7 +115,7 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
         y={y}
         zoom={
           1 /
-          calcUpgrade(
+          callWaveBasedFunction(
             playerConfig.zoomUpgrade,
             player.upgrades.scope,
             playerConfig.baseZoom

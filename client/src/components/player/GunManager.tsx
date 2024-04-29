@@ -10,7 +10,10 @@ import {
 } from "../../../../server/src/game/player";
 import { bodyMeta, getBodiesWithTag } from "../../lib/physics/hooks";
 import Matter from "matter-js";
-import { calcUpgrade, weaponConfig } from "../../../../server/src/game/config";
+import {
+  callWaveBasedFunction,
+  weaponConfig,
+} from "../../../../server/src/game/config";
 
 export function GunManager({
   x,
@@ -82,7 +85,7 @@ export function GunManager({
         if (zombieId) {
           room?.send("meleeHitZombie", {
             zombieId,
-            damage: calcUpgrade(
+            damage: callWaveBasedFunction(
               weaponConfig.damageUpgrade,
               self.upgrades.damage,
               weaponConfig.weapons.melee.damage
@@ -109,12 +112,12 @@ export function GunManager({
       const originY = y + Math.sin(rotation) * barrelMoveForwardFactor;
 
       const weapon = getWeaponData(self.playerClass);
-      const damage = calcUpgrade(
+      const damage = callWaveBasedFunction(
         weaponConfig.damageUpgrade,
         self.upgrades.damage,
         weapon.damage
       );
-      const pierces = calcUpgrade(
+      const pierces = callWaveBasedFunction(
         weaponConfig.pierceUpgrade,
         self.upgrades.pierce,
         weapon.pierce
@@ -196,7 +199,7 @@ export function GunManager({
     if (isShooting && shootCoolDown.current <= 0) {
       const coolDownTicks =
         200 /
-        calcUpgrade(
+        callWaveBasedFunction(
           weaponConfig.fireRateUpgrade,
           self.upgrades.fireRate,
           getWeaponData(self.playerClass).fireRate

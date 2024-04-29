@@ -10,7 +10,7 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
-import { calcUpgrade, playerConfig } from "../game/config";
+import { callWaveBasedFunction, playerConfig } from "../game/config";
 import { getMaxHealth } from "../game/player";
 import { prisma } from "../prisma";
 import { PrismaClient } from "@prisma/client";
@@ -326,7 +326,7 @@ export class MyRoom extends Room<MyRoomState> {
           break;
         case "health":
           upgrade.health++;
-          player.health += calcUpgrade(
+          player.health += callWaveBasedFunction(
             playerConfig.healthUpgrade,
             player.upgrades.health,
             0
