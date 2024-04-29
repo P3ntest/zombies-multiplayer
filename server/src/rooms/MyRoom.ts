@@ -433,7 +433,7 @@ export class MyRoom extends Room<MyRoomState> {
     console.log(client.sessionId, "joined!");
     const playerState = new PlayerState();
     playerState.name =
-      options.playerName ?? "Player " + client.sessionId.substr(0, 4);
+      options.playerName || "Player " + client.sessionId.substr(0, 4);
     playerState.sessionId = client.sessionId;
     playerState.x = Math.floor(Math.random() * 800);
     playerState.y = Math.floor(Math.random() * 600);
