@@ -178,14 +178,6 @@ function RoomSettings({
   }, [name, selectedClass, roomType, mapId]);
   return (
     <div className="flex flex-col gap-2 items-start">
-      <MapSelector
-        open={mapSelectorOpen}
-        onClose={() => setMapSelectorOpen(false)}
-        onSelect={(mapId, mapName) => {
-          setMapId(mapId);
-          setMapName(mapName);
-        }}
-      />
       <div className="flex flex-row gap-2 items-center">
         <h3 className="text-white font-bold text-2xl">
           {roomType == "multiPlayer" ? "Room" : "Single Player"} Settings
@@ -210,6 +202,14 @@ function RoomSettings({
       <button onClick={onBack} className="btn btn-secondary">
         Back
       </button>
+      <MapSelector
+        open={mapSelectorOpen}
+        onClose={() => setMapSelectorOpen(false)}
+        onSelect={(mapId, mapName) => {
+          setMapId(mapId);
+          setMapName(mapName);
+        }}
+      />
     </div>
   );
 }

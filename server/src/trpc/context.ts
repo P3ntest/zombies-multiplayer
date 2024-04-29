@@ -1,6 +1,7 @@
 import { CreateExpressContextOptions } from "@trpc/server/adapters/express";
 import { createRemoteJWKSet, jwtVerify } from "jose";
 import { prisma } from "../prisma";
+// eslint-disable-next-line no-redeclare
 import { Request } from "express";
 
 const jwks = createRemoteJWKSet(

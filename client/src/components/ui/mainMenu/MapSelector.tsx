@@ -26,7 +26,7 @@ export function MapSelector({
   return (
     <CenteredFullScreen onClose={onClose}>
       <div
-        className="bg-slate-800 rounded-xl p-4 z-40"
+        className="bg-base-100 card p-4"
         style={{
           height: "80vh",
           width: "80vw",

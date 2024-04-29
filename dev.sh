@@ -1,1 +1,1 @@
-bunx --bun concurrently "cd client && bun dev" "cd server && bun start"
+bunx concurrently "cd client && bun dev" "cd server && bun start"

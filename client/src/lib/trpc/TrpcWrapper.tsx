@@ -6,7 +6,7 @@ import { trpc } from "./trpcClient";
 import { backendUrl } from "./backendUrl";
 
 export function TrpcWrapper({ children }: { children: ReactNode }) {
-  const { getAccessToken } = useLogto();
+  const { getAccessToken, isAuthenticated } = useLogto();
 
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
@@ -15,6 +15,7 @@ export function TrpcWrapper({ children }: { children: ReactNode }) {
         httpBatchLink({
           url: `${backendUrl}/trpc`,
           async headers() {
+            if (!isAuthenticated) return {};
             return {
               authorization:
                 "Bearer " +

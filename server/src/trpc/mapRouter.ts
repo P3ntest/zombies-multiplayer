@@ -158,10 +158,10 @@ export const mapRouter = router({
         verified: true,
       },
     });
-    const myMaps = ctx.user
+    const myMaps = ctx?.user
       ? await prisma.map.findMany({
           where: {
-            authorId: ctx.user.id,
+            authorId: ctx?.user.id,
             verified: false,
           },
         })
@@ -171,7 +171,7 @@ export const mapRouter = router({
       where: {
         published: true,
         authorId: {
-          not: ctx.user?.id,
+          not: ctx?.user?.id,
         },
       },
       orderBy: {
