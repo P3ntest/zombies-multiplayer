@@ -20,6 +20,7 @@ export class PlayerUpgradeState extends Schema {
 
 export class PlayerState extends Schema {
   @type("string") name: string = "Unnamed";
+  @type("string") id: string = "";
   @type("string") sessionId: string = "";
 
   @type("int32") x: number = 0;

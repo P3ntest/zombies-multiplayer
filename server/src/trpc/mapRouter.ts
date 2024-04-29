@@ -175,7 +175,7 @@ export const mapRouter = router({
         },
       },
       orderBy: {
-        plays: "desc",
+        createdAt: "desc",
       },
       take: 20,
     });

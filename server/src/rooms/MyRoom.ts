@@ -11,9 +11,8 @@ import {
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
 import { calcUpgrade, playerConfig } from "../game/config";
-import { getMaxHealth } from "../game/player";
+import { calculateScore, getMaxHealth } from "../game/player";
 import { prisma } from "../prisma";
-import { PrismaClient } from "@prisma/client";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -50,7 +49,6 @@ export class MyRoom extends Room<MyRoomState> {
 
     if (roomOptions.mapId) {
       roomState.mapId = roomOptions.mapId;
-      const prisma: PrismaClient = new PrismaClient();
     } else {
       const amountVerifiedMaps = await prisma.map.count({
         where: { verified: true },
@@ -64,10 +62,6 @@ export class MyRoom extends Room<MyRoomState> {
       if (!selectedMap) {
         throw new Error("No verified maps found.");
       }
-      await prisma.map.update({
-        where: { id: selectedMap.id },
-        data: { plays: { increment: 1 } },
-      });
       roomState.mapId = selectedMap.id;
     }
 
@@ -521,6 +515,32 @@ export class MyRoom extends Room<MyRoomState> {
 
     this.broadcast("gameOver");
     this.state.isGameOver = true;
+
+    prisma.playedGame
+      .create({
+        data: {
+          map: {
+            connect: {
+              id: this.state.mapId,
+            },
+          },
+          wavesSurvived: this.waveManager.currentWaveNumber - 1,
+          participants: {
+            create: Array.from(this.state.players.values()).map((p) => ({
+              username: p.name,
+              kills: p.kills,
+              deaths: p.deaths,
+              accuracy: p.accuracy,
+              waveSurvived: p.wavesSurvived,
+              damageDealt: p.damageDealt,
+              score: calculateScore(p),
+            })),
+          },
+        },
+      })
+      .catch((e) => {
+        console.error("Error saving game to database", e);
+      });
   }
 
   getConnectedPlayers() {
