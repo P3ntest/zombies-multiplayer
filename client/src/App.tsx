@@ -10,6 +10,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { CallBackHandler } from "./routes/callback";
 import { MapEditor } from "./editor/MapEditor";
 import { TrpcWrapper } from "./lib/trpc/TrpcWrapper";
+import { useSetColyseusAuthToken } from "./lib/auth/colyseusAuth";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ function AssetLoadLayout() {
 }
 
 export function App() {
+  useSetColyseusAuthToken();
   return <Game />;
 }
 

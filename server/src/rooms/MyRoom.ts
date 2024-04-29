@@ -14,6 +14,8 @@ import { calcUpgrade, playerConfig } from "../game/config";
 import { getMaxHealth } from "../game/player";
 import { prisma } from "../prisma";
 import { PrismaClient } from "@prisma/client";
+import { IncomingMessage } from "http";
+import { getUserForToken } from "../trpc/context";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -22,6 +24,17 @@ export class MyRoom extends Room<MyRoomState> {
 
   waveStartType: "manual" | "playerCount";
   requiredPlayerCount = 1;
+
+  clientToUserMap: Map<string, string | null> = new Map();
+
+  static async onAuth(token: string, req: IncomingMessage) {
+    const user = await getUserForToken(token);
+    if (user) {
+      return user.id;
+    } else {
+      return true;
+    }
+  }
 
   async onCreate(options: any) {
     this.roomId = Math.random().toString(36).substr(2, 5);
@@ -409,7 +422,14 @@ export class MyRoom extends Room<MyRoomState> {
     client?.send("chatMessage", { message, color });
   }
 
-  onJoin(client: Client, options: any) {
+  onJoin(client: Client, options: any, auth: string | true) {
+    //auth
+    if (auth !== true) {
+      this.clientToUserMap.set(client.id, auth);
+    } else {
+      this.clientToUserMap.set(client.id, null);
+    }
+
     console.log(client.sessionId, "joined!");
     const playerState = new PlayerState();
     playerState.name =

@@ -8,15 +8,8 @@ const jwks = createRemoteJWKSet(
   new URL("https://zombies-auth.p3ntest.dev/oidc/jwks")
 );
 
-export async function extractUserFromRequest(req: Request) {
-  if (!req.headers.authorization) {
-    return null;
-  }
-  if (!req.headers.authorization.startsWith("Bearer ")) {
-    return null;
-  }
-  const token = req.headers.authorization.replace("Bearer ", "");
-
+export async function getUserForToken(token: string) {
+  if (!token) return null;
   const { payload } = await jwtVerify(token, jwks, {
     // Expected issuer of the token, issued by the Logto server
     issuer: "https://zombies-auth.p3ntest.dev/oidc",
@@ -27,7 +20,7 @@ export async function extractUserFromRequest(req: Request) {
   const { sub } = payload;
   const scopePermissions = ((payload.scope as string) ?? "").split(" ");
 
-  const user = await prisma.user.upsert({
+  return await prisma.user.upsert({
     where: {
       id: sub,
     },
@@ -44,6 +37,18 @@ export async function extractUserFromRequest(req: Request) {
       },
     },
   });
+}
+
+export async function extractUserFromRequest(req: Request) {
+  if (!req.headers.authorization) {
+    return null;
+  }
+  if (!req.headers.authorization.startsWith("Bearer ")) {
+    return null;
+  }
+  const token = req.headers.authorization.replace("Bearer ", "");
+
+  const user = await getUserForToken(token);
 
   return {
     user,
