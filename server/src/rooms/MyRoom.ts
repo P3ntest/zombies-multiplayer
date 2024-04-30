@@ -10,12 +10,9 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
-import { calcUpgrade, playerConfig, callWaveBasedFunction, playerConfig } from "../game/config";
-import { calculateScore, getMaxHealth } from "../game/player";
+import { calcUpgrade, playerConfig, callWaveBasedFunction } from "../game/config";
+import { getMaxHealth, calculateScore } from "../game/player";
 import { prisma } from "../prisma";
-import { PrismaClient } from "@prisma/client";
-import { IncomingMessage } from "http";
-import { getUserForToken } from "../trpc/context";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
