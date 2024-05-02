@@ -43,7 +43,7 @@ export function LeaderBoard({ gameOver }: { gameOver: boolean }) {
                 }))
                 .sort((a, b) => b.score - a.score)
                 .map((player) => (
-                  <tr key={player.sessionId}>
+                  <tr key={player.sessionId} className="last:border-0">
                     <td className="uppercase">{player.name}</td>
                     <td>{player.kills}</td>
                     <td>{player.deaths}</td>
