@@ -29,9 +29,9 @@ model PlayedGame {
   mapId String
   map   Map    @relation(fields: [mapId], references: [id])
 
-  createdAt     DateTime                @default(now())
-  wavesSurvived Int
-  participants  PlayedGameParticipant[]
+  createdAt           DateTime                @default(now())
+  highestWaveSurvived Int
+  participants        PlayedGameParticipant[]
 }
 
 model PlayedGameParticipant {
@@ -44,12 +44,12 @@ model PlayedGameParticipant {
   user     User?   @relation(fields: [userId], references: [id])
   username String  @default("Anonymous")
 
-  kills        Int
-  deaths       Int
-  accuracy     Float
-  waveSurvived Int
-  damageDealt  Int
-  score        Int
+  kills         Int
+  deaths        Int
+  accuracy      Float
+  wavesSurvived Int
+  damageDealt   Int
+  score         Int
 
   createdAt DateTime @default(now())
 }

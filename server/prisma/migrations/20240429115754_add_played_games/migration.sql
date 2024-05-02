@@ -12,7 +12,7 @@ CREATE TABLE "PlayedGame" (
     "id" TEXT NOT NULL,
     "mapId" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "wavesSurvived" INTEGER NOT NULL,
+    "highestWaveSurvived" INTEGER NOT NULL,
 
     CONSTRAINT "PlayedGame_pkey" PRIMARY KEY ("id")
 );
@@ -25,7 +25,7 @@ CREATE TABLE "PlayedGameParticipant" (
     "kills" INTEGER NOT NULL,
     "deaths" INTEGER NOT NULL,
     "accuracy" DOUBLE PRECISION NOT NULL,
-    "waveSurvived" INTEGER NOT NULL,
+    "wavesSurvived" INTEGER NOT NULL,
     "damageDealt" INTEGER NOT NULL,
     "score" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

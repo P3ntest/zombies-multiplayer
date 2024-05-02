@@ -83,8 +83,8 @@ function Leaderboard() {
               <th>Deaths</th>
               <th>Score</th>
               <th>Damage</th>
-              <th className="tooltip" data-tip="Highest Wave Survived">
-                Wave
+              <th className="tooltip" data-tip="Highest wave survived">
+                Waves
               </th>
               <th>Accuracy</th>
               <th className="tooltip" data-tip="Number of teammates">
@@ -102,7 +102,7 @@ function Leaderboard() {
                     <td>{player.deaths}</td>
                     <td>{player.score}</td>
                     <td>{player.damageDealt}</td>
-                    <td>{player.waveSurvived}</td>
+                    <td>{player.playedGame.highestWaveSurvived}</td>
                     <td>{player.accuracy}</td>
                     <td>{player.playedGame.participants.length}</td>
                     <td>{player.playedGame.map.name}</td>

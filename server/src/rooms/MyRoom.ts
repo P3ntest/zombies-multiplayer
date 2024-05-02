@@ -544,14 +544,14 @@ export class MyRoom extends Room<MyRoomState> {
               id: this.state.mapId,
             },
           },
-          wavesSurvived: this.waveManager.currentWaveNumber - 1,
+          highestWaveSurvived: this.waveManager.currentWaveNumber - 1,
           participants: {
             create: Array.from(this.state.players.values()).map((p) => ({
               username: p.name,
               kills: p.kills,
               deaths: p.deaths,
               accuracy: p.accuracy,
-              waveSurvived: p.wavesSurvived,
+              wavesSurvived: p.wavesSurvived,
               damageDealt: p.damageDealt,
               score: calculateScore(p),
               user: {
