@@ -21,36 +21,36 @@ export function LeaderBoard({ gameOver }: { gameOver: boolean }) {
         !leaderboardOpen && "hidden"
       )}
     >
-      <div className="relative overflow-x-auto sm:rounded-lg select-none">
-        <table className="text-sm text-left rtl:text-right text-gray-400 w-full">
-          <thead className="text-xs uppercase bg-slate-600 bg-opacity-80">
+      <div className="flex flex-col items-center card bg-neutral bg-opacity-80">
+        <table className="table">
+          <thead>
             <tr>
-              <th className="px-6 py-3">Player</th>
-              <th className="px-6 py-3">Kills</th>
-              <th className="px-6 py-3">Deaths</th>
-              <th className="px-6 py-3">Accuracy</th>
-              <th className="px-6 py-3">Waves Survived</th>
-              <th className="px-6 py-3">Damage</th>
-              <th className="px-6 py-3">Score</th>
+              <th>Name</th>
+              <th>Kills</th>
+              <th>Deaths</th>
+              <th>Accuracy</th>
+              <th>Waves Survived</th>
+              <th>Damage</th>
+              <th>Score</th>
             </tr>
           </thead>
           <tbody>
             {players &&
               Array.from(players.values())
-                .map((player) => ({ ...player, score: calculateScore(player) }))
+                .map((player) => ({
+                  ...player,
+                  score: calculateScore(player),
+                }))
                 .sort((a, b) => b.score - a.score)
                 .map((player) => (
-                  <tr
-                    key={player.sessionId}
-                    className="bg-slate-800 bg-opacity-80"
-                  >
-                    <td className="px-6 py-4 uppercase">{player.name}</td>
-                    <td className="px-6 py-4">{player.kills}</td>
-                    <td className="px-6 py-4">{player.deaths}</td>
-                    <td className="px-6 py-4">{player.accuracy}</td>
-                    <td className="px-6 py-4">{player.wavesSurvived}</td>
-                    <td className="px-6 py-4">{player.damageDealt}</td>
-                    <td className="px-6 py-4">{player.score}</td>
+                  <tr key={player.sessionId} className="last:border-0">
+                    <td className="uppercase">{player.name}</td>
+                    <td>{player.kills}</td>
+                    <td>{player.deaths}</td>
+                    <td>{player.accuracy}</td>
+                    <td>{player.wavesSurvived}</td>
+                    <td>{player.damageDealt}</td>
+                    <td>{player.score}</td>
                   </tr>
                 ))}
           </tbody>

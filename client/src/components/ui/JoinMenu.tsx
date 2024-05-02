@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { colyseusClient, setCurrentRoom } from "../../colyseus";
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
-import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
+import { useCharacterCustomizationStore } from "./characterCustomizationStore";
 import { useNavigate } from "react-router-dom";
 import { MapSelector } from "./mainMenu/MapSelector";
 import { twMerge } from "tailwind-merge";

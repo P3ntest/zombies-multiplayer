@@ -32,9 +32,14 @@ export function useMouseDown(callback: (event: MouseEvent) => void) {
   }, [callback]);
 }
 
+export function useIsShooting() {
+  return useControlsStore(
+    (state) => state.keysDown.has("mouse0") || state.keysDown.has(" ")
+  );
+}
+
 export function useIsKeyDown(key: string) {
-  const isMouseDown = useControlsStore((state) => state.keysDown.has(key));
-  return isMouseDown;
+  return useControlsStore((state) => state.keysDown.has(key));
 }
 
 export function useControlEventListeners(preventTab = true) {

@@ -20,6 +20,38 @@ model User {
   maps                 Map[]
   scopePermissions     String[]
   uploadedCustomAssets CustomAsset[]
+  playedGames          PlayedGameParticipant[]
+}
+
+model PlayedGame {
+  id String @id @default(cuid())
+
+  mapId String
+  map   Map    @relation(fields: [mapId], references: [id])
+
+  createdAt           DateTime                @default(now())
+  highestWaveSurvived Int
+  participants        PlayedGameParticipant[]
+}
+
+model PlayedGameParticipant {
+  id String @id @default(cuid())
+
+  playedGameId String
+  playedGame   PlayedGame @relation(fields: [playedGameId], references: [id])
+
+  userId   String?
+  user     User?   @relation(fields: [userId], references: [id])
+  username String  @default("Anonymous")
+
+  kills         Int
+  deaths        Int
+  accuracy      Float
+  wavesSurvived Int
+  damageDealt   Int
+  score         Int
+
+  createdAt DateTime @default(now())
 }
 
 model Map {
@@ -30,7 +62,7 @@ model Map {
   verified  Boolean @default(false)
   published Boolean @default(false)
 
-  plays Int @default(0)
+  plays PlayedGame[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

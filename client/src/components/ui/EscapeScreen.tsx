@@ -13,7 +13,9 @@ export function EscapeScreen() {
 
   const onLeave = useCallback(() => {
     localStorage.removeItem("reconnectToken");
-    disconnectFromColyseus(true);
+    disconnectFromColyseus(true).then(() => {
+      localStorage.removeItem("reconnectToken");
+    });
   }, []);
 
   useEffect(() => {
@@ -34,8 +36,8 @@ export function EscapeScreen() {
   }
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-auto">
-      <div className="bg-slate-800 p-6 rounded-lg pointer-events-auto">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-default pointer-events-auto">
+      <div className="bg-slate-800 p-6 rounded-lg">
         <div className="flex flex-row items-center justify-between gap-5">
           <h1 className="text-2xl text-white font-bold">Escape Menu</h1>
           <div

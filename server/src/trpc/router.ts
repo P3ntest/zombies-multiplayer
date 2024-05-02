@@ -1,4 +1,5 @@
 import { mapRouter } from "./mapRouter";
+import { statRouter } from "./statRouter";
 import { authProcedure, router } from "./trpc";
 
 export const appRouter = router({
@@ -6,6 +7,7 @@ export const appRouter = router({
     return "Connection Test Successful!";
   }),
   maps: mapRouter,
+  stats: statRouter,
 });
 
 // Export type router type signature,
