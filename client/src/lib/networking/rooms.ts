@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MyRoomState } from "../../../../server/src/rooms/schema/MyRoomState";
 import { colyseusClient, setCurrentRoom } from "../../colyseus";
-import { useCharacterCustomizationStore } from "../../components/ui/characterCusotmizationStore";
+import { useCharacterCustomizationStore } from "../../components/ui/characterCustomizationStore";
 
 let connecting = false;
 

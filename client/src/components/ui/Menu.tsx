@@ -1,7 +1,7 @@
 import { CharacterPreview } from "./CharacterPreview";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { twMerge } from "tailwind-merge";
-import { useCharacterCustomizationStore } from "./characterCusotmizationStore";
+import { useCharacterCustomizationStore } from "./characterCustomizationStore";
 import { JoinMenu } from "./JoinMenu";
 import { AuthSection } from "./mainMenu/AuthSection";
 

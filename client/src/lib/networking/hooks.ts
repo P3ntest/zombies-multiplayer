@@ -9,7 +9,7 @@ import {
   MyRoomState,
   PlayerState,
 } from "../../../../server/src/rooms/schema/MyRoomState";
-import { useCharacterCustomizationStore } from "../../components/ui/characterCusotmizationStore";
+import { useCharacterCustomizationStore } from "../../components/ui/characterCustomizationStore";
 // const networkTickRate = 20;
 
 export function useNetworkTick(callback: (tick: number) => void) {
@@ -135,5 +135,5 @@ export function useTryJoinByQueryOrReconnectToken() {
           connecting = false;
         });
     }
-  }, [room]);
+  }, [room, name, selectedClass]);
 }
