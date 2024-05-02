@@ -8,6 +8,14 @@ export const statRouter = router({
       orderBy: {
         score: "desc",
       },
+      include: {
+        playedGame: {
+          include: {
+            map: true,
+            participants: true,
+          },
+        },
+      },
     });
     return {
       leaderboard,
