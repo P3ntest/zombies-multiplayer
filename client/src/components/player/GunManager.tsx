@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 import { useColyseusRoom } from "../../colyseus";
-import { useIsKeyDown } from "../../lib/useControls";
+import { useIsKeyDown, useIsShooting } from "../../lib/useControls";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playGunSound, playMeleeSound } from "../../lib/sound/sound";
 import { useTick } from "@pixi/react";
@@ -27,7 +27,7 @@ export function GunManager({
   setCurrentAnimation: (animation: number) => void;
 }) {
   const room = useColyseusRoom();
-  const isShooting = useIsKeyDown("mouse0");
+  const isShooting = useIsShooting();
   const isAttackingMelee = useIsKeyDown("f");
   const shootCoolDown = useRef(0);
   const meleeCoolDown = useRef({

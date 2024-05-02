@@ -1,16 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playWaveStart } from "../../lib/sound/sound";
-import {
-  disconnectFromColyseus,
-  useColyseusRoom,
-  useColyseusState,
-} from "../../colyseus";
+import { disconnectFromColyseus, useColyseusState } from "../../colyseus";
 import { UpgradeStore } from "./UpgradeStore";
 import { EscapeScreen } from "./EscapeScreen";
 import { Chat } from "./Chat";
 import { LeaderBoard } from "./LeaderBoard";
-import { useNavigate } from "react-router-dom";
 
 const TITLE_DURATION = 4000;
 
@@ -163,20 +158,16 @@ function WaveTitle({ title }: { title: string }) {
 }
 
 function GameOverScreen() {
-  const room = useColyseusRoom();
-  const navigate = useNavigate();
-
   const onLeave = useCallback(() => {
     localStorage.removeItem("reconnectToken");
-    room?.leave(true).finally(() => {
-      disconnectFromColyseus();
-      navigate("/");
+    disconnectFromColyseus(true).then(() => {
+      localStorage.removeItem("reconnectToken");
     });
-  }, [room, navigate]);
+  }, []);
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-auto">
-      <div className="p-6 rounded-lg pointer-events-auto">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-auto pointer-events-auto">
+      <div className="p-6 rounded-lg">
         <div className="flex flex-row items-center justify-between gap-5">
           <div className="text-9xl font-extrabold ui-text">Game Over!</div>
         </div>
