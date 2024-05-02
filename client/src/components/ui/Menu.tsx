@@ -69,8 +69,6 @@ function ClassSelector() {
 function Leaderboard() {
   const { data } = trpc.stats.getLeaderboard.useQuery();
 
-  if (data) console.log(data);
-
   return (
     <div className="flex flex-col items-center gap-4 p-10 card bg-neutral bg-opacity-80">
       <h3 className="text-white font-bold text-2xl">Leaderboard</h3>
