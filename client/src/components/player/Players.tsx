@@ -3,7 +3,7 @@ import {
   PlayerState,
 } from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
-import { Sprite, useTick } from "@pixi/react";
+import { Container, Sprite, useTick } from "@pixi/react";
 import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { PlayerSprite } from "./PlayerSprite";
 import { PlayerSelf } from "./PlayerSelf";
@@ -15,6 +15,9 @@ import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
 import { playSelfDied } from "../../lib/sound/sound";
 import { Texture } from "pixi.js";
 import { getMaxHealth } from "../../../../server/src/game/player";
+import { getEntityFilters } from "../graphics/filters";
+
+const playerFilter = getEntityFilters();
 
 export function Players() {
   const state = useColyseusState();
@@ -32,11 +35,11 @@ export function Players() {
   }
 
   return (
-    <>
+    <Container filters={playerFilter}>
       {Array.from(players.entries()).map(([id, player]) => (
         <Player key={id} player={player} />
       ))}
-    </>
+    </Container>
   );
 }
 

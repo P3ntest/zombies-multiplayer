@@ -21,6 +21,9 @@ import {
 } from "../../lib/sound/sound";
 import { spriteSheets } from "../../assets/assetHandler";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
+import { getEntityFilters } from "../graphics/filters";
+
+const zombiesFilter = getEntityFilters();
 
 export function Zombies() {
   const state = useColyseusState();
@@ -42,7 +45,7 @@ export function Zombies() {
   });
 
   return (
-    <Container>
+    <Container filters={zombiesFilter}>
       {zombies?.map((zombie) => (
         <Zombie key={zombie.id} zombie={zombie} />
       ))}
