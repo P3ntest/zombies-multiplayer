@@ -10,9 +10,11 @@ import {
   ZombieState,
 } from "./schema/MyRoomState";
 import { handleCommand } from "../game/console/commandHandler";
-import { calcUpgrade, playerConfig, callWaveBasedFunction } from "../game/config";
+import { playerConfig, callWaveBasedFunction } from "../game/config";
 import { getMaxHealth, calculateScore } from "../game/player";
 import { prisma } from "../prisma";
+import { getUserForToken } from "../trpc/context";
+import { IncomingMessage } from "http";
 
 export class MyRoom extends Room<MyRoomState> {
   maxClients = 4;
@@ -552,6 +554,15 @@ export class MyRoom extends Room<MyRoomState> {
               waveSurvived: p.wavesSurvived,
               damageDealt: p.damageDealt,
               score: calculateScore(p),
+              user: {
+                ...(this.clientToUserMap.get(p.sessionId)
+                  ? {
+                      connect: {
+                        id: this.clientToUserMap.get(p.sessionId),
+                      },
+                    }
+                  : {}),
+              },
             })),
           },
         },
