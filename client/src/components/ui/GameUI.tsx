@@ -158,13 +158,6 @@ function WaveTitle({ title }: { title: string }) {
 }
 
 function GameOverScreen() {
-  const onLeave = useCallback(() => {
-    localStorage.removeItem("reconnectToken");
-    disconnectFromColyseus(true).then(() => {
-      localStorage.removeItem("reconnectToken");
-    });
-  }, []);
-
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-slate-500 bg-opacity-80 flex items-center justify-center cursor-auto pointer-events-auto">
       <div className="p-6 rounded-lg">
@@ -175,7 +168,10 @@ function GameOverScreen() {
           <LeaderBoard gameOver={true} />
         </div>
         <div className="flex flex-col items-center gap-3 mt-5">
-          <button className="btn btn-secondary" onClick={onLeave}>
+          <button
+            className="btn btn-secondary"
+            onClick={() => disconnectFromColyseus()}
+          >
             Back To Lobby
           </button>
         </div>

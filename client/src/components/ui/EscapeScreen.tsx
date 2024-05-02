@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUIStore } from "./uiStore";
 import { disconnectFromColyseus } from "../../colyseus";
 import { useClientSettings } from "./soundStore";
@@ -10,13 +10,6 @@ export function EscapeScreen() {
   const otherMenuOpen = useUIStore(
     (state) => state.buyMenuOpen || state.chatOpen
   );
-
-  const onLeave = useCallback(() => {
-    localStorage.removeItem("reconnectToken");
-    disconnectFromColyseus(true).then(() => {
-      localStorage.removeItem("reconnectToken");
-    });
-  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -68,7 +61,10 @@ export function EscapeScreen() {
           />
         </div>
         <div className="flex flex-col gap-3 mt-5">
-          <button className="btn btn-secondary" onClick={onLeave}>
+          <button
+            className="btn btn-secondary"
+            onClick={() => disconnectFromColyseus()}
+          >
             Leave Game
           </button>
         </div>
