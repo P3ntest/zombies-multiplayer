@@ -27,7 +27,7 @@ function _VisualCollider({ collider }: { collider: AssetCollider }) {
       g.clear();
 
       // only outline for now
-      g.lineStyle(4, 65280);
+      g.lineStyle(4, collider.destroyBullet ? 0x00ff00 : 0x0000ff);
       if (collider.shape.shape === "circle") {
         g.drawCircle(0, 0, collider.shape.radius);
       } else if (collider.shape.shape === "rectangle") {
@@ -40,6 +40,7 @@ function _VisualCollider({ collider }: { collider: AssetCollider }) {
       }
     },
     [
+      collider.destroyBullet,
       collider.shape.shape,
       // @ts-expect-error - is not casted
       collider.shape.radius,

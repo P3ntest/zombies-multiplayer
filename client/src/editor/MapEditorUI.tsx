@@ -237,37 +237,63 @@ function Inspector() {
                   />
                 </div>
                 {selectedObject.tiling && (
-                  <div className="flex flex-row items-center gap-2">
-                    <div>
-                      <h2 className="text-white font-bold text-lg mb-1">
-                        Tiling Width
-                      </h2>
-                      <SmartNumberInput
-                        number={selectedObject.width}
-                        setNumber={(value) =>
-                          updateObject(selectedObject.id, {
-                            width: value,
-                          } as any)
-                        }
-                        className="input input-sm input-secondary"
-                        step={20}
-                      />
+                  <div>
+                    <div className="flex flex-row items-center gap-2">
+                      <div>
+                        <h2 className="text-white font-bold text-lg mb-1">
+                          Tiling Width
+                        </h2>
+                        <SmartNumberInput
+                          number={selectedObject.width}
+                          setNumber={(value) =>
+                            updateObject(selectedObject.id, {
+                              width: value,
+                            } as any)
+                          }
+                          className="input input-sm input-secondary"
+                          step={20}
+                        />
+                      </div>
+                      <div>
+                        <h2 className="text-white font-bold text-lg mb-1">
+                          Tiling Height
+                        </h2>
+                        <SmartNumberInput
+                          number={selectedObject.height}
+                          setNumber={(value) =>
+                            updateObject(selectedObject.id, {
+                              height: value,
+                            } as any)
+                          }
+                          className="input input-sm input-secondary"
+                          step={20}
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <h2 className="text-white font-bold text-lg mb-1">
-                        Tiling Height
-                      </h2>
-                      <SmartNumberInput
-                        number={selectedObject.height}
-                        setNumber={(value) =>
-                          updateObject(selectedObject.id, {
-                            height: value,
-                          } as any)
-                        }
-                        className="input input-sm input-secondary"
-                        step={20}
-                      />
-                    </div>
+                    <button
+                      className="btn btn-sm btn-secondary mt-2"
+                      onClick={() => {
+                        updateObject(selectedObject.id, {
+                          ...selectedObject,
+                          colliders: [
+                            ...selectedObject.colliders,
+                            {
+                              shape: {
+                                shape: "rectangle",
+                                width: selectedObject.width,
+                                height: selectedObject.height,
+                                destroyBullet: true,
+                              },
+                              x: 0,
+                              y: 0,
+                              rotation: 0,
+                            } as AssetCollider,
+                          ],
+                        });
+                      }}
+                    >
+                      Add as Collider
+                    </button>
                   </div>
                 )}
                 <div className="flex flex-row items-center gap-4">
