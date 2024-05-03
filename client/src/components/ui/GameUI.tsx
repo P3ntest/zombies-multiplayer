@@ -6,6 +6,9 @@ import { UpgradeStore } from "./UpgradeStore";
 import { EscapeScreen } from "./EscapeScreen";
 import { Chat } from "./Chat";
 import { LeaderBoard } from "./LeaderBoard";
+import { useUIStore } from "./uiStore";
+import { Joystick } from "react-joystick-component";
+import { useControlsStore } from "../../lib/useControls";
 
 const TITLE_DURATION = 4000;
 
@@ -44,9 +47,10 @@ export function GameUI() {
         zIndex: 100,
         width: "100vw",
         height: "100vh",
-        pointerEvents: "none",
       }}
+      onTouchStart={() => setTouch(true)}
     >
+      <TouchInterface />
       {waveTitle && <WaveTitle title={waveTitle} key={waveTitle} />}
       {gameOver && <GameOverScreen />}
       <WaveInfo />
@@ -62,8 +66,10 @@ export function GameUI() {
 function SkillPointInfo() {
   const me = useSelf();
   const skillPoints = me?.skillPoints ?? 0;
+  const { buyMenuOpen: open, setBuyMenuOpen: setOpen } = useUIStore();
+
   return (
-    <div
+    <button
       style={{
         position: "fixed",
         top: 0,
@@ -74,10 +80,13 @@ function SkillPointInfo() {
         fontSize: 24,
         padding: 20,
       }}
-      className="ui-text flex flex-row items-center gap-2"
+      className="ui-text flex flex-row items-center gap-2 pointer-events-auto"
+      onClick={() => {
+        setOpen(!open);
+      }}
     >
       {skillPoints} <SkillPointSymbol />
-    </div>
+    </button>
   );
 }
 
@@ -178,4 +187,89 @@ function GameOverScreen() {
       </div>
     </div>
   );
+}
+
+function TouchInterface() {
+  const { setEscapeOpen: setOpen } = useUIStore();
+
+  const controlStore = useControlsStore();
+
+  const handleMove = useCallback(
+    (direction) => {
+      controlStore.touchMove = {
+        x: direction.x / 1000,
+        y: -direction.y / 1000,
+      };
+    },
+    [controlStore]
+  );
+
+  const moveStop = useCallback(() => {
+    controlStore.touchMove = { x: 0, y: 0 };
+  }, [controlStore]);
+
+  const handleLook = useCallback(
+    (direction) => {
+      controlStore.touchLook = {
+        x: direction.x / 1000,
+        y: -direction.y / 1000,
+      };
+    },
+    [controlStore]
+  );
+
+  const lookStop = useCallback(() => {
+    controlStore.touchLook = { x: 0, y: 0 };
+  }, [controlStore]);
+
+  return (
+    <div>
+      {controlStore.touch && (
+        <div>
+          <button
+            className="btn btn-outline btn-square btn-sm top-0 left-0 m-4 "
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+          <div className="opacity-25">
+            <div className="absolute left-28 top-3/4">
+              <Joystick size={100} move={handleMove} stop={moveStop}></Joystick>
+            </div>
+            <div className="absolute right-28 top-3/4">
+              <Joystick size={100} move={handleLook} stop={lookStop}></Joystick>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function setTouch(touch: boolean) {
+  if (touch) {
+    useControlsStore.setState((state) => {
+      state.keysDown.clear();
+      return state;
+    });
+  }
+  useControlsStore.setState((state) => {
+    state.touch = touch;
+    return state;
+  });
 }

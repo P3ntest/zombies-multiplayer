@@ -6,6 +6,16 @@ interface ControlsStore {
   keysDown: Set<string>;
   onKeydown: (key: string) => void;
   onKeyup: (key: string) => void;
+  touch: boolean;
+  setTouch: (touch: boolean) => void;
+  touchLook: {
+    x: number;
+    y: number;
+  };
+  touchMove: {
+    x: number;
+    y: number;
+  };
 }
 
 export const useControlsStore = create<ControlsStore>((set) => ({
@@ -18,6 +28,16 @@ export const useControlsStore = create<ControlsStore>((set) => ({
       keysDown.delete(key);
       return { keysDown };
     }),
+  touch: false,
+  setTouch: (touch: boolean) => set({ touch }),
+  touchLook: {
+    x: 0,
+    y: 0,
+  },
+  touchMove: {
+    x: 0,
+    y: 0,
+  },
 }));
 
 export function useMouseDown(callback: (event: MouseEvent) => void) {
@@ -34,7 +54,11 @@ export function useMouseDown(callback: (event: MouseEvent) => void) {
 
 export function useIsShooting() {
   return useControlsStore(
-    (state) => state.keysDown.has("mouse0") || state.keysDown.has(" ")
+    (state) =>
+      state.keysDown.has("mouse0") ||
+      state.keysDown.has(" ") ||
+      state.touchLook.x !== 0 ||
+      state.touchLook.y !== 0
   );
 }
 
@@ -43,11 +67,14 @@ export function useIsKeyDown(key: string) {
 }
 
 export function useControlEventListeners(preventTab = true) {
-  const { onKeydown, onKeyup } = useControlsStore();
+  const { onKeydown, onKeyup, setTouch } = useControlsStore();
   useEffect(() => {
     const keydownListener = (event: KeyboardEvent) => {
       if (event.key == "Tab" && preventTab) event.preventDefault();
       const key = event.key.toLowerCase();
+      if (key === "a" || key === "w" || key === "s" || key === "d") {
+        setTouch(false);
+      }
       onKeydown(key);
     };
     const keyupListener = (event: KeyboardEvent) => {
@@ -75,11 +102,18 @@ export function useControlEventListeners(preventTab = true) {
       window.removeEventListener("mousedown", mouseDownListener);
       window.removeEventListener("mouseup", mouseUpListener);
     };
-  }, [onKeydown, onKeyup, preventTab]);
+  }, [onKeydown, onKeyup, preventTab, setTouch]);
 }
 
 export function useAxis() {
-  const keysDown = useControlsStore((state) => state.keysDown);
+  const controlsStore = useControlsStore();
+  const keysDown = controlsStore.keysDown;
+
+  if (controlsStore.touch)
+    return {
+      x: controlsStore.touchMove.x,
+      y: controlsStore.touchMove.y,
+    };
 
   const x = (keysDown.has("d") ? 1 : 0) + (keysDown.has("a") ? -1 : 0);
   const y = (keysDown.has("s") ? 1 : 0) + (keysDown.has("w") ? -1 : 0);

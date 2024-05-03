@@ -9,7 +9,10 @@ import {
 } from "../../lib/networking/hooks";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { playHurtSound } from "../../lib/sound/sound";
-import { useCurrentPlayerDirection } from "../../lib/useControls";
+import {
+  useControlsStore,
+  useCurrentPlayerDirection,
+} from "../../lib/useControls";
 import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
 import { GunManager } from "./GunManager";
@@ -41,6 +44,8 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
 
   const currentDirection = useCurrentPlayerDirection();
 
+  const { touch, touchLook } = useControlsStore();
+
   useRoomMessageHandler("playerHurt", (message) => {
     if (message.playerId === player.sessionId) {
       playHurtSound();
@@ -48,14 +53,19 @@ export function PlayerSelf({ player }: { player: PlayerState }) {
   });
 
   useTick(() => {
-    const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;
-    const { x: stageX, y: stageY } = stageRef?.camera?.toLocal({
-      x: mouseX,
-      y: mouseY,
-    }) ?? { x: 0, y: 0 };
+    let rotation;
 
-    // the player always looks at the mouse
-    const rotation = Math.atan2(stageY - y, stageX - x);
+    if (touch) {
+      const { x: touchX, y: touchY } = touchLook;
+      rotation = Math.atan2(touchY, touchX);
+    } else {
+      const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;
+      const { x: stageX, y: stageY } = stageRef?.camera?.toLocal({
+        x: mouseX,
+        y: mouseY,
+      }) ?? { x: 0, y: 0 };
+      rotation = Math.atan2(stageY - y, stageX - x);
+    }
 
     Body.setVelocity(collider.current, {
       x: callWaveBasedFunction(
