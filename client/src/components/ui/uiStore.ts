@@ -9,6 +9,9 @@ interface UIStore {
 
   leaderboardOpen: boolean;
   setLeaderboardOpen: (leaderboardOpen: boolean) => void;
+
+  escapeOpen: boolean;
+  setEscapeOpen: (escapeOpen: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>((set) => ({
@@ -20,4 +23,7 @@ export const useUIStore = create<UIStore>((set) => ({
 
   leaderboardOpen: false,
   setLeaderboardOpen: (leaderboardOpen: boolean) => set({ leaderboardOpen }),
+
+  escapeOpen: false,
+  setEscapeOpen: (escapeOpen: boolean) => set({ escapeOpen }),
 }));

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useUIStore } from "./uiStore";
 import { disconnectFromColyseus } from "../../colyseus";
 import { useClientSettings } from "./soundStore";
@@ -6,7 +6,8 @@ import { useClientSettings } from "./soundStore";
 export function EscapeScreen() {
   const { volume, setVolume } = useClientSettings();
 
-  const [open, setOpen] = useState(false);
+  const { escapeOpen: open, setEscapeOpen: setOpen } = useUIStore();
+
   const otherMenuOpen = useUIStore(
     (state) => state.buyMenuOpen || state.chatOpen
   );
@@ -22,7 +23,7 @@ export function EscapeScreen() {
     return () => {
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, otherMenuOpen]);
+  }, [open, otherMenuOpen, setOpen]);
 
   if (!open) {
     return null;
