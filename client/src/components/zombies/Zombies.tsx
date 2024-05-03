@@ -6,10 +6,9 @@ import { MyZombie } from "./MyZombie";
 import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealthBar";
-import { EntityShadow } from "../Shadow";
 import {
   useNetworkTick,
   useRoomMessageHandler,
@@ -21,9 +20,7 @@ import {
 } from "../../lib/sound/sound";
 import { spriteSheets } from "../../assets/assetHandler";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
-import { getEntityFilters } from "../graphics/filters";
-
-const zombiesFilter = getEntityFilters();
+import { useEntityShadow } from "../graphics/filters";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -45,7 +42,7 @@ export function Zombies() {
   });
 
   return (
-    <Container filters={zombiesFilter}>
+    <Container>
       {zombies?.map((zombie) => (
         <Zombie key={zombie.id} zombie={zombie} />
       ))}
@@ -123,9 +120,11 @@ export function ZombieSprite({
 
   const scale = 0.4 * typeInfo.size;
 
+  const shadow = useEntityShadow();
+  const filters = useMemo(() => [shadow], [shadow]);
+
   return (
     <Container x={x} y={y}>
-      <EntityShadow radius={40} />
       <AnimatedSprite
         rotation={rotation}
         animationSpeed={0.36 * typeInfo.baseSpeed}
@@ -135,6 +134,7 @@ export function ZombieSprite({
         scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}
         {...other}
+        filters={filters}
       />
       <Container y={70}>
         <HealthBar health={health} maxHealth={maxHealth} />

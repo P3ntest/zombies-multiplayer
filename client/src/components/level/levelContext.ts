@@ -16,6 +16,17 @@ export const useLevel = () => {
   return context;
 };
 
+export function useLevelShadowSettings() {
+  return useMemo(() => {
+    return {
+      sunOffset: 10,
+      sunDirection: 1,
+      shadowAlpha: 0.4,
+      shadowBlur: 0.2,
+    };
+  }, []);
+}
+
 export function usePaddedLevelBounds() {
   const { level } = useLevel();
 

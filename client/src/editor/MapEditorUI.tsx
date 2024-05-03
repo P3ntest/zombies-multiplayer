@@ -270,6 +270,45 @@ function Inspector() {
                     </div>
                   </div>
                 )}
+                <div className="flex flex-row items-center gap-4">
+                  <h2 className="text-white font-bold text-lg my-2">Shadows</h2>
+                  <input
+                    type="checkbox"
+                    checked={!!selectedObject.shadow?.enabled}
+                    className="checkbox checkbox-secondary"
+                    onChange={(e) =>
+                      updateObject(selectedObject.id, {
+                        shadow: {
+                          ...selectedObject.shadow,
+                          enabled: e.target.checked,
+                        },
+                      })
+                    }
+                  />
+                </div>
+                {selectedObject.shadow?.enabled && (
+                  <div>
+                    <h2 className="text-white font-bold text-lg mb-1">
+                      Shadow Offset
+                    </h2>
+                    <input
+                      type="range"
+                      className="range"
+                      value={selectedObject.shadow.offset}
+                      min={0}
+                      max={5}
+                      step={1}
+                      onChange={(e) =>
+                        updateObject(selectedObject.id, {
+                          shadow: {
+                            ...selectedObject.shadow,
+                            offset: parseInt(e.target.value),
+                          },
+                        })
+                      }
+                    />
+                  </div>
+                )}
               </>
             )}
             {selectedObject.objectType === "spawnPoint" && (

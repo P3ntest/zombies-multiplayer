@@ -9,6 +9,7 @@ import { MapEditorUI } from "./MapEditorUI";
 import { spriteSheets } from "../assets/assetHandler";
 import { TempFloor } from "../components/level/LevelInstanceRenderer";
 import { LevelObject } from "./LevelObject";
+import { useEntityShadow } from "../components/graphics/filters";
 
 export function MapEditor() {
   return (
@@ -68,6 +69,8 @@ export function SpawnPointDisplay({
     []
   );
 
+  const shadow = useEntityShadow();
+
   return (
     <Container x={spawnPoint.x} y={spawnPoint.y}>
       <Sprite
@@ -77,6 +80,7 @@ export function SpawnPointDisplay({
             : spriteSheets.zombieAtlas.animations.walk[0]
         }
         scale={scale}
+        filters={[shadow]}
         anchor={useMemo(
           () => ({
             x: 0.5,

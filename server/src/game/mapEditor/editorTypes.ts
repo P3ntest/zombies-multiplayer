@@ -73,6 +73,13 @@ export const AssetObject = Transform.extend({
 
   zHeight: IntLike.default(0),
 
+  shadow: z
+    .object({
+      enabled: z.boolean(),
+      offset: IntLike,
+    })
+    .default({ enabled: false, offset: 0 }),
+
   tiling: z.boolean(),
   width: IntLike,
   height: IntLike,

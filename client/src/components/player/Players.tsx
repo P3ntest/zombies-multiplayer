@@ -17,8 +17,6 @@ import { Texture } from "pixi.js";
 import { getMaxHealth } from "../../../../server/src/game/player";
 import { getEntityFilters } from "../graphics/filters";
 
-const playerFilter = getEntityFilters();
-
 export function Players() {
   const state = useColyseusState();
   const players = state?.players;
@@ -35,7 +33,7 @@ export function Players() {
   }
 
   return (
-    <Container filters={playerFilter}>
+    <Container>
       {Array.from(players.entries()).map(([id, player]) => (
         <Player key={id} player={player} />
       ))}

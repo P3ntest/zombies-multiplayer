@@ -3,12 +3,13 @@ import { MapObject } from "../../../server/src/game/mapEditor/editorTypes";
 import { AssetObjectRendering } from "../components/level/AssetObjectInstance";
 import { useEditor } from "./mapEditorStore";
 import { Container as PIXIContainer } from "pixi.js";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { useCamera } from "../components/stageContext";
 import * as PIXI from "pixi.js";
 import { SpawnPointDisplay } from "./MapEditor";
 import { VisualColliders } from "./VisualColliders";
 import lodash from "lodash";
+import { GlowFilter } from "pixi-filters";
 
 function _LevelObject({ asset }: { asset: MapObject }) {
   const containerRef = useRef<PIXIContainer>(null);
@@ -79,6 +80,10 @@ function _LevelObject({ asset }: { asset: MapObject }) {
     };
   }, [camera, app.stage, thisSelected, asset.id]);
 
+  const filters = useMemo(() => {
+    return [new GlowFilter()];
+  }, []);
+
   return (
     <>
       <Container
@@ -86,22 +91,17 @@ function _LevelObject({ asset }: { asset: MapObject }) {
         cursor="pointer"
         eventMode="dynamic"
         zIndex={asset.objectType === "spawnPoint" ? 1000 : asset.zHeight ?? 100}
+        filters={thisSelected ? filters : undefined}
       >
         {asset.objectType === "asset" && (
           <>
-            <AssetObjectRendering
-              asset={asset}
-              tint={thisSelected ? 16724787 : 16777215}
-            />
+            <AssetObjectRendering asset={asset} />
             {thisSelected && <VisualColliders asset={asset} />}
           </>
         )}
         {asset.objectType === "spawnPoint" && (
           <>
-            <SpawnPointDisplay
-              spawnPoint={asset}
-              tint={thisSelected ? 16724787 : 16777215}
-            />
+            <SpawnPointDisplay spawnPoint={asset} />
           </>
         )}
       </Container>
@@ -111,8 +111,5 @@ function _LevelObject({ asset }: { asset: MapObject }) {
 
 export const LevelObject = memo(_LevelObject, (prev, next) => {
   const areEqual = lodash.isEqual(prev.asset, next.asset);
-  if (!areEqual) {
-    console.log("LevelObject changed");
-  }
   return areEqual;
 });

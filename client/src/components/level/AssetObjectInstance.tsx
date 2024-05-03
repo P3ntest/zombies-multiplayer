@@ -8,6 +8,9 @@ import { ComponentProps, useEffect, useMemo, useState } from "react";
 import { useBodyRef } from "../../lib/physics/hooks";
 import { Bodies } from "matter-js";
 import { useCustomAsset } from "../../editor/assets/hooks";
+import { DropShadowFilter } from "pixi-filters";
+import { useLevelShadowSettings } from "./levelContext";
+import { useLevelObjectShadow } from "../graphics/filters";
 
 export function AssetObjectRendering({
   asset,
@@ -43,21 +46,30 @@ export function AssetObjectRendering({
     }
   }, [asset.sprite, missingTexture, customAssetUrl]);
 
+  const objectShadow = useLevelObjectShadow(asset.shadow?.offset ?? 0);
+
   const common = useMemo(
-    () => ({
-      texture: actualTexture ?? missingTexture,
-      x: asset.x,
-      y: asset.y,
-      rotation: asset.rotation,
-      scale: asset.scale,
-      anchor: {
-        x: 0.5,
-        y: 0.5,
-      },
-    }),
+    () =>
+      ({
+        texture: actualTexture ?? missingTexture,
+        x: asset.x,
+        y: asset.y,
+        rotation: asset.rotation,
+        scale: asset.scale,
+        anchor: {
+          x: 0.5,
+          y: 0.5,
+        },
+        filters: asset.shadow?.enabled ? [objectShadow] : undefined,
+      } satisfies Partial<
+        ComponentProps<typeof Sprite> &
+          Partial<ComponentProps<typeof TilingSprite>>
+      >),
     [
       actualTexture,
       missingTexture,
+      objectShadow,
+      asset.shadow?.enabled,
       asset.x,
       asset.y,
       asset.rotation,
