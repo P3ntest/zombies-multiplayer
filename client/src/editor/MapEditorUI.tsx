@@ -20,7 +20,7 @@ export function MapEditorUI({ children }: { children: ReactNode }) {
       {currentView == "editor" && children}
       <div className="fixed top-0 left-0 w-screen h-screen pointer-events-none">
         <div className="pointer-events-auto">
-          <EditorNavBar />
+          <NewNavBar />
         </div>
         {currentView == "editor" && (
           <>
@@ -50,19 +50,18 @@ export function MapEditorUI({ children }: { children: ReactNode }) {
   );
 }
 
-function EditorNavBar() {
+function NewNavBar() {
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-base-300">
       <div className="navbar-start">
-        <span className="text-lg font-bold text-white px-10">Map Editor</span>
-
-        <ul className="menu menu-horizontal">
-          <FileOptions />
-          <CreateAssetsMenu />
-          <li>
-            <Link to="/">Back to Main Menu</Link>
-          </li>
-        </ul>
+        <a className="text-lg font-bold px-2">Map Editor</a>
+        <FileOptions />
+        <CreateAssetsMenu />
+      </div>
+      <div className="navbar-end">
+        <Link to="/" className="btn btn-secondary btn-sm">
+          Back to Main Menu
+        </Link>
       </div>
     </div>
   );
@@ -90,7 +89,7 @@ function Inspector() {
     <div className="h-full">
       <div className="bg-base-300 p-4 h-screen pb-20 overflow-y-auto flex flex-col gap-4">
         <div className="flex flex-row items-center justify-between">
-          <h1 className="text-white font-bold text-xl mb-3">Inspector</h1>
+          <h1 className="text-white font-bold text-xl mb-3 pr-10">Inspector</h1>
           <div className="flex flex-row gap-2">
             <button
               className="btn btn-sm btn-accent"

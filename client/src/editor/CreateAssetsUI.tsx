@@ -14,67 +14,32 @@ export function CreateAssetsMenu() {
   };
 
   return (
-    <li>
-      <details>
-        <summary>Create</summary>
-        <ul className="flex flex-col gap-2">
-          <li>
-            <button
-              className="button"
-              onClick={() =>
-                create({
-                  objectType: "asset",
-                  x,
-                  y,
-                  width: 100,
-                  height: 100,
-                  colliders: [],
-                  rotation: 0,
-                  zHeight: 100,
-                  id: Math.random().toString(36).substr(2, 5),
-                  scale: 1,
-                  tiling: false,
-                  sprite: {
-                    assetSource: "custom",
-                    uploadId: "",
-                  },
-                })
-              }
-            >
-              Asset
-            </button>
-          </li>
-          <li>
-            <button
-              className="button"
-              onClick={() => {
-                create({
-                  objectType: "spawnPoint",
-                  x,
-                  y,
-                  rotation: 0,
-                  id: Math.random().toString(36).substr(2, 5),
-                  scale: 1,
-                  spawns: "player",
-                });
-              }}
-            >
-              Spawn Point
-            </button>
-          </li>
-        </ul>
-      </details>
-    </li>
-  );
-
-  return (
-    <div className="h-full">
-      <div className="card bg-neutral p-4 rounded-xl pointer-events-auto flex flex-col gap-4">
-        <div>
-          <h1 className="text-white font-bold text-xl mb-3">Create</h1>
-          <div className="flex flex-row gap-2"></div>
+    <div className="dropdown px-2">
+      <div tabIndex={0} role="button" className="btn btn-primary btn-sm">
+        Create
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1.5em"
+          height="1.5em"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="m7 10l5 5m0 0l5-5"
+          />
+        </svg>
+      </div>
+      <ul
+        tabIndex={0}
+        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-5 flex flex-col gap-2"
+      >
+        <li>
           <button
-            className="button"
+            className="btn btn-sm btn-primary"
             onClick={() =>
               create({
                 objectType: "asset",
@@ -97,8 +62,10 @@ export function CreateAssetsMenu() {
           >
             Asset
           </button>
+        </li>
+        <li>
           <button
-            className="button"
+            className="btn btn-sm btn-primary"
             onClick={() => {
               create({
                 objectType: "spawnPoint",
@@ -113,8 +80,8 @@ export function CreateAssetsMenu() {
           >
             Spawn Point
           </button>
-        </div>
-      </div>
+        </li>
+      </ul>
     </div>
   );
 }

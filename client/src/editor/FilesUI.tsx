@@ -13,46 +13,64 @@ export function FileOptions() {
   const setCurrentView = useEditor((state) => state.setCurrentView);
 
   return (
-    <li>
-      <details>
-        <summary>File</summary>
-        <ul className="flex flex-col gap-2">
-          <li>
-            <button
-              className="btn btn-sm btn-primary"
-              onClick={async () => {
-                const name = prompt("Enter a name for the map");
-                await saveMap.mutateAsync({
-                  name: name ?? "Unnamed Map",
-                  level: level,
-                });
-                utils.maps.invalidate();
-              }}
-            >
-              Save as New Map
-            </button>
-          </li>
-          <li>
-            <button
-              className="btn btn-sm btn-accent"
-              onClick={() => setCurrentView("myMaps")}
-            >
-              My Maps
-            </button>
-          </li>
-          <li>
-            <ConfirmButton
-              onClick={() => {
-                resetLevel();
-              }}
-              className="btn btn-sm btn-error"
-            >
-              Reset Editor
-            </ConfirmButton>
-          </li>
-        </ul>
-      </details>
-    </li>
+    <div className="dropdown px-2">
+      <div tabIndex={0} role="button" className="btn btn-primary btn-sm">
+        File
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="1.5em"
+          height="1.5em"
+          viewBox="0 0 24 24"
+        >
+          <path
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="m7 10l5 5m0 0l5-5"
+          />
+        </svg>
+      </div>
+      <ul
+        tabIndex={0}
+        className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-5 flex flex-col gap-2"
+      >
+        <li>
+          <button
+            className="btn btn-sm btn-primary"
+            onClick={async () => {
+              const name = prompt("Enter a name for the map");
+              await saveMap.mutateAsync({
+                name: name ?? "Unnamed Map",
+                level: level,
+              });
+              utils.maps.invalidate();
+            }}
+          >
+            Save as New Map
+          </button>
+        </li>
+        <li>
+          <button
+            className="btn btn-sm btn-accent"
+            onClick={() => setCurrentView("myMaps")}
+          >
+            My Maps
+          </button>
+        </li>
+        <li>
+          <ConfirmButton
+            onClick={() => {
+              resetLevel();
+            }}
+            className="btn btn-sm btn-error"
+          >
+            Reset Editor
+          </ConfirmButton>
+        </li>
+      </ul>
+    </div>
   );
 }
 
