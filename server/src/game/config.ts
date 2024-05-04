@@ -9,7 +9,7 @@ export const playerConfig = {
   } as WaveBasedFunction,
   zoomUpgrade: {
     type: "lin",
-    factor: 0.625,
+    factor: 0.4,
   } as WaveBasedFunction,
   startingHealth: 100,
   baseZoom: 1.25,

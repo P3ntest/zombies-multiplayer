@@ -27,9 +27,9 @@ export function useEntityShadow() {
       Math.sin(levelShadowSettings.sunDirection) * offsetMagnitude;
 
     return new DropShadowFilter({
-      blur: levelShadowSettings.shadowBlur,
+      blur: levelShadowSettings.shadowBlur + 1,
       alpha: levelShadowSettings.shadowAlpha,
-      quality: 4,
+      quality: 0, // needs to be 0 for the shadow to not bug around when moving
       offset: {
         x: offsetX,
         y: offsetY,

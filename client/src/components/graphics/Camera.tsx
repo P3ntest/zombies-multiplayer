@@ -7,8 +7,11 @@ import { Container as PIXIContainer } from "pixi.js";
 
 export function GameCamera({ children }: { children: ReactNode }) {
   const windowSize = useWindowSize();
-  const maxAxis = Math.max(windowSize.width, windowSize.height);
-  const zoom = (maxAxis / 1920) * 1.2 * useCameraStore((state) => state.zoom);
+  const screenSurface = windowSize.width * windowSize.height;
+  const zoom =
+    (screenSurface / (1920 * 1080)) *
+    2.2 *
+    useCameraStore((state) => state.zoom);
   return (
     <GenericCamera {...useCameraStore()} zoom={zoom}>
       {children}
@@ -62,7 +65,6 @@ export function GenericCamera({
   });
 
   return (
-     
     <Container x={x} y={y} scale={{ x: zoom, y: zoom }} ref={camRef} name={id}>
       <CameraProvider value={{ camera: camRef.current }}>
         {children}
