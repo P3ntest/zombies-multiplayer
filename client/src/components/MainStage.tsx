@@ -43,6 +43,7 @@ export const MainStage = () => {
                 <>
                   <ZombieSpawner />
                   <PlayerSpawner />
+
                   <LevelInstanceRenderer level={level as any} />
                   <BloodManager />
                   <Zombies />

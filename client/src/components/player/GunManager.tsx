@@ -62,9 +62,9 @@ export function GunManager({
   );
 
   const melee = useCallback(() => {
-    const zombies = getBodiesWithTag("zombie");
+    const zombies = getBodiesWithTag("zombieHitBox");
 
-    const MELEE_RANGE = 100;
+    const MELEE_RANGE = 140;
     const collisions = Matter.Query.ray(
       zombies,
       { x, y },
@@ -72,7 +72,7 @@ export function GunManager({
         x: x + Math.cos(rotation) * MELEE_RANGE,
         y: y + Math.sin(rotation) * MELEE_RANGE,
       },
-      80
+      100
     );
     playMeleeSound(collisions.length > 0);
     collisions.forEach(
@@ -122,6 +122,7 @@ export function GunManager({
         self.upgrades.pierce,
         weapon.pierce
       );
+      const bulletSpread = weapon.bulletSpread;
 
       room?.send("shotSound", {
         playerClass: self.playerClass,
@@ -130,8 +131,17 @@ export function GunManager({
       playGunSound(self.playerClass, (coolDownTicksAfter / 20) * 1000);
 
       if (self.playerClass === "shotgun") {
-        for (let i = 0; i < weaponConfig.weapons.shotgun.bulletAmount; i++) {
-          const randomRotation = rotation + (Math.random() - 0.5) * 0.5;
+        const SPREAD_RANGE = 0.45;
+        const bulletAmount = weaponConfig.weapons.shotgun.bulletAmount;
+        for (let i = 0; i < bulletAmount; i++) {
+          //evenly spread bullets
+          const evenRotation =
+            rotation -
+            SPREAD_RANGE / 2 +
+            (SPREAD_RANGE / (bulletAmount - 1)) * i;
+          const randomRotation =
+            evenRotation + Math.random() * bulletSpread - bulletSpread / 2;
+
           shootBullet(
             originX,
             originY,
@@ -143,10 +153,12 @@ export function GunManager({
           );
         }
       } else {
+        const randomRotation =
+          rotation + Math.random() * bulletSpread - bulletSpread / 2;
         shootBullet(
           originX,
           originY,
-          rotation,
+          randomRotation,
           weapon.bulletSpeed,
           damage,
           pierces,

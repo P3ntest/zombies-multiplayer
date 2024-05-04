@@ -1,5 +1,4 @@
 import { AnimatedSprite, Container, Graphics, Text } from "@pixi/react";
-import { EntityShadow } from "../Shadow";
 import { HealthBar } from "../HealthBar";
 import {
   PlayerAnimation,
@@ -9,6 +8,8 @@ import {
 } from "../../assets/spritesheets/playerAnimationAtlas";
 import { PlayerClass } from "../../../../server/src/game/player";
 import { TextStyle } from "pixi.js";
+import { useEntityShadow } from "../graphics/filters";
+import { useMemo } from "react";
 
 const gunFromClass: Record<PlayerClass, PlayerGun> = {
   pistol: "pistol",
@@ -46,10 +47,12 @@ export function PlayerSprite({
     currentAnimation == 0 ? (isWalking ? "walk" : "idle") : "melee";
   const gun: PlayerGun = gunFromClass[playerClass];
 
+  const shadowFilter = useEntityShadow();
+  const filters = useMemo(() => [shadowFilter], [shadowFilter]);
+
   return (
     <Container x={x} y={y}>
-      <EntityShadow radius={40} />
-      <Container rotation={rotation}>
+      <Container rotation={rotation} filters={filters}>
         <Feet rotation={rotation} velocityX={velocityX} velocityY={velocityY} />
         <AnimatedSprite
           key={gun + animation}

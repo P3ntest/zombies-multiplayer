@@ -3,6 +3,7 @@ export type ZombieType =
   | "baby"
   | "greenMutant"
   | "tank"
+  | "mutatedBaby"
   | "blueMutant";
 
 export const zombieInfo: Record<
@@ -12,7 +13,9 @@ export const zombieInfo: Record<
     baseSpeed: number;
     baseAttackDamage: number;
     size: number;
+    attackDelayTicks?: number;
     tint?: string | number;
+    glow?: number;
   }
 > = {
   normal: {
@@ -25,7 +28,17 @@ export const zombieInfo: Record<
     baseHealth: 30,
     baseSpeed: 3,
     baseAttackDamage: 10,
+    attackDelayTicks: 0,
     size: 0.7,
+  },
+  mutatedBaby: {
+    baseHealth: 50,
+    baseSpeed: 3.5,
+    baseAttackDamage: 20,
+    attackDelayTicks: 0,
+    size: 0.7,
+    tint: 0xccccff,
+    glow: 0x0000ff,
   },
   greenMutant: {
     baseHealth: 200,
@@ -33,11 +46,12 @@ export const zombieInfo: Record<
     baseAttackDamage: 20,
     size: 1,
     tint: 0x00ff00,
+    glow: 0x00ff00,
   },
   tank: {
-    baseHealth: 1000,
-    baseSpeed: 0.5,
-    baseAttackDamage: 50,
+    baseHealth: 600,
+    baseSpeed: 0.8,
+    baseAttackDamage: 110,
     size: 1.9,
   },
   blueMutant: {

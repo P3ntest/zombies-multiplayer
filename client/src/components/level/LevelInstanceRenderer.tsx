@@ -39,7 +39,6 @@ export function MapPreviewRenderer({
       ),
     };
   }, [level]);
-  console.log("filtered", filtered);
   return (
     <Stage raf={false} width={size} height={size}>
       <LogtoProvider config={logtoConfig}>

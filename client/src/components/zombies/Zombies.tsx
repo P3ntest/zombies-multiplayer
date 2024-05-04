@@ -6,10 +6,9 @@ import { MyZombie } from "./MyZombie";
 import { useLerped, useLerpedRadian } from "../../lib/useLerped";
 import { useBodyRef } from "../../lib/physics/hooks";
 import Matter, { Body } from "matter-js";
-import { ComponentProps } from "react";
+import { ComponentProps, useMemo } from "react";
 import { useGrowling, useZombieBulletHitListener } from "./zombieHooks";
 import { HealthBar } from "../HealthBar";
-import { EntityShadow } from "../Shadow";
 import {
   useNetworkTick,
   useRoomMessageHandler,
@@ -21,9 +20,9 @@ import {
 } from "../../lib/sound/sound";
 import { spriteSheets } from "../../assets/assetHandler";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
-import { getEntityFilters } from "../graphics/filters";
-
-const zombiesFilter = getEntityFilters();
+import { useEntityShadow } from "../graphics/filters";
+import { GlowFilter } from "pixi-filters";
+import { useZombieColliders } from "./zombieColliders";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -45,7 +44,7 @@ export function Zombies() {
   });
 
   return (
-    <Container filters={zombiesFilter}>
+    <Container>
       {zombies?.map((zombie) => (
         <Zombie key={zombie.id} zombie={zombie} />
       ))}
@@ -66,26 +65,21 @@ function Zombie({ zombie }: { zombie: ZombieState }) {
 }
 
 function OtherZombie({ zombie }: { zombie: ZombieState }) {
-  const collider = useBodyRef(
-    () => {
-      return Matter.Bodies.circle(zombie.x, zombie.y, 40, {
-        density: 0.003,
-      });
-    },
-    {
-      tags: ["zombie"],
-      id: zombie.id,
-    }
+  const colliders = useZombieColliders(
+    zombie.zombieType,
+    zombie.id,
+    zombie.x,
+    zombie.y
   );
 
-  useZombieBulletHitListener(collider.current, zombie.id);
+  useZombieBulletHitListener(colliders.hitBox.current, zombie.id);
 
   const x = useLerped(zombie.x, 0.1);
   const y = useLerped(zombie.y, 0.1);
   const rotation = useLerpedRadian(zombie.rotation, 0.1);
 
   useTick(() => {
-    Body.setPosition(collider.current, {
+    Body.setPosition(colliders.collider.current, {
       x,
       y,
     });
@@ -123,9 +117,22 @@ export function ZombieSprite({
 
   const scale = 0.4 * typeInfo.size;
 
+  const glow = useMemo(() => {
+    if (!typeInfo.glow) {
+      return;
+    }
+
+    return new GlowFilter({
+      color: typeInfo.glow,
+      distance: 5,
+    });
+  }, [typeInfo.glow]);
+
+  const shadow = useEntityShadow();
+  const filters = useMemo(() => [shadow, glow].filter(Boolean), [shadow, glow]);
+
   return (
     <Container x={x} y={y}>
-      <EntityShadow radius={40} />
       <AnimatedSprite
         rotation={rotation}
         animationSpeed={0.36 * typeInfo.baseSpeed}
@@ -135,6 +142,7 @@ export function ZombieSprite({
         scale={{ x: scale, y: scale }}
         anchor={{ x: 0.35, y: 0.55 }}
         {...other}
+        filters={filters}
       />
       <Container y={70}>
         <HealthBar health={health} maxHealth={maxHealth} />

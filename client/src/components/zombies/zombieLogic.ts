@@ -135,8 +135,12 @@ export function useZombieLogic(
       zombie.targetPlayerId,
       zombieType.size,
       room,
+      calculateNextPointPathFinding,
     ]
   );
+
+  const firstAttachOpportunityTick = useRef(0);
+  const hasEverPathFound = useRef(false);
 
   useNetworkTick((currentTick) => {
     zombieUpdatesBatch.add({
@@ -147,7 +151,8 @@ export function useZombieLogic(
     });
 
     const offsetTick = currentTick + tickOffset;
-    if (offsetTick % 10 === 0) {
+    if (offsetTick % 10 === 0 || !hasEverPathFound.current) {
+      hasEverPathFound.current = true;
       // 2 times per second
       updateTarget(offsetTick % 20 === 0);
     }
@@ -163,7 +168,8 @@ export function useZombieLogic(
         y,
         room,
         currentTick,
-        zombieType.baseAttackDamage
+        zombieType.baseAttackDamage,
+        firstAttachOpportunityTick
       );
     }
   });
@@ -234,13 +240,27 @@ function attackLogic(
   y: number,
   room: ReturnType<typeof useColyseusRoom>,
   currentTick: number,
-  damage: number
+  damage: number,
+  firstAttachOpportunityTick: React.MutableRefObject<number>
 ) {
+  const typeInfo = zombieInfo[zombie.zombieType];
   const distanceToTarget = Math.hypot(targetPlayer.x - x, targetPlayer.y - y);
-  if (
-    distanceToTarget < 100 &&
-    zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick
-  ) {
+
+  const isInRange = distanceToTarget < 100 * typeInfo.size;
+
+  if (!isInRange) {
+    firstAttachOpportunityTick.current = currentTick;
+  }
+
+  const hasCooledDown =
+    zombie.lastAttackTick + zombie.attackCoolDownTicks < currentTick;
+
+  const attackDelayTicks = typeInfo.attackDelayTicks ?? 10;
+
+  const hasSeenPlayerLongEnough =
+    currentTick - firstAttachOpportunityTick.current >= attackDelayTicks;
+
+  if (isInRange && hasCooledDown && hasSeenPlayerLongEnough) {
     // attack the player
     room?.send("zombieAttackPlayer", {
       playerId: targetPlayer.sessionId,

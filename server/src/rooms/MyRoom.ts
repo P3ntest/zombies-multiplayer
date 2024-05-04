@@ -271,6 +271,8 @@ export class MyRoom extends Room<MyRoomState> {
     this.onMessage("spawnZombie", (client, message) => {
       const { x, y, type, respawnId } = message;
 
+      console.log("spawning zombie", type);
+
       if (respawnId) {
         const zombie = this.zombieRespawnData.get(respawnId);
         if (zombie) {
@@ -284,7 +286,7 @@ export class MyRoom extends Room<MyRoomState> {
       }
 
       const zombie = new ZombieState();
-      const typeInfo = zombieInfo[type as ZombieType];
+      const typeInfo = zombieInfo[type as ZombieType] ?? zombieInfo.normal;
       const health = Math.round(
         typeInfo.baseHealth *
           this.waveManager.currentWave.zombieHealthMultiplier
@@ -577,7 +579,7 @@ export class MyRoom extends Room<MyRoomState> {
   }
 
   zombieRespawnData: Map<number, ZombieState> = new Map();
-  requestSpawnZombie(existing?: ZombieState) {
+  requestSpawnZombie(existing?: ZombieState, zombieType?: ZombieType) {
     if (this.state.isGameOver) return;
     // find a player which has the least number of zombies
     const players = this.getConnectedPlayers();
@@ -604,8 +606,14 @@ export class MyRoom extends Room<MyRoomState> {
     if (existing) {
       this.zombieRespawnData.set(existing.id, existing.clone());
     }
+
+    const type =
+      zombieType ??
+      calculateZombieSpawnType(this.waveManager.currentWaveNumber);
+    console.log("requesting spawn", type);
+
     client?.send("requestSpawnZombie", {
-      type: calculateZombieSpawnType(this.waveManager.currentWaveNumber),
+      type,
       respawnId: existing?.id,
     });
   }
