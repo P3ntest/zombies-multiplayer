@@ -147,22 +147,22 @@ export const upgradeConfig = [
 export const waveConfig = {
   zombies: {
     type: "exp",
-    factor: 1.2,
+    factor: 1.35,
     base: 30,
-    max: 120,
+    max: 1000,
   } as WaveBasedFunction,
   zombieSpawnInterval: {
-    max: 20,
+    max: 15,
     factor: -80,
-    base: 1000,
+    base: 800,
   },
   zombieHealthMultiplier: {
     type: "exp",
-    factor: 1.2,
+    factor: 1.35,
   } as WaveBasedFunction,
   zombieAttackMultiplier: {
     type: "exp",
-    factor: 1.2,
+    factor: 1.3,
   } as WaveBasedFunction,
   spawnChances: {
     normal: {
@@ -178,22 +178,22 @@ export const waveConfig = {
     mutatedBaby: {
       max: 30,
       factor: 2,
-      base: 0,
+      base: -10,
     },
     greenMutant: {
       max: 40,
       factor: 3,
-      base: 0,
+      base: -6,
     },
     tank: {
       max: 5,
       factor: 1,
-      base: 0,
+      base: -3,
     },
     blueMutant: {
       max: 40,
       factor: 3,
-      base: 0,
+      base: -12,
     },
   } satisfies Record<ZombieType, SpawnChance>,
   postDelay: 5000,

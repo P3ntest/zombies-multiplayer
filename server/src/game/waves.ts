@@ -6,7 +6,7 @@ export function generateWave(wave: number, players: number = 1) {
 
   return {
     wave,
-    zombies: callWaveBasedFunction(waveConfig.zombies, wave),
+    zombies: Math.round(callWaveBasedFunction(waveConfig.zombies, wave)),
     zombieSpawnInterval: Math.max(
       waveConfig.zombieSpawnInterval.max,
       waveConfig.zombieSpawnInterval.base +
@@ -46,5 +46,27 @@ export function calculateZombieSpawnType(wave: number): ZombieType {
 
 function calcSpawnChange(wave: number, type: ZombieType) {
   const spawnChance = waveConfig.spawnChances[type] as SpawnChance;
-  return Math.min(spawnChance.max, wave * spawnChance.factor);
+  return minmax(wave * spawnChance.factor, spawnChance.base, spawnChance.max);
+}
+
+// for (let wave = 0; wave < 20; wave++) {
+//   console.log(`============ Wave ${wave + 1} ============`);
+//   // log how what types of zombies spawn
+//   const numZombies = generateWave(wave).zombies;
+//   const zombieSpawns: Record<ZombieType, number> = {
+//     normal: 0,
+//     baby: 0,
+//     mutatedBaby: 0,
+//     greenMutant: 0,
+//     tank: 0,
+//     blueMutant: 0,
+//   };
+//   for (let i = 0; i < numZombies; i++) {
+//     zombieSpawns[calculateZombieSpawnType(wave)]++;
+//   }
+//   console.log(zombieSpawns);
+// }
+
+function minmax(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
 }
