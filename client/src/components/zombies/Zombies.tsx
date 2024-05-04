@@ -65,7 +65,12 @@ function Zombie({ zombie }: { zombie: ZombieState }) {
 }
 
 function OtherZombie({ zombie }: { zombie: ZombieState }) {
-  const colliders = useZombieColliders(zombie.zombieType, zombie.x, zombie.y);
+  const colliders = useZombieColliders(
+    zombie.zombieType,
+    zombie.id,
+    zombie.x,
+    zombie.y
+  );
 
   useZombieBulletHitListener(colliders.hitBox.current, zombie.id);
 

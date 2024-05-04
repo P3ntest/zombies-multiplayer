@@ -66,8 +66,8 @@ export const weaponConfig = {
     },
     melee: {
       //2970 dmg per second
-      damage: 33,
-      knockBack: 0,
+      damage: 40,
+      knockBack: 2.4,
       fireRate: 15,
       pierce: 10,
       range: 1,

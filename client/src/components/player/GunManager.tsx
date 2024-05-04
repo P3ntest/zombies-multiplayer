@@ -62,7 +62,7 @@ export function GunManager({
   );
 
   const melee = useCallback(() => {
-    const zombies = getBodiesWithTag("zombie");
+    const zombies = getBodiesWithTag("zombieHitBox");
 
     const MELEE_RANGE = 140;
     const collisions = Matter.Query.ray(

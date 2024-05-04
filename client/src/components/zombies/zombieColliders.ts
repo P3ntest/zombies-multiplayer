@@ -6,6 +6,7 @@ import { useTick } from "@pixi/react";
 
 export function useZombieColliders(
   zombieType: ZombieType,
+  zombieId: number,
   initialX: number,
   initialY: number
 ) {
@@ -17,7 +18,7 @@ export function useZombieColliders(
         isSensor: true,
       });
     },
-    { tags: ["zombie"] }
+    { tags: ["zombie", "zombieHitBox"], id: zombieId }
   );
   const collider = useBodyRef(
     () => {
@@ -25,7 +26,7 @@ export function useZombieColliders(
         density: 0.003,
       });
     },
-    { tags: ["zombie"] }
+    { tags: ["zombie", "zombieCollider"], id: zombieId }
   );
 
   useTick(() => {
