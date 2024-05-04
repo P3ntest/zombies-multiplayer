@@ -21,8 +21,9 @@ export function generateWave(wave: number, players: number = 1) {
       wave
     ),
     spawnChances: {
-      normal: waveConfig.spawnChances.normal,
+      normal: calcSpawnChange(wave, "normal"),
       baby: calcSpawnChange(wave, "baby"),
+      mutatedBaby: calcSpawnChange(wave, "mutatedBaby"),
       greenMutant: calcSpawnChange(wave, "greenMutant"),
       tank: calcSpawnChange(wave, "tank"),
       blueMutant: calcSpawnChange(wave, "blueMutant"),

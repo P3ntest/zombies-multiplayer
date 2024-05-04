@@ -21,6 +21,7 @@ import {
 import { spriteSheets } from "../../assets/assetHandler";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
 import { useEntityShadow } from "../graphics/filters";
+import { GlowFilter } from "pixi-filters";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -120,8 +121,19 @@ export function ZombieSprite({
 
   const scale = 0.4 * typeInfo.size;
 
+  const glow = useMemo(() => {
+    if (!typeInfo.glow) {
+      return;
+    }
+
+    return new GlowFilter({
+      color: typeInfo.glow,
+      distance: 5,
+    });
+  }, [typeInfo.glow]);
+
   const shadow = useEntityShadow();
-  const filters = useMemo(() => [shadow], [shadow]);
+  const filters = useMemo(() => [shadow, glow].filter(Boolean), [shadow, glow]);
 
   return (
     <Container x={x} y={y}>

@@ -1,3 +1,6 @@
+import { ZombieState } from "../rooms/schema/MyRoomState";
+import { ZombieType } from "./zombies";
+
 export const playerConfig = {
   healthUpgrade: {
     type: "lin",
@@ -38,6 +41,7 @@ export const weaponConfig = {
       pierce: 2,
       range: 10,
       bulletSpeed: 30,
+      bulletSpread: 0.08,
     },
     shotgun: {
       //4500 dmg per second
@@ -48,6 +52,7 @@ export const weaponConfig = {
       range: 8,
       bulletSpeed: 20,
       bulletAmount: 5,
+      bulletSpread: 0.1,
     },
     rifle: {
       //5400 dmg per second
@@ -57,6 +62,7 @@ export const weaponConfig = {
       pierce: 1,
       range: 10,
       bulletSpeed: 20,
+      bulletSpread: 0.35,
     },
     melee: {
       //2970 dmg per second
@@ -66,6 +72,7 @@ export const weaponConfig = {
       pierce: 10,
       range: 1,
       bulletSpeed: 20,
+      bulletSpread: 0,
     },
   },
 };
@@ -140,42 +147,55 @@ export const upgradeConfig = [
 export const waveConfig = {
   zombies: {
     type: "exp",
-    factor: 1.1,
+    factor: 1.2,
     base: 30,
-    max: 100,
+    max: 120,
   } as WaveBasedFunction,
   zombieSpawnInterval: {
-    max: 40,
-    factor: -60,
+    max: 20,
+    factor: -80,
     base: 1000,
   },
   zombieHealthMultiplier: {
     type: "exp",
-    factor: 1.15,
+    factor: 1.2,
   } as WaveBasedFunction,
   zombieAttackMultiplier: {
     type: "exp",
-    factor: 1.15,
+    factor: 1.2,
   } as WaveBasedFunction,
   spawnChances: {
-    normal: 100,
+    normal: {
+      max: 100,
+      factor: 0,
+      base: 100,
+    },
     baby: {
-      max: 40,
-      factor: 5,
-    } as SpawnChance,
+      max: 50,
+      factor: 6,
+      base: 0,
+    },
+    mutatedBaby: {
+      max: 30,
+      factor: 2,
+      base: 0,
+    },
     greenMutant: {
       max: 40,
-      factor: 2,
-    } as SpawnChance,
+      factor: 3,
+      base: 0,
+    },
     tank: {
-      max: 10,
+      max: 5,
       factor: 1,
-    } as SpawnChance,
+      base: 0,
+    },
     blueMutant: {
       max: 40,
-      factor: 1,
-    } as SpawnChance,
-  },
+      factor: 3,
+      base: 0,
+    },
+  } satisfies Record<ZombieType, SpawnChance>,
   postDelay: 5000,
 };
 export type WaveBasedFunction = {
@@ -186,6 +206,7 @@ export type WaveBasedFunction = {
 };
 
 export type SpawnChance = {
+  base: number;
   max: number;
   factor: number;
 };
