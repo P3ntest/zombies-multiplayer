@@ -22,6 +22,7 @@ import { spriteSheets } from "../../assets/assetHandler";
 import { zombieUpdatesBatch } from "../../lib/networking/batches";
 import { useEntityShadow } from "../graphics/filters";
 import { GlowFilter } from "pixi-filters";
+import { useZombieColliders } from "./zombieColliders";
 
 export function Zombies() {
   const state = useColyseusState();
@@ -64,26 +65,16 @@ function Zombie({ zombie }: { zombie: ZombieState }) {
 }
 
 function OtherZombie({ zombie }: { zombie: ZombieState }) {
-  const collider = useBodyRef(
-    () => {
-      return Matter.Bodies.circle(zombie.x, zombie.y, 40, {
-        density: 0.003,
-      });
-    },
-    {
-      tags: ["zombie"],
-      id: zombie.id,
-    }
-  );
+  const colliders = useZombieColliders(zombie.zombieType, zombie.x, zombie.y);
 
-  useZombieBulletHitListener(collider.current, zombie.id);
+  useZombieBulletHitListener(colliders.hitBox.current, zombie.id);
 
   const x = useLerped(zombie.x, 0.1);
   const y = useLerped(zombie.y, 0.1);
   const rotation = useLerpedRadian(zombie.rotation, 0.1);
 
   useTick(() => {
-    Body.setPosition(collider.current, {
+    Body.setPosition(colliders.collider.current, {
       x,
       y,
     });
