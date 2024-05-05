@@ -109,8 +109,6 @@ function WaveInfo() {
       : ""
     : `Next wave in ${waveInfo?.nextWaveStartsInSec} seconds`;
 
-  console.log(waveInfo?.zombiesLeft / waveInfo?.totalZombies);
-
   return (
     <div
       style={{
