@@ -9,9 +9,10 @@ export function GameCamera({ children }: { children: ReactNode }) {
   const windowSize = useWindowSize();
   const screenSurface = windowSize.width * windowSize.height;
   const zoom =
-    (screenSurface / (1920 * 1080)) *
+    Math.sqrt(screenSurface / (1920 * 1080)) *
     2.2 *
     useCameraStore((state) => state.zoom);
+
   return (
     <GenericCamera {...useCameraStore()} zoom={zoom}>
       {children}
