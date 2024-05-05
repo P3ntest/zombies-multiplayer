@@ -1,4 +1,3 @@
-import { ZombieState } from "../rooms/schema/MyRoomState";
 import { ZombieType } from "./zombies";
 
 export const playerConfig = {

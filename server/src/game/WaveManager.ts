@@ -33,6 +33,9 @@ export class WaveManager {
     this.currentWaveSpawned = 0;
     this.finishedSpawning = false;
 
+    this.room.state.waveInfo.totalZombies = this.currentWave.zombies;
+    this.room.state.waveInfo.zombiesLeft = this.currentWave.zombies;
+
     this.room.broadcast("waveStart", {
       wave: this.currentWaveNumber,
     });

@@ -95,7 +95,6 @@ export function SkillPointSymbol() {
 }
 
 function WaveInfo() {
-  const zombiesCount = useColyseusState((state) => state.zombies.length);
   const waveInfo = useColyseusState((state) => state.waveInfo);
 
   const title =
@@ -105,8 +104,12 @@ function WaveInfo() {
         (!waveInfo?.active ? " complete!" : "");
 
   const subtitle = waveInfo?.active
-    ? `Remaining Zombies: ${zombiesCount}`
+    ? waveInfo?.zombiesLeft / waveInfo?.totalZombies < 0.1
+      ? `${waveInfo?.zombiesLeft} zombies left`
+      : ""
     : `Next wave in ${waveInfo?.nextWaveStartsInSec} seconds`;
+
+  console.log(waveInfo?.zombiesLeft / waveInfo?.totalZombies);
 
   return (
     <div
@@ -126,6 +129,11 @@ function WaveInfo() {
       className="flex flex-col items-center"
     >
       <div className="ui-text text-2xl">{title}</div>
+      <progress
+        className="progress progress-error w-56 mt-2"
+        value={waveInfo.zombiesLeft}
+        max={waveInfo.totalZombies}
+      ></progress>
       <div className="ui-text text-lg">{subtitle}</div>
     </div>
   );

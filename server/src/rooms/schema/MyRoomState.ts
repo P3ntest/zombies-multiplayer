@@ -83,6 +83,8 @@ export class WaveInfoState extends Schema {
   @type("uint32") currentWaveNumber: number = 0;
   @type("boolean") active: boolean = false;
   @type("uint16") nextWaveStartsInSec: number = 0;
+  @type("uint32") totalZombies: number = 0;
+  @type("uint32") zombiesLeft: number = 0;
 }
 
 export class MyRoomState extends Schema {

@@ -397,6 +397,7 @@ export class MyRoom extends Room<MyRoomState> {
       y: zombie.y,
       size: 8,
     });
+    this.state.waveInfo.zombiesLeft--;
     this.broadcast("zombieDead", { zombieId });
   }
 
