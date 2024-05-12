@@ -153,11 +153,11 @@ export const waveConfig = {
   zombieSpawnInterval: {
     max: 15,
     factor: -80,
-    base: 800,
+    base: 1000,
   },
   zombieHealthMultiplier: {
     type: "exp",
-    factor: 1.35,
+    factor: 1.3,
   } as WaveBasedFunction,
   zombieAttackMultiplier: {
     type: "exp",
@@ -172,27 +172,27 @@ export const waveConfig = {
     baby: {
       max: 50,
       factor: 6,
-      base: 0,
+      base: -12, // start spawning at wave 3
     },
     mutatedBaby: {
       max: 30,
       factor: 2,
-      base: -10,
+      base: -8, // start spawning at wave 5
     },
     greenMutant: {
       max: 40,
       factor: 3,
-      base: -6,
+      base: -3, // start spawning at wave 2
     },
     tank: {
       max: 5,
       factor: 1,
-      base: -3,
+      base: -3, // start spawning at wave 4
     },
     blueMutant: {
       max: 40,
       factor: 3,
-      base: -12,
+      base: -15, // start spawning at wave 6
     },
   } satisfies Record<ZombieType, SpawnChance>,
   postDelay: 5000,

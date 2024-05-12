@@ -46,7 +46,12 @@ export function calculateZombieSpawnType(wave: number): ZombieType {
 
 function calcSpawnChange(wave: number, type: ZombieType) {
   const spawnChance = waveConfig.spawnChances[type] as SpawnChance;
-  return minmax(wave * spawnChance.factor, spawnChance.base, spawnChance.max);
+  const chance = minmax(
+    (wave + 1) * spawnChance.factor + spawnChance.base, // wave + 1 because wave is 0-indexed
+    spawnChance.base, // min
+    spawnChance.max // max
+  );
+  return chance;
 }
 
 // for (let wave = 0; wave < 20; wave++) {
