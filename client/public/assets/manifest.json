@@ -981,6 +981,22 @@
         },
         {
           "alias": [
+            "vehicles/kv2_body.png"
+          ],
+          "src": [
+            "vehicles/kv2_body.png"
+          ]
+        },
+        {
+          "alias": [
+            "vehicles/kv2_gun.png"
+          ],
+          "src": [
+            "vehicles/kv2_gun.png"
+          ]
+        },
+        {
+          "alias": [
             "zombie/zombie.png"
           ],
           "src": [

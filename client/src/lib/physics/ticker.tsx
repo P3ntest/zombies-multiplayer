@@ -3,6 +3,8 @@ export class PhysicsTicker {
   tick: number = 0;
   lastTick: number = 0;
 
+  tickSpeed = 1000 / 60;
+
   constructor(private physicsUpdate: (delta: number) => void) {}
 
   start() {
@@ -31,7 +33,7 @@ export class PhysicsTicker {
 
     this.update(Math.min(delta, maxDelta));
 
-    requestAnimationFrame(() => this.loop());
+    setTimeout(() => this.loop(), this.tickSpeed);
   }
 
   beforeHandlers = new Set<() => void>();

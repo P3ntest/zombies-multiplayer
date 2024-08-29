@@ -25,3 +25,10 @@ export function useLerpedRadian(value: number, factor: number) {
 
   return lerped;
 }
+
+export function useLerpedVec2(value: { x: number; y: number }, factor: number) {
+  return {
+    x: useLerped(value.x, factor),
+    y: useLerped(value.y, factor),
+  };
+}

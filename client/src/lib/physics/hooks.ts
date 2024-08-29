@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import { physicsContext } from "./context";
-import Matter, { Composite } from "matter-js";
+import Matter, { Body, Composite } from "matter-js";
 
 export function usePhysicsWorld() {
   const context = useContext(physicsContext);
@@ -111,4 +111,15 @@ export function useFilteredOnCollisionStart(
       });
     }
   });
+}
+
+export function useBeforePhysicsUpdate(callback: () => void) {
+  const ticker = useContext(physicsContext)?.ticker;
+  useEffect(() => {
+    if (!ticker) return;
+    ticker.addBeforeHandler(callback);
+    return () => {
+      ticker.removeBeforeHandler(callback);
+    };
+  }, [ticker, callback]);
 }

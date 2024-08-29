@@ -25,7 +25,7 @@ export function GenericCamera({
   y,
   zoom,
   children,
-  lerp = 0.04,
+  lerp = 0.2,
 }: {
   x: number;
   y: number;

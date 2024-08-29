@@ -1,32 +1,23 @@
-import {
-  PlayerHealthState,
-  PlayerState,
-} from "../../../../server/src/rooms/schema/MyRoomState";
 import { useColyseusRoom, useColyseusState } from "../../colyseus";
 import { Container, Sprite, useTick } from "@pixi/react";
-import { useLerped, useLerpedRadian } from "../../lib/useLerped";
+import { useLerped, useLerpedRadian, useLerpedVec2 } from "../../lib/useLerped";
 import { PlayerSprite } from "./PlayerSprite";
 import { PlayerSelf } from "./PlayerSelf";
 import Matter, { Body } from "matter-js";
-import { useBodyRef } from "../../lib/physics/hooks";
-import { SpectateControls } from "./SpectateControls";
-import { useState } from "react";
-import { useRoomMessageHandler, useSelf } from "../../lib/networking/hooks";
-import { playSelfDied } from "../../lib/sound/sound";
+import { useBeforePhysicsUpdate, useBodyRef } from "../../lib/physics/hooks";
+
+import { useCallback, useState } from "react";
 import { Texture } from "pixi.js";
 import { getMaxHealth } from "../../../../server/src/game/player";
-import { getEntityFilters } from "../graphics/filters";
+import {
+  playerCollider,
+  PlayerState,
+} from "../../../../server/src/rooms/Player";
+import { useSyncSchemaToBody } from "../../lib/physics/utils";
 
 export function Players() {
   const state = useColyseusState();
   const players = state?.players;
-  const self = useSelf();
-
-  useRoomMessageHandler("playerDied", (message) => {
-    if (message.playerId === self.sessionId) {
-      playSelfDied();
-    }
-  });
 
   if (!players) {
     return null;
@@ -46,69 +37,39 @@ function Player({ player }: { player: PlayerState }) {
   const isMe = player.sessionId === sessionId;
 
   if (isMe) {
-    return player.healthState == PlayerHealthState.ALIVE ? (
-      <PlayerSelf player={player} />
-    ) : (
-      <>
-        <SpectateControls x={player.x} y={player.y} />
-        {PlayerHealthState.DEAD && <PlayerGrave x={player.x} y={player.y} />}
-      </>
-    );
+    return <PlayerSelf player={player} />;
+    // return player.healthState == PlayerHealthState.ALIVE ? (
+    //   <PlayerSelf player={player} />
+    // ) : (
+    //   <>
+    //     <SpectateControls x={player.x} y={player.y} />
+    //     {PlayerHealthState.DEAD && <PlayerGrave x={player.x} y={player.y} />}
+    //   </>
+    // );
   } else {
-    return <OtherPlayer player={player} />;
-  }
-}
-
-function OtherPlayer({ player }: { player: PlayerState }) {
-  if (player.healthState === PlayerHealthState.ALIVE) {
     return <OtherAlivePlayer player={player} />;
-  } else if (player.healthState === PlayerHealthState.DEAD) {
-    return <PlayerGrave x={player.x} y={player.y} />;
-  } else {
-    return null;
   }
-}
-
-function PlayerGrave({ x, y }: { x: number; y: number }) {
-  const rotation = useState(Math.random() * Math.PI * 2)[0];
-  return (
-    <Sprite
-      anchor={[0.5, 0.5]}
-      x={x}
-      y={y}
-      rotation={rotation}
-      texture={Texture.from("dogtag.png")}
-      scale={0.2}
-    />
-  );
 }
 
 function OtherAlivePlayer({ player }: { player: PlayerState }) {
-  const x = useLerped(player.x, 0.5);
-  const y = useLerped(player.y, 0.5);
-  const rotation = useLerpedRadian(player.rotation, 0.5);
-  const collider = useBodyRef(() => {
-    return Matter.Bodies.circle(player.x, player.y, 40);
-  });
-  useTick(() => {
-    Body.setPosition(collider.current, {
-      x,
-      y,
-    });
-  });
+  const body = useBodyRef(playerCollider);
+  const position = useLerpedVec2(body.current.position, 0.2);
+  const rotation = useLerpedRadian(player.transform.rotation, 0.5);
+
+  useSyncSchemaToBody(player.transform, body);
 
   return (
     <PlayerSprite
       currentAnimation={player.currentAnimation}
       name={player.name}
-      playerClass={player.playerClass}
-      x={x}
-      y={y}
+      playerClass={"shotgun"}
+      x={position.x}
+      y={position.y}
       rotation={rotation}
       health={player.health}
-      maxHealth={getMaxHealth(player)}
-      velocityX={player.velocityX}
-      velocityY={player.velocityY}
+      maxHealth={100}
+      velocityX={player.transform.velocityX}
+      velocityY={player.transform.velocityY}
     />
   );
 }

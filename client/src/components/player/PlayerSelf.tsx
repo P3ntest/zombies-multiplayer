@@ -1,142 +1,132 @@
 import { useApp, useTick } from "@pixi/react";
-import Matter, { Body } from "matter-js";
-import { useContext, useEffect, useRef, useState } from "react";
-import { PlayerState } from "../../../../server/src/rooms/schema/MyRoomState";
+import { useContext, useEffect } from "react";
+
 import { useColyseusRoom } from "../../colyseus";
+
 import {
-  useNetworkTick,
-  useRoomMessageHandler,
-} from "../../lib/networking/hooks";
-import { useBodyRef } from "../../lib/physics/hooks";
-import { playHurtSound } from "../../lib/sound/sound";
-import {
-  useControlsStore,
   useCurrentPlayerDirection,
+  useIsShooting,
 } from "../../lib/useControls";
 import { useCameraStore } from "../graphics/cameraStore";
 import { cameraContext } from "../stageContext";
-import { GunManager } from "./GunManager";
 import { PlayerSprite } from "./PlayerSprite";
+
 import {
-  callWaveBasedFunction,
-  playerConfig,
-} from "../../../../server/src/game/config";
-import { getMaxHealth } from "../../../../server/src/game/player";
+  playerCollider,
+  PlayerState,
+} from "../../../../server/src/rooms/Player";
+import { useLerpedVec2 } from "../../lib/useLerped";
+import { useBeforePhysicsUpdate, useBodyRef } from "../../lib/physics/hooks";
+import { deadZoneLerp } from "../../lib/physics/utils";
+import { Body, Vector } from "matter-js";
+import { useUpdate } from "../util/useUpdate";
 
 export function PlayerSelf({ player }: { player: PlayerState }) {
-  const collider = useBodyRef(() => {
-    return Matter.Bodies.circle(player.x, player.y, 40);
-  });
-
   const room = useColyseusRoom();
 
-  const [currentAnimation, setCurrentAnimation] = useState(
-    player.currentAnimation
-  );
-  const lastAnimationSent = useRef(player.currentAnimation);
+  // const [currentAnimation, setCurrentAnimation] = useState(
+  //   player.currentAnimation
+  // );
+  // const lastAnimationSent = useRef(player.currentAnimation);
 
-  const [x, setX] = useState(player.x);
-  const [y, setY] = useState(player.y);
-  const [rotation, setRotation] = useState(player.rotation);
+  // const [x, setX] = useState(player.x);
+  // const [y, setY] = useState(player.y);
 
   const app = useApp();
   const stageRef = useContext(cameraContext);
 
+  // const { touch, touchLook } = useControlsStore();
+
+  // useRoomMessageHandler("playerHurt", (message) => {
+  //   if (message.playerId === player.sessionId) {
+  //     playHurtSound();
+  //   }
+  // });
+
+  const body = useBodyRef(playerCollider);
+
+  const update = useUpdate();
+
   const currentDirection = useCurrentPlayerDirection();
+  const isShooting = useIsShooting();
 
-  const { touch, touchLook } = useControlsStore();
-
-  useRoomMessageHandler("playerHurt", (message) => {
-    if (message.playerId === player.sessionId) {
-      playHurtSound();
-    }
-  });
+  const position = useLerpedVec2(body.current.position, 0.3);
 
   useTick(() => {
-    let rotation;
+    const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;
+    const { x: stageX, y: stageY } = stageRef!.camera!.toLocal({
+      x: mouseX,
+      y: mouseY,
+    });
 
-    if (touch) {
-      const { x: touchX, y: touchY } = touchLook;
-      rotation = Math.atan2(touchY, touchX);
+    const rotation = Math.atan2(stageY - position.y, stageX - position.x);
+
+    room.send("update", {
+      x: currentDirection.x,
+      y: currentDirection.y,
+      rotation,
+      isShooting,
+    });
+
+    Body.setAngle(body.current, rotation);
+    update();
+  });
+
+  useBeforePhysicsUpdate(() => {
+    // deadZone lerp to make sure the client keeps the same direction as the server
+    Body.setPosition(body.current, {
+      x: deadZoneLerp(body.current.position.x, player.transform.x, 10, 0.2),
+      y: deadZoneLerp(body.current.position.y, player.transform.y, 10, 0.2),
+    });
+
+    if (player.mountedVehicleId) {
+      body.current.isSensor = true;
+      update();
+      return;
     } else {
-      const { x: mouseX, y: mouseY } = app.renderer.events.pointer.global;
-      const { x: stageX, y: stageY } = stageRef?.camera?.toLocal({
-        x: mouseX,
-        y: mouseY,
-      }) ?? { x: 0, y: 0 };
-      rotation = Math.atan2(stageY - y, stageX - x);
+      body.current.isSensor = false;
     }
 
-    Body.setVelocity(collider.current, {
-      x: callWaveBasedFunction(
-        playerConfig.speedUpgrade,
-        player.upgrades.speed * currentDirection.x,
-        currentDirection.x * playerConfig.baseSpeed
-      ),
-      y: callWaveBasedFunction(
-        playerConfig.speedUpgrade,
-        player.upgrades.speed * currentDirection.y,
-        currentDirection.y * playerConfig.baseSpeed
-      ),
-    });
-
-    setX(collider.current.position.x);
-    setY(collider.current.position.y);
-    setRotation(rotation);
+    const targetVelocity = Vector.mult(currentDirection, 1.5);
+    const delta = Vector.sub(targetVelocity, body.current.velocity);
+    const force = Vector.mult(delta, 0.01);
+    Body.applyForce(body.current, body.current.position, force);
+    update();
   });
 
-  useNetworkTick(() => {
-    room?.send("move", {
-      x: Math.round(collider.current.position.x),
-      y: Math.round(collider.current.position.y),
-      velocityX: collider.current.velocity.x,
-      velocityY: collider.current.velocity.y,
-      rotation,
-      currentAnimation:
-        lastAnimationSent.current === currentAnimation
-          ? undefined
-          : currentAnimation,
-    });
-    lastAnimationSent.current = currentAnimation;
-  });
+  const isInVehicle = player.mountedVehicleId;
+  if (isInVehicle) {
+    return null;
+  }
 
   return (
     <>
       <PlayerSprite
-        currentAnimation={currentAnimation}
+        currentAnimation={0}
         name={player.name}
-        playerClass={player.playerClass}
-        x={x}
-        y={y}
-        rotation={rotation}
+        playerClass={"pistol"}
+        x={position.x}
+        y={position.y}
+        rotation={body.current.angle}
         health={player.health}
-        maxHealth={getMaxHealth(player)}
-        velocityX={currentDirection.x}
-        velocityY={currentDirection.y}
+        maxHealth={100}
+        velocityX={body.current.velocity.x}
+        velocityY={body.current.velocity.y}
       />
-      <GunManager
-        x={x}
-        y={y}
-        rotation={rotation}
-        setCurrentAnimation={setCurrentAnimation}
-      />
-      <PlayerCamera
-        x={x}
-        y={y}
-        zoom={
-          1 /
-          callWaveBasedFunction(
-            playerConfig.zoomUpgrade,
-            player.upgrades.scope,
-            playerConfig.baseZoom
-          )
-        }
-      />
+      <PlayerCamera x={position.x} y={position.y} zoom={0.6} />
     </>
   );
 }
 
-function PlayerCamera({ x, y, zoom }: { x: number; y: number; zoom: number }) {
+export function PlayerCamera({
+  x,
+  y,
+  zoom,
+}: {
+  x: number;
+  y: number;
+  zoom: number;
+}) {
   const { setPosition, setZoom } = useCameraStore();
 
   useEffect(() => {

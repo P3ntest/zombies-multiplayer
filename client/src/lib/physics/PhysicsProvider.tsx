@@ -1,4 +1,4 @@
-import Matter from "matter-js";
+import Matter, { Vector } from "matter-js";
 import { useRef, useEffect } from "react";
 import { PhysicsContextProvider } from "./context";
 import { PhysicsTicker } from "./ticker";
