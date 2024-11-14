@@ -1,0 +1,2019 @@
+{
+  "type": "document",
+  "children": [
+    {
+      "type": "element",
+      "isRootNode": true,
+      "name": "map",
+      "attributes": {
+        "version": "1.10",
+        "tiledversion": "1.11.0",
+        "orientation": "orthogonal",
+        "renderorder": "right-down",
+        "width": "30",
+        "height": "20",
+        "tilewidth": "128",
+        "tileheight": "128",
+        "infinite": "1",
+        "nextlayerid": "5",
+        "nextobjectid": "10"
+      },
+      "children": [
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "editorsettings",
+          "attributes": {},
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "export",
+              "attributes": {
+                "format": "json"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "tileset",
+          "attributes": {
+            "firstgid": "1",
+            "name": "Streets test 2",
+            "tilewidth": "128",
+            "tileheight": "128",
+            "tilecount": "48",
+            "columns": "8"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "image",
+              "attributes": {
+                "source": "../../../Downloads/roads/preview.jpg",
+                "width": "1024",
+                "height": "768"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "wangsets",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "wangset",
+                  "attributes": {
+                    "name": "Street",
+                    "type": "corner",
+                    "tile": "-1"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangcolor",
+                      "attributes": {
+                        "name": "Street",
+                        "color": "#ff0000",
+                        "tile": "33",
+                        "probability": "1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "0",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "1",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "2",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "3",
+                        "wangid": "0,0,0,1,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "6",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "7",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "8",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "9",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "10",
+                        "wangid": "0,1,0,0,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "11",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "14",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "15",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "16",
+                        "wangid": "0,1,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "17",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "20",
+                        "wangid": "0,0,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "21",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "22",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "23",
+                        "wangid": "0,0,0,0,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "24",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "25",
+                        "wangid": "0,0,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "28",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "29",
+                        "wangid": "0,1,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "30",
+                        "wangid": "0,1,0,1,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "31",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "32",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "36",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "37",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "39",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "40",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "42",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "43",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "47",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n   "
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "tileset",
+          "attributes": {
+            "firstgid": "49",
+            "name": "Common",
+            "tilewidth": "524",
+            "tileheight": "524",
+            "tilecount": "1",
+            "columns": "0"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "grid",
+              "attributes": {
+                "orientation": "orthogonal",
+                "width": "1",
+                "height": "1"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "tile",
+              "attributes": {
+                "id": "0"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "image",
+                  "attributes": {
+                    "source": "../../../Downloads/circular-stone-fountain-top-view-tk92zrgkujxyd49e-tk92zrgkujxyd49e.png",
+                    "width": "524",
+                    "height": "524"
+                  },
+                  "children": []
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "objectgroup",
+                  "attributes": {
+                    "draworder": "index",
+                    "id": "2"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "object",
+                      "attributes": {
+                        "id": "2",
+                        "x": "7.4607e-14",
+                        "y": "2.84217e-14",
+                        "width": "523.502",
+                        "height": "523.502"
+                      },
+                      "children": [
+                        {
+                          "type": "text",
+                          "text": "\n     "
+                        },
+                        {
+                          "type": "element",
+                          "name": "ellipse",
+                          "attributes": {},
+                          "children": []
+                        },
+                        {
+                          "type": "text",
+                          "text": "\n    "
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n   "
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "tileset",
+          "attributes": {
+            "firstgid": "50",
+            "name": "grass.png",
+            "tilewidth": "128",
+            "tileheight": "128",
+            "tilecount": "16",
+            "columns": "4"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "image",
+              "attributes": {
+                "source": "../../seamless-tileset-creator/output/grass.png.png",
+                "width": "512",
+                "height": "512"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "wangsets",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "wangset",
+                  "attributes": {
+                    "name": "Grass",
+                    "type": "corner",
+                    "tile": "-1"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangcolor",
+                      "attributes": {
+                        "name": "Grass",
+                        "color": "#ff0000",
+                        "tile": "15",
+                        "probability": "1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "1",
+                        "wangid": "0,0,0,0,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "2",
+                        "wangid": "0,0,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "3",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "4",
+                        "wangid": "0,1,0,0,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "5",
+                        "wangid": "0,1,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "6",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "7",
+                        "wangid": "0,1,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "8",
+                        "wangid": "0,0,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "9",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "10",
+                        "wangid": "0,0,0,1,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "11",
+                        "wangid": "0,0,0,1,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "12",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "13",
+                        "wangid": "0,1,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "14",
+                        "wangid": "0,1,0,1,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "15",
+                        "wangid": "0,1,0,1,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n   "
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "tileset",
+          "attributes": {
+            "firstgid": "66",
+            "name": "sand.jpg",
+            "tilewidth": "128",
+            "tileheight": "128",
+            "tilecount": "16",
+            "columns": "4"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "image",
+              "attributes": {
+                "source": "../../seamless-tileset-creator/output/sand.jpg.png",
+                "width": "512",
+                "height": "512"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "wangsets",
+              "attributes": {},
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "wangset",
+                  "attributes": {
+                    "name": "Sand",
+                    "type": "corner",
+                    "tile": "-1"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangcolor",
+                      "attributes": {
+                        "name": "Sand",
+                        "color": "#ff0000",
+                        "tile": "15",
+                        "probability": "1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "1",
+                        "wangid": "0,0,0,0,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "2",
+                        "wangid": "0,0,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "3",
+                        "wangid": "0,0,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "4",
+                        "wangid": "0,1,0,0,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "5",
+                        "wangid": "0,1,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "6",
+                        "wangid": "0,1,0,1,0,0,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "7",
+                        "wangid": "0,1,0,1,0,1,0,0"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "8",
+                        "wangid": "0,0,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "9",
+                        "wangid": "0,0,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "10",
+                        "wangid": "0,0,0,1,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "11",
+                        "wangid": "0,0,0,1,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "12",
+                        "wangid": "0,1,0,0,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "13",
+                        "wangid": "0,1,0,0,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "14",
+                        "wangid": "0,1,0,1,0,0,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n    "
+                    },
+                    {
+                      "type": "element",
+                      "name": "wangtile",
+                      "attributes": {
+                        "tileid": "15",
+                        "wangid": "0,1,0,1,0,1,0,1"
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "text",
+                      "text": "\n   "
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "layer",
+          "attributes": {
+            "id": "3",
+            "name": "Tile Layer 2",
+            "width": "30",
+            "height": "20"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "data",
+              "attributes": {
+                "encoding": "csv"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-32",
+                    "y": "-16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,52,53,51,0,0,0,0,\n0,0,0,0,0,0,0,0,0,56,65,61,51,0,0,0,\n0,0,0,0,0,0,0,0,0,56,63,64,59,0,0,0,\n0,0,0,0,0,0,0,0,0,56,59,56,61,53,53,53,\n0,0,0,0,0,0,0,0,0,56,59,54,64,65,63,62,\n0,0,0,0,0,0,0,0,0,56,59,65,54,62,58,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "-16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,52,53,53,53,53,53,53,53,53,53,53,53,53,53,\n52,53,57,63,62,62,62,62,62,62,62,62,62,62,62,62,\n57,63,62,58,65,65,65,65,65,65,65,65,65,65,65,65,\n62,58,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "-16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,\n62,62,62,62,62,62,62,62,62,62,62,62,62,62,62,62,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "16",
+                    "y": "-16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,53,\n62,62,62,62,62,62,62,62,62,62,62,62,62,62,62,62,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "32",
+                    "y": "-16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n53,53,53,53,51,0,0,0,0,0,0,0,0,0,0,0,\n62,62,62,64,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,0,\n65,65,65,56,61,51,0,0,0,0,0,0,0,0,0,0,\n65,65,65,54,64,59,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-32",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "16",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "32",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,0,\n65,65,65,65,56,61,51,0,0,0,0,0,0,0,0,0,\n65,65,65,65,54,64,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,0,\n65,65,65,65,65,56,61,51,0,0,0,0,0,0,0,0,\n65,65,65,65,65,54,64,59,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-32",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "16",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "32",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,56,59,0,0,0,0,0,0,0,0,\n65,65,65,65,65,65,56,61,51,0,0,0,0,0,0,0,\n65,65,65,65,65,65,54,64,59,0,0,0,0,0,0,0,\n65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,0,\n65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,0,\n65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,0,\n65,65,65,65,65,65,65,56,61,51,0,0,0,0,0,0,\n65,65,65,65,65,65,65,54,64,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,0,\n65,65,65,65,65,65,65,65,56,61,51,0,0,0,0,0,\n65,65,65,65,65,65,65,65,54,64,59,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-32",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "16",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "32",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,\n65,65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,\n65,65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,\n65,65,65,65,65,65,65,65,65,56,59,0,0,0,0,0,\n65,65,65,65,65,65,65,65,65,56,61,51,0,0,0,0,\n65,65,65,65,65,65,65,65,65,54,64,59,0,0,0,0,\n65,65,65,65,65,65,65,65,65,65,56,61,51,0,0,0,\n65,65,65,65,65,65,65,65,65,65,54,64,59,0,0,0,\n65,65,65,65,65,65,65,65,65,65,65,56,59,0,0,0,\n65,65,65,65,65,65,65,65,65,65,65,56,59,0,0,0,\n65,65,65,65,65,65,65,65,65,65,65,56,61,51,0,0,\n65,65,65,65,65,65,65,65,65,65,65,54,64,59,0,0,\n65,65,65,65,65,65,65,65,65,65,65,65,56,61,51,0,\n65,65,65,65,65,65,65,65,65,65,65,65,54,64,59,0,\n65,65,65,65,65,65,65,65,65,65,65,65,65,56,59,0,\n65,65,65,65,65,65,65,65,65,65,65,65,65,56,59,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-32",
+                    "y": "48",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,59,65,65,65,65,65,\n0,0,0,0,0,0,0,0,0,56,61,53,53,53,53,53,\n0,0,0,0,0,0,0,0,0,54,62,62,62,62,62,62,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "48",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,52,53,53,53,53,53,\n53,53,53,53,53,53,53,53,53,53,57,63,62,62,62,62,\n62,62,62,62,62,62,62,62,62,62,62,58,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "48",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,65,\n65,65,65,65,65,65,65,65,65,65,65,65,65,65,52,53,\n65,65,65,65,65,52,53,53,53,53,53,53,53,53,57,63,\n52,53,53,53,53,55,63,62,62,62,62,62,62,62,62,58,\n55,63,62,62,62,62,58,0,0,0,0,0,0,0,0,0,\n62,58,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "16",
+                    "y": "48",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n65,65,65,65,52,53,53,53,53,53,53,53,53,53,53,53,\n53,53,53,53,55,63,62,62,62,62,62,62,62,62,62,62,\n62,62,62,62,62,58,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "32",
+                    "y": "48",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n53,53,53,53,53,53,53,53,53,53,53,53,51,56,61,51,\n62,62,62,62,62,62,62,62,62,62,62,64,61,55,65,59,\n0,0,0,0,0,0,0,0,0,0,0,54,62,62,62,58,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "layer",
+          "attributes": {
+            "id": "4",
+            "name": "Sand",
+            "width": "30",
+            "height": "20"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "data",
+              "attributes": {
+                "encoding": "csv"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,68,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,72,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,70\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,68,67,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,72,75,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,72,75,0,0,0,0,0,0,0,0,0,0,0,\n0,0,68,73,75,0,0,0,0,0,0,0,0,0,0,0,\n0,0,72,81,75,0,0,0,0,0,0,0,0,0,0,0,\n0,0,72,81,77,69,67,0,0,0,0,0,0,0,0,0,\n0,68,73,81,81,81,77,67,0,0,0,0,0,0,0,0,\n0,72,81,81,81,81,81,75,0,0,0,0,0,0,0,0,\n68,73,81,81,81,81,81,75,0,0,0,0,0,0,0,0,\n73,81,81,81,81,81,81,75,0,68,69,69,69,67,0,0,\n81,81,81,81,81,81,81,75,68,71,81,81,79,74,0,0,\n81,81,81,81,81,81,81,75,72,81,81,81,75,0,0,0,\n81,81,81,81,81,81,81,77,73,81,81,81,75,0,0,0,\n81,81,81,81,79,78,78,80,81,81,79,80,75,0,0,0,\n80,81,81,79,74,0,0,72,79,78,74,70,74,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n72,81,81,75,0,0,0,70,74,0,0,0,0,0,0,0,\n72,81,81,75,0,0,0,0,0,0,0,0,0,0,0,0,\n72,79,78,74,0,0,0,0,0,0,0,0,0,0,0,0,\n70,74,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "layer",
+          "attributes": {
+            "id": "1",
+            "name": "Tile Layer 1",
+            "width": "30",
+            "height": "20"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "data",
+              "attributes": {
+                "encoding": "csv"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "-16",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,21,1,38,\n0,0,0,0,0,0,0,0,0,0,0,0,0,11,31,30,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,4,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,11,31,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,11\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "0",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,21,37,2,1,2,2,22,38,38,24,0,0,\n0,0,0,0,7,30,43,12,9,12,9,43,31,48,0,0,\n0,0,0,0,33,48,20,20,20,20,20,19,33,48,0,0,\n0,0,0,0,15,8,20,20,20,19,19,19,7,16,0,0,\n0,0,0,0,41,40,20,20,19,19,19,20,29,48,0,0,\n0,0,0,0,41,48,19,19,19,19,20,20,33,48,0,0,\n21,1,38,2,17,48,20,20,19,20,20,20,7,48,0,0,\n17,30,10,25,31,40,20,19,19,20,20,20,15,8,0,0,\n10,26,21,38,17,48,20,20,20,20,20,20,7,40,0,0,\n24,21,17,30,31,48,20,20,20,20,20,20,15,40,0,0,\n4,17,30,26,29,16,20,20,20,20,20,20,41,48,0,0,\n31,30,26,0,15,16,20,20,20,20,20,20,41,16,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "16",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n15,48,0,0,41,8,20,20,20,20,20,20,29,40,0,0,\n41,40,0,0,3,18,20,20,20,20,20,20,41,48,0,0,\n29,40,0,0,33,18,20,20,20,20,20,20,33,32,0,0,\n3,4,2,23,17,18,20,20,20,20,20,20,7,48,0,0,\n11,25,12,44,31,32,20,20,20,20,20,20,15,18,0,0,\n0,0,0,0,7,32,20,20,20,20,20,20,33,8,0,0,\n0,0,0,0,41,8,20,20,20,20,20,20,7,18,0,0,\n0,0,0,0,15,48,20,20,20,20,20,20,7,32,0,0,\n0,0,0,0,15,8,20,20,20,20,20,20,33,16,0,0,\n0,0,0,0,3,4,22,1,22,23,38,22,17,16,0,0,\n0,0,0,0,11,9,25,9,31,30,25,43,12,26,0,0,\n0,0,0,0,0,0,0,21,17,32,0,0,0,0,0,0,\n0,0,0,0,0,0,0,3,30,26,0,0,0,0,0,0,\n0,0,0,0,0,0,0,11,26,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,21,24,0,0,0,0,\n0,0,0,0,0,0,0,0,21,2,17,32,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n   "
+                },
+                {
+                  "type": "element",
+                  "name": "chunk",
+                  "attributes": {
+                    "x": "0",
+                    "y": "32",
+                    "width": "16",
+                    "height": "16"
+                  },
+                  "children": [
+                    {
+                      "type": "text",
+                      "text": "\n0,0,0,0,0,0,0,0,11,44,44,26,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,\n0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\n"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "\n  "
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n "
+        },
+        {
+          "type": "element",
+          "name": "objectgroup",
+          "attributes": {
+            "id": "2",
+            "name": "Test"
+          },
+          "children": [
+            {
+              "type": "text",
+              "text": "\n  "
+            },
+            {
+              "type": "element",
+              "name": "object",
+              "attributes": {
+                "id": "9",
+                "gid": "49",
+                "x": "937.332",
+                "y": "2157.57",
+                "width": "395.245",
+                "height": "395.245"
+              },
+              "children": []
+            },
+            {
+              "type": "text",
+              "text": "\n "
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "\n"
+        }
+      ]
+    }
+  ]
+}
